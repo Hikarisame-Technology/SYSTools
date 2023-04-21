@@ -1,4 +1,4 @@
-## SYSTools 基于VB.Net的系统工具箱
+## SYSTools C#版 基于C#的系统工具箱
   
 ![](https://img.shields.io/badge/Language-VB.net-blue?style=flat-square)
 
