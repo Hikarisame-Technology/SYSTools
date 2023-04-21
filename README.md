@@ -1,6 +1,6 @@
-## SYSTools C#版 基于C#的系统工具箱
+## SYSTools 基于C#重构的系统工具箱
   
-![](https://img.shields.io/badge/Language-VB.net-blue?style=flat-square)
+![](https://img.shields.io/badge/Language-C%23-blue)
 
   
 ### 截图
