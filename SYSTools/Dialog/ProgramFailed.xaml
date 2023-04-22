@@ -1,0 +1,17 @@
+﻿<muxc:ContentDialog x:Class="SYSTools.Dialog.ProgramFailed"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:muxc="http://schemas.modernwpf.com/2019"
+      xmlns:local="clr-namespace:SYSTools.Dialog"
+      Title="无法打开该工具"
+      CloseButtonText="Cancel"
+      DefaultButton="Close">
+
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom">
+        <!-- Content body -->
+        <TextBlock Text="请检查程序包内是否存在该工具" TextWrapping="Wrap" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <TextBlock Text="或工具存放位置是否正确" TextWrapping="Wrap" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" />
+    </StackPanel> 
+</muxc:ContentDialog>

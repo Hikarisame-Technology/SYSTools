@@ -1,0 +1,20 @@
+﻿<muxc:ContentDialog x:Class="SYSTools.Dialog.TestQueryDialog"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:muxc="http://schemas.modernwpf.com/2019"
+      xmlns:local="clr-namespace:SYSTools.Dialog"
+      mc:Ignorable="d" 
+      Title="系统配置测试 ( 疑问 )"
+      CloseButtonText="关闭"
+      DefaultButton="Close" MinWidth="320" MinHeight="184">
+
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom">
+        <!-- Content body -->
+        <TextBlock Text="配置提取基于WMI" TextWrapping="Wrap" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <TextBlock Text="获取是会发生短暂卡顿(根据电脑配置)" TextWrapping="Wrap" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <TextBlock Text="正常现象 耐心等待" TextWrapping="Wrap" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <TextBlock Text="文件保存至软件根目录下Info.xml" TextWrapping="Wrap" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" />
+    </StackPanel>
+</muxc:ContentDialog>
