@@ -1,0 +1,18 @@
+﻿<Application x:Class="SYSTools.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:muxc="http://schemas.modernwpf.com/2019"
+             xmlns:local="clr-namespace:SYSTools"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <muxc:ThemeResources RequestedTheme="Dark"/>
+                <muxc:XamlControlsResources />
+                <!-- Other merged dictionaries here -->
+            </ResourceDictionary.MergedDictionaries>
+            <FontFamily x:Key="SegoeIcons">/SYSTools;component/Resource/#Segoe Fluent Icons</FontFamily>
+            <!-- Other app resources here -->
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
