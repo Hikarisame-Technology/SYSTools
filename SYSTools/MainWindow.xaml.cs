@@ -1,21 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using SYSTools.Dialog;
 using SYSTools.Pages;
 using SYSTools.ToolPages;
-using SYSTools.Dialog;
-using System.IO;
 
 namespace SYSTools
 {
@@ -34,20 +26,90 @@ namespace SYSTools
         private Frame PeripheralsTools = new Frame() { Content = new PeripheralsTools() };
         private Frame RepairingTools = new Frame() { Content = new RepairingTools() };
         private Frame AdbTools = new Frame() { Content = new AdbTools() };
-        private Frame ChangeWindows = new Frame() { Content = new WindowsTools() };
+        private Frame WindowsTools = new Frame() { Content = new WindowsTools() };
         private Frame WindowsActivation = new Frame() { Content = new Activation() };
         private Frame AboutPage = new Frame() { Content = new About() };
+        string AppPath = Directory.GetCurrentDirectory();
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            LoadBackgroundImage();
+            File.Delete("Info.xml");
+            //程序启动数量限制
+            string appName = Process.GetCurrentProcess().ProcessName;
+            int processTotal = Process.GetProcessesByName(appName).Length;
+            if (processTotal > 1)
+            {
+                MessageBox.Show("有一个同名进程正在运行！", "程序冲突!", MessageBoxButton.OK);
+                Close();
+            }
+            Title = "SYSTools Ver" + (Application.ResourceAssembly.GetName().Version.ToString());
+            //设置默认启动Page页
+            FrameContent.Content = Home_Page;
         }
 
+        private void Home_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            FrameContent.Content = Home_Page;
+        }
+
+        private void Fast_Detection_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            FrameContent.Content = FastDetection;
+        }
+
+        private void Detection_Tools_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            FrameContent.Content = DetectionTools;
+        }
+
+        private void Test_Tools_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            FrameContent.Content = TestTools;
+        }
+
+        private void Disk_Tools_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            FrameContent.Content = DiskTools;
+        }
+
+        private void Peripherals_Tools_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            FrameContent.Content = PeripheralsTools;
+        }
+
+        private void Repairing_Tools_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            FrameContent.Content = RepairingTools;
+        }
+
+        private void Adb_Tools_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            FrameContent.Content = AdbTools;
+        }
+
+        private void WindowsTools_Page_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            FrameContent.Content = WindowsTools;
+        }
+
+        private void Windows_Activation_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            FrameContent.Content = WindowsActivation;
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            //判断是否有文件夹（后期会修改）
+            if (Directory.Exists(AppPath + "\\Config\\BackImage"))
+            {
+                LoadBackgroundImage();
+            }
+        }
         private string FindFile(string directoryPath, string fileExtension)
         {
             string[] files = Directory.GetFiles(directoryPath, "*." + fileExtension);
@@ -64,9 +126,8 @@ namespace SYSTools
         private void LoadBackgroundImage()
         {
             //背景图片更换
-            string appPath = Directory.GetCurrentDirectory();
             BitmapImage bitmap = new BitmapImage();
-            string imagePath = FindFile(appPath + "\\Config\\BackImage", "jpg") ?? FindFile(appPath + "\\Config\\BackImage", "png");
+            string imagePath = FindFile(AppPath + "\\Config\\BackImage", "jpg") ?? FindFile(AppPath + "\\Config\\BackImage", "png");
             if (imagePath != null)
             {
                 bitmap.BeginInit();
@@ -81,10 +142,9 @@ namespace SYSTools
             //鼠标右键双击事件
             if (e.ChangedButton == MouseButton.Right && e.ClickCount == 2)
             {
-                //判断彩蛋&文件夹是否触发
+                //判断彩蛋&文件夹是否触发 (背景替换功能预计写入设置项内)
                 BackImageNew BackNew = new BackImageNew();
                 BackImageOld Backold = new BackImageOld();
-                string AppPath = Directory.GetCurrentDirectory();
                 if (Directory.Exists(AppPath + "\\Config\\BackImage"))
                 {
                     if (Directory.Exists(AppPath + "\\Config\\BackImage\\Null.txt"))
@@ -104,11 +164,12 @@ namespace SYSTools
                     BackText();
                 }
             }
+            //点击事件
+            FrameContent.Content = AboutPage;
         }
         public void BackText()
         {
             //彩蛋文本写入
-            string AppPath = Directory.GetCurrentDirectory();
             File.Create(AppPath + "\\Config\\BackImage\\Null.txt").Close();
             StreamWriter sw = new StreamWriter(AppPath + "\\Config\\BackImage\\Null.txt");
             sw.WriteLine("恭喜你找到一个神奇的彩蛋");
@@ -118,5 +179,7 @@ namespace SYSTools
             sw.WriteLine("记得重启软件 我没加热更新(因为我不会 （；´д｀）ゞ)");
             sw.Close();
         }
+
+
     }
 }
