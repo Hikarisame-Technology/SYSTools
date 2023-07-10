@@ -8,14 +8,17 @@
       KeepAlive="True"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Test" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610">
-    
+
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        
+        <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="/SYSTools;component/Resources/LOGO.png" Opacity="0.5" Height="90" Width="160"/>
+
         <Border  BorderThickness="1" CornerRadius="5" Grid.RowSpan="3" Grid.ColumnSpan="2">
             <Border.Background>
                 <SolidColorBrush Color="#FF202020" Opacity="0.5"/>
             </Border.Background>
         </Border>
-
+        
         <TextBlock x:Name="textBlock" Margin="20,17,0,0" TextWrapping="Wrap" Text="系统配置快速检测 ( 基于 Windows Management Instrumentation ) 信息仅供参考" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" UseLayoutRounding="True"/>
 
         <Border BorderBrush="#CC202020" BorderThickness="1" CornerRadius="5" Margin="10,60,10,10">
