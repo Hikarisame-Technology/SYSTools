@@ -26,6 +26,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,10 +37,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>SYSTools_LOGO_256.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="netstandard" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -220,14 +225,14 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Resource Include="Resource\SegoeIcons.ttf" />
+    <Resource Include="Resources\SegoeIcons.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -250,33 +255,44 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resource\Icon\DetectionICON\Aida64.png" />
-    <Resource Include="Resource\Icon\DetectionICON\CPU-Z.png" />
-    <Resource Include="Resource\Icon\DetectionICON\GPU-Z.png" />
-    <Resource Include="Resource\Icon\DetectionICON\HWiNFO.png" />
-    <Resource Include="Resource\Icon\DetectionICON\HWMonitor.png" />
-    <Resource Include="Resource\Icon\DiskToolsICON\AS SSD.png" />
-    <Resource Include="Resource\Icon\DiskToolsICON\CrystalDiskInfo.png" />
-    <Resource Include="Resource\Icon\DiskToolsICON\CrystalDiskMark.png" />
-    <Resource Include="Resource\Icon\DiskToolsICON\Disk Benchmark.png" />
-    <Resource Include="Resource\Icon\DiskToolsICON\DiskGenius.png" />
-    <Resource Include="Resource\Icon\DiskToolsICON\H2TestW.png" />
-    <Resource Include="Resource\Icon\DiskToolsICON\HD Tune.png" />
-    <Resource Include="Resource\Icon\DiskToolsICON\LLFTOOL.png" />
-    <Resource Include="Resource\Icon\DiskToolsICON\PartAssist.png" />
-    <Resource Include="Resource\Icon\DiskToolsICON\SSD-Z.png" />
-    <Resource Include="Resource\Icon\DiskToolsICON\Victoria.png" />
-    <Resource Include="Resource\Icon\PeripheralsToolsICON\HKBTest.png" />
-    <Resource Include="Resource\Icon\PeripheralsToolsICON\MouseRate.png" />
-    <Resource Include="Resource\Icon\PeripheralsToolsICON\MouseTest.png" />
-    <Resource Include="Resource\Icon\RepairingToolsICON\DirectX.png" />
-    <Resource Include="Resource\Icon\RepairingToolsICON\Visual-C-Runtimes.png" />
-    <Resource Include="Resource\Icon\TestToolsICON\FurMark.png" />
-    <Resource Include="Resource\Icon\TestToolsICON\IntelBurnTest.png" />
-    <Resource Include="Resource\Icon\TestToolsICON\MemTest.png" />
-    <Resource Include="Resource\Icon\TestToolsICON\Prime95.png" />
-    <Resource Include="Resource\Icon\占位.png" />
-    <Resource Include="Resource\Test2.jpg" />
+    <Resource Include="Resources\Test2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\B-LOGO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\DetectionICON\Aida64.png" />
+    <Resource Include="Resources\Icon\DetectionICON\CPU-Z.png" />
+    <Resource Include="Resources\Icon\DetectionICON\GPU-Z.png" />
+    <Resource Include="Resources\Icon\DetectionICON\HWiNFO.png" />
+    <Resource Include="Resources\Icon\DetectionICON\HWMonitor.png" />
+    <Resource Include="Resources\Icon\DiskToolsICON\AS SSD.png" />
+    <Resource Include="Resources\Icon\DiskToolsICON\CrystalDiskInfo.png" />
+    <Resource Include="Resources\Icon\DiskToolsICON\CrystalDiskMark.png" />
+    <Resource Include="Resources\Icon\DiskToolsICON\Disk Benchmark.png" />
+    <Resource Include="Resources\Icon\DiskToolsICON\DiskGenius.png" />
+    <Resource Include="Resources\Icon\DiskToolsICON\H2TestW.png" />
+    <Resource Include="Resources\Icon\DiskToolsICON\HD Tune.png" />
+    <Resource Include="Resources\Icon\DiskToolsICON\LLFTOOL.png" />
+    <Resource Include="Resources\Icon\DiskToolsICON\PartAssist.png" />
+    <Resource Include="Resources\Icon\DiskToolsICON\SSD-Z.png" />
+    <Resource Include="Resources\Icon\DiskToolsICON\Victoria.png" />
+    <Resource Include="Resources\Icon\PeripheralsToolsICON\HKBTest.png" />
+    <Resource Include="Resources\Icon\PeripheralsToolsICON\MouseRate.png" />
+    <Resource Include="Resources\Icon\PeripheralsToolsICON\MouseTest.png" />
+    <Resource Include="Resources\Icon\RepairingToolsICON\DirectX.png" />
+    <Resource Include="Resources\Icon\RepairingToolsICON\Visual-C-Runtimes.png" />
+    <Resource Include="Resources\Icon\TestToolsICON\FurMark.png" />
+    <Resource Include="Resources\Icon\TestToolsICON\IntelBurnTest.png" />
+    <Resource Include="Resources\Icon\TestToolsICON\MemTest.png" />
+    <Resource Include="Resources\Icon\TestToolsICON\Prime95.png" />
+    <Resource Include="Resources\Icon\占位.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\LOGO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SYSTools_LOGO_256.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
