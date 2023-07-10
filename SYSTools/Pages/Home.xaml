@@ -3,12 +3,68 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:muxc="http://schemas.modernwpf.com/2019"
       xmlns:local="clr-namespace:SYSTools.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Home">
-
-    <Grid>
-        
+      d:DesignHeight="610" d:DesignWidth="1040"
+      KeepAlive="True"
+      Title="Home" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610" Loaded="Page_Loaded">
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="18*"/>
+            <ColumnDefinition Width="47*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="129*"/>
+            <RowDefinition Height="76*"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="3" Source="/SYSTools;component/Resources/LOGO.png" Opacity="0.5" Width="160" Height="90"/>
+        <Border  BorderThickness="1" CornerRadius="5" Grid.RowSpan="4" Grid.ColumnSpan="2">
+            <Border.Background>
+                <SolidColorBrush Color="#FF202020" Opacity="0.5"/>
+            </Border.Background>
+        </Border>
+        <StackPanel x:Name="Home_SP_Tip" Margin="270,0" Height="100" Width="500" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" ToolTip="" Grid.ColumnSpan="2">
+            <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xF1AD;" HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Height="70" FontSize="45" Margin="15,0,0,0" Foreground="White"  />
+            <TextBlock VerticalAlignment="Center" Text="欢迎使用SYSTools工具箱" Foreground="White" FontSize="30 " HorizontalAlignment="Center"  d:IsLocked="True" />
+        </StackPanel>
+        <Border  Margin="10" Grid.Row="3" Background="#4C272727" CornerRadius="5" Padding="25,0,0,0" Grid.ColumnSpan="2">
+            <StackPanel Margin="0" Orientation="Horizontal">
+                <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE141;" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"  Foreground="White"  />
+                <TextBlock VerticalAlignment="Center" Text="Tip" Foreground="White" FontSize="20" HorizontalAlignment="Center"  d:IsLocked="True" Margin="10,0,0,0"/>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="当前版本暂未加入Adb功能" Foreground="White" FontSize="20"   d:IsLocked="True" Margin="20,0,0,0" />
+            </StackPanel>
+        </Border>
+        <Border  Margin="10,10,10,0" Grid.Row="1" CornerRadius="5" Grid.RowSpan="2" >
+            <Border.Background>
+                <SolidColorBrush Color="#FC272727" Opacity="0.75"/>
+            </Border.Background>
+        </Border>
+        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE2AD;" HorizontalAlignment="Center" VerticalAlignment="Top"  Foreground="White" Margin="89,22,179,0" Grid.Row="1"  />
+        <TextBlock  HorizontalAlignment="Center" TextWrapping="Wrap" Text="系统时间" VerticalAlignment="Top" Margin="113,20,103,0" Grid.Row="1" FontSize="18" Foreground="White"/>
+        <TextBlock  HorizontalAlignment="Center" TextWrapping="Wrap" Text="系统启动时间" VerticalAlignment="Center" Margin="84,67.3,84,165.2" Grid.Row="1" FontSize="20" Foreground="White"/>
+        <TextBlock x:Name="OpenTime" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Margin="0,0,0,25" Grid.Row="1" FontSize="20" Foreground="White"/>
+        <TextBlock  HorizontalAlignment="Center" TextWrapping="Wrap" Text="系统运行时间" VerticalAlignment="Center" Margin="84,147.3,84,85.2" Grid.Row="1" FontSize="20" Foreground="White"/>
+        <TextBlock x:Name="RunTime" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Margin="0,125,0,0" Grid.Row="1" FontSize="20" Foreground="White"/>
+        <TextBlock Text="当前系统为" VerticalAlignment="Top" Grid.Row="2" FontSize="18" Foreground="White" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+        <TextBlock x:Name="Windows_Name" Text="" VerticalAlignment="Top" Grid.Row="2" Foreground="White" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,40,0,0" Visibility="Visible" TextTrimming="None" FontStretch="Normal" MaxWidth="230" Block.TextAlignment="Center" FontSize="16"/>
+        <TextBlock x:Name="Windows_Version" Text="" VerticalAlignment="Top" Grid.Row="2" FontSize="16" Foreground="White" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,90,0,0"/>
+        <Border BorderThickness="1" Grid.Column="1" Margin="0,10,10,0" Grid.Row="1" CornerRadius="5" Height="248">
+            <Border.Background>
+                <SolidColorBrush Color="#FC272727" Opacity="0.75"/>
+            </Border.Background>
+        </Border>
+        <TextBlock x:Name="IP" TextWrapping="Wrap" Text="公网IP ( IPv4 : ipip.net &amp; IPv6 : neu6.edu ) 点击星号获取" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="20" Margin="0,20,0,0" Grid.Column="1" Grid.Row="1" ToolTip="左键单击获取 右键单击隐藏"/>
+        <TextBlock x:Name="IPv4" Text="***.***.***.***" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Margin="0,-40,0,0" Grid.Column="1" Grid.Row="1" MouseLeftButtonDown="IPv4_MouseLeftButtonDown" MouseRightButtonDown="IPv4_MouseRightButtonDown"/>
+        <TextBlock x:Name="IPv6" Text="****:****:****:****:****:****:****:****" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Margin="0,0,0,-100" Grid.Column="1" Grid.Row="1" MouseLeftButtonDown="IPv6_MouseLeftButtonDown" MouseRightButtonDown="IPv6_MouseRightButtonDown"/>
+        <Border BorderThickness="1" Grid.Column="1" Margin="0,10,10,0" Grid.Row="2" CornerRadius="5">
+            <Border.Background>
+                <SolidColorBrush Color="#FC272727" Opacity="0.75"/>
+            </Border.Background>
+        </Border>
+        <TextBlock TextWrapping="Wrap" Grid.Column="1" Grid.Row="2" Text="一言卡片(Hitokoto Card)" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="15" Margin="0,25,0,0" />
+        <TextBlock x:Name="Hitokoto" Block.TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" TextWrapping="Wrap" Text="Now loading" Foreground="White" Grid.Column="1" Grid.Row="2" Margin="0,0,0,-15" />
     </Grid>
-</Page>
+</Page> 
