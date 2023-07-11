@@ -108,6 +108,8 @@ namespace SYSTools.Pages
             catch (Exception IPv4Error)
             {
                 IPv4.Text = "当前网络可能没有IPV4地址或获取失败";
+                SYSToolsLog.LogInfo(IPv4Error.ToString(), true);
+
             }
         }
 
@@ -124,6 +126,7 @@ namespace SYSTools.Pages
             catch (Exception IPv6Error)
             {
                 IPv6.Text = "当前网络可能没有IPV6地址或获取失败";
+                SYSToolsLog.LogInfo(IPv6Error.ToString(), true);
             }
         }
     }
