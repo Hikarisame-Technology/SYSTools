@@ -10,7 +10,7 @@
         Height="650" Width="1100" MinWidth="1100" MinHeight="650" Loaded="Window_Loaded">
     <Grid Loaded="Grid_Loaded">
 
-        <Image x:Name="BackImage" Stretch="UniformToFill" Source="/Resource/Test2.jpg"/>
+        <Image x:Name="BackImage" Stretch="UniformToFill" Source="/Resources/Test2.jpg"/>
 
 
         <muxc:NavigationView x:Name="Sidebar" IsSettingsVisible="False" IsBackButtonVisible="Collapsed"
