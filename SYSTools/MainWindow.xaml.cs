@@ -52,54 +52,88 @@ namespace SYSTools
             FrameContent.Content = Home_Page;
         }
 
-        private void Home_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Home_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             FrameContent.Content = Home_Page;
         }
 
-        private void Fast_Detection_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Fast_Detection_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             FrameContent.Content = FastDetection;
         }
 
-        private void Detection_Tools_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Detection_Tools_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             FrameContent.Content = DetectionTools;
         }
 
-        private void Test_Tools_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Test_Tools_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             FrameContent.Content = TestTools;
         }
 
-        private void Disk_Tools_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Disk_Tools_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             FrameContent.Content = DiskTools;
         }
 
-        private void Peripherals_Tools_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Peripherals_Tools_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             FrameContent.Content = PeripheralsTools;
         }
 
-        private void Repairing_Tools_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Repairing_Tools_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             FrameContent.Content = RepairingTools;
         }
 
-        private void Adb_Tools_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Adb_Tools_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             FrameContent.Content = AdbTools;
         }
 
-        private void WindowsTools_Page_MouseDown(object sender, MouseButtonEventArgs e)
+        private void WindowsTools_Page_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             FrameContent.Content = WindowsTools;
         }
 
-        private void Windows_Activation_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Windows_Activation_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             FrameContent.Content = WindowsActivation;
+        }
+
+        private void About_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            FrameContent.Content = AboutPage;
+        }
+
+        private void About_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            //鼠标右键双击事件
+            if (e.ChangedButton == MouseButton.Right && e.ClickCount == 2)
+            {
+                //判断彩蛋&文件夹是否触发 (背景替换功能预计写入设置项内)
+                BackImageNew BackNew = new BackImageNew();
+                BackImageOld Backold = new BackImageOld();
+                if (Directory.Exists(AppPath + "\\Config\\BackImage"))
+                {
+                    if (Directory.Exists(AppPath + "\\Config\\BackImage\\Null.txt"))
+                    {
+                        Backold.ShowAsync();
+                    }
+                    else
+                    {
+                        BackText();
+                        Backold.ShowAsync();
+                    }
+                }
+                else
+                {
+                    BackNew.ShowAsync();
+                    Directory.CreateDirectory(AppPath + "\\Config\\BackImage");
+                    BackText();
+                }
+            }
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
@@ -137,36 +171,6 @@ namespace SYSTools
             }
         }
 
-        private void About_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            //鼠标右键双击事件
-            if (e.ChangedButton == MouseButton.Right && e.ClickCount == 2)
-            {
-                //判断彩蛋&文件夹是否触发 (背景替换功能预计写入设置项内)
-                BackImageNew BackNew = new BackImageNew();
-                BackImageOld Backold = new BackImageOld();
-                if (Directory.Exists(AppPath + "\\Config\\BackImage"))
-                {
-                    if (Directory.Exists(AppPath + "\\Config\\BackImage\\Null.txt"))
-                    {
-                        Backold.ShowAsync();
-                    }
-                    else
-                    {
-                        BackText();
-                        Backold.ShowAsync();
-                    }
-                }
-                else
-                {
-                    BackNew.ShowAsync();
-                    Directory.CreateDirectory(AppPath + "\\Config\\BackImage");
-                    BackText();
-                }
-            }
-            //点击事件
-            FrameContent.Content = AboutPage;
-        }
         public void BackText()
         {
             //彩蛋文本写入
