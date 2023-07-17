@@ -100,6 +100,7 @@ namespace SYSTools
         private void Windows_Activation_MouseDown(object sender, MouseButtonEventArgs e)
         {
             FrameContent.Content = WindowsActivation;
+
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
@@ -180,6 +181,18 @@ namespace SYSTools
             sw.Close();
         }
 
+        //public void ToggleWindowThemeHandler()
+        //    深色模式切换（不会使用）
+        //{
+        //    if (ThemeManager.GetActualTheme(this) == ElementTheme.Light)
+        //    {
+        //        ThemeManager.SetRequestedTheme(this, ElementTheme.Dark);
+        //    }
+        //    else
+        //    {
+        //        ThemeManager.SetRequestedTheme(this, ElementTheme.Light);
+        //    }
+        //}
 
     }
 }
