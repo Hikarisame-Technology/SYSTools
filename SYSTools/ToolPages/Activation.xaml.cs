@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SYSTools.Pages
+namespace SYSTools.ToolPages
 {
     /// <summary>
-    /// Configuration.xaml 的交互逻辑
+    /// Activation.xaml 的交互逻辑
     /// </summary>
-    public partial class Configuration : Page
+    public partial class Activation : Page
     {
-        public Configuration()
+        public Activation()
         {
             InitializeComponent();
         }

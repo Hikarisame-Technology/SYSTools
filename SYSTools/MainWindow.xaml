@@ -71,13 +71,19 @@
 
                 <muxc:NavigationViewItemSeparator/>
 
+                <muxc:NavigationViewItem Content="Windows Tools" Tag="Windows Tools" x:Name="WindowsTools_Page" IsTabStop="False" MouseLeftButtonDown="WindowsTools_Page_MouseLeftButtonDown">
+                    <muxc:NavigationViewItem.Icon>
+                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE90F;" />
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+
             </muxc:NavigationView.MenuItems>
 
             <muxc:NavigationView.FooterMenuItems>
 
-                <muxc:NavigationViewItem Content="软件设置" Tag="软件设置" x:Name="Software_Configuration" IsTabStop="False" MouseLeftButtonDown="Software_Configuration_MouseLeftButtonDown">
+                <muxc:NavigationViewItem Content="Windows Activation" Tag="系统激活工具" x:Name="Windows_Activation" IsTabStop="False" MouseLeftButtonDown="Windows_Activation_MouseLeftButtonDown">
                     <muxc:NavigationViewItem.Icon>
-                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE713;" />
+                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE192;" />
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
 
