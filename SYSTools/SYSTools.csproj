@@ -95,9 +95,6 @@
     <Compile Include="Pages\AdbTools.xaml.cs">
       <DependentUpon>AdbTools.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Configuration.xaml.cs">
-      <DependentUpon>Configuration.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
@@ -109,6 +106,9 @@
     </Compile>
     <Compile Include="Pages\WindowsTools.xaml.cs">
       <DependentUpon>WindowsTools.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ToolPages\Activation.xaml.cs">
+      <DependentUpon>Activation.xaml</DependentUpon>
     </Compile>
     <Compile Include="ToolPages\DetectionTools.xaml.cs">
       <DependentUpon>DetectionTools.xaml</DependentUpon>
@@ -174,10 +174,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Configuration.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -191,6 +187,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\WindowsTools.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ToolPages\Activation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -27,7 +27,7 @@ namespace SYSTools
         private Frame RepairingTools = new Frame() { Content = new RepairingTools() };
         private Frame AdbTools = new Frame() { Content = new AdbTools() };
         private Frame WindowsTools = new Frame() { Content = new WindowsTools() };
-        private Frame ConfigurationPage = new Frame() { Content = new Configuration() };
+        private Frame WindowsActivation = new Frame() { Content = new Activation() };
         private Frame AboutPage = new Frame() { Content = new About() };
         string AppPath = Directory.GetCurrentDirectory();
 
@@ -97,9 +97,10 @@ namespace SYSTools
             FrameContent.Content = WindowsTools;
         }
 
-        private void Software_Configuration_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Windows_Activation_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            FrameContent.Content = ConfigurationPage;
+            FrameContent.Content = WindowsActivation;
+
         }
 
         private void About_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
