@@ -184,6 +184,18 @@ namespace SYSTools
             sw.Close();
         }
 
+        //public void ToggleWindowThemeHandler()
+        //    深色模式切换（不会使用）
+        //{
+        //    if (ThemeManager.GetActualTheme(this) == ElementTheme.Light)
+        //    {
+        //        ThemeManager.SetRequestedTheme(this, ElementTheme.Dark);
+        //    }
+        //    else
+        //    {
+        //        ThemeManager.SetRequestedTheme(this, ElementTheme.Light);
+        //    }
+        //}
 
     }
 }
