@@ -27,6 +27,6 @@
             </TreeView>
         </Border>
         <Button x:Name="TestBotton" Content="检测配置" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="800,13.5,0,0" Foreground="White" Background="#4CFFFFFF" MinWidth="70" FontSize="15" MinHeight="32.05" IsTabStop="False" ToolTip="配置保存至软件根目录Info.xml文件夹内" Click="TestBotton_Click"/>
-        <Button x:Name="Info" Content="？" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="920,13.5,0,0" Foreground="White" Background="#4CFFFFFF" MinWidth="70" FontSize="15" MinHeight="32.05" IsTabStop="False" Click="Info_Click"/>
+        <Button x:Name="Info" Content="?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="920,13.5,0,0" Foreground="White" Background="#4CFFFFFF" MinWidth="70" FontSize="15" MinHeight="32.05" IsTabStop="False" Click="Info_Click"/>
     </Grid>
 </Page>
