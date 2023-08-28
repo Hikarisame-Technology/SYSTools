@@ -223,7 +223,7 @@ namespace SYSTools.Pages
 
         private void Info_Click(object sender, RoutedEventArgs e)
         {
-            TestConfigDialog dialog = new TestConfigDialog();
+            TestQueryDialog dialog = new TestQueryDialog();
             dialog.ShowAsync();
         }
 
