@@ -1,21 +1,8 @@
-﻿using ModernWpf.Controls;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Management;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Xml;
 using SYSTools.Dialog;
 
@@ -56,9 +43,6 @@ namespace SYSTools.Pages
 
             ManagementObjectSearcher Monitor = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE service='monitor'");
             ManagementObjectCollection MonitorService = Monitor.Get();
-
-            ManagementObjectSearcher DeskTop = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController");
-            ManagementObjectCollection DeskTopCont = DeskTop.Get();
 
             XmlWriterSettings XmlSettings = new XmlWriterSettings();
             XmlSettings.Indent = true;
@@ -103,7 +87,12 @@ namespace SYSTools.Pages
                     Xml_Writer.WriteStartElement("Attribute", "显卡信息");
                     foreach (ManagementObject VideoDevice_Object in VideoDevice)
                     {
-                        Xml_Writer.WriteElementString("Properties", VideoDevice_Object.GetPropertyValue("Name").ToString());
+                        string VideoProcessor = (string)VideoDevice_Object["VideoProcessor"];
+                        //通过读取VideoProcessor项识别显卡是否有处理器以过滤虚拟显卡(比如向x葵)
+                        if (VideoProcessor != null)
+                        {
+                            Xml_Writer.WriteElementString("Properties", VideoDevice_Object.GetPropertyValue("Name").ToString());
+                        }
                     }
                     Xml_Writer.WriteEndElement();
 
@@ -153,11 +142,16 @@ namespace SYSTools.Pages
                     Xml_Writer.WriteEndElement();
 
                     Xml_Writer.WriteStartElement("Attribute", "屏幕分辨率.颜色深度.当前刷新率(有空位表示双卡或扩展未使用)");
-                    foreach (ManagementObject DeskTop_Info in DeskTopCont)
+                    foreach (ManagementObject DeskTop_Info in VideoDevice)
                     {
                         try
                         {
-                            Xml_Writer.WriteElementString("Properties", DeskTop_Info.GetPropertyValue("Name") + ": " + DeskTop_Info.GetPropertyValue("VideoModeDescription").ToString() + Convert.ToChar(32) + DeskTop_Info.GetPropertyValue("CurrentRefreshRate").ToString() + "Hz");
+                            string VideoProcessor = (string)DeskTop_Info["VideoProcessor"];
+                            //通过读取VideoProcessor项识别显卡是否有处理器以过滤虚拟显卡(比如向x葵)
+                            if (VideoProcessor != null)
+                            {
+                                Xml_Writer.WriteElementString("Properties", DeskTop_Info.GetPropertyValue("Name") + ": " + DeskTop_Info.GetPropertyValue("VideoModeDescription").ToString() + Convert.ToChar(32) + DeskTop_Info.GetPropertyValue("CurrentRefreshRate").ToString() + "Hz");
+                            }
                         }
                         catch (NullReferenceException)
                         {
@@ -238,7 +232,7 @@ namespace SYSTools.Pages
 
         private void Info_Click(object sender, RoutedEventArgs e)
         {
-            TestConfigDialog dialog = new TestConfigDialog();
+            TestQueryDialog dialog = new TestQueryDialog();
             dialog.ShowAsync();
         }
 
