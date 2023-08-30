@@ -8,7 +8,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="610" d:DesignWidth="1040"
       KeepAlive="True"
-      Title="DetectionTools" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610" >
+      Title="DetectionTools" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610" Loaded="Page_Loaded" >
 
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610">
         <Border  BorderThickness="1" CornerRadius="5" Grid.RowSpan="3" Grid.ColumnSpan="2">

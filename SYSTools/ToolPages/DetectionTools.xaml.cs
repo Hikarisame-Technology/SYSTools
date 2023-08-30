@@ -36,17 +36,17 @@ namespace SYSTools.ToolPages
 
         public void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (!DirExist(AppPath + DetectionTools_Path))
+            if (!DirExist(Path.Combine(AppPath, DetectionTools_Path)))
             {
-                Directory.CreateDirectory(AppPath + DetectionTools_Path);
+                Directory.CreateDirectory(Path.Combine(AppPath, DetectionTools_Path));
             }
         }
 
         public void TextBlock_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (DirExist(AppPath + DetectionTools_Path))
+            if (DirExist(Path.Combine(AppPath, DetectionTools_Path)))
             {
-                Process.Start(Path.Combine(AppPath, DetectionTools_Path));
+                Process.Start("explorer.exe", Path.Combine(AppPath, DetectionTools_Path));
             }
         }
         public void HandleMouseClick(string ToolName, string ExeName)

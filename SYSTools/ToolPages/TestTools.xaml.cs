@@ -34,18 +34,18 @@ namespace SYSTools.ToolPages
 
         public void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (!DirExist(AppPath + TestTools_Path))
+            if (!DirExist(Path.Combine(AppPath, TestTools_Path)))
             {
-                Directory.CreateDirectory(AppPath + TestTools_Path);
+                Directory.CreateDirectory(Path.Combine(AppPath, TestTools_Path));
             }
         }
 
         public void TextBlock_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (DirExist(AppPath + TestTools_Path))
+            if (DirExist(Path.Combine(AppPath, TestTools_Path)))
             {
                 //Process.Start("explorer.exe", AppPath + @"\Software Package\TestTools\");
-                Process.Start(Path.Combine(AppPath, TestTools_Path));
+                Process.Start("explorer.exe", Path.Combine(AppPath, TestTools_Path));
             }
         }
         public void HandleMouseClick(string ToolName, string ExeName)

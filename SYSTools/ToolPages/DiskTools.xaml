@@ -3,13 +3,149 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:muxc="http://schemas.modernwpf.com/2019"
       xmlns:local="clr-namespace:SYSTools.ToolPages"
       mc:Ignorable="d" 
       d:DesignHeight="610" d:DesignWidth="1040"
       KeepAlive="True"
-      Title="DiskTools" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610">
-
-    <Grid>
+      Title="DiskTools" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610" Loaded="Page_Loaded">
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Border  BorderThickness="1" CornerRadius="5" Grid.RowSpan="3" Grid.ColumnSpan="2">
+            <Border.Background>
+                <SolidColorBrush Color="#FF202020" Opacity="0.5"/>
+            </Border.Background>
+        </Border>
         <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="3" Source="/SYSTools;component/Resources/LOGO.png" Opacity="0.5" Width="160" Height="90"/>
+
+        <ScrollViewer  VerticalScrollBarVisibility="Auto" MinWidth="1040" MinHeight="610" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <TextBlock Text="该页工具存放于'应用根目录/Software Package/DiskTools/'文件夹内(鼠标右键点击这条文字可打开文件夹)       下列工具请双击打开" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" FontSize="10" Foreground="#FFCFCED1" Height="13" MouseRightButtonDown="TextBlock_MouseRightButtonDown"/>
+                <!--按钮固定上下大小66(px?)-->
+                <Button x:Name="AS_SSD" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="AS_SSD_Click">
+                    <TextBlock><InlineUIContainer>
+                            <Image Source="/SYSTools;component/Resources/Icon/DiskToolsICON/AS SSD.png" Width="50" Height="50"/>
+                        </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="AS SSD" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
+                        </InlineUIContainer><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="AS SSD Benchmark是一款功能强大、免费实用的硬盘性能测试工具,软件能够帮助用户测出固态硬盘持续读写等的性能" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Foreground="#FFCFCED1" Height="13" Width="650"/>
+                        </InlineUIContainer>
+
+                    </TextBlock>
+                </Button>
+                <Button x:Name="CrystalDiskInfo" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="CrystalDiskInfo_Click">
+                    <TextBlock><InlineUIContainer>
+                            <Image Source="/SYSTools;component/Resources/Icon/DiskToolsICON/CrystalDiskInfo.png" Width="50" Height="50"/>
+                        </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="CrystalDiskInfo" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
+                        </InlineUIContainer><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="CrystalDiskInfo是一个硬盘健康监测工具。它显示了硬盘驱动器的基本信息，智能监控和磁盘的温度。可以迅速读到本机硬盘的详细信息" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Foreground="#FFCFCED1" Height="13" Width="650"/>
+                        </InlineUIContainer>
+
+                    </TextBlock>
+                </Button>
+                <Button x:Name="CrystalDiskMark" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="CrystalDiskMark_Click">
+                    <TextBlock><InlineUIContainer>
+                            <Image Source="/SYSTools;component/Resources/Icon/DiskToolsICON/CrystalDiskMark.png" Width="50" Height="50"/>
+                        </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="CrystalDiskMark" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
+                        </InlineUIContainer><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="衡量各种存储（HDD、SSD、USB 内存等）速度的基准软件。" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Foreground="#FFCFCED1" Width="650" Height="13"/>
+                        </InlineUIContainer>
+
+                    </TextBlock>
+                </Button>
+                <Button x:Name="DiskBenchmark" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="DiskBenchmark_Click">
+                    <TextBlock><InlineUIContainer>
+                            <Image Source="/SYSTools;component/Resources/Icon/DiskToolsICON/Disk Benchmark.png" Width="50" Height="50"/>
+                        </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="Disk Benchmark" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
+                        </InlineUIContainer><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="ATTO Disk Benchmark 可以测量硬盘驱动器、固态驱动器、RAID 阵列以及主机连接到附加存储的性能" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Foreground="#FFCFCED1" Width="650" Height="13"/>
+                        </InlineUIContainer>
+
+                    </TextBlock>
+                </Button>
+                <Button x:Name="DiskGenius" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="DiskGenius_Click">
+                    <TextBlock><InlineUIContainer>
+                            <Image Source="/SYSTools;component/Resources/Icon/DiskToolsICON/DiskGenius.png" Width="50" Height="50"/>
+                        </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="DiskGenius" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
+                        </InlineUIContainer><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="DiskGenius是一款硬盘分区及数据维护软件" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Foreground="#FFCFCED1" Width="650" Height="13"/>
+                        </InlineUIContainer>
+
+                    </TextBlock>
+                </Button>
+                <Button x:Name="HDTune" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="HDTune_Click">
+                    <TextBlock><InlineUIContainer>
+                            <Image Source="/SYSTools;component/Resources/Icon/DiskToolsICON/HD Tune.png" Width="50" Height="50"/>
+                        </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="HD Tune" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
+                        </InlineUIContainer><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="HD Tune是一款具有多种功能的硬盘/SSD 实用程序。它可用于测量驱动器的性能、扫描错误、检查健康状态 (SMART)、安全擦除所有数据等等。" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Foreground="#FFCFCED1" Width="650" Height="13"/>
+                        </InlineUIContainer>
+
+                    </TextBlock>
+                </Button>
+                <Button x:Name="LLFTOOL" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="LLFTOOL_Click">
+                    <TextBlock><InlineUIContainer>
+                            <Image Source="/SYSTools;component/Resources/Icon/DiskToolsICON/LLFTOOL.png" Width="50" Height="50"/>
+                        </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="LLFTOOL" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
+                        </InlineUIContainer><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="LLFTOOL万能低格工具是一款适用于windows操作系统的硬盘低级格式化工具，该硬盘低格工具使用方便，操作简单" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Foreground="#FFCFCED1" Width="650" Height="13"/>
+                        </InlineUIContainer>
+
+                    </TextBlock>
+                </Button>
+                <Button x:Name="PartAssist" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="PartAssist_Click">
+                    <TextBlock><InlineUIContainer>
+                            <Image Source="/SYSTools;component/Resources/Icon/DiskToolsICON/PartAssist.png" Width="50" Height="50"/>
+                        </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="PartAssist" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
+                        </InlineUIContainer><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="傲梅分区助手是一款免费、专业级的无损分区工具，提供简单、易用的磁盘分区管理操作" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Foreground="#FFCFCED1" Width="650" Height="13"/>
+                        </InlineUIContainer>
+
+                    </TextBlock>
+                </Button>
+                <Button x:Name="SSDZ" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="SSDZ_Click">
+                    <TextBlock><InlineUIContainer>
+                            <Image Source="/SYSTools;component/Resources/Icon/DiskToolsICON/SSD-Z.png" Width="50" Height="50"/>
+                        </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="SSD-Z" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
+                        </InlineUIContainer><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="SSD-Z是一款针对SSD设备的高可靠性的测试软件" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Foreground="#FFCFCED1" Width="650" Height="13"/>
+                        </InlineUIContainer>
+
+                    </TextBlock>
+                </Button>
+                <Button x:Name="Victoria" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="Victoria_Click">
+                    <TextBlock><InlineUIContainer>
+                            <Image Source="/SYSTools;component/Resources/Icon/DiskToolsICON/Victoria.png" Width="50" Height="50"/>
+                        </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="Victoria" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
+                        </InlineUIContainer><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="Victoria是Windows环境下强大的硬盘维护工具，具备硬盘表面检测/硬盘坏道修复/S.M.A.R.T.信息察看保存/Cache缓存控制等多功能的工具" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Foreground="#FFCFCED1" Width="650" Height="13"/>
+                        </InlineUIContainer>
+
+                    </TextBlock>
+                </Button>
+                <Button x:Name="H2TestW" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="H2TestW_Click">
+                    <TextBlock><InlineUIContainer>
+                            <Image Source="/SYSTools;component/Resources/Icon/DiskToolsICON/H2TestW.png" Width="50" Height="50"/>
+                        </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="H2TestW" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
+                        </InlineUIContainer><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="H2testw是一款u盘读写速度测试和坏块检测软件，通过往待测目录写入数据的方式测试u盘的实际写入速度校验写入的数据是否正确" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Foreground="#FFCFCED1" Width="650" Height="13"/>
+                        </InlineUIContainer>
+
+                    </TextBlock>
+                </Button>
+
+
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
+    
 </Page>
