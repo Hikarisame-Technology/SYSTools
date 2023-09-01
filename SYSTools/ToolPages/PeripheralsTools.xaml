@@ -3,13 +3,59 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:muxc="http://schemas.modernwpf.com/2019"
       xmlns:local="clr-namespace:SYSTools.ToolPages"
       mc:Ignorable="d" 
       d:DesignHeight="610" d:DesignWidth="1040"
       KeepAlive="True"
-      Title="PeripheralsTools" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610">
+      Title="PeripheralsTools" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610" Loaded="Page_Loaded">
 
-    <Grid>
+
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Border  BorderThickness="1" CornerRadius="5" Grid.RowSpan="3" Grid.ColumnSpan="2">
+            <Border.Background>
+                <SolidColorBrush Color="#FF202020" Opacity="0.5"/>
+            </Border.Background>
+        </Border>
         <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="3" Source="/SYSTools;component/Resources/LOGO.png" Opacity="0.5" Width="160" Height="90"/>
+
+        <ScrollViewer  VerticalScrollBarVisibility="Auto" MinWidth="1040" MinHeight="610" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <TextBlock Text="该页工具存放于'应用根目录/Software Package/PeripheralsTools/'文件夹内(鼠标右键点击这条文字可打开文件夹)       下列工具请双击打开" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" FontSize="10" Foreground="#FFCFCED1" Height="13" MouseRightButtonDown="TextBlock_MouseRightButtonDown"/>
+                <Button x:Name="HKBTest" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="HKBTest_Click">
+                    <TextBlock><InlineUIContainer>
+                            <Image Source="/SYSTools;component/Resources/Icon/PeripheralsToolsICON/HKBTest.png" Width="50" Height="50"/>
+                        </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="HKBTest" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
+                        </InlineUIContainer><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="HKBTest是一款键盘测试工具，可以用于键盘按键冲突检测" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Foreground="#FFCFCED1" Height="13" Width="650"/>
+                        </InlineUIContainer>
+                    </TextBlock>
+                </Button>
+
+                <Button x:Name="MouseTest" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="MouseTest_Click">
+                    <TextBlock><InlineUIContainer>
+                            <Image Source="/SYSTools;component/Resources/Icon/PeripheralsToolsICON/MouseTest.png" Width="50" Height="50"/>
+                        </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="MouseTest" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
+                        </InlineUIContainer><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="MouseTest是鼠标之家出品的鼠标按键连点检测工具" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Foreground="#FFCFCED1" Height="13" Width="650"/>
+                        </InlineUIContainer>
+                    </TextBlock>
+                </Button>
+
+                <Button x:Name="MouseRate" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="MouseRate_Click">
+                    <TextBlock><InlineUIContainer>
+                            <Image Source="/SYSTools;component/Resources/Icon/PeripheralsToolsICON/MouseRate.png" Width="50" Height="50"/>
+                        </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="MouseRate" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
+                        </InlineUIContainer><Run Text=" "/><InlineUIContainer>
+                            <TextBlock Text="MouseRate是一款检测鼠标DPI和扫描率综合性能的软件" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Foreground="#FFCFCED1" Height="13" Width="650"/>
+                        </InlineUIContainer>
+                    </TextBlock>
+                </Button>
+
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>
