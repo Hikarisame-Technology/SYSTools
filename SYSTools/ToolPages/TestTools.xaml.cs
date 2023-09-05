@@ -57,10 +57,20 @@ namespace SYSTools.ToolPages
                 {
                     Process.Start(ExePath);
                 }
-                catch (Exception e)
+                catch (Exception ExeFail)
                 {
                     // Handle the exception if needed
                     // MessageBox.Show(e.Message);
+                    ModernWpf.Controls.ContentDialog dialog = new ModernWpf.Controls.ContentDialog
+                    {
+                        Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+                        Title = ExeFail,
+                        CloseButtonText = "Cancel",
+                        DefaultButton = ModernWpf.Controls.ContentDialogButton.Close
+                    };
+                    dialog.ShowAsync();
+
+                    SYSToolsLog.LogInfo(ExeFail.ToString(), true);
                 }
             }
             else
