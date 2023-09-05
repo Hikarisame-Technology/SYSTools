@@ -241,6 +241,9 @@
     <PackageReference Include="Autoupdater.NET.Official">
       <Version>1.8.4</Version>
     </PackageReference>
+    <PackageReference Include="log4net">
+      <Version>2.0.15</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.Windows.SDK.Contracts">
       <Version>10.0.18362.2005</Version>
     </PackageReference>
