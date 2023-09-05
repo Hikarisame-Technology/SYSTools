@@ -7,8 +7,10 @@
         xmlns:local="clr-namespace:SYSTools_Update_Tools_"
         mc:Ignorable="d"
         muxc:WindowHelper.UseModernWindowStyle="True"
-        Title="ToolsUpdate 工具包更新器" Height="200" Width="410" ShowInTaskbar="False" ResizeMode="NoResize">
-     <Grid>
-        
+        Title="ToolsUpdate 工具包更新器" Loaded="Window_Loaded" Height="200" Width="410" ShowInTaskbar="False" ResizeMode="NoResize">
+    <Grid>
+        <TextBlock x:Name="Version" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" Margin="0,35,0,0" Height="25" />
+        <TextBlock x:Name="Cloud_Version" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Text="等待获取版本更新中..."/>
+        <TextBlock x:Name="Version_Verify" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="18" Margin="0,0,0,35"/>
     </Grid>
 </Window>
