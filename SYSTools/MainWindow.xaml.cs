@@ -25,8 +25,8 @@ namespace SYSTools
         private Frame DiskTools = new Frame() { Content = new DiskTools() };
         private Frame PeripheralsTools = new Frame() { Content = new PeripheralsTools() };
         private Frame RepairingTools = new Frame() { Content = new RepairingTools() };
-        private Frame AdbTools = new Frame() { Content = new AdbTools() };
         private Frame WindowsTools = new Frame() { Content = new WindowsTools() };
+        private Frame WSATools = new Frame() { Content = new WSATools() };
         private Frame ConfigurationPage = new Frame() { Content = new Configuration() };
         private Frame AboutPage = new Frame() { Content = new About() };
         string AppPath = Directory.GetCurrentDirectory();
@@ -87,14 +87,14 @@ namespace SYSTools
             FrameContent.Content = RepairingTools;
         }
 
-        private void Adb_Tools_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            FrameContent.Content = AdbTools;
-        }
-
         private void WindowsTools_Page_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             FrameContent.Content = WindowsTools;
+        }
+
+        private void WSA_Tools_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            FrameContent.Content = WSATools;
         }
 
         private void Software_Configuration_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

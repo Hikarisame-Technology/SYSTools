@@ -14,7 +14,7 @@
 
 
         <muxc:NavigationView x:Name="Sidebar" IsSettingsVisible="False" IsBackButtonVisible="Collapsed"
-    IsBackEnabled="False" AlwaysShowHeader="True" PaneTitle="SysTools" SelectionFollowsFocus="Disabled"
+    IsBackEnabled="False" AlwaysShowHeader="True" PaneTitle="SYSTools" SelectionFollowsFocus="Disabled"
     PaneDisplayMode="LeftCompact" IsTabStop="False" HorizontalContentAlignment="Center" IsTitleBarAutoPaddingEnabled="True">
 
             <muxc:NavigationView.MenuItems>
@@ -63,13 +63,19 @@
 
                 <muxc:NavigationViewItemSeparator/>
 
-                <muxc:NavigationViewItem Content="安卓ADB工具" Tag="安卓ADB工具" x:Name="Adb_Tools" ToolTip= "功能未完成" IsTabStop="False" MouseLeftButtonDown="Adb_Tools_MouseLeftButtonDown" >
+                <muxc:NavigationViewItem Content="Windows快捷小工具" Tag="Windows快捷小工具" x:Name="Windows_Tools" IsTabStop="False" MouseLeftButtonDown="WindowsTools_Page_MouseLeftButtonDown" >
                     <muxc:NavigationViewItem.Icon>
-                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE1C9;" />
+                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE74C;" />
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
 
                 <muxc:NavigationViewItemSeparator/>
+
+                <muxc:NavigationViewItem Content="WSA工具" Tag="WSA工具" x:Name="Adb_Tools" ToolTip= "功能未完成" IsTabStop="False" MouseLeftButtonDown="WSA_Tools_MouseLeftButtonDown" >
+                    <muxc:NavigationViewItem.Icon>
+                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE1C9;" />
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
 
             </muxc:NavigationView.MenuItems>
 

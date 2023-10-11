@@ -91,8 +91,8 @@
     <Compile Include="Pages\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AdbTools.xaml.cs">
-      <DependentUpon>AdbTools.xaml</DependentUpon>
+    <Compile Include="Pages\WSATools.xaml.cs">
+      <DependentUpon>WSATools.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Configuration.xaml.cs">
       <DependentUpon>Configuration.xaml</DependentUpon>
@@ -169,7 +169,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\AdbTools.xaml">
+    <Page Include="Pages\WSATools.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
