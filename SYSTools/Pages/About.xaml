@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:muxc="http://schemas.modernwpf.com/2019"
+      xmlns:muxc="http://schemas.inkore.net/lib/ui/wpf/modern"
       xmlns:local="clr-namespace:SYSTools.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="610" d:DesignWidth="1040"
@@ -49,7 +49,7 @@
         <muxc:HyperlinkButton Content="@tz95" Margin="326,110,0,0" FontSize="15" NavigateUri="https://github.com/tz95" Cursor="Hand" Style="{StaticResource NoUnderlineHyperlinkButton}" VerticalAlignment="Top"/>
 
         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,150,0,0" FontSize="15" Text="UI设计 :" Foreground="White"/>
-        <muxc:HyperlinkButton x:Name="ShizukuNanamiUI" Content="@ShizukuNanami" Margin="89,150,0,0" VerticalAlignment="Top" FontSize="15" VerticalContentAlignment="Top" NavigateUri="https://github.com/Shizuku-Nanami" Cursor="Hand" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
+        <TextBlock Text=" Prismatic Design Studio" Margin="89,150,0,0" VerticalAlignment="Top" FontSize="15" Cursor="Hand" Foreground="#FF004275" HorizontalAlignment="Left" />
 
         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,190,0,0" FontSize="15" Text="软件协助 :" Foreground="White"/>
         <muxc:HyperlinkButton x:Name="KanChan" Content="@偷税师柑柑" Margin="103,190,0,0" VerticalAlignment="Top" FontSize="15" VerticalContentAlignment="Top" NavigateUri="https://github.com/YorokobiMaster" Cursor="Hand" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
@@ -89,9 +89,9 @@
                     </Border.BorderBrush>
                 </Border>
 
-                <TextBlock Text="ModernWPF UI Library (MIT License)" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0" FontSize="16"/>
-                <muxc:HyperlinkButton NavigateUri="https://github.com/Kinnara/ModernWpf" Content="https://github.com/Kinnara/ModernWpf" HorizontalAlignment="Center" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
-                <muxc:HyperlinkButton NavigateUri="https://github.com/Kinnara/ModernWpf/blob/master/LICENSE" Content="https://github.com/Kinnara/ModernWpf/blob/master/LICENSE" HorizontalAlignment="Center" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
+                <TextBlock Text="iNKORE.UI.WPF.Modern (MIT License)" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0" FontSize="16"/>
+                <muxc:HyperlinkButton NavigateUri="https://github.com/iNKORE-Public/UI.WPF.Modern" Content="https://github.com/iNKORE-Public/UI.WPF.Modern" HorizontalAlignment="Center" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
+                <muxc:HyperlinkButton NavigateUri="https://github.com/iNKORE-Public/UI.WPF.Modern/blob/main/LICENSE" Content="https://github.com/iNKORE-Public/UI.WPF.Modern/blob/main/LICENSE" HorizontalAlignment="Center" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
 
                 <TextBlock Text="Fluent UI System Icons (MIT License)" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0" FontSize="16"/>
                 <muxc:HyperlinkButton NavigateUri="https://github.com/microsoft/fluentui-system-icons" Content="https://github.com/microsoft/fluentui-system-icons" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>

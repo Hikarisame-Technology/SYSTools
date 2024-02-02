@@ -3,9 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:muxc="http://schemas.modernwpf.com/2019" 
+        xmlns:muxc="http://schemas.inkore.net/lib/ui/wpf/modern"
         xmlns:local="clr-namespace:SYSTools"
         mc:Ignorable="d"
+        muxc:ThemeManager.IsThemeAware="True"
+        muxc:TitleBar.ExtendViewIntoTitleBar="False"    
+        muxc:WindowHelper.SystemBackdropType="Mica"
+        muxc:TitleBar.IsBackButtonVisible="False"
         muxc:WindowHelper.UseModernWindowStyle="True"
         Height="650" Width="1100" MinWidth="1100" MinHeight="650" Loaded="Window_Loaded">
     <Grid Loaded="Grid_Loaded">

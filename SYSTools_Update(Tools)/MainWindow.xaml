@@ -3,9 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:muxc="http://schemas.modernwpf.com/2019" 
+        xmlns:muxc="http://schemas.inkore.net/lib/ui/wpf/modern"
         xmlns:local="clr-namespace:SYSTools_Update_Tools_"
         mc:Ignorable="d"
+        muxc:ThemeManager.IsThemeAware="True"
+        muxc:TitleBar.ExtendViewIntoTitleBar="False"    
+        muxc:WindowHelper.SystemBackdropType="Mica"
+        muxc:TitleBar.IsBackButtonVisible="False"
         muxc:WindowHelper.UseModernWindowStyle="True"
         Title="ToolsUpdate 工具包更新器" Loaded="Window_Loaded" Height="200" Width="410" ShowInTaskbar="False" ResizeMode="NoResize">
     <Grid>
