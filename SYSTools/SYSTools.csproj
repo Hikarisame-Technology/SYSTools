@@ -300,5 +300,8 @@
   <ItemGroup>
     <Resource Include="SYSTools_LOGO_256.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\WSAPage\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

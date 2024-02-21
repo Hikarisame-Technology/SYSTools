@@ -87,7 +87,7 @@ namespace SYSTools
             FrameContent.Content = RepairingTools;
         }
 
-        private void WindowsTools_Page_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Windows_Tools_Page_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             FrameContent.Content = WindowsTools;
         }

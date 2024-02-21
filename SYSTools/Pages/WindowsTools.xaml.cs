@@ -26,36 +26,49 @@ namespace SYSTools.Pages
 
         private void Regedit_Click(object sender, RoutedEventArgs e)
         {
+            //注册表
             Process.Start("regedit");
         }
 
         private void Control_Click(object sender, RoutedEventArgs e)
         {
+            //控制面板
             Process.Start("control");
+        }
+
+        private void compmgmt_Click(object sender, RoutedEventArgs e)
+        {
+            //计算机管理
+            Process.Start("compmgmt.msc");
         }
 
         private void Eventvwr_Click(object sender, RoutedEventArgs e)
         {
+            //事件查看器
             Process.Start("eventvwr");
         }
 
         private void Devmgmt_Click(object sender, RoutedEventArgs e)
         {
+            //设备管理器
             Process.Start("devmgmt.msc");
         }
 
         private void Gpedit_Click(object sender, RoutedEventArgs e)
         {
+            //组策略
             Process.Start("gpedit.msc");
         }
 
         private void GodMode_Click(object sender, RoutedEventArgs e)
         {
+            //上帝模式
             Process.Start("shell:::{ED7BA470-8E54-465E-825C-99712043E01C}");
         }
 
         private void Winver_Click(object sender, RoutedEventArgs e)
         {
+            //关于Windows
             Process.Start("winver");
         }
         //网络工具分类

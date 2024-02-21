@@ -12,5 +12,37 @@
 
     <Grid>
         <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="3" Source="/SYSTools;component/Resources/LOGO.png" Opacity="0.5" Width="160" Height="90"/>
+        
+        <muxc:NavigationView x:Name="WSANavigation" PaneDisplayMode="Top" SelectionFollowsFocus="Enabled" IsBackButtonVisible="Collapsed" HorizontalContentAlignment="Center" IsTitleBarAutoPaddingEnabled="True" IsSettingsVisible="False" IsBackEnabled="False" AlwaysShowHeader="True">
+            <muxc:NavigationView.MenuItems>
+
+                <muxc:NavigationViewItem Content="WSA状态" x:Name="SamplePage1Item" IsSelected="True">
+                    <muxc:NavigationViewItem.Icon>
+                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE8EA;" />
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+                
+                <muxc:NavigationViewItem Content="APP安装" x:Name="SamplePage2Item">
+                    <muxc:NavigationViewItem.Icon>
+                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE713;" />
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+                
+                <muxc:NavigationViewItem Content="文件传输" x:Name="SamplePage3Item">
+                    <muxc:NavigationViewItem.Icon>
+                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE17C;" />
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+                
+                <muxc:NavigationViewItem Content="正在运行" x:Name="SamplePage4Item">
+                    <muxc:NavigationViewItem.Icon>
+                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE006;" />
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+                
+            </muxc:NavigationView.MenuItems>
+
+            <ContentControl x:Name="FrameContent" HorizontalAlignment="stretch" VerticalAlignment="stretch" Margin="4" IsTabStop="False" />
+        </muxc:NavigationView>
     </Grid>
 </Page>

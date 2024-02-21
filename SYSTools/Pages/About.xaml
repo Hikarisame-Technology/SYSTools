@@ -49,7 +49,7 @@
         <muxc:HyperlinkButton Content="@tz95" Margin="326,110,0,0" FontSize="15" NavigateUri="https://github.com/tz95" Cursor="Hand" Style="{StaticResource NoUnderlineHyperlinkButton}" VerticalAlignment="Top"/>
 
         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,150,0,0" FontSize="15" Text="UI设计 :" Foreground="White"/>
-        <TextBlock Text=" Prismatic Design Studio" Margin="89,150,0,0" VerticalAlignment="Top" FontSize="15" Cursor="Hand" Foreground="#FF004275" HorizontalAlignment="Left" />
+        <TextBlock Text=" Prismatic Design Studio" Margin="89,150,0,0" VerticalAlignment="Top" FontSize="15" Cursor="Hand" HorizontalAlignment="Left" Foreground="White" />
 
         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,190,0,0" FontSize="15" Text="软件协助 :" Foreground="White"/>
         <muxc:HyperlinkButton x:Name="KanChan" Content="@偷税师柑柑" Margin="103,190,0,0" VerticalAlignment="Top" FontSize="15" VerticalContentAlignment="Top" NavigateUri="https://github.com/YorokobiMaster" Cursor="Hand" Style="{StaticResource NoUnderlineHyperlinkButton}"/>

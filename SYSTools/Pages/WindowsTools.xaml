@@ -30,6 +30,7 @@
                             <Button x:Name="PowerShell" Margin="5,5,0,0" Width="140" Height="40" Content="PowerShell终端" FontSize="15" Click="PowerShell_Click"/>
                             <Button x:Name="Regedit" Margin="5,5,0,0" Width="140" Height="40" Content="注册表" FontSize="15" Click="Regedit_Click"/>
                             <Button x:Name="Control" Margin="5,5,0,0" Width="140" Height="40" Content="控制面板" FontSize="15" Click="Control_Click" />
+                            <Button x:Name="compmgmt" Margin="5,5,0,0" Width="140" Height="40" Content="计算机管理" FontSize="15" Click="compmgmt_Click" />
                             <Button x:Name="Eventvwr" Margin="5,5,0,0" Width="140" Height="40" Content="事件查看器" FontSize="15" Click="Eventvwr_Click" />
                             <Button x:Name="Devmgmt" Margin="5,5,0,0" Width="140" Height="40" Content="设备管理器" FontSize="15" Click="Devmgmt_Click" />
                             <Button x:Name="Gpedit" Margin="5,5,0,0" Width="140" Height="40" Content="组策略" FontSize="15" Click="Gpedit_Click" />
