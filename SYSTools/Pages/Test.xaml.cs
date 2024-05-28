@@ -2,7 +2,10 @@
 using System.IO;
 using System.Linq;
 using System.Management;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using System.Xml;
 using SYSTools.Dialog;
 
@@ -11,14 +14,15 @@ namespace SYSTools.Pages
     /// <summary>
     /// Test.xaml 的交互逻辑
     /// </summary>
-    public partial class Test : System.Windows.Controls.Page
+    public partial class Test : Page
     {
         public Test()
         {
             InitializeComponent();
+            CommandBindings.Add(new CommandBinding(ApplicationCommands.Copy, CopyCommandExecuted));
         }
-       
-        private void HardwareTest()
+
+        private void HardwareTestAsync()
         {
             ManagementObjectSearcher OpSystem = new ManagementObjectSearcher("SELECT * FROM win32_OperatingSystem");
             ManagementObjectCollection OpS = OpSystem.Get();
@@ -108,13 +112,18 @@ namespace SYSTools.Pages
                     {
                         Xml_Writer.WriteElementString("Properties", "网卡名称:" + Convert.ToChar(32) + MNF.GetPropertyValue("Description").ToString());
                         Xml_Writer.WriteElementString("Properties", "MAC地址:" + Convert.ToChar(32) + MNF.GetPropertyValue("MACAddress").ToString());
-                        Xml_Writer.WriteElementString("Properties", "本机IPv4/6地址:");
+                    }
+                    Xml_Writer.WriteEndElement();
+
+                    Xml_Writer.WriteStartElement("Attribute", "本机IPv4/6地址:");
+                    foreach (ManagementObject MNF in MNetconfig)
+                    {
                         string[] ipAddresses = (string[])MNF["IPAddress"];
                         if (ipAddresses != null && ipAddresses.Length > 0)
                         {
                             foreach (string ipAddress in ipAddresses)
                             {
-                                Xml_Writer.WriteElementString("Properties", Convert.ToChar(9) + ipAddress);
+                                Xml_Writer.WriteElementString("Properties", ipAddress);
                             }
                         }
                         else
@@ -212,24 +221,33 @@ namespace SYSTools.Pages
 
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load("Info.xml");
-            XmlNode xn = xmlDoc.SelectSingleNode("//ComputerSystem");
-            XmlNodeList xnl = xn.ChildNodes;
-            XmlNode xnf;
-            XmlElement root = xmlDoc.DocumentElement;
-            XmlNodeList elemList = root.GetElementsByTagName("Attribute");
+            XmlNodeList elemList = xmlDoc.DocumentElement.GetElementsByTagName("Attribute");
             for (int i = 0; i < elemList.Count; i++)
             {
-                xnf = xnl.Item(i);
-                XmlElement xe = (XmlElement)xnf;
-                XmlNodeList xnf1 = xe.ChildNodes;
-                TestView.Items.Add(xnf.Attributes["xmlns"].Value);
-                foreach (XmlNode xnfItem in xnf1)
+                XmlElement xe = (XmlElement)elemList[i];
+                TreeViewItem parentItem = new TreeViewItem
                 {
-                    TestView.Items.Add("    " + xnfItem.InnerText);
+                    Header = xe.Attributes["xmlns"].Value,
+                    IsExpanded = true
+                };
+                AddContextMenu(parentItem);
+
+                TestView.Items.Add(parentItem);
+
+                XmlNodeList childNodes = xe.ChildNodes;
+                foreach (XmlNode childNode in childNodes)
+                {
+                    TreeViewItem childItem = new TreeViewItem
+                    {
+                        Header = childNode.InnerText,
+                        IsExpanded = true
+                    };
+                    AddContextMenu(childItem);
+
+                    parentItem.Items.Add(childItem);
                 }
             }
         }
-
         private void Info_Click(object sender, RoutedEventArgs e)
         {
             TestQueryDialog dialog = new TestQueryDialog();
@@ -238,8 +256,38 @@ namespace SYSTools.Pages
 
         private void TestBotton_Click(object sender, RoutedEventArgs e)
         {
-            HardwareTest();
+            HardwareTestAsync();
             Xml();
         }
+
+        private void AddContextMenu(TreeViewItem item)
+        {
+            ContextMenu contextMenu = new ContextMenu();
+            MenuItem menuItemCopy = new MenuItem
+            {
+                Header = "复制",
+                Command = ApplicationCommands.Copy,
+                CommandTarget = item
+            };
+            contextMenu.Items.Add(menuItemCopy);
+            item.ContextMenu = contextMenu;
+        }
+
+        private void CopyCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.OriginalSource is TreeViewItem item && item.Header != null)
+            {
+                try
+                {
+                    string textToCopy = item.Header.ToString();
+                    TextCopy.ClipboardService.SetText(textToCopy);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("无法复制内容: " + ex.Message);
+                }
+            }
+        }
+
     }
 }

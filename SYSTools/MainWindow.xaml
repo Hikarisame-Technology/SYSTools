@@ -17,9 +17,17 @@
         <Image x:Name="BackImage" Stretch="UniformToFill" Source="/Resources/Test2.jpg"/>
 
 
-        <muxc:NavigationView x:Name="Sidebar" IsSettingsVisible="False" IsBackButtonVisible="Collapsed"
-    IsBackEnabled="False" AlwaysShowHeader="True" PaneTitle="SYSTools" SelectionFollowsFocus="Disabled"
-    PaneDisplayMode="LeftCompact" IsTabStop="False" HorizontalContentAlignment="Center" IsTitleBarAutoPaddingEnabled="True">
+        <muxc:NavigationView x:Name="Sidebar" 
+                             IsSettingsVisible="False" 
+                             IsBackButtonVisible="Collapsed"
+                             IsBackEnabled="False" 
+                             AlwaysShowHeader="True" 
+                             PaneTitle="SYSTools" 
+                             SelectionFollowsFocus="Disabled"
+                             PaneDisplayMode="LeftCompact" 
+                             IsTabStop="False" 
+                             HorizontalContentAlignment="Center"
+                             IsTitleBarAutoPaddingEnabled="True">
 
             <muxc:NavigationView.MenuItems>
 
