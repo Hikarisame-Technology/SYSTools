@@ -7,13 +7,16 @@
   
 ~~软件还没写完~~ 暂无
 
-### 功能
+### 功能 / 特点
 
-~~待补全~~
+- 🔥 与卡吧工具箱(EX-DIY、卡硬工具箱)、图吧工具箱等二次封装外部程序工具箱类似功能。  
+- 🪵 系统检测通过WMI获取，可能无法识别精修改硬件的正确信息(后续解决Cooming s∞n)。  
+- 🍕 开源，运行内存占用小，安全(工具包优先使用Kaspersky扫描)。  
+- 💫 更加符合Windows10/11的界面设计(设置除外)，全工具包显示图标重构。
 
 ### 特别鸣谢 
 
-[ModernWPF UI Library](https://github.com/Kinnara/ModernWpf)
+[iNKORE.UI.WPF.Modern](https://github.com/iNKORE-NET/UI.WPF.Modern)
 
 [Fluent UI System Icons](https://github.com/microsoft/fluentui-system-icons)
 
