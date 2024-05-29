@@ -34,6 +34,16 @@ namespace SYSTools
         public MainWindow()
         {
             InitializeComponent();
+            this.Loaded += MainWindow_Loaded;
+            ConfigurationPage.Content = new Configuration
+            {
+                // 设置OnBackgroundChanged委托的实现
+                OnBackgroundChanged = () =>
+                {
+                    LoadUserSettings();
+                }
+            };
+            FrameContent.Content = ConfigurationPage;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -107,83 +117,32 @@ namespace SYSTools
             FrameContent.Content = AboutPage;
         }
 
-        private void About_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            //鼠标右键双击事件
-            if (e.ChangedButton == MouseButton.Right && e.ClickCount == 2)
-            {
-                //判断彩蛋&文件夹是否触发 (背景替换功能预计写入设置项内)
-                BackImageNew BackNew = new BackImageNew();
-                BackImageOld Backold = new BackImageOld();
-                if (Directory.Exists(AppPath + "\\Config\\BackImage"))
-                {
-                    if (Directory.Exists(AppPath + "\\Config\\BackImage\\Null.txt"))
-                    {
-                        Backold.ShowAsync();
-                    }
-                    else
-                    {
-                        BackText();
-                        Backold.ShowAsync();
-                    }
-                }
-                else
-                {
-                    BackNew.ShowAsync();
-                    Directory.CreateDirectory(AppPath + "\\Config\\BackImage");
-                    BackText();
-                }
-            }
+            LoadUserSettings();
+        }
+        private void SettingsPage_BackgroundChanged(object sender, EventArgs e)
+        {
+            LoadUserSettings();
         }
 
-        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        private void LoadBackgroundImage(string imagePath)
         {
-            //判断是否有文件夹（后期会修改）
-            if (Directory.Exists(AppPath + "\\Config\\BackImage"))
-            {
-                LoadBackgroundImage();
-            }
-        }
-        private string FindFile(string directoryPath, string fileExtension)
-        {
-            string[] files = Directory.GetFiles(directoryPath, "*." + fileExtension);
-            if (files.Length > 0)
-            {
-                return files[0]; // 返回第一个找到的文件
-            }
-            else
-            {
-                return null; // 没有找到文件
-            }
-        }
-
-        private void LoadBackgroundImage()
-        {
-            //背景图片更换
             BitmapImage bitmap = new BitmapImage();
-            string imagePath = FindFile(AppPath + "\\Config\\BackImage", "jpg") ?? FindFile(AppPath + "\\Config\\BackImage", "png");
-            if (imagePath != null)
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri(imagePath, UriKind.Absolute);
+            bitmap.EndInit();
+            BackImage.Source = bitmap;
+        }
+
+        private void LoadUserSettings()
+        {
+            string savedImagePath = Properties.Settings.Default.BackgroundImagePath;
+            if (!string.IsNullOrWhiteSpace(savedImagePath) && File.Exists(savedImagePath))
             {
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri(imagePath);
-                bitmap.EndInit();
-                BackImage.Source = bitmap;
+                LoadBackgroundImage(savedImagePath);
             }
         }
-
-        public void BackText()
-        {
-            //彩蛋文本写入
-            File.Create(AppPath + "\\Config\\BackImage\\Null.txt").Close();
-            StreamWriter sw = new StreamWriter(AppPath + "\\Config\\BackImage\\Null.txt");
-            sw.WriteLine("恭喜你找到一个神奇的彩蛋");
-            sw.WriteLine("找一张你喜欢的格式为(.Jpg/.Png)的图片");
-            sw.WriteLine("丢到这个文件夹里面");
-            sw.WriteLine("不出意外应该会修改软件背景图片");
-            sw.WriteLine("记得重启软件 我没加热更新(因为我不会 （；´д｀）ゞ)");
-            sw.Close();
-        }
-
 
     }
 }
