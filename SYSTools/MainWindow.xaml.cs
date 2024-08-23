@@ -142,6 +142,9 @@ namespace SYSTools
             {
                 LoadBackgroundImage(savedImagePath);
             }
+            else {
+                LoadBackgroundImage("pack://application:,,,/Resources/Test2.jpg");
+            }
         }
 
     }

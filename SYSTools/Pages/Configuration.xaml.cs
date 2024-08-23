@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,11 +8,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace SYSTools.Pages
 {
@@ -29,19 +30,15 @@ namespace SYSTools.Pages
             InitializeComponent();
             this.Loaded += Configuration_Loaded;
         }
+
         private void Configuration_Loaded(object sender, RoutedEventArgs e)
         {
             LoadUserSettings();
         }
-        private void SaveBackgroundImagePath(string imagePath)
-        {
-            Properties.Settings.Default.BackgroundImagePath = imagePath;
-            Properties.Settings.Default.Save();
-        }
 
         private void SelectBackgroundButton_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
             openFileDialog.Filter = "Image files (*.jpg;*.png)|*.jpg;*.png";
             if (openFileDialog.ShowDialog() == true)
             {
@@ -51,20 +48,49 @@ namespace SYSTools.Pages
             }
         }
 
+        private void DeleteBackgroundButton_Click(object sender, RoutedEventArgs e)
+        {
+            SaveBackgroundImagePath("");
+            LoadBackgroundImage("");
+            UpdateBackgroundImage("");
+        }
+
+        private void SaveBackgroundImagePath(string imagePath)
+        {
+            Properties.Settings.Default.BackgroundImagePath = imagePath;
+            Properties.Settings.Default.Save();
+        }
+
         private void UpdateBackgroundImage(string imagePath)
         {
-            SaveBackgroundImagePath(imagePath);
-            LoadBackgroundImage(imagePath);
-            OnBackgroundChanged?.Invoke();
+            if (imagePath == "")
+            {
+                SaveBackgroundImagePath(imagePath);
+                LoadBackgroundImage(imagePath);
+                OnBackgroundChanged?.Invoke();
+            }
+            else
+            {
+                SaveBackgroundImagePath(imagePath);
+                LoadBackgroundImage(imagePath);
+                OnBackgroundChanged?.Invoke();
+            }
         }
 
         private void LoadBackgroundImage(string imagePath)
         {
-            BitmapImage bitmap = new BitmapImage();
-            bitmap.BeginInit();
-            bitmap.UriSource = new Uri(imagePath, UriKind.Absolute);
-            bitmap.EndInit();
-            BackgroundPreview.Source = bitmap;
+            if (imagePath == "")
+            {
+                BackgroundPreview.Source = null;
+            }
+            else
+            {
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(imagePath, UriKind.Absolute);
+                bitmap.EndInit();
+                BackgroundPreview.Source = bitmap;
+            }
         }
 
         private void LoadUserSettings()
@@ -75,6 +101,5 @@ namespace SYSTools.Pages
                 LoadBackgroundImage(savedImagePath);
             }
         }
-
     }
 }
