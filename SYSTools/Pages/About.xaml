@@ -89,21 +89,25 @@
                     </Border.BorderBrush>
                 </Border>
 
-                <TextBlock Text="iNKORE.UI.WPF.Modern (MIT License)" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0" FontSize="16"/>
+                <TextBlock Text="iNKORE.UI.WPF.Modern (LGPL-2.1 license)" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0" FontSize="16"/>
                 <muxc:HyperlinkButton NavigateUri="https://github.com/iNKORE-Public/UI.WPF.Modern" Content="https://github.com/iNKORE-Public/UI.WPF.Modern" HorizontalAlignment="Center" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
                 <muxc:HyperlinkButton NavigateUri="https://github.com/iNKORE-Public/UI.WPF.Modern/blob/main/LICENSE" Content="https://github.com/iNKORE-Public/UI.WPF.Modern/blob/main/LICENSE" HorizontalAlignment="Center" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
+
+                <TextBlock Text="iNKORE.UI.WPF (LGPL-2.1 license)" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0" FontSize="16" Cursor=""/>
+                <muxc:HyperlinkButton NavigateUri="https://github.com/iNKORE-NET/UI.WPF" Content="https://github.com/iNKORE-NET/UI.WPF" HorizontalAlignment="Center" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
+                <muxc:HyperlinkButton NavigateUri="https://github.com/iNKORE-NET/UI.WPF/blob/main/LICENSE" Content="https://github.com/iNKORE-NET/UI.WPF/blob/main/LICENSE" HorizontalAlignment="Center" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
 
                 <TextBlock Text="Fluent UI System Icons (MIT License)" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0" FontSize="16"/>
                 <muxc:HyperlinkButton NavigateUri="https://github.com/microsoft/fluentui-system-icons" Content="https://github.com/microsoft/fluentui-system-icons" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
                 <muxc:HyperlinkButton NavigateUri="https://github.com/microsoft/fluentui-system-icons/blob/master/LICENSE" Content="https://github.com/microsoft/fluentui-system-icons/blob/master/LICENSE" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
 
-
-                <TextBlock Text="Microsoft.Web.WebView2" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0" FontSize="16"/>
-                <muxc:HyperlinkButton NavigateUri="https://aka.ms/webview" Content="https://aka.ms/webview" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
-
                 <TextBlock Text="AutoUpdater.NET (MIT License)" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0" FontSize="16"/>
                 <muxc:HyperlinkButton NavigateUri="https://github.com/ravibpatel/AutoUpdater.NET" Content="https://github.com/ravibpatel/AutoUpdater.NET" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
                 <muxc:HyperlinkButton NavigateUri="https://github.com/ravibpatel/AutoUpdater.NET/blob/master/LICENSE" Content="https://github.com/ravibpatel/AutoUpdater.NET/blob/master/LICENSE" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
+
+                <TextBlock Text="Log4Net (Apache-2.0 License)" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0" FontSize="16"/>
+                <muxc:HyperlinkButton NavigateUri="https://logging.apache.org/log4net/" Content="https://logging.apache.org/log4net/" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
+                <muxc:HyperlinkButton NavigateUri="https://logging.apache.org/log4net/license.html" Content="https://logging.apache.org/log4net/license.html" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
 
                 <TextBlock Text="Microsoft.Windows.SDK.Contracts" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0" FontSize="16"/>
                 <muxc:HyperlinkButton NavigateUri="https://aka.ms/WinSDKProjectURL" Content="https://aka.ms/WinSDKProjectURL" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>

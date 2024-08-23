@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:muxc="http://schemas.inkore.net/lib/ui/wpf/modern"
              xmlns:local="clr-namespace:SYSTools"
-             StartupUri="MainWindow.xaml">
+             StartupUri="MainWindow.xaml"
+             >
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

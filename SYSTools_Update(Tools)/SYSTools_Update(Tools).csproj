@@ -99,16 +99,19 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autoupdater.NET.Official">
-      <Version>1.8.4</Version>
+      <Version>1.9.1</Version>
+    </PackageReference>
+    <PackageReference Include="iNKORE.UI.WPF">
+      <Version>1.2.7.1</Version>
     </PackageReference>
     <PackageReference Include="iNKORE.UI.WPF.Modern">
-      <Version>0.9.26.1</Version>
+      <Version>0.9.30</Version>
     </PackageReference>
     <PackageReference Include="log4net">
-      <Version>2.0.15</Version>
+      <Version>2.0.17</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Windows.SDK.Contracts">
-      <Version>10.0.22621.2428</Version>
+      <Version>10.0.26100.1</Version>
     </PackageReference>
     <PackageReference Include="System.Runtime.WindowsRuntime">
       <Version>4.7.0</Version>
