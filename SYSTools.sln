@@ -1,9 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Blend for Visual Studio Version 17
+# Visual Studio Version 17
 VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SYSTools", "SYSTools\SYSTools.csproj", "{15E1A82F-F5CD-408B-ADEB-E1954F0E1008}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F217C29B-02EE-435D-A537-3CABE65308CB} = {F217C29B-02EE-435D-A537-3CABE65308CB}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SYSTools_Update(Tools)", "SYSTools_Update(Tools)\SYSTools_Update(Tools).csproj", "{F217C29B-02EE-435D-A537-3CABE65308CB}"
 EndProject

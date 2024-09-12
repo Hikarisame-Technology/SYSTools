@@ -36,6 +36,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="netstandard" />
     <Reference Include="System" />
@@ -99,7 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autoupdater.NET.Official">
-      <Version>1.9.1</Version>
+      <Version>1.9.2</Version>
     </PackageReference>
     <PackageReference Include="iNKORE.UI.WPF">
       <Version>1.2.7.1</Version>
@@ -124,4 +127,13 @@
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if not exist "$(SolutionDir)SYSTools\$(OutDir)" mkdir "$(SolutionDir)SYSTools\$(OutDir)"
+xcopy /Y "$(TargetPath)" "$(SolutionDir)SYSTools\$(OutDir)"
+</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
 </Project>
