@@ -1,4 +1,6 @@
 ## SYSTools 基于C#重构的系统工具箱
+
+![SYSTools](https://socialify.git.ci/Hikarisame-Technology/SYSTools/image?description=1&font=Jost&forks=1&issues=1&language=1&logo=https%3A%2F%2Fone.hksstudio.work%2Fd%2FOther%2FOther_Resource%2FSYSTools_LOGO.svg&name=1&owner=1&pattern=Floating%20Cogs&pulls=1&stargazers=1&theme=Dark)
   
 ![](https://img.shields.io/badge/Language-C%23-blue)
 
