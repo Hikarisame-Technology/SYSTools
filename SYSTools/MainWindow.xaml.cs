@@ -57,7 +57,7 @@ namespace SYSTools
                 MessageBox.Show("有一个同名进程正在运行！", "程序冲突!", MessageBoxButton.OK);
                 Close();
             }
-            Title = "SYSTools Ver" + (Application.ResourceAssembly.GetName().Version.ToString());
+            //Title = "SYSTools Ver" + (Application.ResourceAssembly.GetName().Version.ToString());
             //设置默认启动Page页
             FrameContent.Content = Home_Page;
         }

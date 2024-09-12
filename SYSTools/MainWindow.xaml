@@ -6,16 +6,21 @@
         xmlns:muxc="http://schemas.inkore.net/lib/ui/wpf/modern"
         xmlns:local="clr-namespace:SYSTools"
         mc:Ignorable="d"
+        Title="SYSTools"
         muxc:ThemeManager.IsThemeAware="True"
-        muxc:TitleBar.ExtendViewIntoTitleBar="False"    
-        muxc:WindowHelper.SystemBackdropType="Mica"
+        muxc:TitleBar.ExtendViewIntoTitleBar="True"    
+        muxc:WindowHelper.SystemBackdropType="Acrylic11"
         muxc:TitleBar.IsBackButtonVisible="False"
         muxc:WindowHelper.UseModernWindowStyle="True"
+        muxc:TitleBar.Height="48"
         Height="650" Width="1100" MinWidth="1100" MinHeight="650" Loaded="Window_Loaded">
     <Grid>
 
-        <Image x:Name="BackImage" Stretch="UniformToFill" Source="/Resources/Test2.jpg"/>
-
+        <Image x:Name="BackImage" Stretch="UniformToFill" Source="/Resources/Test2.jpg" Visibility="Hidden"/>
+        
+        <Border x:Name="AppTitleBar" Grid.Column="1" VerticalAlignment="Top" Height="24" Margin="50,12,0,0">
+            <TextBlock x:Name="AppTitle" Text="" VerticalAlignment="Top" Margin="0,8,0,0"/>
+        </Border>
 
         <muxc:NavigationView x:Name="Sidebar" 
                              IsSettingsVisible="False" 
@@ -28,7 +33,6 @@
                              IsTabStop="False" 
                              HorizontalContentAlignment="Center"
                              IsTitleBarAutoPaddingEnabled="True">
-
             <muxc:NavigationView.MenuItems>
 
                 <muxc:NavigationViewItem Content="主页" Tag="主页" x:Name="Home" IsSelected="True" IsTabStop="False" MouseLeftButtonDown="Home_MouseLeftButtonDown"  >
