@@ -1,0 +1,28 @@
+name: Build .NET Framework 4.7.2
+
+on:
+  push:
+    branches:
+      - C#  # 当推送到 main 分支时触发
+  pull_request:
+    branches:
+      - C#  # 当有针对 main 分支的 pull request 时触发
+
+jobs:
+  build:
+    runs-on: windows-latest  # 使用 Windows 虚拟环境
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.0.3
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.6
+
+    - name: Restore NuGet packages
+      run: nuget restore SYSTools.sln
+
+    - name: Build solution
+      run: msbuild SYSTools.sln /p:Configuration=Release
