@@ -26,3 +26,9 @@ jobs:
 
     - name: Build solution
       run: msbuild SYSTools.sln /p:Configuration=Release
+
+    - name: Upload Gallery apps
+      uses: actions/upload-artifact@v3
+      with:
+        name: SYSTools
+        path: .\SYSTools\bin\Release
