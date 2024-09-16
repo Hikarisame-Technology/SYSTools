@@ -14,21 +14,17 @@
 
         <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="/SYSTools;component/Resources/LOGO.png" Opacity="0.5" Height="90" Width="160"/>
 
-        <Border  BorderThickness="1" CornerRadius="5" Grid.RowSpan="3" Grid.ColumnSpan="2">
-            <Border.Background>
-                <SolidColorBrush Color="#FF202020" Opacity="0.5"/>
-            </Border.Background>
-        </Border>
+        <Border  BorderThickness="1" CornerRadius="5" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
 
-        <TextBlock x:Name="textBlock" Margin="20,17,0,0" TextWrapping="Wrap" Text="系统配置快速检测 ( 基于 Windows Management Instrumentation ) 信息仅供参考" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" UseLayoutRounding="True"/>
+        <TextBlock x:Name="textBlock" Margin="20,17,0,0" TextWrapping="Wrap" Text="系统配置快速检测 ( 基于 Windows Management Instrumentation ) 信息仅供参考" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" UseLayoutRounding="True"/>
 
         <Border BorderBrush="#CC202020" BorderThickness="1" CornerRadius="5" Margin="10,60,10,10">
-            <TreeView x:Name="TestView" IsTabStop="False" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" BorderBrush="White" BorderThickness="0" Loaded="TestView_Loaded">
+            <TreeView x:Name="TestView" IsTabStop="False" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderThickness="0" Loaded="TestView_Loaded">
             </TreeView>
         </Border>
 
-        <Button x:Name="TestBotton" Content="检测配置" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="800,13.5,0,0" Foreground="White" Background="#4CFFFFFF" MinWidth="70" FontSize="15" MinHeight="32.05" IsTabStop="False" ToolTip="配置保存至软件根目录Info.xml文件夹内" Click="TestBotton_Click"/>
-        <Button x:Name="Info" Content="?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="920,13.5,0,0" Foreground="White" Background="#4CFFFFFF" MinWidth="70" FontSize="15" MinHeight="32.05" IsTabStop="False" Click="Info_Click"/>
+        <Button x:Name="TestBotton" Content="检测配置" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="800,13.5,0,0" MinWidth="70" FontSize="15" MinHeight="32.05" IsTabStop="False" ToolTip="配置保存至软件根目录Info.xml文件夹内" Click="TestBotton_Click" Background="{x:Null}" BorderBrush="#33000000"/>
+        <Button x:Name="Info" Content="?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="920,13.5,0,0" MinWidth="70" FontSize="15" MinHeight="32.05" IsTabStop="False" Click="Info_Click" Background="{x:Null}" BorderBrush="#33000000"/>
 
     </Grid>
 </Page>

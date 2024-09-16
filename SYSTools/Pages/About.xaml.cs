@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Windows;
 using System.Windows.Controls;
 using AutoUpdaterDotNET;
+using iNKORE.UI.WPF.Modern;
 using SYSTools.Dialog;
 
 namespace SYSTools.Pages

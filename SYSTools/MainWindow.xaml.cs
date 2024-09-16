@@ -1,11 +1,11 @@
-﻿using System;
+﻿using iNKORE.UI.WPF.Modern;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using SYSTools.Dialog;
 using SYSTools.Pages;
 using SYSTools.ToolPages;
 
@@ -44,6 +44,7 @@ namespace SYSTools
                 }
             };
             FrameContent.Content = ConfigurationPage;
+            ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -57,7 +58,7 @@ namespace SYSTools
                 MessageBox.Show("有一个同名进程正在运行！", "程序冲突!", MessageBoxButton.OK);
                 Close();
             }
-            //Title = "SYSTools Ver" + (Application.ResourceAssembly.GetName().Version.ToString());
+            Title = "SYSTools Ver" + (Application.ResourceAssembly.GetName().Version.ToString());
             //设置默认启动Page页
             FrameContent.Content = Home_Page;
         }
@@ -143,9 +144,18 @@ namespace SYSTools
                 LoadBackgroundImage(savedImagePath);
             }
             else {
-                LoadBackgroundImage("pack://application:,,,/Resources/Test2.jpg");
+                LoadBackgroundImage("pack://application:,,,/Resources/NoBackImage.png");
             }
         }
 
+        private void Dark_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
+        }
+
+        private void Light_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
+        }
     }
 }

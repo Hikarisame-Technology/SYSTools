@@ -11,11 +11,8 @@
       Title="WindowsTools" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610" >
 
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Border  BorderThickness="1" CornerRadius="5" Grid.RowSpan="3" Grid.ColumnSpan="2">
-            <Border.Background>
-                <SolidColorBrush Color="#FF202020" Opacity="0.5"/>
-            </Border.Background>
-        </Border>
+        <Border  BorderThickness="1" CornerRadius="5" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
+        
         <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="3" Source="/SYSTools;component/Resources/LOGO.png" Opacity="0.5" Width="160" Height="90"/>
 
         <ScrollViewer  VerticalScrollBarVisibility="Auto" MinWidth="1040" MinHeight="610" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -26,16 +23,16 @@
                 <Expander HorizontalContentAlignment="Left" Padding="0" VerticalContentAlignment="Top" Header="快捷启动" IsExpanded="True" FontSize="20" VerticalAlignment="Top" UseLayoutRounding="False" Margin="10,10,10,0">
                     <Expander.Content>
                         <WrapPanel>
-                            <Button x:Name="CMD" Margin="5,5,0,0" Width="140" Height="40" Content="CMD终端" FontSize="15" Click="CMD_Click"/>
-                            <Button x:Name="PowerShell" Margin="5,5,0,0" Width="140" Height="40" Content="PowerShell终端" FontSize="15" Click="PowerShell_Click"/>
-                            <Button x:Name="Regedit" Margin="5,5,0,0" Width="140" Height="40" Content="注册表" FontSize="15" Click="Regedit_Click"/>
-                            <Button x:Name="Control" Margin="5,5,0,0" Width="140" Height="40" Content="控制面板" FontSize="15" Click="Control_Click" />
-                            <Button x:Name="compmgmt" Margin="5,5,0,0" Width="140" Height="40" Content="计算机管理" FontSize="15" Click="compmgmt_Click" />
-                            <Button x:Name="Eventvwr" Margin="5,5,0,0" Width="140" Height="40" Content="事件查看器" FontSize="15" Click="Eventvwr_Click" />
-                            <Button x:Name="Devmgmt" Margin="5,5,0,0" Width="140" Height="40" Content="设备管理器" FontSize="15" Click="Devmgmt_Click" />
-                            <Button x:Name="Gpedit" Margin="5,5,0,0" Width="140" Height="40" Content="组策略" FontSize="15" Click="Gpedit_Click" />
-                            <Button x:Name="GodMode" Margin="5,5,0,0" Width="140" Height="40" Content="上帝模式" FontSize="15" Click="GodMode_Click" />
-                            <Button x:Name="Winver" Margin="5,5,0,0" Width="140" Height="40" Content="Windows版本" FontSize="15" Click="Winver_Click" />
+                            <Button x:Name="CMD" Margin="5,5,0,0" Width="140" Height="40" Content="CMD终端" FontSize="15" Click="CMD_Click" Background="{x:Null}"/>
+                            <Button x:Name="PowerShell" Margin="5,5,0,0" Width="140" Height="40" Content="PowerShell终端" FontSize="15" Click="PowerShell_Click" Background="{x:Null}"/>
+                            <Button x:Name="Regedit" Margin="5,5,0,0" Width="140" Height="40" Content="注册表" FontSize="15" Click="Regedit_Click" Background="{x:Null}"/>
+                            <Button x:Name="Control" Margin="5,5,0,0" Width="140" Height="40" Content="控制面板" FontSize="15" Click="Control_Click" Background="{x:Null}"/>
+                            <Button x:Name="compmgmt" Margin="5,5,0,0" Width="140" Height="40" Content="计算机管理" FontSize="15" Click="compmgmt_Click" Background="{x:Null}"/>
+                            <Button x:Name="Eventvwr" Margin="5,5,0,0" Width="140" Height="40" Content="事件查看器" FontSize="15" Click="Eventvwr_Click" Background="{x:Null}"/>
+                            <Button x:Name="Devmgmt" Margin="5,5,0,0" Width="140" Height="40" Content="设备管理器" FontSize="15" Click="Devmgmt_Click" Background="{x:Null}"/>
+                            <Button x:Name="Gpedit" Margin="5,5,0,0" Width="140" Height="40" Content="组策略" FontSize="15" Click="Gpedit_Click" Background="{x:Null}"/>
+                            <Button x:Name="GodMode" Margin="5,5,0,0" Width="140" Height="40" Content="上帝模式" FontSize="15" Click="GodMode_Click" Background="{x:Null}"/>
+                            <Button x:Name="Winver" Margin="5,5,0,0" Width="140" Height="40" Content="Windows版本" FontSize="15" Click="Winver_Click" Background="{x:Null}"/>
                         </WrapPanel>
                     </Expander.Content>
                 </Expander>
@@ -43,10 +40,10 @@
                 <Expander HorizontalContentAlignment="Left" Padding="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Header="网络工具( 管理员权限 需要手动重启 )" IsExpanded="True" FontSize="20" Margin="10,10,10,0">
                     <Expander.Content>
                         <WrapPanel>
-                            <Button x:Name="ClearDNS" Margin="5,5,0,0" Width="140" Height="40" Content="清除DNS缓存" FontSize="15" Click="ClearDNS_Click"/>
-                            <Button x:Name="ResetWS" Margin="5,5,0,0" Width="140" Height="40" Content="重置Winsock" FontSize="15" Click="ResetWS_Click"/>
-                            <Button x:Name="ResetWS_LSP" Margin="5,5,0,0" Width="140" Height="40" Content="重置LSP" FontSize="15" Click="ResetWS_LSP_Click"/>
-                            <Button x:Name="ResetTCP" Margin="5,5,0,0" Width="140" Height="40" Content="重置TCP/IP栈" FontSize="15" Click="ResetTCP_Click"/>
+                            <Button x:Name="ClearDNS" Margin="5,5,0,0" Width="140" Height="40" Content="清除DNS缓存" FontSize="15" Click="ClearDNS_Click" Background="{x:Null}"/>
+                            <Button x:Name="ResetWS" Margin="5,5,0,0" Width="140" Height="40" Content="重置Winsock" FontSize="15" Click="ResetWS_Click" Background="{x:Null}"/>
+                            <Button x:Name="ResetWS_LSP" Margin="5,5,0,0" Width="140" Height="40" Content="重置LSP" FontSize="15" Click="ResetWS_LSP_Click" Background="{x:Null}"/>
+                            <Button x:Name="ResetTCP" Margin="5,5,0,0" Width="140" Height="40" Content="重置TCP/IP栈" FontSize="15" Click="ResetTCP_Click" Background="{x:Null}"/>
                         </WrapPanel>
                     </Expander.Content>
                 </Expander>

@@ -6,17 +6,18 @@
         xmlns:muxc="http://schemas.inkore.net/lib/ui/wpf/modern"
         xmlns:local="clr-namespace:SYSTools"
         mc:Ignorable="d"
-        Title="SYSTools"
         muxc:ThemeManager.IsThemeAware="True"
-        muxc:TitleBar.ExtendViewIntoTitleBar="True"    
-        muxc:WindowHelper.SystemBackdropType="Acrylic11"
-        muxc:TitleBar.IsBackButtonVisible="False"
         muxc:WindowHelper.UseModernWindowStyle="True"
+        muxc:WindowHelper.SystemBackdropType="Acrylic11"
+        muxc:WindowHelper.CornerStyle="Round"
+        muxc:TitleBar.IsBackButtonVisible="False"
+        muxc:TitleBar.ButtonGlyphStyle="Fluent"
         muxc:TitleBar.Height="48"
-        Height="650" Width="1100" MinWidth="1100" MinHeight="650" Loaded="Window_Loaded">
+        Height="670" Width="1100" MinWidth="1100" MinHeight="670" Loaded="Window_Loaded">
+    
     <Grid>
 
-        <Image x:Name="BackImage" Stretch="UniformToFill" Source="/Resources/Test2.jpg" Visibility="Hidden"/>
+        <Image x:Name="BackImage" Stretch="UniformToFill" Source="/Resources/NoBackImage.png" Visibility="Visible"/>
         
         <Border x:Name="AppTitleBar" Grid.Column="1" VerticalAlignment="Top" Height="24" Margin="50,12,0,0">
             <TextBlock x:Name="AppTitle" Text="" VerticalAlignment="Top" Margin="0,8,0,0"/>
@@ -29,10 +30,16 @@
                              AlwaysShowHeader="True" 
                              PaneTitle="SYSTools" 
                              SelectionFollowsFocus="Disabled"
-                             PaneDisplayMode="LeftCompact" 
+                             PaneDisplayMode="LeftCompact"
                              IsTabStop="False" 
-                             HorizontalContentAlignment="Center"
                              IsTitleBarAutoPaddingEnabled="True">
+
+            <FrameworkElement.Resources>
+                <SolidColorBrush x:Key="{x:Static muxc:ThemeKeys.NavigationViewContentBackgroundKey}" Color="Transparent"/>
+                <SolidColorBrush x:Key="{x:Static muxc:ThemeKeys.ExpanderHeaderBorderBrushKey}" Color="Transparent"/>
+                <Thickness x:Key="NavigationViewContentGridBorderThickness">0,0,0,0</Thickness>
+            </FrameworkElement.Resources>
+
             <muxc:NavigationView.MenuItems>
 
                 <muxc:NavigationViewItem Content="主页" Tag="主页" x:Name="Home" IsSelected="True" IsTabStop="False" MouseLeftButtonDown="Home_MouseLeftButtonDown"  >
@@ -90,6 +97,20 @@
                 <muxc:NavigationViewItem Content="WSA工具" Tag="WSA工具" x:Name="WSA_Tools" ToolTip= "功能准备中" IsTabStop="False" MouseLeftButtonDown="WSA_Tools_MouseLeftButtonDown" >
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE1C9;" />
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+
+                <muxc:NavigationViewItemSeparator/>
+
+                <muxc:NavigationViewItem Content="深色模式" Tag="Theme Dark Mode" x:Name="Dark" IsTabStop="False" MouseLeftButtonDown="Dark_MouseLeftButtonDown" >
+                    <muxc:NavigationViewItem.Icon>
+                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE708;" />
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+
+                <muxc:NavigationViewItem Content="亮色模式" Tag="Theme Light Mode" x:Name="Light" IsTabStop="False" MouseLeftButtonDown="Light_MouseLeftButtonDown" >
+                    <muxc:NavigationViewItem.Icon>
+                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE793;" />
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
 

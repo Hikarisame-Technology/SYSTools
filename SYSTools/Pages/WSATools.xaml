@@ -14,6 +14,13 @@
         <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="3" Source="/SYSTools;component/Resources/LOGO.png" Opacity="0.5" Width="160" Height="90"/>
         
         <muxc:NavigationView x:Name="WSANavigation" PaneDisplayMode="Top" SelectionFollowsFocus="Enabled" IsBackButtonVisible="Collapsed" HorizontalContentAlignment="Center" IsTitleBarAutoPaddingEnabled="True" IsSettingsVisible="False" IsBackEnabled="False" AlwaysShowHeader="True">
+
+            <FrameworkElement.Resources>
+                <SolidColorBrush x:Key="{x:Static muxc:ThemeKeys.NavigationViewContentBackgroundKey}" Color="Transparent"/>
+                <SolidColorBrush x:Key="{x:Static muxc:ThemeKeys.ExpanderHeaderBorderBrushKey}" Color="Transparent"/>
+                <Thickness x:Key="NavigationViewContentGridBorderThickness">0,0,0,0</Thickness>
+            </FrameworkElement.Resources>
+
             <muxc:NavigationView.MenuItems>
 
                 <muxc:NavigationViewItem Content="WSA状态" x:Name="SamplePage1Item" IsSelected="True">

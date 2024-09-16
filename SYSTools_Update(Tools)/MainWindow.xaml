@@ -7,10 +7,12 @@
         xmlns:local="clr-namespace:SYSTools_Update_Tools_"
         mc:Ignorable="d"
         muxc:ThemeManager.IsThemeAware="True"
-        muxc:TitleBar.ExtendViewIntoTitleBar="False"    
-        muxc:WindowHelper.SystemBackdropType="Mica"
-        muxc:TitleBar.IsBackButtonVisible="False"
         muxc:WindowHelper.UseModernWindowStyle="True"
+        muxc:WindowHelper.SystemBackdropType="Acrylic11"
+        muxc:WindowHelper.CornerStyle="Round"
+        muxc:TitleBar.IsBackButtonVisible="False"
+        muxc:TitleBar.ButtonGlyphStyle="Fluent"
+        muxc:TitleBar.Height="48"
         Title="ToolsUpdate 工具包更新器" Loaded="Window_Loaded" Height="200" Width="410" ShowInTaskbar="False" ResizeMode="NoResize">
     <Grid>
         <TextBlock x:Name="Version" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" Margin="0,35,0,0" Height="25" />

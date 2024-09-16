@@ -10,7 +10,7 @@
       KeepAlive="True"
       Title="About" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610" >
 
-    <Page.Resources>
+    <!--<Page.Resources>
         <Style x:Key="NoUnderlineHyperlinkButton" TargetType="muxc:HyperlinkButton">
             <Setter Property="Template">
                 <Setter.Value>
@@ -25,115 +25,107 @@
                 </Setter.Value>
             </Setter>
         </Style>
-    </Page.Resources>
+    </Page.Resources>-->
 
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Border  BorderThickness="1" CornerRadius="5" Grid.ColumnSpan="2">
-            <Border.Background>
-                <SolidColorBrush Color="#FF202020" Opacity="0.5"/>
-            </Border.Background>
-        </Border>
+        <Border  BorderThickness="1" CornerRadius="5" Grid.ColumnSpan="2"/>
+        
         <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="/SYSTools;component/Resources/B-LOGO.png" Margin="0,0,-100,-100" Opacity="0.1" Grid.Column="1" Height="430"/>
         <Image Source="/SYSTools_LOGO_256.ico" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Height="70" Margin="20,20,0,0"/>
 
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,35,0,0" FontSize="25" Text="SYSTools" Foreground="White"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,67,0,0" FontSize="10" Text="Hikarisame Technology Studio" Foreground="White"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,110,0,0" FontSize="15" Text="软件开发 :" Foreground="White"/>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,35,0,0" FontSize="25" Text="SYSTools"/>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,67,0,0" FontSize="10" Text="Hikarisame Technology Studio"/>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,110,0,0" FontSize="15" Text="软件开发 :"/>
 
-        <muxc:HyperlinkButton Content="@ShizukuNanami" Margin="103,110,0,0" FontSize="15" NavigateUri="https://github.com/Shizuku-Nanami" Cursor="Hand" Style="{StaticResource NoUnderlineHyperlinkButton}" VerticalAlignment="Top"/>
-        <muxc:HyperlinkButton Content="@39MiRai" Margin="241,110,0,0" FontSize="15" NavigateUri="https://github.com/39MiRai" Cursor="Hand" Style="{StaticResource NoUnderlineHyperlinkButton}" VerticalAlignment="Top"/>
-        <muxc:HyperlinkButton Content="@tz95" Margin="326,110,0,0" FontSize="15" NavigateUri="https://github.com/tz95" Cursor="Hand" Style="{StaticResource NoUnderlineHyperlinkButton}" VerticalAlignment="Top"/>
+        <muxc:HyperlinkButton Content="ShizukuNanami" Margin="100,104,0,0" FontSize="15" NavigateUri="https://github.com/Shizuku-Nanami" Cursor="Hand"  VerticalAlignment="Top"/>
+        <muxc:HyperlinkButton Content="39MiRai" Margin="235,104,0,0" FontSize="15" NavigateUri="https://github.com/39MiRai" Cursor="Hand" VerticalAlignment="Top"/>
+        <muxc:HyperlinkButton Content="Tz95" Margin="315,104,0,0" FontSize="15" NavigateUri="https://github.com/tz95" Cursor="Hand" VerticalAlignment="Top"/>
 
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,150,0,0" FontSize="15" Text="UI设计 :" Foreground="White"/>
-        <TextBlock Text=" Prismatic Design Studio" Margin="89,150,0,0" VerticalAlignment="Top" FontSize="15" Cursor="Hand" HorizontalAlignment="Left" Foreground="White" />
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,150,0,0" FontSize="15" Text="UI设计 :"/>
+        <TextBlock Text=" Prismatic Design Studio" Margin="89,150,0,0" VerticalAlignment="Top" FontSize="15" Cursor="Hand" HorizontalAlignment="Left"/>
 
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,190,0,0" FontSize="15" Text="软件协助 :" Foreground="White"/>
-        <muxc:HyperlinkButton x:Name="KanChan" Content="@偷税师柑柑" Margin="103,190,0,0" VerticalAlignment="Top" FontSize="15" VerticalContentAlignment="Top" NavigateUri="https://github.com/YorokobiMaster" Cursor="Hand" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,190,0,0" FontSize="15" Text="软件协助 :"/>
+        <muxc:HyperlinkButton x:Name="KanChan" Content="偷税师柑柑" Margin="100,184,0,0" VerticalAlignment="Top" FontSize="15" VerticalContentAlignment="Top" NavigateUri="https://github.com/YorokobiMaster" Cursor="Hand"/>
 
         <Button x:Name="QQ" Content="QQ群" Margin="30,245,0,0" VerticalAlignment="Top" Width="135" Height="33" Click="QQ_Click"/>
         <Button x:Name="Web" Content="官网" Margin="30,300,0,0" Width="135" Height="33" VerticalAlignment="Top" Click="Web_Click"/>
         <Button x:Name="Github" Content="Github" Margin="30,355,0,0" Width="135" Height="33" VerticalAlignment="Top" Click="Github_Click"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="16,0,0,92" FontSize="15" Text="第一次写类似的软件 虽然代码只是能用的阶段 有问题还请提交Issue" Foreground="#FFA4A4A4"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="16,0,0,68" FontSize="15" Foreground="#FFA4A4A4" Text="该有的都会有的 时间问题（Flag）"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,10" FontSize="15" Foreground="White" Text="©2018-2023 Hikarisame Technology Studio. All Rights Reserved."/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="16,0,0,42" FontSize="15" Foreground="#FFA4A4A4" Text="软件默认图片背景：Forever"/>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="15" Text="第一次写类似的软件 虽然代码只是能用的阶段 有问题还请提交Issue" Margin="30,0,0,95"/>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="30,0,0,70" FontSize="15" Text="该有的都会有的 时间问题（Flag）"/>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,10" FontSize="15" Text="©2018-2023 Hikarisame Technology Studio. All Rights Reserved."/>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="30,0,0,45" FontSize="15" Text="软件默认图片背景：Forever"/>
 
-        <Button x:Name="Update" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="30,0,0,130" Width="150" Height="60" BorderThickness="0,0,0,0" BorderBrush="{x:Null}" Background="{x:Null}" Focusable="False" ToolTip="软件升级" Panel.ZIndex="1" Padding="0,0,0,0" Click="Update_Click">
-            <TextBlock Foreground="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                <InlineUIContainer Foreground="{x:Null}">
-                <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE117;" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                </InlineUIContainer>
-                <TextBlock Text="软件升级" Foreground="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,-5,0,0"/>
-            </TextBlock>
+        <Button x:Name="Update" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="30,0,0,130" Width="150" Height="60" BorderThickness="0,0,0,0" Background="{x:Null}" Focusable="False" ToolTip="软件升级" Panel.ZIndex="1" Padding="0,0,0,0" Click="Update_Click">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE117;" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <TextBlock Text="软件升级" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0"/>
+            </StackPanel>
         </Button>
-        <Button x:Name="Tool_Update" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="220,0,0,130" Width="150" Height="60" BorderThickness="0,0,0,0" BorderBrush="{x:Null}" Background="{x:Null}" Focusable="False" ToolTip="工具包升级" Panel.ZIndex="1" Padding="0,0,0,0" Click="Tool_Update_Click">
-            <TextBlock Foreground="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                <InlineUIContainer Foreground="{x:Null}">
-                <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE117;" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                </InlineUIContainer>
-                <TextBlock Text="工具包升级" Foreground="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,-5,0,0"/>
-            </TextBlock>
+        <Button x:Name="Tool_Update" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="220,0,0,130" Width="150" Height="60" BorderThickness="0,0,0,0" Background="{x:Null}" Focusable="False" ToolTip="工具包升级" Panel.ZIndex="1" Padding="0,0,0,0" Click="Tool_Update_Click">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE117;" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <TextBlock Text="工具包升级" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0"/>
+            </StackPanel>
         </Button>
 
         <ScrollViewer  VerticalScrollBarVisibility="Auto" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <!--内容预留-->
-                <TextBlock Text="使用的组件以及对应源代码许可" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" Margin="0,10,0,0"/>
+                <TextBlock Text="使用的组件以及对应源代码许可" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" Margin="0,10,0,0"/>
                 <Border BorderThickness="0,0,0,1" Height="1" Width="300" VerticalAlignment="Top" Margin="0,10,0,0">
                     <Border.BorderBrush>
                         <SolidColorBrush Color="White" Opacity="0.5"/>
                     </Border.BorderBrush>
                 </Border>
 
-                <TextBlock Text="iNKORE.UI.WPF.Modern (LGPL-2.1 license)" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0" FontSize="16"/>
-                <muxc:HyperlinkButton NavigateUri="https://github.com/iNKORE-Public/UI.WPF.Modern" Content="https://github.com/iNKORE-Public/UI.WPF.Modern" HorizontalAlignment="Center" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
-                <muxc:HyperlinkButton NavigateUri="https://github.com/iNKORE-Public/UI.WPF.Modern/blob/main/LICENSE" Content="https://github.com/iNKORE-Public/UI.WPF.Modern/blob/main/LICENSE" HorizontalAlignment="Center" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
+                <TextBlock Text="iNKORE.UI.WPF.Modern (LGPL-2.1 license)" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0" FontSize="16"/>
+                <muxc:HyperlinkButton NavigateUri="https://github.com/iNKORE-Public/UI.WPF.Modern" Content="https://github.com/iNKORE-Public/UI.WPF.Modern" HorizontalAlignment="Center" FontSize="12" Cursor="Hand" Margin="0,5,0,0"/>
+                <muxc:HyperlinkButton NavigateUri="https://github.com/iNKORE-Public/UI.WPF.Modern/blob/main/LICENSE" Content="https://github.com/iNKORE-Public/UI.WPF.Modern/blob/main/LICENSE" HorizontalAlignment="Center" FontSize="12" Cursor="Hand" Margin="0,5,0,0"/>
 
-                <TextBlock Text="iNKORE.UI.WPF (LGPL-2.1 license)" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0" FontSize="16" Cursor=""/>
-                <muxc:HyperlinkButton NavigateUri="https://github.com/iNKORE-NET/UI.WPF" Content="https://github.com/iNKORE-NET/UI.WPF" HorizontalAlignment="Center" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
-                <muxc:HyperlinkButton NavigateUri="https://github.com/iNKORE-NET/UI.WPF/blob/main/LICENSE" Content="https://github.com/iNKORE-NET/UI.WPF/blob/main/LICENSE" HorizontalAlignment="Center" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
+                <TextBlock Text="iNKORE.UI.WPF (LGPL-2.1 license)" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0" FontSize="16" Cursor=""/>
+                <muxc:HyperlinkButton NavigateUri="https://github.com/iNKORE-NET/UI.WPF" Content="https://github.com/iNKORE-NET/UI.WPF" HorizontalAlignment="Center" FontSize="12" Cursor="Hand" Margin="0,5,0,0"/>
+                <muxc:HyperlinkButton NavigateUri="https://github.com/iNKORE-NET/UI.WPF/blob/main/LICENSE" Content="https://github.com/iNKORE-NET/UI.WPF/blob/main/LICENSE" HorizontalAlignment="Center" FontSize="12" Cursor="Hand" Margin="0,5,0,0"/>
 
-                <TextBlock Text="Fluent UI System Icons (MIT License)" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0" FontSize="16"/>
-                <muxc:HyperlinkButton NavigateUri="https://github.com/microsoft/fluentui-system-icons" Content="https://github.com/microsoft/fluentui-system-icons" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
-                <muxc:HyperlinkButton NavigateUri="https://github.com/microsoft/fluentui-system-icons/blob/master/LICENSE" Content="https://github.com/microsoft/fluentui-system-icons/blob/master/LICENSE" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
+                <TextBlock Text="Fluent UI System Icons (MIT License)" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0" FontSize="16"/>
+                <muxc:HyperlinkButton NavigateUri="https://github.com/microsoft/fluentui-system-icons" Content="https://github.com/microsoft/fluentui-system-icons" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0"/>
+                <muxc:HyperlinkButton NavigateUri="https://github.com/microsoft/fluentui-system-icons/blob/master/LICENSE" Content="https://github.com/microsoft/fluentui-system-icons/blob/master/LICENSE" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0"/>
 
-                <TextBlock Text="AutoUpdater.NET (MIT License)" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0" FontSize="16"/>
-                <muxc:HyperlinkButton NavigateUri="https://github.com/ravibpatel/AutoUpdater.NET" Content="https://github.com/ravibpatel/AutoUpdater.NET" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
-                <muxc:HyperlinkButton NavigateUri="https://github.com/ravibpatel/AutoUpdater.NET/blob/master/LICENSE" Content="https://github.com/ravibpatel/AutoUpdater.NET/blob/master/LICENSE" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
+                <TextBlock Text="AutoUpdater.NET (MIT License)" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0" FontSize="16"/>
+                <muxc:HyperlinkButton NavigateUri="https://github.com/ravibpatel/AutoUpdater.NET" Content="https://github.com/ravibpatel/AutoUpdater.NET" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0"/>
+                <muxc:HyperlinkButton NavigateUri="https://github.com/ravibpatel/AutoUpdater.NET/blob/master/LICENSE" Content="https://github.com/ravibpatel/AutoUpdater.NET/blob/master/LICENSE" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0"/>
 
-                <TextBlock Text="Log4Net (Apache-2.0 License)" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0" FontSize="16"/>
-                <muxc:HyperlinkButton NavigateUri="https://logging.apache.org/log4net/" Content="https://logging.apache.org/log4net/" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
-                <muxc:HyperlinkButton NavigateUri="https://logging.apache.org/log4net/license.html" Content="https://logging.apache.org/log4net/license.html" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
+                <TextBlock Text="Log4Net (Apache-2.0 License)" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0" FontSize="16"/>
+                <muxc:HyperlinkButton NavigateUri="https://logging.apache.org/log4net/" Content="https://logging.apache.org/log4net/" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0"/>
+                <muxc:HyperlinkButton NavigateUri="https://logging.apache.org/log4net/license.html" Content="https://logging.apache.org/log4net/license.html" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0"/>
 
-                <TextBlock Text="Microsoft.Windows.SDK.Contracts" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0" FontSize="16"/>
-                <muxc:HyperlinkButton NavigateUri="https://aka.ms/WinSDKProjectURL" Content="https://aka.ms/WinSDKProjectURL" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
-                
-                <TextBlock Text=".NET Runtime" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0" FontSize="16"/>
-                <muxc:HyperlinkButton NavigateUri="https://github.com/dotnet/runtime" Content="https://github.com/dotnet/runtime" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
-                <muxc:HyperlinkButton NavigateUri="https://github.com/dotnet/runtime/blob/main/LICENSE.TXT" Content="https://github.com/dotnet/runtime/blob/main/LICENSE.TXT" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
-                
-                <TextBlock Text="System.ValueTuple" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0" FontSize="16"/>
-                <muxc:HyperlinkButton NavigateUri="https://dot.net" Content="https://dot.net" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
-                <muxc:HyperlinkButton NavigateUri="https://github.com/dotnet/corefx/blob/master/LICENSE.TXT" Content="https://github.com/dotnet/corefx/blob/master/LICENSE.TXT" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
+                <TextBlock Text="Microsoft.Windows.SDK.Contracts" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0" FontSize="16"/>
+                <muxc:HyperlinkButton NavigateUri="https://aka.ms/WinSDKProjectURL" Content="https://aka.ms/WinSDKProjectURL" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0"/>
+
+                <TextBlock Text=".NET Runtime" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0" FontSize="16"/>
+                <muxc:HyperlinkButton NavigateUri="https://github.com/dotnet/runtime" Content="https://github.com/dotnet/runtime" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0"/>
+                <muxc:HyperlinkButton NavigateUri="https://github.com/dotnet/runtime/blob/main/LICENSE.TXT" Content="https://github.com/dotnet/runtime/blob/main/LICENSE.TXT" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0"/>
+
+                <TextBlock Text="System.ValueTuple" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0" FontSize="16"/>
+                <muxc:HyperlinkButton NavigateUri="https://dot.net" Content="https://dot.net" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0"/>
+                <muxc:HyperlinkButton NavigateUri="https://github.com/dotnet/corefx/blob/master/LICENSE.TXT" Content="https://github.com/dotnet/corefx/blob/master/LICENSE.TXT" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,0"/>
 
 
-                <TextBlock Text="开发所使用的工具" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" Margin="0,30,0,0"/>
+                <TextBlock Text="开发所使用的工具" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" Margin="0,30,0,0"/>
                 <Border BorderThickness="0,0,0,1" Height="1" Width="200" VerticalAlignment="Top" Margin="0,10,0,0">
                     <Border.BorderBrush>
                         <SolidColorBrush Color="White" Opacity="0.5"/>
                     </Border.BorderBrush>
                 </Border>
 
-                <TextBlock Text="Visual Studio 2022" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0" FontSize="16"/>
-                <muxc:HyperlinkButton NavigateUri="https://visualstudio.microsoft.com" Content="https://visualstudio.microsoft.com" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,20" Style="{StaticResource NoUnderlineHyperlinkButton}"/>
+                <TextBlock Text="Visual Studio 2022" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0" FontSize="16"/>
+                <muxc:HyperlinkButton NavigateUri="https://visualstudio.microsoft.com" Content="https://visualstudio.microsoft.com" HorizontalAlignment="Center" UseSystemFocusVisuals="True" FontSize="12" Cursor="Hand" Margin="0,5,0,20"/>
 
             </StackPanel>
         </ScrollViewer>
-
 
     </Grid>
 </Page>
