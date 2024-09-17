@@ -1,20 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Microsoft.Win32;
+using SYSTools.Model;
+using Windows.Devices.Geolocation;
 
 namespace SYSTools.Pages
 {
@@ -28,14 +18,10 @@ namespace SYSTools.Pages
         public Configuration()
         {
             InitializeComponent();
-            this.Loaded += Configuration_Loaded;
-        }
-
-        private void Configuration_Loaded(object sender, RoutedEventArgs e)
-        {
             LoadUserSettings();
         }
 
+        // 背景图片设定按钮
         private void SelectBackgroundButton_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
@@ -44,39 +30,23 @@ namespace SYSTools.Pages
             {
                 SaveBackgroundImagePath(openFileDialog.FileName);
                 LoadBackgroundImage(openFileDialog.FileName);
-                UpdateBackgroundImage(openFileDialog.FileName);
+                GlobalSettings.Instance.BackgroundImagePath = openFileDialog.FileName;
             }
         }
-
+        // 背景图片清除按钮(设定为内置透明图片)
         private void DeleteBackgroundButton_Click(object sender, RoutedEventArgs e)
         {
             SaveBackgroundImagePath("");
             LoadBackgroundImage("");
-            UpdateBackgroundImage("");
+            GlobalSettings.Instance.BackgroundImagePath = "pack://application:,,,/Resources/NoBackImage.png";
         }
-
+        // 保存图片地址到Config文件
         private void SaveBackgroundImagePath(string imagePath)
         {
             Properties.Settings.Default.BackgroundImagePath = imagePath;
             Properties.Settings.Default.Save();
         }
-
-        private void UpdateBackgroundImage(string imagePath)
-        {
-            if (imagePath == "")
-            {
-                SaveBackgroundImagePath(imagePath);
-                LoadBackgroundImage(imagePath);
-                OnBackgroundChanged?.Invoke();
-            }
-            else
-            {
-                SaveBackgroundImagePath(imagePath);
-                LoadBackgroundImage(imagePath);
-                OnBackgroundChanged?.Invoke();
-            }
-        }
-
+        // 加载背景图片到预览窗口
         private void LoadBackgroundImage(string imagePath)
         {
             if (imagePath == "")
@@ -92,7 +62,7 @@ namespace SYSTools.Pages
                 BackgroundPreview.Source = bitmap;
             }
         }
-
+        // 加载用户Config文件
         private void LoadUserSettings()
         {
             string savedImagePath = Properties.Settings.Default.BackgroundImagePath;

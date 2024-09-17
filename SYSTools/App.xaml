@@ -8,7 +8,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <muxc:ThemeResources RequestedTheme="Light"/>
+                <muxc:ThemeResources RequestedTheme="{x:Null}"/>
                 <muxc:XamlControlsResources />
             </ResourceDictionary.MergedDictionaries>
             <FontFamily x:Key="SegoeIcons">/SYSTools;component/Resources/#Segoe Fluent Icons</FontFamily>

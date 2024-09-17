@@ -1,13 +1,17 @@
 ﻿using iNKORE.UI.WPF.Modern;
+using iNKORE.UI.WPF.Modern.Controls;
+using iNKORE.UI.WPF.Modern.Media.Animation;
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using SYSTools.Model;
 using SYSTools.Pages;
 using SYSTools.ToolPages;
+using Page = System.Windows.Controls.Page;
 
 namespace SYSTools
 {
@@ -18,33 +22,53 @@ namespace SYSTools
 
     public partial class MainWindow : Window
     {
-        private Frame Home_Page = new Frame() { Content = new Home() };
-        private Frame FastDetection = new Frame() { Content = new Test() };
-        private Frame DetectionTools = new Frame() { Content = new DetectionTools() };
-        private Frame TestTools = new Frame() { Content = new TestTools() };
-        private Frame DiskTools = new Frame() { Content = new DiskTools() };
-        private Frame PeripheralsTools = new Frame() { Content = new PeripheralsTools() };
-        private Frame RepairingTools = new Frame() { Content = new RepairingTools() };
-        private Frame WindowsTools = new Frame() { Content = new WindowsTools() };
-        private Frame WSATools = new Frame() { Content = new WSATools() };
-        private Frame ConfigurationPage = new Frame() { Content = new Configuration() };
-        private Frame AboutPage = new Frame() { Content = new About() };
+        //private Frame Home_Page = new Frame() { Content = new Home() };
+        //private Frame FastDetection = new Frame() { Content = new Test() };
+        //private Frame DetectionTools = new Frame() { Content = new DetectionTools() };
+        //private Frame TestTools = new Frame() { Content = new TestTools() };
+        //private Frame DiskTools = new Frame() { Content = new DiskTools() };
+        //private Frame PeripheralsTools = new Frame() { Content = new PeripheralsTools() };
+        //private Frame RepairingTools = new Frame() { Content = new RepairingTools() };
+        //private Frame WindowsTools = new Frame() { Content = new WindowsTools() };
+        //private Frame WSATools = new Frame() { Content = new WSATools() };
+        //private Frame ConfigurationPage = new Frame() { Content = new Configuration() };
+        //private Frame AboutPage = new Frame() { Content = new About() };
+
+        private readonly Page Home_Page = new Home();
+        private readonly Page Test_Page = new Test();
+        private readonly Page DetectionTools_Page = new DetectionTools();
+        private readonly Page TestTools_Page = new TestTools();
+        private readonly Page DiskTools_Page = new DiskTools();
+        private readonly Page PeripheralsTools_Page = new PeripheralsTools();
+        private readonly Page RepairingTools_Page = new RepairingTools();
+        private readonly Page WindowsTools_Page = new WindowsTools();
+        private readonly Page WSATools_Page = new WSATools();
+        private readonly Page Configuration_Page = new Configuration();
+        private readonly Page About_Page = new About();
         string AppPath = Directory.GetCurrentDirectory();
 
         public MainWindow()
         {
             InitializeComponent();
             this.Loaded += MainWindow_Loaded;
-            ConfigurationPage.Content = new Configuration
+            GlobalSettings.Instance.PropertyChanged += OnSettingsPropertyChanged;
+            UpdateBackgroundImage();
+        }
+
+        private void OnSettingsPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(GlobalSettings.BackgroundImagePath))
             {
-                // 设置OnBackgroundChanged委托的实现
-                OnBackgroundChanged = () =>
-                {
-                    LoadUserSettings();
-                }
-            };
-            FrameContent.Content = ConfigurationPage;
-            ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
+                UpdateBackgroundImage();
+            }
+        }
+
+        private void UpdateBackgroundImage()
+        {
+            if (!string.IsNullOrEmpty(GlobalSettings.Instance.BackgroundImagePath))
+            {
+                BackImage.Source = new BitmapImage(new Uri(GlobalSettings.Instance.BackgroundImagePath, UriKind.RelativeOrAbsolute));
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -55,74 +79,66 @@ namespace SYSTools
             int processTotal = Process.GetProcessesByName(appName).Length;
             if (processTotal > 1)
             {
-                MessageBox.Show("有一个同名进程正在运行！", "程序冲突!", MessageBoxButton.OK);
+                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("有一个同名进程正在运行！", "程序冲突!", MessageBoxButton.OK);
                 Close();
             }
             Title = "SYSTools Ver" + (Application.ResourceAssembly.GetName().Version.ToString());
             //设置默认启动Page页
-            FrameContent.Content = Home_Page;
+            CurrentPage.Navigate(Home_Page, new DrillInNavigationTransitionInfo());
         }
 
-        private void Home_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void NavigationTriggered(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            FrameContent.Content = Home_Page;
+            if (args.IsSettingsInvoked)
+                NavigateTo(typeof(int), args.RecommendedNavigationTransitionInfo);
+            else if (args.InvokedItemContainer != null)
+                NavigateTo(Type.GetType(args.InvokedItemContainer.Tag.ToString()),
+                    args.RecommendedNavigationTransitionInfo);
         }
 
-        private void Fast_Detection_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void NavigateTo(Type navPageType, NavigationTransitionInfo transitionInfo)
         {
-            FrameContent.Content = FastDetection;
-        }
-
-        private void Detection_Tools_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            FrameContent.Content = DetectionTools;
-        }
-
-        private void Test_Tools_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            FrameContent.Content = TestTools;
-        }
-
-        private void Disk_Tools_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            FrameContent.Content = DiskTools;
-        }
-
-        private void Peripherals_Tools_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            FrameContent.Content = PeripheralsTools;
-        }
-
-        private void Repairing_Tools_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            FrameContent.Content = RepairingTools;
-        }
-
-        private void Windows_Tools_Page_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            FrameContent.Content = WindowsTools;
-        }
-
-        private void WSA_Tools_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            FrameContent.Content = WSATools;
-        }
-
-        private void Software_Configuration_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            FrameContent.Content = ConfigurationPage;
-        }
-
-        private void About_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            FrameContent.Content = AboutPage;
+            var preNavPageType = CurrentPage.Content.GetType();
+            if (navPageType == preNavPageType) return;
+            switch (navPageType)
+            {
+                case not null when navPageType == typeof(Home):
+                    CurrentPage.Navigate(Home_Page);
+                    break;
+                case not null when navPageType == typeof(Test):
+                    CurrentPage.Navigate(Test_Page);
+                    break;
+                case not null when navPageType == typeof(DetectionTools):
+                    CurrentPage.Navigate(DetectionTools_Page);
+                    break;
+                case not null when navPageType == typeof(TestTools):
+                    CurrentPage.Navigate(TestTools_Page);
+                    break;
+                case not null when navPageType == typeof(DiskTools):
+                    CurrentPage.Navigate(DiskTools_Page);
+                    break;
+                case not null when navPageType == typeof(PeripheralsTools):
+                    CurrentPage.Navigate(PeripheralsTools_Page);
+                    break;
+                case not null when navPageType == typeof(RepairingTools):
+                    CurrentPage.Navigate(RepairingTools_Page);
+                    break;
+                case not null when navPageType == typeof(WindowsTools):
+                    CurrentPage.Navigate(WindowsTools_Page);
+                    break;
+                case not null when navPageType == typeof(WSATools):
+                    CurrentPage.Navigate(WSATools_Page);
+                    break;
+                case not null when navPageType == typeof(Configuration):
+                    CurrentPage.Navigate(Configuration_Page);
+                    break;
+                case not null when navPageType == typeof(About):
+                    CurrentPage.Navigate(About_Page);
+                    break;
+            }
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            LoadUserSettings();
-        }
-        private void SettingsPage_BackgroundChanged(object sender, EventArgs e)
         {
             LoadUserSettings();
         }
@@ -143,11 +159,11 @@ namespace SYSTools
             {
                 LoadBackgroundImage(savedImagePath);
             }
-            else {
+            else
+            {
                 LoadBackgroundImage("pack://application:,,,/Resources/NoBackImage.png");
             }
         }
-
         private void Dark_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;

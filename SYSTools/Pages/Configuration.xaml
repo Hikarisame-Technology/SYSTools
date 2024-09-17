@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:muxc="http://schemas.inkore.net/lib/ui/wpf/modern"
+      xmlns:ikw="http://schemas.inkore.net/lib/ui/wpf"
       xmlns:local="clr-namespace:SYSTools.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="610" d:DesignWidth="1040"
@@ -29,8 +30,8 @@
                     <Image x:Name="BackgroundPreview" Height="150" HorizontalAlignment="Left" Margin="10,0,0,0" />
                 </StackPanel>
             </StackPanel>
-            
         </ScrollViewer>
 
+        
     </Grid>
 </Page>

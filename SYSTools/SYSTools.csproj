@@ -28,6 +28,9 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>9</LangVersion>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
@@ -88,6 +91,7 @@
     <Compile Include="Dialog\TestQueryDialog.xaml.cs">
       <DependentUpon>TestQueryDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\BackGroudImageSetting.cs" />
     <Compile Include="Pages\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>

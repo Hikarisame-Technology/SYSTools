@@ -17,7 +17,7 @@
 
         <ScrollViewer  VerticalScrollBarVisibility="Auto" MinWidth="1040" MinHeight="610" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <TextBlock Text="该页工具存放于'应用根目录/Software Package/DetectionTools/'文件夹内(鼠标右键点击这条文字可打开文件夹)       下列工具请单击打开" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" FontSize="10" Foreground="#FFCFCED1" Height="13" MouseRightButtonDown="TextBlock_MouseRightButtonDown"/>
+                <TextBlock Text="该页工具存放于'应用根目录/Software Package/DetectionTools/'文件夹内(鼠标右键点击这条文字可打开文件夹)       下列工具请单击打开" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" FontSize="10" Height="13" MouseRightButtonDown="TextBlock_MouseRightButtonDown"/>
                 <!--按钮固定上下大小66(px?)-->
                 <Button x:Name="Aida64" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="Aida64_Click" Background="{x:Null}">
                     <TextBlock><InlineUIContainer>

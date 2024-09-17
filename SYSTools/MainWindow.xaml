@@ -17,14 +17,13 @@
     
     <Grid>
 
-        <Image x:Name="BackImage" Stretch="UniformToFill" Source="/Resources/NoBackImage.png" Visibility="Visible"/>
+        <Image x:Name="BackImage" Stretch="UniformToFill" Source="/Resources/Test2.jpg"/>
         
         <Border x:Name="AppTitleBar" Grid.Column="1" VerticalAlignment="Top" Height="24" Margin="50,12,0,0">
             <TextBlock x:Name="AppTitle" Text="" VerticalAlignment="Top" Margin="0,8,0,0"/>
         </Border>
 
         <muxc:NavigationView x:Name="Sidebar" 
-                             IsSettingsVisible="False" 
                              IsBackButtonVisible="Collapsed"
                              IsBackEnabled="False" 
                              AlwaysShowHeader="True" 
@@ -32,8 +31,8 @@
                              SelectionFollowsFocus="Disabled"
                              PaneDisplayMode="LeftCompact"
                              IsTabStop="False" 
-                             IsTitleBarAutoPaddingEnabled="True">
-
+                             IsTitleBarAutoPaddingEnabled="True"
+                             ItemInvoked="NavigationTriggered">
             <FrameworkElement.Resources>
                 <SolidColorBrush x:Key="{x:Static muxc:ThemeKeys.NavigationViewContentBackgroundKey}" Color="Transparent"/>
                 <SolidColorBrush x:Key="{x:Static muxc:ThemeKeys.ExpanderHeaderBorderBrushKey}" Color="Transparent"/>
@@ -42,43 +41,43 @@
 
             <muxc:NavigationView.MenuItems>
 
-                <muxc:NavigationViewItem Content="主页" Tag="主页" x:Name="Home" IsSelected="True" IsTabStop="False" MouseLeftButtonDown="Home_MouseLeftButtonDown"  >
+                <muxc:NavigationViewItem Content="主页" Tag="SYSTools.Pages.Home" x:Name="Home" IsSelected="True" IsTabStop="False">
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE10F;" />
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
 
-                <muxc:NavigationViewItem Content="系统配置快速检测" Tag="系统配置快速检测" x:Name="Fast_Detection" IsTabStop="False" MouseLeftButtonDown="Fast_Detection_MouseLeftButtonDown">
+                <muxc:NavigationViewItem Content="系统配置快速检测" Tag="SYSTools.Pages.Test" x:Name="Test" IsTabStop="False">
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE70C;" />
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
 
-                <muxc:NavigationViewItem Content="检测工具" Tag="检测工具" x:Name="Detection_Tools" IsTabStop="False" MouseLeftButtonDown="Detection_Tools_MouseLeftButtonDown">
+                <muxc:NavigationViewItem Content="检测工具" Tag="SYSTools.ToolPages.DetectionTools" x:Name="DetectionTools" IsTabStop="False">
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE9D9;" />
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
 
-                <muxc:NavigationViewItem Content="硬件测试工具" Tag="硬件测试工具" x:Name="Test_Tools" IsTabStop="False" MouseLeftButtonDown="Test_Tools_MouseLeftButtonDown">
+                <muxc:NavigationViewItem Content="硬件测试工具" Tag="SYSTools.ToolPages.TestTools" x:Name="TestTools" IsTabStop="False">
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE950;" />
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
 
-                <muxc:NavigationViewItem Content="硬盘工具" Tag="硬盘工具" x:Name="Disk_Tools" IsTabStop="False" MouseLeftButtonDown="Disk_Tools_MouseLeftButtonDown">
+                <muxc:NavigationViewItem Content="硬盘工具" Tag="SYSTools.ToolPages.DiskTools" x:Name="DiskTools" IsTabStop="False">
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xEB05;" />
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
 
-                <muxc:NavigationViewItem Content="外设检测工具" Tag="外设检测工具" x:Name="Peripherals_Tools" IsTabStop="False" MouseLeftButtonDown="Peripherals_Tools_MouseLeftButtonDown">
+                <muxc:NavigationViewItem Content="外设检测工具" Tag="SYSTools.ToolPages.PeripheralsTools" x:Name="PeripheralsTools" IsTabStop="False">
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE961;" />
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
 
-                <muxc:NavigationViewItem Content="运行库安装工具" Tag="运行库安装工具" x:Name="Repairing_Tools" IsTabStop="False" MouseLeftButtonDown="Repairing_Tools_MouseLeftButtonDown">
+                <muxc:NavigationViewItem Content="运行库安装工具" Tag="SYSTools.Pages.RepairingTools" x:Name="RepairingTools" IsTabStop="False">
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE945;" />
                     </muxc:NavigationViewItem.Icon>
@@ -86,7 +85,7 @@
 
                 <muxc:NavigationViewItemSeparator/>
 
-                <muxc:NavigationViewItem Content="Windows快捷小工具" Tag="Windows快捷小工具" x:Name="Windows_Tools" IsTabStop="False" MouseLeftButtonDown="Windows_Tools_Page_MouseLeftButtonDown" >
+                <muxc:NavigationViewItem Content="Windows快捷小工具" Tag="SYSTools.Pages.WindowsTools" x:Name="WindowsTools" IsTabStop="False">
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE74C;" />
                     </muxc:NavigationViewItem.Icon>
@@ -94,7 +93,7 @@
 
                 <muxc:NavigationViewItemSeparator/>
 
-                <muxc:NavigationViewItem Content="WSA工具" Tag="WSA工具" x:Name="WSA_Tools" ToolTip= "功能准备中" IsTabStop="False" MouseLeftButtonDown="WSA_Tools_MouseLeftButtonDown" >
+                <muxc:NavigationViewItem Content="WSA工具" Tag="SYSTools.Pages.WSATools" x:Name="WSATools" ToolTip= "功能准备中" IsTabStop="False">
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE1C9;" />
                     </muxc:NavigationViewItem.Icon>
@@ -102,13 +101,13 @@
 
                 <muxc:NavigationViewItemSeparator/>
 
-                <muxc:NavigationViewItem Content="深色模式" Tag="Theme Dark Mode" x:Name="Dark" IsTabStop="False" MouseLeftButtonDown="Dark_MouseLeftButtonDown" >
+                <muxc:NavigationViewItem Content="深色模式" Tag="ThemeDarkMode" x:Name="Dark" IsTabStop="False" MouseLeftButtonDown="Dark_MouseLeftButtonDown" >
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE708;" />
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
 
-                <muxc:NavigationViewItem Content="亮色模式" Tag="Theme Light Mode" x:Name="Light" IsTabStop="False" MouseLeftButtonDown="Light_MouseLeftButtonDown" >
+                <muxc:NavigationViewItem Content="亮色模式" Tag="ThemeLightMode" x:Name="Light" IsTabStop="False" MouseLeftButtonDown="Light_MouseLeftButtonDown" >
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE793;" />
                     </muxc:NavigationViewItem.Icon>
@@ -118,13 +117,13 @@
 
             <muxc:NavigationView.FooterMenuItems>
 
-                <muxc:NavigationViewItem Content="软件设置" Tag="软件设置" x:Name="Software_Configuration" IsTabStop="False" MouseLeftButtonDown="Software_Configuration_MouseLeftButtonDown">
+                <muxc:NavigationViewItem Content="软件设置" Tag="SYSTools.Pages.Configuration" x:Name="Configuration" IsTabStop="False">
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE713;" />
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
 
-                <muxc:NavigationViewItem Content="关于" Tag="关于" x:Name="About" IsTabStop="False"  MouseLeftButtonDown="About_MouseLeftButtonDown">
+                <muxc:NavigationViewItem Content="关于" Tag="SYSTools.Pages.About" x:Name="About" IsTabStop="False">
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE946;" />
                     </muxc:NavigationViewItem.Icon>
@@ -133,7 +132,9 @@
             </muxc:NavigationView.FooterMenuItems>
 
 
-            <ContentControl x:Name="FrameContent"  HorizontalAlignment="stretch" VerticalAlignment="stretch" Margin="4" IsTabStop="False"/>
+            <muxc:Frame x:Name="CurrentPage" />
+
+            <!--<ContentControl x:Name="FrameContent"  HorizontalAlignment="stretch" VerticalAlignment="stretch" Margin="4" IsTabStop="False"/>-->
 
 
         </muxc:NavigationView>
