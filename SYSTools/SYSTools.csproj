@@ -113,6 +113,7 @@
     <Compile Include="Pages\WindowsTools.xaml.cs">
       <DependentUpon>WindowsTools.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="ToolPages\DetectionTools.xaml.cs">
       <DependentUpon>DetectionTools.xaml</DependentUpon>
     </Compile>

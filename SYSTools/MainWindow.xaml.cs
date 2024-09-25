@@ -1,13 +1,14 @@
-﻿using iNKORE.UI.WPF.Modern;
-using iNKORE.UI.WPF.Modern.Controls;
-using iNKORE.UI.WPF.Modern.Media.Animation;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
+using iNKORE.UI.WPF.Modern;
+using iNKORE.UI.WPF.Modern.Controls;
+using iNKORE.UI.WPF.Modern.Media.Animation;
 using SYSTools.Model;
 using SYSTools.Pages;
 using SYSTools.ToolPages;
@@ -18,7 +19,7 @@ namespace SYSTools
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    ///     
+    ///
 
     public partial class MainWindow : Window
     {
@@ -52,22 +53,25 @@ namespace SYSTools
             InitializeComponent();
             this.Loaded += MainWindow_Loaded;
             GlobalSettings.Instance.PropertyChanged += OnSettingsPropertyChanged;
-            UpdateBackgroundImage();
         }
 
         private void OnSettingsPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(GlobalSettings.BackgroundImagePath))
             {
-                UpdateBackgroundImage();
+                if (!string.IsNullOrEmpty(GlobalSettings.Instance.BackgroundImagePath))
+                {
+                    BackImage.Source = new BitmapImage(
+                        new Uri(
+                            GlobalSettings.Instance.BackgroundImagePath,
+                            UriKind.RelativeOrAbsolute
+                        )
+                    );
+                }
             }
-        }
-
-        private void UpdateBackgroundImage()
-        {
-            if (!string.IsNullOrEmpty(GlobalSettings.Instance.BackgroundImagePath))
+            else if (e.PropertyName == nameof(GlobalSettings.BackgroundImageBlurRadius))
             {
-                BackImage.Source = new BitmapImage(new Uri(GlobalSettings.Instance.BackgroundImagePath, UriKind.RelativeOrAbsolute));
+                LoadBackgroundImageBlurRadius(GlobalSettings.Instance.BackgroundImageBlurRadius);
             }
         }
 
@@ -79,7 +83,11 @@ namespace SYSTools
             int processTotal = Process.GetProcessesByName(appName).Length;
             if (processTotal > 1)
             {
-                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("有一个同名进程正在运行！", "程序冲突!", MessageBoxButton.OK);
+                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(
+                    "有一个同名进程正在运行！",
+                    "程序冲突!",
+                    MessageBoxButton.OK
+                );
                 Close();
             }
             Title = "SYSTools Ver" + (Application.ResourceAssembly.GetName().Version.ToString());
@@ -87,19 +95,25 @@ namespace SYSTools
             CurrentPage.Navigate(Home_Page, new DrillInNavigationTransitionInfo());
         }
 
-        private void NavigationTriggered(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        private void NavigationTriggered(
+            NavigationView sender,
+            NavigationViewItemInvokedEventArgs args
+        )
         {
             if (args.IsSettingsInvoked)
                 NavigateTo(typeof(int), args.RecommendedNavigationTransitionInfo);
             else if (args.InvokedItemContainer != null)
-                NavigateTo(Type.GetType(args.InvokedItemContainer.Tag.ToString()),
-                    args.RecommendedNavigationTransitionInfo);
+                NavigateTo(
+                    Type.GetType(args.InvokedItemContainer.Tag.ToString()),
+                    args.RecommendedNavigationTransitionInfo
+                );
         }
 
         private void NavigateTo(Type navPageType, NavigationTransitionInfo transitionInfo)
         {
             var preNavPageType = CurrentPage.Content.GetType();
-            if (navPageType == preNavPageType) return;
+            if (navPageType == preNavPageType)
+                return;
             switch (navPageType)
             {
                 case not null when navPageType == typeof(Home):
@@ -143,6 +157,22 @@ namespace SYSTools
             LoadUserSettings();
         }
 
+        private void LoadUserSettings()
+        {
+            string savedImagePath = Properties.Settings.Default.BackgroundImagePath;
+            double savedBlurRadius = Properties.Settings.Default.BackgroundImageBlurRadius;
+            if (!string.IsNullOrWhiteSpace(savedImagePath) && File.Exists(savedImagePath))
+            {
+                LoadBackgroundImage(savedImagePath);
+                LoadBackgroundImageBlurRadius(savedBlurRadius);
+            }
+            else
+            {
+                LoadBackgroundImage("pack://application:,,,/Resources/NoBackImage.png");
+                LoadBackgroundImageBlurRadius(savedBlurRadius);
+            }
+        }
+
         private void LoadBackgroundImage(string imagePath)
         {
             BitmapImage bitmap = new BitmapImage();
@@ -152,18 +182,15 @@ namespace SYSTools
             BackImage.Source = bitmap;
         }
 
-        private void LoadUserSettings()
+        private void LoadBackgroundImageBlurRadius(double RadiusInt)
         {
-            string savedImagePath = Properties.Settings.Default.BackgroundImagePath;
-            if (!string.IsNullOrWhiteSpace(savedImagePath) && File.Exists(savedImagePath))
+            var blurEffect = new BlurEffect
             {
-                LoadBackgroundImage(savedImagePath);
-            }
-            else
-            {
-                LoadBackgroundImage("pack://application:,,,/Resources/NoBackImage.png");
-            }
+                Radius = RadiusInt // 获取模糊度
+            };
+            BackImage.Effect = blurEffect; // 应用模糊效果
         }
+
         private void Dark_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;

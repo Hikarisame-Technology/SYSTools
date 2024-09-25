@@ -6,6 +6,7 @@
       xmlns:muxc="http://schemas.inkore.net/lib/ui/wpf/modern"
       xmlns:ikw="http://schemas.inkore.net/lib/ui/wpf"
       xmlns:local="clr-namespace:SYSTools.Pages"
+      xmlns:model="clr-namespace:SYSTools.Model"
       mc:Ignorable="d" 
       d:DesignHeight="610" d:DesignWidth="1040"
       KeepAlive="True"
@@ -20,15 +21,34 @@
             muxc:FocusVisualHelper.UseSystemFocusVisuals="False"
             IsTabStop="False"
             VerticalScrollBarVisibility="Auto">
-            <StackPanel HorizontalAlignment="Stretch">
-                <TextBlock Margin="0,12,0,0" Text="背景图片" FontWeight="Bold" FontSize="20"/>
+            <StackPanel VerticalAlignment="Top" Margin="0,20,0,0">
+                <TextBlock Margin="0,15,0,0" Text="背景图片" FontWeight="Bold" FontSize="20"/>
                 <StackPanel x:Name="ThemePanel" Margin="0,10,0,0" Orientation="Horizontal">
-                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="50,0,0,0">
-                        <Button Content="选择背景图片" Click="SelectBackgroundButton_Click" FontSize="15" VerticalAlignment="Center" Margin="0,0,0,10"/>
-                        <Button Content="清空背景图片" Click="DeleteBackgroundButton_Click" FontSize="15" VerticalAlignment="Center"/>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="50,20,0,10">
+                        <Button Content="选择背景图片" Click="SelectBackgroundButton_Click" FontSize="15" VerticalAlignment="Center" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+                        <Button Content="清空背景图片" Click="DeleteBackgroundButton_Click" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Text="图片模糊度(实验性)" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,25,0,0" />
+                        <Slider VerticalAlignment="Center" Width="150" Minimum="0" Maximum="100" Value="{Binding Source={x:Static model:GlobalSettings.Instance}, Path=BackgroundImageBlurRadius, Mode=TwoWay}"/>
                     </StackPanel>
-                    <Image x:Name="BackgroundPreview" Height="150" HorizontalAlignment="Left" Margin="10,0,0,0" />
+                    <Image x:Name="BackgroundPreview" Height="150" HorizontalAlignment="Left" Margin="15,0,0,0">
+                        <Image.Effect>
+                            <BlurEffect Radius="{Binding Source={x:Static model:GlobalSettings.Instance}, Path=BackgroundImageBlurRadius, Mode=TwoWay}"/>
+                        </Image.Effect>
+                    </Image>
+
+                    <Image x:Name="nu" Height="150" HorizontalAlignment="Left" Margin="15,0,0,0">
+                        
+                    </Image>
+
+                    <!--<Rectangle Fill="{muxc:ThemeResource CustomAcrylicInAppLuminosity}" />
+
+                    <ResourceDictionary x:Key="Default">
+                        <muxc:AcrylicBrush x:Key="CustomAcrylicInAppLuminosity"
+            TintOpacity="" TintLuminosityOpacity="" TintColor="SkyBlue" FallbackColor="SkyBlue" />
+                    </ResourceDictionary>-->
+
                 </StackPanel>
+
             </StackPanel>
         </ScrollViewer>
 

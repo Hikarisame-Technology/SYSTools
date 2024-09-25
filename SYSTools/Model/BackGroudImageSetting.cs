@@ -22,6 +22,23 @@ namespace SYSTools.Model
             }
         }
 
+        private double _backgroundImageBlurRadius;
+        public double BackgroundImageBlurRadius
+        {
+            get => _backgroundImageBlurRadius;
+            set
+            {
+                if (_backgroundImageBlurRadius != value)
+                {
+                    _backgroundImageBlurRadius = value;
+                    OnPropertyChanged();
+                    Properties.Settings.Default.BackgroundImageBlurRadius =
+                        _backgroundImageBlurRadius;
+                    Properties.Settings.Default.Save();
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)

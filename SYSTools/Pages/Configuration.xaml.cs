@@ -1,10 +1,11 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using SYSTools.Model;
-using Windows.Devices.Geolocation;
 
 namespace SYSTools.Pages
 {
@@ -19,6 +20,11 @@ namespace SYSTools.Pages
         {
             InitializeComponent();
             LoadUserSettings();
+            GlobalSettings.Instance.BackgroundImageBlurRadius = Properties
+                .Settings
+                .Default
+                .BackgroundImageBlurRadius;
+            DataContext = this;
         }
 
         // 背景图片设定按钮
@@ -33,19 +39,23 @@ namespace SYSTools.Pages
                 GlobalSettings.Instance.BackgroundImagePath = openFileDialog.FileName;
             }
         }
+
         // 背景图片清除按钮(设定为内置透明图片)
         private void DeleteBackgroundButton_Click(object sender, RoutedEventArgs e)
         {
             SaveBackgroundImagePath("");
             LoadBackgroundImage("");
-            GlobalSettings.Instance.BackgroundImagePath = "pack://application:,,,/Resources/NoBackImage.png";
+            GlobalSettings.Instance.BackgroundImagePath =
+                "pack://application:,,,/Resources/NoBackImage.png";
         }
+
         // 保存图片地址到Config文件
         private void SaveBackgroundImagePath(string imagePath)
         {
             Properties.Settings.Default.BackgroundImagePath = imagePath;
             Properties.Settings.Default.Save();
         }
+
         // 加载背景图片到预览窗口
         private void LoadBackgroundImage(string imagePath)
         {
@@ -62,6 +72,7 @@ namespace SYSTools.Pages
                 BackgroundPreview.Source = bitmap;
             }
         }
+
         // 加载用户Config文件
         private void LoadUserSettings()
         {
