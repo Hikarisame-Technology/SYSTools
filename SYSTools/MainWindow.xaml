@@ -14,7 +14,7 @@
         muxc:TitleBar.IsBackButtonVisible="False"
         muxc:TitleBar.ButtonGlyphStyle="Fluent"
         muxc:TitleBar.Height="48"
-        Height="670" Width="1100" MinWidth="1100" MinHeight="670" Loaded="Window_Loaded">
+        Height="670" Width="1100" MinWidth="1100" MinHeight="670" Loaded="Window_Loaded" Closed="Window_Closed" Deactivated="Window_Deactivated">
     
     <Grid>
 
@@ -37,7 +37,8 @@
                              PaneDisplayMode="LeftCompact"
                              IsTabStop="False" 
                              IsTitleBarAutoPaddingEnabled="True"
-                             ItemInvoked="NavigationTriggered">
+                             ItemInvoked="NavigationTriggered"
+                             >
             <FrameworkElement.Resources>
                 <SolidColorBrush x:Key="{x:Static muxc:ThemeKeys.NavigationViewContentBackgroundKey}" Color="Transparent"/>
                 <SolidColorBrush x:Key="{x:Static muxc:ThemeKeys.ExpanderHeaderBorderBrushKey}" Color="Transparent"/>

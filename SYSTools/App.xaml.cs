@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hardcodet.Wpf.TaskbarNotification;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,14 @@ namespace SYSTools
     /// </summary>
     public partial class App : Application
     {
+        public static TaskbarIcon TaskbarIcon;
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            TaskbarIcon = (TaskbarIcon)FindResource("Taskbar");
+            TaskbarIcon.ToolTipText = "SYSTools Ver" + (Application.ResourceAssembly.GetName().Version.ToString());
+
+        }
     }
 }

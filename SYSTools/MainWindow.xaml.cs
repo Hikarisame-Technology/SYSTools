@@ -200,5 +200,15 @@ namespace SYSTools
         {
             ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
         }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void Window_Deactivated(object sender, EventArgs e)
+        {
+            if (WindowState == WindowState.Minimized) { Application.Current.MainWindow.Hide();}
+        }
     }
 }
