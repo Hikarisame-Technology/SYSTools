@@ -13,13 +13,13 @@ jobs:
     runs-on: windows-latest  # 使用 Windows 虚拟环境
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1.0.3
+      uses: microsoft/setup-msbuild@v2
 
     - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1.0.6
+      uses: NuGet/setup-nuget@v2
 
     - name: Restore NuGet packages
       run: nuget restore SYSTools.sln
@@ -28,7 +28,8 @@ jobs:
       run: msbuild SYSTools.sln /p:Configuration=Release
 
     - name: Upload Gallery apps
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: SYSTools
         path: .\SYSTools\bin\Release
+        retention-days: 5
