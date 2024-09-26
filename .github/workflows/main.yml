@@ -3,10 +3,10 @@ name: Build .NET Framework 4.7.2
 on:
   push:
     branches:
-      - C#  # 当推送到 main 分支时触发
+      - '*'  # 当推送到 任何 分支时触发
   pull_request:
     branches:
-      - C#  # 当有针对 main 分支的 pull request 时触发
+      - 'C#'  # 当有针对 C# 分支的 pull request 时触发
 
 jobs:
   build:
