@@ -154,6 +154,8 @@ namespace SYSTools
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            Properties.Settings.Default.Upgrade();
+            Properties.Settings.Default.Save();
             LoadUserSettings();
         }
 
