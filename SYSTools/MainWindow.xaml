@@ -17,8 +17,8 @@
         Height="670" Width="1100" MinWidth="1100" MinHeight="670" Loaded="Window_Loaded" Closed="Window_Closed" Deactivated="Window_Deactivated">
     
     <Grid>
-
-        <Image x:Name="BackImage" Stretch="UniformToFill" Source="/Resources/Test2.jpg">
+        <!--设定为预设无背景图片-->
+        <Image x:Name="BackImage" Stretch="UniformToFill" Source="/Resources/NoBackImage.png">
             <Image.Effect>
                 <BlurEffect/>
             </Image.Effect>

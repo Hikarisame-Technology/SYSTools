@@ -168,6 +168,7 @@ namespace SYSTools
             }
             else
             {
+                // 读取不到Config的背景图片路径则设定为全透明图片路径
                 LoadBackgroundImage("pack://application:,,,/Resources/NoBackImage.png");
                 LoadBackgroundImageBlurRadius(savedBlurRadius);
             }

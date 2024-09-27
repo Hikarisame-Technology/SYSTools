@@ -34,19 +34,18 @@ namespace SYSTools.Pages
             openFileDialog.Filter = "Image files (*.jpg;*.png)|*.jpg;*.png";
             if (openFileDialog.ShowDialog() == true)
             {
+                GlobalSettings.Instance.BackgroundImagePath = openFileDialog.FileName;
                 SaveBackgroundImagePath(openFileDialog.FileName);
                 LoadBackgroundImage(openFileDialog.FileName);
-                GlobalSettings.Instance.BackgroundImagePath = openFileDialog.FileName;
             }
         }
 
         // 背景图片清除按钮(设定为内置透明图片)
         private void DeleteBackgroundButton_Click(object sender, RoutedEventArgs e)
         {
+            GlobalSettings.Instance.BackgroundImagePath = "pack://application:,,,/Resources/NoBackImage.png";
             SaveBackgroundImagePath("");
             LoadBackgroundImage("");
-            GlobalSettings.Instance.BackgroundImagePath =
-                "pack://application:,,,/Resources/NoBackImage.png";
         }
 
         // 保存图片地址到Config文件
