@@ -101,14 +101,16 @@ namespace SYSTools.Pages
             // 创建并显示ContentDialog
             iNKORE.UI.WPF.Modern.Controls.ContentDialog dialog = new iNKORE.UI.WPF.Modern.Controls.ContentDialog
             {
-                Title = "隐私协议",
+                Title = "SYSTools 隐私协议",
                 Content = new System.Windows.Controls.TextBox
                 {
                     Text = txtContent,
                     AcceptsReturn = true,
                     AcceptsTab = true,
                     TextWrapping = TextWrapping.Wrap,
-                    VerticalScrollBarVisibility = ScrollBarVisibility.Auto
+                    VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+                    IsReadOnly = true,
+                    Padding = new Thickness(10, 0, 20, 0)
                 },
 
                 CloseButtonText = "关闭",
