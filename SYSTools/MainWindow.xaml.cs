@@ -23,18 +23,6 @@ namespace SYSTools
 
     public partial class MainWindow : Window
     {
-        //private Frame Home_Page = new Frame() { Content = new Home() };
-        //private Frame FastDetection = new Frame() { Content = new Test() };
-        //private Frame DetectionTools = new Frame() { Content = new DetectionTools() };
-        //private Frame TestTools = new Frame() { Content = new TestTools() };
-        //private Frame DiskTools = new Frame() { Content = new DiskTools() };
-        //private Frame PeripheralsTools = new Frame() { Content = new PeripheralsTools() };
-        //private Frame RepairingTools = new Frame() { Content = new RepairingTools() };
-        //private Frame WindowsTools = new Frame() { Content = new WindowsTools() };
-        //private Frame WSATools = new Frame() { Content = new WSATools() };
-        //private Frame ConfigurationPage = new Frame() { Content = new Configuration() };
-        //private Frame AboutPage = new Frame() { Content = new About() };
-
         private readonly Page Home_Page = new Home();
         private readonly Page Test_Page = new Test();
         private readonly Page DetectionTools_Page = new DetectionTools();
@@ -55,6 +43,7 @@ namespace SYSTools
             GlobalSettings.Instance.PropertyChanged += OnSettingsPropertyChanged;
         }
 
+        // 监听全局设置修改
         private void OnSettingsPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(GlobalSettings.BackgroundImagePath))
@@ -77,8 +66,9 @@ namespace SYSTools
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // 启动时删除Info.xml
             File.Delete("Info.xml");
-            //程序启动数量限制
+            // 程序启动数量限制
             string appName = Process.GetCurrentProcess().ProcessName;
             int processTotal = Process.GetProcessesByName(appName).Length;
             if (processTotal > 1)
@@ -91,7 +81,7 @@ namespace SYSTools
                 Close();
             }
             Title = "SYSTools Ver" + (Application.ResourceAssembly.GetName().Version.ToString());
-            //设置默认启动Page页
+            // 设置默认启动Page页
             CurrentPage.Navigate(Home_Page, new DrillInNavigationTransitionInfo());
         }
 
@@ -100,9 +90,7 @@ namespace SYSTools
             NavigationViewItemInvokedEventArgs args
         )
         {
-            if (args.IsSettingsInvoked)
-                NavigateTo(typeof(int), args.RecommendedNavigationTransitionInfo);
-            else if (args.InvokedItemContainer != null)
+            if (args.InvokedItemContainer != null)
                 NavigateTo(
                     Type.GetType(args.InvokedItemContainer.Tag.ToString()),
                     args.RecommendedNavigationTransitionInfo
@@ -111,6 +99,7 @@ namespace SYSTools
 
         private void NavigateTo(Type navPageType, NavigationTransitionInfo transitionInfo)
         {
+            // 导航到目标页
             var preNavPageType = CurrentPage.Content.GetType();
             if (navPageType == preNavPageType)
                 return;
@@ -154,13 +143,16 @@ namespace SYSTools
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            // 随时升级配置文件并保存到最新版本
             Properties.Settings.Default.Upgrade();
             Properties.Settings.Default.Save();
+            // 加载用户配置
             LoadUserSettings();
         }
 
         private void LoadUserSettings()
         {
+            // 启动程序时加载 user.config 文件
             string savedImagePath = Properties.Settings.Default.BackgroundImagePath;
             double savedBlurRadius = Properties.Settings.Default.BackgroundImageBlurRadius;
             if (!string.IsNullOrWhiteSpace(savedImagePath) && File.Exists(savedImagePath))
@@ -170,7 +162,7 @@ namespace SYSTools
             }
             else
             {
-                // 读取不到Config的背景图片路径则设定为全透明图片路径
+                // 读取不到Config的背景图片路径或路径为空则设定为全透明图片路径
                 LoadBackgroundImage("pack://application:,,,/Resources/NoBackImage.png");
                 LoadBackgroundImageBlurRadius(savedBlurRadius);
             }
@@ -178,6 +170,7 @@ namespace SYSTools
 
         private void LoadBackgroundImage(string imagePath)
         {
+            // 加载背景图片
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
             bitmap.UriSource = new Uri(imagePath, UriKind.Absolute);
@@ -187,31 +180,41 @@ namespace SYSTools
 
         private void LoadBackgroundImageBlurRadius(double RadiusInt)
         {
+            // 加载背景模糊
             var blurEffect = new BlurEffect
             {
-                Radius = RadiusInt // 获取模糊度
+                // 获取模糊度
+                Radius = RadiusInt 
             };
-            BackImage.Effect = blurEffect; // 应用模糊效果
+            // 为背景图片应用模糊效果
+            BackImage.Effect = blurEffect; 
         }
 
         private void Dark_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            //实验性功能 设定为暗色模式
             ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
         }
 
         private void Light_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            // 实验性功能 设定为亮色模式
             ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
         }
 
         private void Window_Closed(object sender, EventArgs e)
         {
+            // 结束线程
             Application.Current.Shutdown();
         }
 
         private void Window_Deactivated(object sender, EventArgs e)
         {
-            if (WindowState == WindowState.Minimized) { Application.Current.MainWindow.Hide();}
+            // 修改最小化窗口为隐藏
+            if (WindowState == WindowState.Minimized)
+            {
+                Application.Current.MainWindow.Hide();
+            }
         }
     }
 }

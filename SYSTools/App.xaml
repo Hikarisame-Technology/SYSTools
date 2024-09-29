@@ -16,7 +16,7 @@
             </ResourceDictionary.MergedDictionaries>
             <FontFamily x:Key="SegoeIcons">/SYSTools;component/Resources/#Segoe Fluent Icons</FontFamily>
             <!-- Other app resources here -->
-
+            <!--托盘菜单-->
             <ContextMenu x:Shared="false" x:Key="SysTrayMenu">
                 <MenuItem Header="显示窗口" Command="{Binding ShowWindowCommand}" />
                 <MenuItem Header="关闭窗口" Command="{Binding HideWindowCommand}" />
