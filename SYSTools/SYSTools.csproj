@@ -70,12 +70,6 @@
     <Compile Include="Dialog\AdbDialog.xaml.cs">
       <DependentUpon>AdbDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialog\BackImageNew.xaml.cs">
-      <DependentUpon>BackImageNew.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialog\BackImageOld.xaml.cs">
-      <DependentUpon>BackImageOld.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Dialog\NoUpdate.xaml.cs">
       <DependentUpon>NoUpdate.xaml</DependentUpon>
     </Compile>
@@ -128,14 +122,6 @@
       <DependentUpon>TestTools.xaml</DependentUpon>
     </Compile>
     <Page Include="Dialog\AdbDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialog\BackImageNew.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialog\BackImageOld.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

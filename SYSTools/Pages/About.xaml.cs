@@ -1,11 +1,13 @@
-﻿using System;
+﻿using AutoUpdaterDotNET;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using AutoUpdaterDotNET;
-using iNKORE.UI.WPF.Modern;
+using System.Windows.Forms;
 using SYSTools.Dialog;
 
 namespace SYSTools.Pages
@@ -49,7 +51,7 @@ namespace SYSTools.Pages
             response.EnsureSuccessStatusCode();
             string webCode = await response.Content.ReadAsStringAsync();
 
-            Version currentVersion = Application.ResourceAssembly.GetName().Version;
+            Version currentVersion = System.Windows.Application.ResourceAssembly.GetName().Version;
             Version webVersion = new Version(webCode);
 
             if (currentVersion >= webVersion)
@@ -82,6 +84,52 @@ namespace SYSTools.Pages
             else
             {
                 Process.Start(ToolsExecutablePath);
+            }
+        }
+
+        private void Agreement_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private async void Privacy_Click(object sender, RoutedEventArgs e)
+        {
+            // 从URL下载txt内容
+            string url = "https://systools.hksstudio.work/Agree_Privacy/Privacy.txt";
+            string txtContent = await GetTxtFromUrlAsync(url);
+
+            // 创建并显示ContentDialog
+            iNKORE.UI.WPF.Modern.Controls.ContentDialog dialog = new iNKORE.UI.WPF.Modern.Controls.ContentDialog
+            {
+                Title = "隐私协议",
+                Content = new System.Windows.Controls.TextBox
+                {
+                    Text = txtContent,
+                    AcceptsReturn = true,
+                    AcceptsTab = true,
+                    TextWrapping = TextWrapping.Wrap,
+                    VerticalScrollBarVisibility = ScrollBarVisibility.Auto
+                },
+
+                CloseButtonText = "关闭",
+                PrimaryButtonText = "打开Url查看",
+                DefaultButton = iNKORE.UI.WPF.Modern.Controls.ContentDialogButton.Close
+            };
+
+            var result = await dialog.ShowAsync();
+            // 设定Url跳转地址
+            if (result == iNKORE.UI.WPF.Modern.Controls.ContentDialogResult.Primary)
+            {
+                Process.Start(new ProcessStartInfo("https://systools.hksstudio.work/privacy.html") { UseShellExecute = true });
+            }
+        }
+        // 获取txt文件内容，GB2312编码
+        private async Task<string> GetTxtFromUrlAsync(string url)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                byte[] bytes = await client.GetByteArrayAsync(url);
+                return Encoding.GetEncoding("GB2312").GetString(bytes);
             }
         }
     }

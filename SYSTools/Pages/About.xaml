@@ -54,8 +54,8 @@
         <Button x:Name="QQ" Content="QQ群" Margin="30,245,0,0" VerticalAlignment="Top" Width="135" Height="33" Click="QQ_Click"/>
         <Button x:Name="Web" Content="官网" Margin="30,300,0,0" Width="135" Height="33" VerticalAlignment="Top" Click="Web_Click"/>
         <Button x:Name="Github" Content="Github" Margin="30,355,0,0" Width="135" Height="33" VerticalAlignment="Top" Click="Github_Click"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="30,0,0,65" FontSize="15" Text="第一次写类似的软件 虽然代码只是能用的阶段 有问题还请提交Issue"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="30,0,0,40" FontSize="15" Text="该有的都会有的 时间问题（Flag）"/>
+        <!--<Button x:Name="Agreement" Content="用户协议" VerticalAlignment="Bottom" FontSize="15" VerticalContentAlignment="Top" Margin="20,0,0,35" Background="{x:Null}" Click="Agreement_Click" BorderBrush="{x:Null}" />-->
+        <Button x:Name="Privacy" Content="隐私协议" VerticalAlignment="Bottom" FontSize="15" VerticalContentAlignment="Top" Margin="120,0,0,35" Background="{x:Null}" Click="Privacy_Click" BorderBrush="{x:Null}"/>
         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,10" FontSize="15" Text="©2018-2024 Hikarisame Technology Studio. All Rights Reserved."/>
 
         <Button x:Name="Update" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="30,0,0,130" Width="150" Height="60" BorderThickness="0,0,0,0" Background="{x:Null}" Focusable="False" ToolTip="软件升级" Panel.ZIndex="1" Padding="0,0,0,0" Click="Update_Click" BorderBrush="#66000000">
