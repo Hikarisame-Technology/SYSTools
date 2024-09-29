@@ -1,12 +1,13 @@
 name: Build .NET Framework 4.7.2
 
 on:
-  push:
-    branches:
-      - '*'  # 当推送到 任何 分支时触发
-  pull_request:
-    branches:
-      - 'C#'  # 当有针对 C# 分支的 pull request 时触发
+  workflow_dispatch: # 手动触发
+  # push:
+  #   branches:
+  #     - '*'  # 当推送到 任何 分支时触发
+  # pull_request:
+  #   branches:
+  #     - 'C#'  # 当有针对 C# 分支的 pull request 时触发
 
 jobs:
   build:
