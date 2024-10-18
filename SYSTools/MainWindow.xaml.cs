@@ -143,9 +143,10 @@ namespace SYSTools
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            // 随时升级配置文件并保存到最新版本
-            Properties.Settings.Default.Upgrade();
-            Properties.Settings.Default.Save();
+            if (!System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).HasFile)
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.Save();
+                LoadUserSettings();
             // 加载用户配置
             LoadUserSettings();
         }

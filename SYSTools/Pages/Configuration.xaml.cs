@@ -18,10 +18,6 @@ namespace SYSTools.Pages
         {
             InitializeComponent();
             LoadUserSettings();
-            GlobalSettings.Instance.BackgroundImageBlurRadius = Properties
-                .Settings
-                .Default
-                .BackgroundImageBlurRadius;
             DataContext = this;
         }
 
@@ -74,9 +70,12 @@ namespace SYSTools.Pages
         private void LoadUserSettings()
         {
             string savedImagePath = Properties.Settings.Default.BackgroundImagePath;
+            double savedBlurRadius = Properties.Settings.Default.BackgroundImageBlurRadius;
             if (!string.IsNullOrWhiteSpace(savedImagePath) && File.Exists(savedImagePath))
             {
                 LoadBackgroundImage(savedImagePath);
+                GlobalSettings.Instance.BackgroundImageBlurRadius = savedBlurRadius;
+                GlobalSettings.Instance.BackgroundImagePath = savedImagePath;
             }
         }
     }
