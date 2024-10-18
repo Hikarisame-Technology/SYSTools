@@ -1,7 +1,5 @@
 ﻿using System;
-using System.ComponentModel;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -20,10 +18,6 @@ namespace SYSTools.Pages
         {
             InitializeComponent();
             LoadUserSettings();
-            GlobalSettings.Instance.BackgroundImageBlurRadius = Properties
-                .Settings
-                .Default
-                .BackgroundImageBlurRadius;
             DataContext = this;
         }
 
@@ -34,19 +28,18 @@ namespace SYSTools.Pages
             openFileDialog.Filter = "Image files (*.jpg;*.png)|*.jpg;*.png";
             if (openFileDialog.ShowDialog() == true)
             {
+                GlobalSettings.Instance.BackgroundImagePath = openFileDialog.FileName;
                 SaveBackgroundImagePath(openFileDialog.FileName);
                 LoadBackgroundImage(openFileDialog.FileName);
-                GlobalSettings.Instance.BackgroundImagePath = openFileDialog.FileName;
             }
         }
 
         // 背景图片清除按钮(设定为内置透明图片)
         private void DeleteBackgroundButton_Click(object sender, RoutedEventArgs e)
         {
+            GlobalSettings.Instance.BackgroundImagePath = "pack://application:,,,/Resources/NoBackImage.png";
             SaveBackgroundImagePath("");
             LoadBackgroundImage("");
-            GlobalSettings.Instance.BackgroundImagePath =
-                "pack://application:,,,/Resources/NoBackImage.png";
         }
 
         // 保存图片地址到Config文件
@@ -77,9 +70,12 @@ namespace SYSTools.Pages
         private void LoadUserSettings()
         {
             string savedImagePath = Properties.Settings.Default.BackgroundImagePath;
+            double savedBlurRadius = Properties.Settings.Default.BackgroundImageBlurRadius;
             if (!string.IsNullOrWhiteSpace(savedImagePath) && File.Exists(savedImagePath))
             {
                 LoadBackgroundImage(savedImagePath);
+                GlobalSettings.Instance.BackgroundImageBlurRadius = savedBlurRadius;
+                GlobalSettings.Instance.BackgroundImagePath = savedImagePath;
             }
         }
     }

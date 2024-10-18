@@ -70,12 +70,6 @@
     <Compile Include="Dialog\AdbDialog.xaml.cs">
       <DependentUpon>AdbDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialog\BackImageNew.xaml.cs">
-      <DependentUpon>BackImageNew.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialog\BackImageOld.xaml.cs">
-      <DependentUpon>BackImageOld.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Dialog\NoUpdate.xaml.cs">
       <DependentUpon>NoUpdate.xaml</DependentUpon>
     </Compile>
@@ -92,6 +86,7 @@
       <DependentUpon>TestQueryDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\BackGroudImageSetting.cs" />
+    <Compile Include="Model\NotifyIconViewModel.cs" />
     <Compile Include="Pages\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
@@ -127,14 +122,6 @@
       <DependentUpon>TestTools.xaml</DependentUpon>
     </Compile>
     <Page Include="Dialog\AdbDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialog\BackImageNew.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialog\BackImageOld.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -246,6 +233,9 @@
     <PackageReference Include="Autoupdater.NET.Official">
       <Version>1.9.2</Version>
     </PackageReference>
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf">
+      <Version>1.1.0</Version>
+    </PackageReference>
     <PackageReference Include="iNKORE.UI.WPF">
       <Version>1.2.7.1</Version>
     </PackageReference>
@@ -253,10 +243,10 @@
       <Version>0.9.30</Version>
     </PackageReference>
     <PackageReference Include="log4net">
-      <Version>2.0.17</Version>
+      <Version>3.0.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Windows.SDK.Contracts">
-      <Version>10.0.26100.1</Version>
+      <Version>10.0.26100.1742</Version>
     </PackageReference>
     <PackageReference Include="System.Runtime.WindowsRuntime">
       <Version>4.7.0</Version>
