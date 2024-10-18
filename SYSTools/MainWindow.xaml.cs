@@ -80,7 +80,7 @@ namespace SYSTools
                 );
                 Close();
             }
-            Title = "SYSTools Ver" + (Application.ResourceAssembly.GetName().Version.ToString());
+            TitleBarTextBlock.Text = "SYSTools Ver" + (Application.ResourceAssembly.GetName().Version.ToString());
             // 设置默认启动Page页
             CurrentPage.Navigate(Home_Page, new DrillInNavigationTransitionInfo());
         }
