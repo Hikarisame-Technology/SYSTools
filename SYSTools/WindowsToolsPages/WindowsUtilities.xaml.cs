@@ -338,31 +338,49 @@ namespace SYSTools.WindowsToolsPages
             string output = RunCommand("powercfg /list");
             string[] lines = output.Split('\n');
             string currentGuid = RunCommand("powercfg /getactivescheme").Split('\n')[0].Trim();
-
+            
+            // 检查是否已存在卓越性能模式
+            bool hasUltimate = false;
+            string ultimateGuid = "";
+            
             foreach (string line in lines)
             {
                 if (line.Contains("电源方案 GUID"))
                 {
-                    if (line.Contains("(节能)") || line.Contains("最佳能效"))
+                    if (line.Contains("卓越性能"))
                     {
-                        if (line.Contains(currentGuid))
+                        hasUltimate = true;
+                        Match match = Regex.Match(line, @"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}");
+                        if (match.Success)
+                        {
+                            ultimateGuid = match.Value;
+                        }
+                    }
+                    
+                    if (line.Contains(currentGuid))
+                    {
+                        if (line.Contains("(节能)") || line.Contains("最佳能效"))
                             PowerConfig.SelectedIndex = 0;
-                    }
-                    else if (line.Contains("(平衡)") || line.Contains("平衡"))
-                    {
-                        if (line.Contains(currentGuid))
+                        else if (line.Contains("(平衡)") || line.Contains("平衡"))
                             PowerConfig.SelectedIndex = 1;
-                    }
-                    else if (line.Contains("(高性能)") || line.Contains("最佳性能"))
-                    {
-                        if (line.Contains(currentGuid))
+                        else if (line.Contains("(高性能)") || line.Contains("最佳性能"))
                             PowerConfig.SelectedIndex = 2;
-                    }
-                    else if (line.Contains("卓越性能"))
-                    {
-                        if (line.Contains(currentGuid))
+                        else if (line.Contains("卓越性能"))
                             PowerConfig.SelectedIndex = 3;
                     }
+                }
+            }
+
+            // 如果不存在卓越性能模式，创建一个
+            if (!hasUltimate)
+            {
+                string createOutput = RunCommand("powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61");
+                Match match = Regex.Match(createOutput, @"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}");
+                if (match.Success)
+                {
+                    ultimateGuid = match.Value;
+                    // 重命名为卓越性能
+                    RunCommand($"powercfg -changename {ultimateGuid} 卓越性能");
                 }
             }
         }
@@ -371,7 +389,9 @@ namespace SYSTools.WindowsToolsPages
         {
             if (isInitializing) return;
 
+            string output = RunCommand("powercfg /list");
             string scheme = "";
+
             switch (PowerConfig.SelectedIndex)
             {
                 case 0: // 最佳能效
@@ -384,18 +404,40 @@ namespace SYSTools.WindowsToolsPages
                     scheme = "8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c";
                     break;
                 case 3: // 卓越性能
-                    // 先创建卓越性能方案
-                    string PowerOut = RunCommand("powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61");
-                    string PowerRegex = @"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}";
-                    Match match = Regex.Match(PowerOut, PowerRegex);
-                    scheme = match.Value;
+                    // 查找现有的卓越性能方案
+                    string[] lines = output.Split('\n');
+                    foreach (string line in lines)
+                    {
+                        if (line.Contains("卓越性能"))
+                        {
+                            Match match = Regex.Match(line, @"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}");
+                            if (match.Success)
+                            {
+                                scheme = match.Value;
+                                break;
+                            }
+                        }
+                    }
+                    
+                    // 如果没有找到卓越性能方案，创建一个
+                    if (string.IsNullOrEmpty(scheme))
+                    {
+                        string createOutput = RunCommand("powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61");
+                        Match match = Regex.Match(createOutput, @"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}");
+                        if (match.Success)
+                        {
+                            scheme = match.Value;
+                            // 重命名为卓越性能
+                            RunCommand($"powercfg -changename {scheme} 卓越性能");
+                        }
+                    }
                     break;
             }
 
             if (!string.IsNullOrEmpty(scheme))
             {
-                string output = RunCommand($"powercfg /setactive {scheme}");
-                ShowMessage("电源计划已更改: " + output);
+                string setOutput = RunCommand($"powercfg /setactive {scheme}");
+                ShowMessage("电源计划已更改: " + setOutput);
             }
         }
 
@@ -431,8 +473,6 @@ namespace SYSTools.WindowsToolsPages
         {
             Process.Start("SystemPropertiesPerformance.exe");  // 性能选项
         }
-
-
 
         // cmd命令执行
         static string RunCommand(string command)
@@ -486,7 +526,6 @@ namespace SYSTools.WindowsToolsPages
 
             await dialog.ShowAsync();
         }
-
     }
 }
 
