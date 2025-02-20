@@ -62,7 +62,7 @@ namespace SYSTools.Pages
             ManagementObjectSearcher NetAdapter = new ManagementObjectSearcher(@"SELECT * FROM Win32_NetworkAdapter WHERE Manufacturer != 'Microsoft' AND NOT PNPDeviceID LIKE 'ROOT\\%'");
             ManagementObjectCollection NetAdapterDevice = NetAdapter.Get();
 
-            ManagementObjectSearcher NETconfig = new ManagementObjectSearcher("SELECT * FROM win32_NetworkAdapterConfiguration WHERE IPEnabled = True");
+            ManagementObjectSearcher NETconfig = new ManagementObjectSearcher("SELECT * FROM win32_NetworkAdapterConfiguration WHERE IPEnabled = True AND MACAddress != Null");
             ManagementObjectCollection MNetconfig = NETconfig.Get();
 
             ManagementObjectSearcher Sound = new ManagementObjectSearcher("SELECT * FROM Win32_SoundDevice");
@@ -199,7 +199,8 @@ namespace SYSTools.Pages
                         try
                         {
                             string VideoProcessor = (string)DeskTop_Info["VideoProcessor"];
-                            //通过读取VideoProcessor项识别显卡是否有处理器以过滤虚拟显卡(比如向x葵)
+                            // 通过读取VideoProcessor项识别显卡是否有处理器以过滤虚拟显卡(比如向x葵)
+                            // 此处调试启动在检测到值为空时会抛出异常,下方已拦截,属正常现象. 继续运行即可.
                             if (VideoProcessor != null)
                             {
                                 Xml_Writer.WriteElementString("Properties", DeskTop_Info.GetPropertyValue("Name") + ": " + DeskTop_Info.GetPropertyValue("VideoModeDescription").ToString() + Convert.ToChar(32) + DeskTop_Info.GetPropertyValue("CurrentRefreshRate").ToString() + "Hz");
