@@ -1,5 +1,7 @@
 name: Build .NET Framework 4.7.2
-
+permissions:
+  contents: read
+  pull-requests: write
 on:
   workflow_dispatch: # 手动触发
   # push:
