@@ -23,10 +23,25 @@ namespace SYSTools.Pages
         private List<string> notices = new List<string>();
         private int currentNoticeIndex = 0;
         private DispatcherTimer noticeTimer;
+        private DispatcherTimer mainTimer; // 将计时器作为类成员
+        
+        // 缓存本地化字符串和语言判断结果
+        private string dayUnit;
+        private string hourUnit; 
+        private string minuteUnit;
+        private string secondUnit;
+        private bool isChineseLanguage;
 
         public Home()
         {
             InitializeComponent();
+            
+            // 初始化主计时器
+            mainTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(1)
+            };
+            mainTimer.Tick += Timer_Tick;
             
             // 初始化公告计时器
             noticeTimer = new DispatcherTimer
@@ -41,7 +56,22 @@ namespace SYSTools.Pages
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            OpenTime.Text = UPTime.ToLongDateString();
+            // 计时器
+            mainTimer?.Stop();
+            RefreshLanguageCache();
+            UpdateTimeDisplay();
+            mainTimer.Start();
+
+            isChineseLanguage = System.Globalization.CultureInfo.CurrentUICulture.Name.StartsWith("zh");
+
+            if (isChineseLanguage)
+            {
+                OpenTime.Text = UPTime.ToLongDateString();
+            }
+            else
+            {
+                RunTime.Text = UPTime.ToLongDateString();
+            }
 
             //欢迎头部文本
             Home_SP_Tip.ToolTip = Properties.Lang.ResourceManager.GetString("Hello", System.Globalization.CultureInfo.CurrentUICulture) + Convert.ToChar(32) + Environment.UserName;
@@ -116,28 +146,36 @@ namespace SYSTools.Pages
                 Debug.WriteLine($"获取公告失败: {ex}");
                 PublicNotice.Text = Properties.Lang.ResourceManager.GetString("NoticeError", System.Globalization.CultureInfo.CurrentUICulture);
             }
+        }
 
-            // 计时器
-            DispatcherTimer Timer = new DispatcherTimer();
-            Timer.Tick += Timer_Tick;
-            Timer.Interval = new TimeSpan(0, 0, 1);
-            Timer.Start();
+        private void RefreshLanguageCache()
+        {
+            isChineseLanguage = System.Globalization.CultureInfo.CurrentUICulture.Name.StartsWith("zh");
+            dayUnit = Properties.Lang.ResourceManager.GetString("TimeUnitDay", System.Globalization.CultureInfo.CurrentUICulture);
+            hourUnit = Properties.Lang.ResourceManager.GetString("TimeUnitHour", System.Globalization.CultureInfo.CurrentUICulture);
+            minuteUnit = Properties.Lang.ResourceManager.GetString("TimeUnitMinute", System.Globalization.CultureInfo.CurrentUICulture);
+            secondUnit = Properties.Lang.ResourceManager.GetString("TimeUnitSecond", System.Globalization.CultureInfo.CurrentUICulture);
+        }
 
+        private void UpdateTimeDisplay()
+        {
+            TimeSpan Nows = DateTime.Now - UPTime;
+            string RunTime_ = $"{Nows.Days} {dayUnit} {Nows.Hours} {hourUnit} {Nows.Minutes} {minuteUnit} {Nows.Seconds} {secondUnit}";
+            
+            // 清空两个控件，然后只更新目标控件（避免闪烁）
+            if (isChineseLanguage)
+            {
+                RunTime.Text = RunTime_;
+            }
+            else
+            {
+                OpenTime.Text = RunTime_;
+            }
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            // 启动时间获取并更新
-            TimeSpan Nows = DateTime.Now - UPTime;
-            
-            // 获取本地化的时间单位
-            var dayUnit = Properties.Lang.ResourceManager.GetString("TimeUnitDay", System.Globalization.CultureInfo.CurrentUICulture);
-            var hourUnit = Properties.Lang.ResourceManager.GetString("TimeUnitHour", System.Globalization.CultureInfo.CurrentUICulture);
-            var minuteUnit = Properties.Lang.ResourceManager.GetString("TimeUnitMinute", System.Globalization.CultureInfo.CurrentUICulture);
-            var secondUnit = Properties.Lang.ResourceManager.GetString("TimeUnitSecond", System.Globalization.CultureInfo.CurrentUICulture);
-            
-            string RunTime_ = $"{Nows.Days} {dayUnit} {Nows.Hours} {hourUnit} {Nows.Minutes} {minuteUnit} {Nows.Seconds} {secondUnit}";
-            RunTime.Text = RunTime_;
+            UpdateTimeDisplay();
             CommandManager.InvalidateRequerySuggested();
         }
 
@@ -161,7 +199,8 @@ namespace SYSTools.Pages
 
         private void Home_Unloaded(object sender, RoutedEventArgs e)
         {
-            noticeTimer.Stop();
+            mainTimer?.Stop();
+            noticeTimer?.Stop();
         }
 
         private void IPv4_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
