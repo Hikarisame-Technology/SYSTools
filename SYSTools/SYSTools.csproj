@@ -300,9 +300,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Lang.en.resx" />
     <EmbeddedResource Include="Properties\Lang.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Lang.Designer.cs</LastGenOutput>
       <CustomToolNamespace>SYSTools.Properties</CustomToolNamespace>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Lang.zh-Hans.resx" />
   </ItemGroup>

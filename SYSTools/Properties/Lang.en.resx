@@ -118,31 +118,31 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ContactUs" xml:space="preserve">
-    <value>User Agreement</value>
+    <value>Contact Us</value>
   </data>
   <data name="QQGroup" xml:space="preserve">
     <value>QQ Group</value>
   </data>
   <data name="WebSite" xml:space="preserve">
-    <value>WebSite</value>
+    <value>Website</value>
   </data>
   <data name="GithubRepo" xml:space="preserve">
     <value>Github Repository</value>
   </data>
   <data name="GithubIssue" xml:space="preserve">
-    <value>Github Issue</value>
+    <value>GitHub Issue</value>
   </data>
   <data name="Developers" xml:space="preserve">
-    <value>Developers &amp; Designers &amp; External Support</value>
+    <value>Developers &amp; Designers &amp; External Contributors</value>
   </data>
   <data name="ComponentsLicense" xml:space="preserve">
-    <value>Components and Corresponding Repositories Used in the Software</value>
+    <value>Third-Party Libraries</value>
   </data>
   <data name="SYSToolsUpdate" xml:space="preserve">
-    <value>SYSTools Update</value>
+    <value>Update</value>
   </data>
   <data name="SoftwareToolkitUpdate" xml:space="preserve">
-    <value>Software Update &amp; Toolkit Update</value>
+    <value>Software &amp; Toolkit Update</value>
   </data>
   <data name="SoftwareUpdate" xml:space="preserve">
     <value>Software Update</value>
@@ -160,22 +160,22 @@
     <value>User Agreement</value>
   </data>
   <data name="BackImageSetting_Description" xml:space="preserve">
-    <value>Preview/Settings Picture &amp; Blur &amp; Transparency</value>
+    <value>Preview and set the background image, blur, and opacity.</value>
   </data>
   <data name="BackImageSetting_Header" xml:space="preserve">
-    <value>Background Image Settings</value>
+    <value>Background &amp; Effects</value>
   </data>
   <data name="BackImagePreview" xml:space="preserve">
-    <value>Background Image Preview</value>
+    <value>Preview your background image</value>
   </data>
   <data name="SelectBackgroundImage" xml:space="preserve">
-    <value>Select Background Image</value>
+    <value>Select</value>
   </data>
   <data name="ClearBackgroundImage" xml:space="preserve">
-    <value>Clear Background Image</value>
+    <value>Clear</value>
   </data>
   <data name="BackgroundImageBlurRadius_Description" xml:space="preserve">
-    <value>Too much blurring effect tends to cause lag</value>
+    <value>High blur settings may cause lag.</value>
   </data>
   <data name="BackgroundImageBlurRadius_Header" xml:space="preserve">
     <value>Image Blur Effect (Experimental)</value>
@@ -184,13 +184,10 @@
     <value>Image Opacity (Experimental)</value>
   </data>
   <data name="ProgramThemeSetting_Header" xml:space="preserve">
-    <value>Program Theme Setting</value>
+    <value>Themes</value>
   </data>
   <data name="ProgramThemeSetting_Description" xml:space="preserve">
-    <value>Setting the program's theme style to dark/light mode</value>
-  </data>
-  <data name="ThemeModeSetting_Light" xml:space="preserve">
-    <value>Light</value>
+    <value>Choose a light/dark theme.</value>
   </data>
   <data name="ThemeModeSetting_Auto" xml:space="preserve">
     <value>Auto</value>
@@ -198,50 +195,53 @@
   <data name="ThemeModeSetting_Dark" xml:space="preserve">
     <value>Dark</value>
   </data>
+  <data name="ThemeModeSetting_Light" xml:space="preserve">
+    <value>Light</value>
+  </data>
   <data name="LanguageSetting_Header" xml:space="preserve">
-    <value>Language Setting</value>
+    <value>Languages</value>
   </data>
   <data name="LanguageSetting_Description" xml:space="preserve">
-    <value>Setting the language of the program display</value>
+    <value>Your preferred language is here.</value>
   </data>
   <data name="OpenWebsite" xml:space="preserve">
     <value>Open WebSite</value>
   </data>
   <data name="HardwareMonitor_TextBlock" xml:space="preserve">
-    <value>Sensor Information Collection (based on LibreHardwareMonitor)</value>
-  </data>
-  <data name="ExpandAll" xml:space="preserve">
-    <value>Expand All</value>
+    <value>Hardware Monitoring (powered by LibreHardwareMonitor)</value>
   </data>
   <data name="CollapseAll" xml:space="preserve">
     <value>Collapse All</value>
   </data>
-  <data name="ErrorTitle" xml:space="preserve">
-    <value>Error</value>
+  <data name="ExpandAll" xml:space="preserve">
+    <value>Expand All</value>
   </data>
   <data name="HardwareMonitorInitError" xml:space="preserve">
     <value>Hardware Monitor Init Error:</value>
   </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
   <data name="Welcome" xml:space="preserve">
-    <value>Welcome to the SYSTools Toolbox</value>
+    <value>Welcome to SYSTools</value>
   </data>
   <data name="Notice" xml:space="preserve">
-    <value>Notice</value>
+    <value>News</value>
   </data>
   <data name="Hello" xml:space="preserve">
     <value>Hello：</value>
   </data>
   <data name="LoadingNotice" xml:space="preserve">
-    <value>Loading notice...</value>
+    <value>Loading news...</value>
   </data>
   <data name="NetError" xml:space="preserve">
     <value>Network or website issue detected.</value>
   </data>
   <data name="NoticeInfo" xml:space="preserve">
-    <value>No notices available.</value>
+    <value>No news available.</value>
   </data>
   <data name="NoticeError" xml:space="preserve">
-    <value>Unable to retrieve notice.</value>
+    <value>Unable to retrieve news.</value>
   </data>
   <data name="TimeUnitDay" xml:space="preserve">
     <value>d</value>
@@ -259,13 +259,13 @@
     <value>System Time</value>
   </data>
   <data name="SystemStartTime" xml:space="preserve">
-    <value>System Start Time</value>
+    <value>Up Time</value>
   </data>
   <data name="SystemRunTime" xml:space="preserve">
-    <value>System Running Time</value>
+    <value>Since</value>
   </data>
   <data name="CurrentSystem" xml:space="preserve">
-    <value>Current System</value>
+    <value>System Version</value>
   </data>
   <data name="LR_ToolTip" xml:space="preserve">
     <value>Left-click to get, right-click to hide.</value>

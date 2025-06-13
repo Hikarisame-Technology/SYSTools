@@ -235,7 +235,8 @@
     <value>正在加载公告...</value>
   </data>
   <data name="NetError" xml:space="preserve">
-    <value>网络或网站出现问题</value>
+    <value>主题
+</value>
   </data>
   <data name="NoticeInfo" xml:space="preserve">
     <value>暂无公告</value>
@@ -259,13 +260,13 @@
     <value>系统时间</value>
   </data>
   <data name="SystemStartTime" xml:space="preserve">
-    <value>系统启动时间</value>
+    <value>启动日期</value>
   </data>
   <data name="SystemRunTime" xml:space="preserve">
-    <value>系统运行时间</value>
+    <value>运行时间</value>
   </data>
   <data name="CurrentSystem" xml:space="preserve">
-    <value>当前系统为</value>
+    <value>系统版本</value>
   </data>
   <data name="LR_ToolTip" xml:space="preserve">
     <value>左键单击获取 右键单击隐藏</value>

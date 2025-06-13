@@ -22,7 +22,7 @@ namespace SYSTools.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Lang {
+    public class Lang {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace SYSTools.Properties {
         ///   返回此类使用的缓存的 ResourceManager 实例。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SYSTools.Properties.Lang", typeof(Lang).Assembly);
@@ -51,7 +51,7 @@ namespace SYSTools.Properties {
         ///   使用此强类型资源类的所有资源查找执行重写。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string BackgroundImageBlurRadius_Description {
+        public static string BackgroundImageBlurRadius_Description {
             get {
                 return ResourceManager.GetString("BackgroundImageBlurRadius_Description", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string BackgroundImageBlurRadius_Header {
+        public static string BackgroundImageBlurRadius_Header {
             get {
                 return ResourceManager.GetString("BackgroundImageBlurRadius_Header", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string BackgroundImageOpacity_Header {
+        public static string BackgroundImageOpacity_Header {
             get {
                 return ResourceManager.GetString("BackgroundImageOpacity_Header", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string BackImagePreview {
+        public static string BackImagePreview {
             get {
                 return ResourceManager.GetString("BackImagePreview", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string BackImageSetting_Description {
+        public static string BackImageSetting_Description {
             get {
                 return ResourceManager.GetString("BackImageSetting_Description", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string BackImageSetting_Header {
+        public static string BackImageSetting_Header {
             get {
                 return ResourceManager.GetString("BackImageSetting_Header", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string ClearBackgroundImage {
+        public static string ClearBackgroundImage {
             get {
                 return ResourceManager.GetString("ClearBackgroundImage", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string ClearList {
+        public static string ClearList {
             get {
                 return ResourceManager.GetString("ClearList", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string CollapseAll {
+        public static string CollapseAll {
             get {
                 return ResourceManager.GetString("CollapseAll", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string ComponentsLicense {
+        public static string ComponentsLicense {
             get {
                 return ResourceManager.GetString("ComponentsLicense", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string ContactUs {
+        public static string ContactUs {
             get {
                 return ResourceManager.GetString("ContactUs", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string CurrentSystem {
+        public static string CurrentSystem {
             get {
                 return ResourceManager.GetString("CurrentSystem", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string Developers {
+        public static string Developers {
             get {
                 return ResourceManager.GetString("Developers", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string ErrorTitle {
+        public static string ErrorTitle {
             get {
                 return ResourceManager.GetString("ErrorTitle", resourceCulture);
             }
@@ -189,7 +189,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string ExpandAll {
+        public static string ExpandAll {
             get {
                 return ResourceManager.GetString("ExpandAll", resourceCulture);
             }
@@ -198,7 +198,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string GithubIssue {
+        public static string GithubIssue {
             get {
                 return ResourceManager.GetString("GithubIssue", resourceCulture);
             }
@@ -207,7 +207,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string GithubRepo {
+        public static string GithubRepo {
             get {
                 return ResourceManager.GetString("GithubRepo", resourceCulture);
             }
@@ -216,7 +216,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string HardwareMonitor_TextBlock {
+        public static string HardwareMonitor_TextBlock {
             get {
                 return ResourceManager.GetString("HardwareMonitor_TextBlock", resourceCulture);
             }
@@ -225,7 +225,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string HardwareMonitorInitError {
+        public static string HardwareMonitorInitError {
             get {
                 return ResourceManager.GetString("HardwareMonitorInitError", resourceCulture);
             }
@@ -234,7 +234,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string Hello {
+        public static string Hello {
             get {
                 return ResourceManager.GetString("Hello", resourceCulture);
             }
@@ -243,7 +243,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string IP {
+        public static string IP {
             get {
                 return ResourceManager.GetString("IP", resourceCulture);
             }
@@ -252,7 +252,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string LanguageSetting_Description {
+        public static string LanguageSetting_Description {
             get {
                 return ResourceManager.GetString("LanguageSetting_Description", resourceCulture);
             }
@@ -261,7 +261,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string LanguageSetting_Header {
+        public static string LanguageSetting_Header {
             get {
                 return ResourceManager.GetString("LanguageSetting_Header", resourceCulture);
             }
@@ -270,7 +270,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string LoadingNotice {
+        public static string LoadingNotice {
             get {
                 return ResourceManager.GetString("LoadingNotice", resourceCulture);
             }
@@ -279,7 +279,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string LoadUpdateHistory {
+        public static string LoadUpdateHistory {
             get {
                 return ResourceManager.GetString("LoadUpdateHistory", resourceCulture);
             }
@@ -288,7 +288,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string LR_ToolTip {
+        public static string LR_ToolTip {
             get {
                 return ResourceManager.GetString("LR_ToolTip", resourceCulture);
             }
@@ -297,7 +297,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string NetError {
+        public static string NetError {
             get {
                 return ResourceManager.GetString("NetError", resourceCulture);
             }
@@ -306,7 +306,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string Notice {
+        public static string Notice {
             get {
                 return ResourceManager.GetString("Notice", resourceCulture);
             }
@@ -315,7 +315,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string NoticeError {
+        public static string NoticeError {
             get {
                 return ResourceManager.GetString("NoticeError", resourceCulture);
             }
@@ -324,7 +324,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string NoticeInfo {
+        public static string NoticeInfo {
             get {
                 return ResourceManager.GetString("NoticeInfo", resourceCulture);
             }
@@ -333,7 +333,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string OpenWebsite {
+        public static string OpenWebsite {
             get {
                 return ResourceManager.GetString("OpenWebsite", resourceCulture);
             }
@@ -342,7 +342,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string PolicyAgreement {
+        public static string PolicyAgreement {
             get {
                 return ResourceManager.GetString("PolicyAgreement", resourceCulture);
             }
@@ -351,7 +351,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string PrivacyPolicy {
+        public static string PrivacyPolicy {
             get {
                 return ResourceManager.GetString("PrivacyPolicy", resourceCulture);
             }
@@ -360,7 +360,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string ProgramThemeSetting_Description {
+        public static string ProgramThemeSetting_Description {
             get {
                 return ResourceManager.GetString("ProgramThemeSetting_Description", resourceCulture);
             }
@@ -369,7 +369,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string ProgramThemeSetting_Header {
+        public static string ProgramThemeSetting_Header {
             get {
                 return ResourceManager.GetString("ProgramThemeSetting_Header", resourceCulture);
             }
@@ -378,7 +378,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string QQGroup {
+        public static string QQGroup {
             get {
                 return ResourceManager.GetString("QQGroup", resourceCulture);
             }
@@ -387,7 +387,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string SelectBackgroundImage {
+        public static string SelectBackgroundImage {
             get {
                 return ResourceManager.GetString("SelectBackgroundImage", resourceCulture);
             }
@@ -396,7 +396,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string SoftwareToolkitUpdate {
+        public static string SoftwareToolkitUpdate {
             get {
                 return ResourceManager.GetString("SoftwareToolkitUpdate", resourceCulture);
             }
@@ -405,7 +405,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string SoftwareUpdate {
+        public static string SoftwareUpdate {
             get {
                 return ResourceManager.GetString("SoftwareUpdate", resourceCulture);
             }
@@ -414,7 +414,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string SystemRunTime {
+        public static string SystemRunTime {
             get {
                 return ResourceManager.GetString("SystemRunTime", resourceCulture);
             }
@@ -423,7 +423,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string SystemStartTime {
+        public static string SystemStartTime {
             get {
                 return ResourceManager.GetString("SystemStartTime", resourceCulture);
             }
@@ -432,7 +432,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string SystemTime {
+        public static string SystemTime {
             get {
                 return ResourceManager.GetString("SystemTime", resourceCulture);
             }
@@ -441,7 +441,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string SYSToolsUpdate {
+        public static string SYSToolsUpdate {
             get {
                 return ResourceManager.GetString("SYSToolsUpdate", resourceCulture);
             }
@@ -450,7 +450,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string ThemeModeSetting_Auto {
+        public static string ThemeModeSetting_Auto {
             get {
                 return ResourceManager.GetString("ThemeModeSetting_Auto", resourceCulture);
             }
@@ -459,7 +459,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string ThemeModeSetting_Dark {
+        public static string ThemeModeSetting_Dark {
             get {
                 return ResourceManager.GetString("ThemeModeSetting_Dark", resourceCulture);
             }
@@ -468,7 +468,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string ThemeModeSetting_Light {
+        public static string ThemeModeSetting_Light {
             get {
                 return ResourceManager.GetString("ThemeModeSetting_Light", resourceCulture);
             }
@@ -477,7 +477,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string TimeUnitDay {
+        public static string TimeUnitDay {
             get {
                 return ResourceManager.GetString("TimeUnitDay", resourceCulture);
             }
@@ -486,7 +486,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string TimeUnitHour {
+        public static string TimeUnitHour {
             get {
                 return ResourceManager.GetString("TimeUnitHour", resourceCulture);
             }
@@ -495,7 +495,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string TimeUnitMinute {
+        public static string TimeUnitMinute {
             get {
                 return ResourceManager.GetString("TimeUnitMinute", resourceCulture);
             }
@@ -504,7 +504,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string TimeUnitSecond {
+        public static string TimeUnitSecond {
             get {
                 return ResourceManager.GetString("TimeUnitSecond", resourceCulture);
             }
@@ -513,7 +513,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string ToolkitUpdate {
+        public static string ToolkitUpdate {
             get {
                 return ResourceManager.GetString("ToolkitUpdate", resourceCulture);
             }
@@ -522,7 +522,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string UpdateDate {
+        public static string UpdateDate {
             get {
                 return ResourceManager.GetString("UpdateDate", resourceCulture);
             }
@@ -531,7 +531,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string UpdateHistory {
+        public static string UpdateHistory {
             get {
                 return ResourceManager.GetString("UpdateHistory", resourceCulture);
             }
@@ -540,7 +540,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string UpdateHistoryError {
+        public static string UpdateHistoryError {
             get {
                 return ResourceManager.GetString("UpdateHistoryError", resourceCulture);
             }
@@ -549,7 +549,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string UpdateStatus {
+        public static string UpdateStatus {
             get {
                 return ResourceManager.GetString("UpdateStatus", resourceCulture);
             }
@@ -558,7 +558,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string UpdateStatusFailed {
+        public static string UpdateStatusFailed {
             get {
                 return ResourceManager.GetString("UpdateStatusFailed", resourceCulture);
             }
@@ -567,7 +567,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string UpdateStatusSuccess {
+        public static string UpdateStatusSuccess {
             get {
                 return ResourceManager.GetString("UpdateStatusSuccess", resourceCulture);
             }
@@ -576,7 +576,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string UpdateStatusUnknown {
+        public static string UpdateStatusUnknown {
             get {
                 return ResourceManager.GetString("UpdateStatusUnknown", resourceCulture);
             }
@@ -585,7 +585,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string UpdateTitle {
+        public static string UpdateTitle {
             get {
                 return ResourceManager.GetString("UpdateTitle", resourceCulture);
             }
@@ -594,7 +594,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string UserAgreement {
+        public static string UserAgreement {
             get {
                 return ResourceManager.GetString("UserAgreement", resourceCulture);
             }
@@ -603,7 +603,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string WebSite {
+        public static string WebSite {
             get {
                 return ResourceManager.GetString("WebSite", resourceCulture);
             }
@@ -612,7 +612,7 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
-        internal static string Welcome {
+        public static string Welcome {
             get {
                 return ResourceManager.GetString("Welcome", resourceCulture);
             }
