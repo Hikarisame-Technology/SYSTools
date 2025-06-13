@@ -99,7 +99,7 @@
 
                     </muxc:SettingsExpander.Items>
                 </muxc:SettingsExpander>
-                <muxc:SettingsExpander Header="{model:Resource Key=SYSToolsUpdate}" IsExpanded="True">
+                <muxc:SettingsExpander Header="{model:Resource Key=SYSToolsUpdate}" IsExpanded="True" Margin="0,0,0,10">
                     <muxc:SettingsExpander.HeaderIcon>
                         <muxc:FontIcon Glyph="&#xE117;"/>
                     </muxc:SettingsExpander.HeaderIcon>
