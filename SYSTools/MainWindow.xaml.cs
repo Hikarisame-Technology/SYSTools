@@ -30,6 +30,7 @@ namespace SYSTools
             { typeof(HardwareMonitor), new HardwareMonitor() },
             { typeof(WindowsTools), new WindowsTools() },
             { typeof(WSATools), new WSATools() },
+            { typeof(CustomTool), new CustomTool() },
             { typeof(Configuration), new Configuration() },
             { typeof(About), new About() }
         };

@@ -103,6 +103,12 @@
 
                 <muxc:NavigationViewItemSeparator/>
 
+                <muxc:NavigationViewItem Content="自定义工具" Tag="SYSTools.Pages.CustomTool" x:Name="CustomTool" ToolTip= "用户自定义添加工具页" IsTabStop="False">
+                    <muxc:NavigationViewItem.Icon>
+                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE8F4;" />
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+
             </muxc:NavigationView.MenuItems>
 
             <muxc:NavigationView.FooterMenuItems>

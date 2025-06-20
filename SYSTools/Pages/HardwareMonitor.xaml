@@ -19,8 +19,8 @@
 
         <TextBlock Margin="20,17,0,0" TextWrapping="Wrap" Text="{model:Resource Key=HardwareMonitor_TextBlock}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" UseLayoutRounding="True"/>
 
-        <Button x:Name="CollapseAllButton" Content="{model:Resource Key=CollapseAll}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="920,13.5,0,0" MinWidth="70" FontSize="15" MinHeight="32.05" IsTabStop="False" Click="CollapseAllButton_Click" Background="{x:Null}" BorderBrush="#33000000"/>
-        <Button x:Name="ExpandAllButton" Content="{model:Resource Key=ExpandAll}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="800,13.5,0,0" MinWidth="70" FontSize="15" MinHeight="32.05" IsTabStop="False" Click="ExpandAllButton_Click" Background="{x:Null}" BorderBrush="#33000000"/>
+        <Button x:Name="CollapseAllButton" Content="{model:Resource Key=CollapseAll}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,13.5,35,0" MinWidth="70" FontSize="15" MinHeight="32.05" IsTabStop="False" Click="CollapseAllButton_Click" Background="{x:Null}" BorderBrush="#33000000"/>
+        <Button x:Name="ExpandAllButton" Content="{model:Resource Key=ExpandAll}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,13.5,155,0" MinWidth="70" FontSize="15" MinHeight="32.05" IsTabStop="False" Click="ExpandAllButton_Click" Background="{x:Null}" BorderBrush="#33000000"/>
 
         <Border BorderBrush="#CC202020" BorderThickness="1" CornerRadius="5" Margin="10,60,10,10">
             <TreeView x:Name="TestView" IsTabStop="False" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderThickness="0" >
