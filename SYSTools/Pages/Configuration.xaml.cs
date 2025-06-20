@@ -98,6 +98,8 @@ namespace SYSTools.Pages
         private void DeleteBackgroundButton_Click(object sender, RoutedEventArgs e)
         {
             AppSettings.Instance.BackgroundImagePath = "pack://application:,,,/Resources/NoBackImage.png";
+            AppSettings.Instance.BackgroundImageBlurRadius = 0;
+            AppSettings.Instance.BackgroundImageOpacity = 100;
             LoadBackgroundImage("");
         }
 
