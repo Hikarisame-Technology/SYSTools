@@ -42,14 +42,6 @@
                             </muxc:SettingsCard.ActionIcon>
                         </muxc:SettingsCard>
 
-                        <muxc:SettingsCard ToolTip="{model:Resource Key=OpenWebsite}" 
-                                       Click="OnCardClicked_Issue" IsClickEnabled="True"
-                                       Header="{model:Resource Key=GithubIssue}" Description="https://github.com/Hikarisame-Technology/SYSTools/issues" IsEnabled="True">
-                            <muxc:SettingsCard.ActionIcon>
-                                <muxc:FontIcon Glyph="&#xE8A7;"/>
-                            </muxc:SettingsCard.ActionIcon>
-                        </muxc:SettingsCard>
-
                         <muxc:SettingsCard Header="{model:Resource Key=ContactUs}" IsEnabled="True">
                             <WrapPanel>
                                 <Button x:Name="QQ" Content="{model:Resource Key=QQGroup}" Width="120" Height="33" Click="QQ_Click" Margin="0,0,20,0"/>
