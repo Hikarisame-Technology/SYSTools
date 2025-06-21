@@ -12,17 +12,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SYSTools.ViewModels;
 
 namespace SYSTools.Pages
 {
-    /// <summary>
-    /// CustomTool.xaml 的交互逻辑
-    /// </summary>
     public partial class CustomTool : Page
     {
         public CustomTool()
         {
             InitializeComponent();
+            DataContext = new CustomToolViewModel();
+        }
+        private void ToolItemContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            if (sender is ContextMenu menu)
+            {
+                menu.DataContext = this.DataContext;
+            }
         }
     }
 }

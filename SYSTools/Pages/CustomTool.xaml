@@ -16,11 +16,44 @@
 
         <TextBlock Margin="20,17,0,0" TextWrapping="Wrap" Text="{model:Resource Key=CustomTool_TextBlock}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" UseLayoutRounding="True"/>
 
-        <Button x:Name="CollapseAllButton" Content="{model:Resource Key=AddNewTool}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,13.5,35,0" MinWidth="70" FontSize="15" MinHeight="32.05" IsTabStop="False" Background="{x:Null}" BorderBrush="#33000000"/>
+        <Button x:Name="AddToolButton" Content="{model:Resource Key=AddNewTool}" Command="{Binding AddToolCommand}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,13.5,35,0" MinWidth="70" FontSize="15" MinHeight="32.05" IsTabStop="False" Background="{x:Null}" BorderBrush="#33000000"/>
 
         <Border BorderBrush="#CC202020" BorderThickness="1" CornerRadius="5" Margin="10,60,10,10">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding ToolItems}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            
+                            <Border Padding="40,15,40,15" Margin="5" CornerRadius="5" BorderThickness="1" BorderBrush="#CC202020" Background="{DynamicResource {x:Static muxc:ThemeKeys.ButtonBorderBrushKey}}" Width="160" Height="170"
+                                    Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=Page}}">
+                                <Border.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="修改"
+                                                  Command="{Binding PlacementTarget.Tag.EditToolCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                                  CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                                        <MenuItem Header="删除"
+                                                  Command="{Binding PlacementTarget.Tag.DeleteToolCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                                  CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                                    </ContextMenu>
+                                </Border.ContextMenu>
+                                <StackPanel>
+                                    <Image Source="{Binding IconSource}" Width="80" Height="80"/>
+                                    <TextBlock Text="{Binding Name}" Margin="0,5,0,0" HorizontalAlignment="Center"
+                                               TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" MaxWidth="80"
+                                               ToolTip="{Binding Name}"/>
+                                    <Button Content="启动" Command="{Binding LaunchCommand}" Margin="0,5,0,5" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="#33000000"/>
+                                </StackPanel>
+                            </Border>
 
-            
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
         </Border>
 
     </Grid>
