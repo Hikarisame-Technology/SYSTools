@@ -129,9 +129,6 @@
   <data name="GithubRepo" xml:space="preserve">
     <value />
   </data>
-  <data name="GithubIssue" xml:space="preserve">
-    <value />
-  </data>
   <data name="Developers" xml:space="preserve">
     <value />
   </data>
@@ -225,13 +222,13 @@
   <data name="Welcome" xml:space="preserve">
     <value></value>
   </data>
-  <data name="Notice" xml:space="preserve">
+  <data name="News" xml:space="preserve">
     <value></value>
   </data>
   <data name="Hello" xml:space="preserve">
     <value></value>
   </data>
-  <data name="LoadingNotice" xml:space="preserve">
+  <data name="LoadingNews" xml:space="preserve">
     <value></value>
   </data>
   <data name="NetError" xml:space="preserve">
@@ -267,12 +264,6 @@
   <data name="CurrentSystem" xml:space="preserve">
     <value></value>
   </data>
-  <data name="LR_ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="IP" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="UpdateHistory" xml:space="preserve">
     <value></value>
   </data>
@@ -301,6 +292,78 @@
     <value></value>
   </data>
   <data name="ClearList" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ServiceProvider" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="IP" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="LR_ToolTip" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="CustomTool_TextBlock" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="AddNewTool" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="AddCustomTool_TextBlock" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="IconPath" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="EXEPath" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Args" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="CustomIcon" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="UseEXEEmbeddedIcon" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Modify" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SelectIcon" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SelectEXEFile" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ImageFilter" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="EXEFilter" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="NameAndExecutableRequired" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Open" xml:space="preserve">
     <value></value>
   </data>
 </root>

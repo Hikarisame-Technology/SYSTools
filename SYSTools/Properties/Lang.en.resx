@@ -129,9 +129,6 @@
   <data name="GithubRepo" xml:space="preserve">
     <value>Github Repository</value>
   </data>
-  <data name="GithubIssue" xml:space="preserve">
-    <value>GitHub Issue</value>
-  </data>
   <data name="Developers" xml:space="preserve">
     <value>Developers &amp; Designers &amp; External Contributors</value>
   </data>
@@ -225,13 +222,13 @@
   <data name="Welcome" xml:space="preserve">
     <value>Welcome to SYSTools</value>
   </data>
-  <data name="Notice" xml:space="preserve">
+  <data name="News" xml:space="preserve">
     <value>News</value>
   </data>
   <data name="Hello" xml:space="preserve">
     <value>Hello：</value>
   </data>
-  <data name="LoadingNotice" xml:space="preserve">
+  <data name="LoadingNews" xml:space="preserve">
     <value>Loading news...</value>
   </data>
   <data name="NetError" xml:space="preserve">
@@ -267,12 +264,6 @@
   <data name="CurrentSystem" xml:space="preserve">
     <value>System Version</value>
   </data>
-  <data name="LR_ToolTip" xml:space="preserve">
-    <value>Left-click to get, right-click to hide.</value>
-  </data>
-  <data name="IP" xml:space="preserve">
-    <value>Public IP (IPv4: ipip.net &amp; IPv6: neu6.edu) Click the asterisk to retrieve.</value>
-  </data>
   <data name="UpdateHistory" xml:space="preserve">
     <value>Windows Update History</value>
   </data>
@@ -302,5 +293,77 @@
   </data>
   <data name="ClearList" xml:space="preserve">
     <value>Clear List</value>
+  </data>
+  <data name="ServiceProvider" xml:space="preserve">
+    <value>IPv4: ipip.net &amp; IPv6: neu6.edu</value>
+  </data>
+  <data name="IP" xml:space="preserve">
+    <value>Public IP</value>
+  </data>
+  <data name="LR_ToolTip" xml:space="preserve">
+    <value>Left-click to get, right-click to hide.</value>
+  </data>
+  <data name="CustomTool_TextBlock" xml:space="preserve">
+    <value>CustomTool</value>
+  </data>
+  <data name="AddNewTool" xml:space="preserve">
+    <value>Add New Tool</value>
+  </data>
+  <data name="AddCustomTool_TextBlock" xml:space="preserve">
+    <value>Add CustomTool</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name:</value>
+  </data>
+  <data name="IconPath" xml:space="preserve">
+    <value>IconPath:</value>
+  </data>
+  <data name="EXEPath" xml:space="preserve">
+    <value>EXEPath:</value>
+  </data>
+  <data name="Args" xml:space="preserve">
+    <value>Args:</value>
+  </data>
+  <data name="CustomIcon" xml:space="preserve">
+    <value>Custom Icon</value>
+  </data>
+  <data name="UseEXEEmbeddedIcon" xml:space="preserve">
+    <value>Use EXE Embedded Icon</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Browse...</value>
+  </data>
+  <data name="Modify" xml:space="preserve">
+    <value>Modify</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="SelectIcon" xml:space="preserve">
+    <value>Select Icon</value>
+  </data>
+  <data name="SelectEXEFile" xml:space="preserve">
+    <value>Select EXE File</value>
+  </data>
+  <data name="ImageFilter" xml:space="preserve">
+    <value>Image File|*.png;*.jpg;*.ico|All File|*.*</value>
+  </data>
+  <data name="EXEFilter" xml:space="preserve">
+    <value>EXE File|*.exe|All File|*.*</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="NameAndExecutableRequired" xml:space="preserve">
+    <value>Name and executable file are required fields.</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Open</value>
   </data>
 </root>

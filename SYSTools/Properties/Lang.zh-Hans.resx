@@ -129,9 +129,6 @@
   <data name="GithubRepo" xml:space="preserve">
     <value>Github仓库</value>
   </data>
-  <data name="GithubIssue" xml:space="preserve">
-    <value>有好的想法或者问题,欢迎提交Issue.</value>
-  </data>
   <data name="Developers" xml:space="preserve">
     <value>开发人员 ＆ 设计人员 ＆ 外部支援</value>
   </data>
@@ -225,18 +222,17 @@
   <data name="Welcome" xml:space="preserve">
     <value>欢迎使用SYSTools工具箱</value>
   </data>
-  <data name="Notice" xml:space="preserve">
+  <data name="News" xml:space="preserve">
     <value>公告</value>
   </data>
   <data name="Hello" xml:space="preserve">
     <value>您好：</value>
   </data>
-  <data name="LoadingNotice" xml:space="preserve">
+  <data name="LoadingNews" xml:space="preserve">
     <value>正在加载公告...</value>
   </data>
   <data name="NetError" xml:space="preserve">
-    <value>主题
-</value>
+    <value>网络或网站出现问题</value>
   </data>
   <data name="NoticeInfo" xml:space="preserve">
     <value>暂无公告</value>
@@ -268,12 +264,6 @@
   <data name="CurrentSystem" xml:space="preserve">
     <value>系统版本</value>
   </data>
-  <data name="LR_ToolTip" xml:space="preserve">
-    <value>左键单击获取 右键单击隐藏</value>
-  </data>
-  <data name="IP" xml:space="preserve">
-    <value>公网IP ( IPv4 : ipip.net &amp; IPv6 : neu6.edu ) 点击星号获取</value>
-  </data>
   <data name="UpdateHistory" xml:space="preserve">
     <value>Windows 更新历史记录</value>
   </data>
@@ -303,5 +293,77 @@
   </data>
   <data name="ClearList" xml:space="preserve">
     <value>清空列表</value>
+  </data>
+  <data name="ServiceProvider" xml:space="preserve">
+    <value>IPv4: ipip.net &amp; IPv6: neu6.edu</value>
+  </data>
+  <data name="IP" xml:space="preserve">
+    <value>公网IP</value>
+  </data>
+  <data name="LR_ToolTip" xml:space="preserve">
+    <value>左键单击获取 右键单击隐藏</value>
+  </data>
+  <data name="CustomTool_TextBlock" xml:space="preserve">
+    <value>自定义工具</value>
+  </data>
+  <data name="AddNewTool" xml:space="preserve">
+    <value>添加新工具</value>
+  </data>
+  <data name="AddCustomTool_TextBlock" xml:space="preserve">
+    <value>添加自定义工具</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>名称:</value>
+  </data>
+  <data name="IconPath" xml:space="preserve">
+    <value>图标路径:</value>
+  </data>
+  <data name="EXEPath" xml:space="preserve">
+    <value>可执行文件:</value>
+  </data>
+  <data name="Args" xml:space="preserve">
+    <value>参数:</value>
+  </data>
+  <data name="CustomIcon" xml:space="preserve">
+    <value>自定义图标</value>
+  </data>
+  <data name="UseEXEEmbeddedIcon" xml:space="preserve">
+    <value>使用 exe 内嵌图标</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>浏览...</value>
+  </data>
+  <data name="Modify" xml:space="preserve">
+    <value>修改</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="SelectIcon" xml:space="preserve">
+    <value>选择图标</value>
+  </data>
+  <data name="SelectEXEFile" xml:space="preserve">
+    <value>选择可执行文件</value>
+  </data>
+  <data name="ImageFilter" xml:space="preserve">
+    <value>图像文件|*.png;*.jpg;*.ico|所有文件|*.*</value>
+  </data>
+  <data name="EXEFilter" xml:space="preserve">
+    <value>可执行文件|*.exe|所有文件|*.*</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>提示</value>
+  </data>
+  <data name="NameAndExecutableRequired" xml:space="preserve">
+    <value>名称和可执行文件为必填项.</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>启动</value>
   </data>
 </root>
