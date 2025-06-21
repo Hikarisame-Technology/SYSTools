@@ -2,6 +2,7 @@
 using System.Windows;
 using iNKORE.UI.WPF.Modern.Controls;
 using Microsoft.Win32;
+using SYSTools.Properties;
 
 namespace SYSTools.Dialog
 {
@@ -24,7 +25,7 @@ namespace SYSTools.Dialog
             NameTextBox.Text = item.Name;
             ExeTextBox.Text = item.ExePath;
             ArgsTextBox.Text = item.Arguments;
-            // 设置图标来源
+
             if (item.IconPath == item.ExePath)
             {
                 UseExeIconRadio.IsChecked = true;
@@ -41,8 +42,8 @@ namespace SYSTools.Dialog
         {
             var dlg = new OpenFileDialog
             {
-                Title = "选择图标",
-                Filter = "图像文件|*.png;*.jpg;*.ico|所有文件|*.*"
+                Title = Lang.SelectIcon,
+                Filter = Lang.ImageFilter
             };
             if (dlg.ShowDialog() == true)
             {
@@ -54,8 +55,8 @@ namespace SYSTools.Dialog
         {
             var dlg = new OpenFileDialog
             {
-                Title = "选择可执行文件",
-                Filter = "可执行文件|*.exe|所有文件|*.*"
+                Title = Lang.SelectEXEFile,
+                Filter = Lang.EXEFilter
             };
             if (dlg.ShowDialog() == true)
             {
@@ -67,7 +68,7 @@ namespace SYSTools.Dialog
         {
             if (string.IsNullOrWhiteSpace(ToolName) || string.IsNullOrWhiteSpace(ExePath))
             {
-                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("名称和可执行文件为必填项", "提示", MessageBoxButton.OK, MessageBoxImage.Warning);
+                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(Lang.NameAndExecutableRequired, Lang.Info, MessageBoxButton.OK, MessageBoxImage.Warning);
                 args.Cancel = true;
                 return;
             }

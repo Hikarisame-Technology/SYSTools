@@ -2,9 +2,10 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:muxc="http://schemas.inkore.net/lib/ui/wpf/modern"
-        Title="添加自定义工具"
-        CloseButtonText="取消"
-        PrimaryButtonText="确定"
+        xmlns:model="clr-namespace:SYSTools.Model"
+        Title="{model:Resource Key=AddCustomTool_TextBlock}"
+        CloseButtonText="{model:Resource Key=Close}"
+        PrimaryButtonText="{model:Resource Key=OK}"
         DefaultButton="Close"
         PrimaryButtonClick="ContentDialog_PrimaryButtonClick">
     <Grid Margin="10">
@@ -23,23 +24,23 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="名称:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,5,5" />
+        <TextBlock Text="{model:Resource Key=Name}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,5,5" />
         <TextBox x:Name="NameTextBox" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,0,5" />
 
-        <TextBlock Text="图标路径:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,5,5" />
+        <TextBlock Text="{model:Resource Key=IconPath}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,5,5" />
         <TextBox x:Name="IconTextBox" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" />
-        <Button x:Name="BrowseIconButton" Content="浏览..." Grid.Row="1" Grid.Column="2" Margin="5,0,0,5" Click="BrowseIcon_Click" />
+        <Button x:Name="BrowseIconButton" Content="{model:Resource Key=Browse}" Grid.Row="1" Grid.Column="2" Margin="5,0,0,5" Click="BrowseIcon_Click" />
 
-        <TextBlock Text="可执行文件:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,5,5" />
+        <TextBlock Text="{model:Resource Key=EXEPath}" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,5,5" />
         <TextBox x:Name="ExeTextBox" Grid.Row="2" Grid.Column="1" Margin="0,0,0,5" />
-        <Button x:Name="BrowseExeButton" Content="浏览..." Grid.Row="2" Grid.Column="2" Margin="5,0,0,5" Click="BrowseExe_Click" />
+        <Button x:Name="BrowseExeButton" Content="{model:Resource Key=Browse}" Grid.Row="2" Grid.Column="2" Margin="5,0,0,5" Click="BrowseExe_Click" />
 
-        <TextBlock Text="参数:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,5,5" />
+        <TextBlock Text="{model:Resource Key=Args}" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,5,5" />
         <TextBox x:Name="ArgsTextBox" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,0,5" />
 
         <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.ColumnSpan="3" Margin="0,10,0,10">
-            <RadioButton x:Name="UseCustomIconRadio" Content="自定义图标" GroupName="IconOption" Checked="IconOption_Checked" />
-            <RadioButton x:Name="UseExeIconRadio" Content="使用 exe 内嵌图标" GroupName="IconOption" IsChecked="True" Margin="20,0,0,0" Checked="IconOption_Checked" />
+            <RadioButton x:Name="UseCustomIconRadio" Content="{model:Resource Key=CustomIcon}" GroupName="IconOption" Checked="IconOption_Checked" />
+            <RadioButton x:Name="UseExeIconRadio" Content="{model:Resource Key=UseEXEEmbeddedIcon}" GroupName="IconOption" IsChecked="True" Margin="20,0,0,0" Checked="IconOption_Checked" />
         </StackPanel>
     </Grid>
 </muxc:ContentDialog> 

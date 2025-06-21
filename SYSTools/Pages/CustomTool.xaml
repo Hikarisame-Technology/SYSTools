@@ -33,10 +33,10 @@
                                     Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=Page}}">
                                 <Border.ContextMenu>
                                     <ContextMenu>
-                                        <MenuItem Header="修改"
+                                        <MenuItem Header="{model:Resource Key=Modify}"
                                                   Command="{Binding PlacementTarget.Tag.EditToolCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
                                                   CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
-                                        <MenuItem Header="删除"
+                                        <MenuItem Header="{model:Resource Key=Delete}"
                                                   Command="{Binding PlacementTarget.Tag.DeleteToolCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
                                                   CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
                                     </ContextMenu>
@@ -46,7 +46,7 @@
                                     <TextBlock Text="{Binding Name}" Margin="0,5,0,0" HorizontalAlignment="Center"
                                                TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" MaxWidth="80"
                                                ToolTip="{Binding Name}"/>
-                                    <Button Content="启动" Command="{Binding LaunchCommand}" Margin="0,5,0,5" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="#33000000"/>
+                                    <Button Content="{model:Resource Key=Open}" Command="{Binding LaunchCommand}" Margin="0,5,0,5" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="#33000000"/>
                                 </StackPanel>
                             </Border>
 

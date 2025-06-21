@@ -32,8 +32,8 @@
         <Border BorderThickness="1" Margin="10" Grid.Row="3" CornerRadius="5" Padding="25,0,0,0" Grid.ColumnSpan="2" BorderBrush="#CC202020" >
             <StackPanel Margin="0" Orientation="Horizontal">
                 <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE141;" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"   />
-                <TextBlock VerticalAlignment="Center" Text="{model:Resource Key=Notice}" FontSize="20" HorizontalAlignment="Center"  d:IsLocked="True" Margin="10,0,0,0"/>
-                <TextBlock x:Name="PublicNotice" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{model:Resource Key=LoadingNotice}" FontSize="20" Margin="20,0,0,0">
+                <TextBlock VerticalAlignment="Center" Text="{model:Resource Key=News}" FontSize="20" HorizontalAlignment="Center"  d:IsLocked="True" Margin="10,0,0,0"/>
+                <TextBlock x:Name="PublicNews" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{model:Resource Key=LoadingNews}" FontSize="20" Margin="20,0,0,0">
                     <TextBlock.Triggers>
                         <EventTrigger RoutedEvent="TextBlock.Loaded">
                             <BeginStoryboard>

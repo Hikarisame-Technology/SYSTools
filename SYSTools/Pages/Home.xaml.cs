@@ -110,7 +110,7 @@ namespace SYSTools.Pages
             {
                 // 根据当前语言选择公告URL
                 string noticeUrl = System.Globalization.CultureInfo.CurrentUICulture.Name.StartsWith("zh") 
-                    ? "http://systools.hksstudio.work/PublicNotice"          // 中文公告
+                    ? "http://systools.hksstudio.work/PublicNotice"          // 中文公告 Notice变更News但Url不修改
                     : "http://systools.hksstudio.work/PublicNotice_EN";      // 英文公告
 
                 HttpResponseMessage response = await client.GetAsync(noticeUrl);
@@ -126,7 +126,7 @@ namespace SYSTools.Pages
                 if (notices.Count > 0)
                 {
                     string firstNotice = notices[0];
-                    PublicNotice.Text = firstNotice;
+                    PublicNews.Text = firstNotice;
                     
                     if (notices.Count > 1)
                     {
@@ -138,13 +138,13 @@ namespace SYSTools.Pages
                 }
                 else
                 {
-                    PublicNotice.Text = Properties.Lang.ResourceManager.GetString("NoticeInfo", System.Globalization.CultureInfo.CurrentUICulture);
+                    PublicNews.Text = Properties.Lang.ResourceManager.GetString("NoticeInfo", System.Globalization.CultureInfo.CurrentUICulture);
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"获取公告失败: {ex}");
-                PublicNotice.Text = Properties.Lang.ResourceManager.GetString("NoticeError", System.Globalization.CultureInfo.CurrentUICulture);
+                PublicNews.Text = Properties.Lang.ResourceManager.GetString("NoticeError", System.Globalization.CultureInfo.CurrentUICulture);
             }
         }
 
@@ -184,16 +184,16 @@ namespace SYSTools.Pages
             if (notices.Count > 1)
             {
                 currentNoticeIndex = (currentNoticeIndex + 1) % notices.Count;
-                PublicNotice.Opacity = 0;
+                PublicNews.Opacity = 0;
                 string nextNotice = notices[currentNoticeIndex];
-                PublicNotice.Text = nextNotice;
+                PublicNews.Text = nextNotice;
                 
                 // 根据文本长度调整显示时间
                 int textLength = nextNotice.Length;
                 TimeSpan interval = textLength > 15 ? TimeSpan.FromSeconds(5) : TimeSpan.FromSeconds(3);
                 noticeTimer.Interval = interval;
-                
-                PublicNotice.BeginAnimation(UIElement.OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(500)));
+
+                PublicNews.BeginAnimation(UIElement.OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(500)));
             }
         }
 
