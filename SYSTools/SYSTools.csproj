@@ -53,6 +53,7 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="netstandard" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -77,9 +78,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Dialog\AddToolDialog.xaml.cs">
+      <DependentUpon>AddToolDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\IconHelper.cs" />
+    <Compile Include="Helpers\LocalizationManager.cs" />
+    <Compile Include="Helpers\RelayCommand.cs" />
+    <Compile Include="Model\ResourceExtension.cs" />
     <Compile Include="Model\AppSettings.cs" />
     <Compile Include="Model\NotifyIconViewModel.cs" />
-    <Compile Include="Model\ResourceExtension.cs" />
+    <Compile Include="Model\ToolItem.cs" />
     <Compile Include="Pages\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
@@ -128,12 +136,17 @@
       <DependentUpon>TestTools.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\CustomUpdater.cs" />
+    <Compile Include="ViewModels\CustomToolViewModel.cs" />
     <Compile Include="WindowsToolsPages\WindowsUpdateHistory.xaml.cs">
       <DependentUpon>WindowsUpdateHistory.xaml</DependentUpon>
     </Compile>
     <Compile Include="WindowsToolsPages\WindowsUtilities.xaml.cs">
       <DependentUpon>WindowsUtilities.xaml</DependentUpon>
     </Compile>
+    <Page Include="Dialog\AddToolDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -248,6 +261,9 @@
     </PackageReference>
     <PackageReference Include="TextCopy">
       <Version>6.2.1</Version>
+    </PackageReference>
+    <PackageReference Include="WindowsAPICodePack-Shell">
+      <Version>1.1.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
