@@ -1,8 +1,12 @@
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Xml.Linq;
+
 
 namespace SYSTools.Model
 {
@@ -215,6 +219,125 @@ namespace SYSTools.Model
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+    public class CustomToolSettings
+    {
+        private static readonly Lazy<CustomToolSettings> _instance = new(() => new CustomToolSettings());
+        public static CustomToolSettings Instance => _instance.Value;
+        private readonly string _settingsFilePath;
+
+        private CustomToolSettings()
+        {
+            // 设置配置文件路径
+            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            _settingsFilePath = Path.Combine(appDataPath, "HikarisameTechnologyStudio", "SYSTools", "CustomTool.list");
+            
+            Directory.CreateDirectory(Path.GetDirectoryName(_settingsFilePath));
+        }
+
+        public void SaveCustomTools(ObservableCollection<ToolItem> toolItems)
+        {
+            try
+            {
+                var toolList = new XDocument(
+                    new XElement("CustomTools",
+                        toolItems.Select(tool => 
+                            new XElement("Tool",
+                                new XElement("Name", tool.Name),
+                                new XElement("ExePath", tool.ExePath),
+                                new XElement("IconPath", tool.IconPath),
+                                new XElement("Arguments", tool.Arguments)
+                            )
+                        )
+                    )
+                );
+                
+                toolList.Save(_settingsFilePath);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"保存自定义工具列表失败: {ex.Message}");
+            }
+        }
+
+        public ObservableCollection<ToolItem> LoadCustomTools()
+        {
+            var toolItems = new ObservableCollection<ToolItem>();
+            
+            try
+            {
+                if (File.Exists(_settingsFilePath))
+                {
+                    var doc = XDocument.Load(_settingsFilePath);
+                    var tools = doc.Element("CustomTools")?.Elements("Tool");
+                    
+                    if (tools != null)
+                    {
+                        foreach (var toolElement in tools)
+                        {
+                            var name = toolElement.Element("Name")?.Value;
+                            var exePath = toolElement.Element("ExePath")?.Value;
+                            var iconPath = toolElement.Element("IconPath")?.Value;
+                            var arguments = toolElement.Element("Arguments")?.Value;
+
+                            if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(exePath))
+                            {
+                                var toolItem = new ToolItem
+                                {
+                                    Name = name,
+                                    ExePath = exePath,
+                                    IconPath = iconPath ?? exePath,
+                                    Arguments = arguments ?? ""
+                                };
+
+                                try
+                                {
+                                    toolItem.IconSource = Helpers.IconHelper.LoadIcon(toolItem.IconPath);
+                                }
+                                catch
+                                {
+                                    toolItem.IconSource = null;
+                                }
+
+                                toolItems.Add(toolItem);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"载入自定义工具列表失败: {ex.Message}");
+                toolItems.Clear();
+            }
+            
+            return toolItems;
+        }
+
+        public void DeleteCustomToolsFile()
+        {
+            try
+            {
+                if (File.Exists(_settingsFilePath))
+                {
+                    File.Delete(_settingsFilePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"删除自定义工具配置文件失败: {ex.Message}");
+            }
+        }
+
+        public bool ConfigFileExists()
+        {
+            return File.Exists(_settingsFilePath);
+        }
+
+        public string GetConfigFilePath()
+        {
+            return _settingsFilePath;
         }
     }
 } 

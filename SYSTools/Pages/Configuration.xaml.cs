@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using SYSTools.Helpers;
 using SYSTools.Model;
+using SYSTools.Properties;
 
 namespace SYSTools.Pages
 {
@@ -71,7 +72,7 @@ namespace SYSTools.Pages
         private void SelectBackgroundButton_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
-            openFileDialog.Filter = "Image files (*.jpg;*.png)|*.jpg;*.png";
+            openFileDialog.Filter = Lang.ImageFilter_JPng;
             if (openFileDialog.ShowDialog() == true)
             {
                 AppSettings.Instance.BackgroundImagePath = openFileDialog.FileName;

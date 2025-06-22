@@ -613,6 +613,7 @@ namespace SYSTools.Pages
                 if (draggedIndex != -1 && targetIndex != -1 && draggedIndex != targetIndex)
                 {
                     viewModel.ToolItems.Move(draggedIndex, targetIndex);
+                    viewModel.SaveCustomToolsManually();
                 }
                 else
                 {

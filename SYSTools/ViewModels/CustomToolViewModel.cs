@@ -1,11 +1,14 @@
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Windows.Input;
-using SYSTools.Model;
-using SYSTools.Helpers;
-using SYSTools.Dialog;
-using System;
+using System.Diagnostics;
 using System.Windows;
+using System.Windows.Input;
+using SYSTools.Dialog;
+using SYSTools.Helpers;
+using SYSTools.Model;
+using SYSTools.Properties;
+using MessageBox = iNKORE.UI.WPF.Modern.Controls.MessageBox;
 
 namespace SYSTools.ViewModels
 {
@@ -28,13 +31,15 @@ namespace SYSTools.ViewModels
 
         public ICommand AddToolCommand { get; }
         public ICommand DeleteToolCommand { get; }
-        public ICommand EditToolCommand { get; }
+        public ICommand ModifyToolCommand { get; }
 
         public CustomToolViewModel()
         {
             AddToolCommand = new RelayCommand(_ => AddTool());
             DeleteToolCommand = new RelayCommand(p => DeleteTool(p as ToolItem));
-            EditToolCommand = new RelayCommand(p => EditTool(p as ToolItem));
+            ModifyToolCommand = new RelayCommand(p => ModifyTool(p as ToolItem));
+            LoadCustomTools();
+            ToolItems.CollectionChanged += (s, e) => SaveCustomTools();
         }
 
         private async void AddTool()
@@ -71,16 +76,18 @@ namespace SYSTools.ViewModels
         private void DeleteTool(ToolItem? item)
         {
             if (item == null) return;
-            var confirm = iNKORE.UI.WPF.Modern.Controls.MessageBox.Show($"确定要删除工具 '{item.Name}' 吗？", "确认删除", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            string message = string.Format(Lang.ConfirmDeleteMessage, item.Name);
+            var confirm = MessageBox.Show(message, Lang.ConfirmDeleteTitle, MessageBoxButton.OKCancel, MessageBoxImage.Question);
             if (confirm == MessageBoxResult.OK)
             {
                 ToolItems.Remove(item);
             }
         }
-        private async void EditTool(ToolItem? item)
+        private async void ModifyTool(ToolItem? item)
         {
             if (item == null) return;
-            var confirm = iNKORE.UI.WPF.Modern.Controls.MessageBox.Show($"是否要修改工具 '{item.Name}'？", "确认修改", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            string message = string.Format(Lang.ConfirmModifyMessage, item.Name);
+            var confirm = MessageBox.Show(message, Lang.ConfirmModifyTitle, MessageBoxButton.OKCancel, MessageBoxImage.Question);
             if (confirm != MessageBoxResult.OK) return;
             var dialog = new AddToolDialog(item);
             var result = await dialog.ShowAsync();
@@ -107,6 +114,48 @@ namespace SYSTools.ViewModels
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void LoadCustomTools()
+        {
+            try
+            {
+                var savedTools = Model.CustomToolSettings.Instance.LoadCustomTools();
+                ToolItems.Clear();
+                foreach (var tool in savedTools)
+                {
+                    ToolItems.Add(tool);
+                }
+                
+                Debug.WriteLine($"已载入 {savedTools.Count} 个自定义工具");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"载入自定义工具失败: {ex.Message}");
+            }
+        }
+
+        private void SaveCustomTools()
+        {
+            try
+            {
+                Model.CustomToolSettings.Instance.SaveCustomTools(ToolItems);
+                Debug.WriteLine($"已保存 {ToolItems.Count} 个自定义工具");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"保存自定义工具失败: {ex.Message}");
+            }
+        }
+
+        public void SaveCustomToolsManually()
+        {
+            SaveCustomTools();
+        }
+
+        public void ReloadCustomTools()
+        {
+            LoadCustomTools();
         }
     }
 } 
