@@ -6,9 +6,6 @@ using System.Windows.Interop;
 
 namespace SYSTools.Helpers
 {
-    /// <summary>
-    /// 底层拖拽监听类
-    /// </summary>
     public class LowLevelDragDrop
     {
         [DllImport("shell32.dll")]
@@ -96,14 +93,11 @@ namespace SYSTools.Helpers
             try
             {
                 uint fileCount = DragQueryFile(hDrop, 0xFFFFFFFF, IntPtr.Zero, 0);
-
                 var files = new string[fileCount];
-                
                 for (uint i = 0; i < fileCount; i++)
                 {
                     uint pathLength = DragQueryFile(hDrop, i, IntPtr.Zero, 0) + 1;
                     IntPtr pathBuffer = Marshal.AllocHGlobal((int)pathLength * 2);
-                    
                     try
                     {
                         DragQueryFile(hDrop, i, pathBuffer, pathLength);
@@ -114,15 +108,12 @@ namespace SYSTools.Helpers
                         Marshal.FreeHGlobal(pathBuffer);
                     }
                 }
-
                 DragFinish(hDrop);
-                
-                // 触发事件
                 FilesDropped?.Invoke(files);
             }
             catch (Exception ex)
             {
-
+                Debug.WriteLine($"提取失败: {ex.Message}");
             }
         }
 
