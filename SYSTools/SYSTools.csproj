@@ -81,8 +81,10 @@
     <Compile Include="Dialog\AddToolDialog.xaml.cs">
       <DependentUpon>AddToolDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DragDropHelper.cs" />
     <Compile Include="Helpers\IconHelper.cs" />
     <Compile Include="Helpers\LocalizationManager.cs" />
+    <Compile Include="Helpers\LowLevelDragDrop.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />
     <Compile Include="Model\ResourceExtension.cs" />
     <Compile Include="Model\AppSettings.cs" />

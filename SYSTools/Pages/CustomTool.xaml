@@ -9,26 +9,49 @@
       mc:Ignorable="d" 
       d:DesignHeight="610" d:DesignWidth="1040"
       KeepAlive="True"
-      Title="CustomTool" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610" >
+      Title="CustomTool" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610" Loaded="Page_Loaded"
+      AllowDrop="True"
+      Drop="MainGrid_Drop"
+      DragLeave="MainGrid_DragLeave"
+      DragOver="MainGrid_DragOver"
+      PreviewDragOver="MainGrid_DragOver"
+      PreviewDrop="MainGrid_Drop">
 
-    <Grid>
+    <Grid x:Name="MainGrid" 
+          AllowDrop="True"
+          Drop="MainGrid_Drop"
+          DragLeave="MainGrid_DragLeave"
+          DragOver="MainGrid_DragOver">
+        
         <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="3" Source="/SYSTools;component/Resources/LOGO.png" Opacity="0.5" Width="160" Height="90"/>
 
         <TextBlock Margin="20,17,0,0" TextWrapping="Wrap" Text="{model:Resource Key=CustomTool_TextBlock}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" UseLayoutRounding="True"/>
 
         <Button x:Name="AddToolButton" Content="{model:Resource Key=AddNewTool}" Command="{Binding AddToolCommand}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,13.5,35,0" MinWidth="70" FontSize="15" MinHeight="32.05" IsTabStop="False" Background="{x:Null}" BorderBrush="#33000000"/>
 
-        <Border BorderBrush="#CC202020" BorderThickness="1" CornerRadius="5" Margin="10,60,10,10">
-            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                <ItemsControl ItemsSource="{Binding ToolItems}">
+        <Border BorderBrush="#CC202020" BorderThickness="1" CornerRadius="5" Margin="10,60,10,10"
+                AllowDrop="True"
+                Drop="MainGrid_Drop"
+                DragLeave="MainGrid_DragLeave"
+                DragOver="MainGrid_DragOver">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
+                          AllowDrop="True"
+                          Drop="MainGrid_Drop"
+                          DragLeave="MainGrid_DragLeave"
+                          DragOver="MainGrid_DragOver">
+                <ItemsControl ItemsSource="{Binding ToolItems}"
+                              AllowDrop="True"
+                              Drop="MainGrid_Drop"
+                              DragLeave="MainGrid_DragLeave"
+                              DragOver="MainGrid_DragOver">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <WrapPanel />
+                            <WrapPanel AllowDrop="True" />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            
+
                             <Border Padding="40,15,40,15" Margin="5" CornerRadius="5" BorderThickness="1" BorderBrush="#CC202020" Background="{DynamicResource {x:Static muxc:ThemeKeys.ButtonBorderBrushKey}}" Width="160" Height="170"
                                     Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=Page}}">
                                 <Border.ContextMenu>
@@ -55,7 +78,7 @@
                 </ItemsControl>
             </ScrollViewer>
         </Border>
-
+        
     </Grid>
 </Page>
 
