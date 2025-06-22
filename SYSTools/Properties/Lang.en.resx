@@ -366,4 +366,19 @@
   <data name="Open" xml:space="preserve">
     <value>Open</value>
   </data>
+  <data name="ImageFilter_JPng" xml:space="preserve">
+    <value>Image files (*.jpg;*.png)|*.jpg;*.png</value>
+  </data>
+  <data name="ConfirmDeleteMessage" xml:space="preserve">
+    <value>Are you sure you want to delete the tool '{0}' ?</value>
+  </data>
+  <data name="ConfirmModifyMessage" xml:space="preserve">
+    <value>Do you want to modify the tool '{0}' ?</value>
+  </data>
+  <data name="ConfirmDeleteTitle" xml:space="preserve">
+    <value>Confirm Deletion</value>
+  </data>
+  <data name="ConfirmModifyTitle" xml:space="preserve">
+    <value>Confirm Modification</value>
+  </data>
 </root>

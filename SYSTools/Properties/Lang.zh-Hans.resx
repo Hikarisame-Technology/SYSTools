@@ -366,4 +366,19 @@
   <data name="Open" xml:space="preserve">
     <value>启动</value>
   </data>
+  <data name="ImageFilter_JPng" xml:space="preserve">
+    <value>图像文件 (*.jpg;*.png)|*.jpg;*.png</value>
+  </data>
+  <data name="ConfirmDeleteMessage" xml:space="preserve">
+    <value>确定要删除工具 '{0}' 吗？</value>
+  </data>
+  <data name="ConfirmModifyMessage" xml:space="preserve">
+    <value>是否要修改工具 '{0}' ？</value>
+  </data>
+  <data name="ConfirmDeleteTitle" xml:space="preserve">
+    <value>确认删除</value>
+  </data>
+  <data name="ConfirmModifyTitle" xml:space="preserve">
+    <value>确认修改</value>
+  </data>
 </root>

@@ -366,4 +366,19 @@
   <data name="Open" xml:space="preserve">
     <value></value>
   </data>
+  <data name="ImageFilter_JPng" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ConfirmDeleteMessage" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ConfirmModifyMessage" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ConfirmDeleteTitle" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ConfirmModifyTitle" xml:space="preserve">
+    <value></value>
+  </data>
 </root>
