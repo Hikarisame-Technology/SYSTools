@@ -17,11 +17,25 @@
       PreviewDragOver="MainGrid_DragOver"
       PreviewDrop="MainGrid_Drop">
 
+    <Page.Resources>
+        <!-- 拖拽时的样式 -->
+        <Style x:Key="DragDropBorderStyle" TargetType="Border">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="#FF007ACC"/>
+                    <Setter Property="BorderThickness" Value="2"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
     <Grid x:Name="MainGrid" 
           AllowDrop="True"
           Drop="MainGrid_Drop"
           DragLeave="MainGrid_DragLeave"
-          DragOver="MainGrid_DragOver">
+          DragOver="MainGrid_DragOver"
+          Background="Transparent">
         
         <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="3" Source="/SYSTools;component/Resources/LOGO.png" Opacity="0.5" Width="160" Height="90"/>
 
@@ -29,31 +43,23 @@
 
         <Button x:Name="AddToolButton" Content="{model:Resource Key=AddNewTool}" Command="{Binding AddToolCommand}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,13.5,35,0" MinWidth="70" FontSize="15" MinHeight="32.05" IsTabStop="False" Background="{x:Null}" BorderBrush="#33000000"/>
 
-        <Border BorderBrush="#CC202020" BorderThickness="1" CornerRadius="5" Margin="10,60,10,10"
-                AllowDrop="True"
-                Drop="MainGrid_Drop"
-                DragLeave="MainGrid_DragLeave"
-                DragOver="MainGrid_DragOver">
-            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
-                          AllowDrop="True"
-                          Drop="MainGrid_Drop"
-                          DragLeave="MainGrid_DragLeave"
-                          DragOver="MainGrid_DragOver">
-                <ItemsControl ItemsSource="{Binding ToolItems}"
-                              AllowDrop="True"
-                              Drop="MainGrid_Drop"
-                              DragLeave="MainGrid_DragLeave"
-                              DragOver="MainGrid_DragOver">
+        <Border BorderBrush="#CC202020" BorderThickness="1" CornerRadius="5" Margin="10,60,10,10">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding ToolItems}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <WrapPanel AllowDrop="True" />
+                            <WrapPanel />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
 
                             <Border Padding="40,15,40,15" Margin="5" CornerRadius="5" BorderThickness="1" BorderBrush="#CC202020" Background="{DynamicResource {x:Static muxc:ThemeKeys.ButtonBorderBrushKey}}" Width="160" Height="170"
-                                    Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=Page}}">
+                                    Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=Page}}"
+                                    Style="{StaticResource DragDropBorderStyle}"
+                                    MouseLeftButtonDown="ToolItem_MouseLeftButtonDown"
+                                    MouseMove="ToolItem_MouseMove"
+                                    MouseLeftButtonUp="ToolItem_MouseLeftButtonUp">
                                 <Border.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="{model:Resource Key=Modify}"
@@ -65,10 +71,10 @@
                                     </ContextMenu>
                                 </Border.ContextMenu>
                                 <StackPanel>
-                                    <Image Source="{Binding IconSource}" Width="80" Height="80"/>
+                                    <Image Source="{Binding IconSource}" Width="80" Height="80" IsHitTestVisible="False"/>
                                     <TextBlock Text="{Binding Name}" Margin="0,5,0,0" HorizontalAlignment="Center"
                                                TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" MaxWidth="80"
-                                               ToolTip="{Binding Name}"/>
+                                               ToolTip="{Binding Name}" IsHitTestVisible="False"/>
                                     <Button Content="{model:Resource Key=Open}" Command="{Binding LaunchCommand}" Margin="0,5,0,5" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="#33000000"/>
                                 </StackPanel>
                             </Border>

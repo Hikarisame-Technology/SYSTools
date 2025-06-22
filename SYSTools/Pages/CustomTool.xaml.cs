@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using SYSTools.Helpers;
 using SYSTools.Model;
 using SYSTools.ViewModels;
@@ -25,6 +26,12 @@ namespace SYSTools.Pages
 
         private LowLevelDragDrop _lowLevelDragDrop;
         
+        private bool _isDraggingTool = false;
+        private Point _dragStartPoint;
+        private ToolItem _draggedToolItem;
+        private Border _draggedBorder;
+        private Border _currentHoverBorder;
+        
         public CustomTool()
         {
             InitializeComponent();
@@ -43,7 +50,7 @@ namespace SYSTools.Pages
         {
             try
             {
-                // 简化检查逻辑
+                // 只处理文件拖拽
                 if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 {
                     e.Effects = DragDropEffects.Copy;
@@ -427,6 +434,195 @@ namespace SYSTools.Pages
             catch (Exception ex)
             {
 
+            }
+        }
+
+        private void ToolItem_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                if (e.OriginalSource is Button button)
+                {
+                    return;
+                }
+                
+                if (sender is Border border && border.DataContext is ToolItem toolItem)
+                {
+                    Debug.WriteLine($"MouseLeftButtonDown: {toolItem.Name}");
+                    _dragStartPoint = e.GetPosition(border);
+                    _draggedToolItem = toolItem;
+                    _draggedBorder = border;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void ToolItem_MouseMove(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (e.LeftButton == MouseButtonState.Pressed && 
+                    sender is Border border && 
+                    border.DataContext is ToolItem toolItem &&
+                    _draggedToolItem == toolItem)
+                {
+                    Point currentPosition = e.GetPosition(border);
+                    
+                    if (!_isDraggingTool &&
+                        (Math.Abs(currentPosition.X - _dragStartPoint.X) > SystemParameters.MinimumHorizontalDragDistance ||
+                         Math.Abs(currentPosition.Y - _dragStartPoint.Y) > SystemParameters.MinimumVerticalDragDistance))
+                    {
+                        _isDraggingTool = true;
+                        _draggedBorder = border;
+                        border.CaptureMouse();
+                        border.Cursor = Cursors.Hand;
+                        border.Opacity = 0.7;
+                    }
+
+                    if (_isDraggingTool)
+                    {
+                        Point screenPoint = border.PointToScreen(currentPosition);
+                        Point pagePoint = this.PointFromScreen(screenPoint);
+                        
+                        var hitElement = this.InputHitTest(pagePoint) as FrameworkElement;
+                        var targetBorder = FindParentBorder(hitElement);
+                        
+                        if (targetBorder != null && targetBorder != border && targetBorder.DataContext is ToolItem)
+                        {
+                            if (_currentHoverBorder != targetBorder)
+                            {
+                                if (_currentHoverBorder != null)
+                                {
+                                    _currentHoverBorder.BorderBrush = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb(0xCC, 0x20, 0x20, 0x20));
+                                    _currentHoverBorder.BorderThickness = new Thickness(1);
+                                }
+
+                                _currentHoverBorder = targetBorder;
+                                _currentHoverBorder.BorderBrush = System.Windows.Media.Brushes.DodgerBlue;
+                                _currentHoverBorder.BorderThickness = new Thickness(3);
+                            }
+                        }
+                        else if (_currentHoverBorder != null)
+                        {
+                            _currentHoverBorder.BorderBrush = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb(0xCC, 0x20, 0x20, 0x20));
+                            _currentHoverBorder.BorderThickness = new Thickness(1);
+                            _currentHoverBorder = null;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"工具项鼠标移动事件错误: {ex.Message}");
+            }
+        }
+
+        private void ToolItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                if (_isDraggingTool && sender is Border border)
+                {
+                    if (_currentHoverBorder != null && _currentHoverBorder.DataContext is ToolItem targetItem)
+                    {
+                        var draggedItem = _draggedToolItem;
+                        if (draggedItem != null && draggedItem != targetItem)
+                        {
+                            var viewModel = DataContext as CustomToolViewModel;
+                            if (viewModel != null)
+                            {
+                                ReorderToolItems(viewModel, draggedItem, targetItem);
+                            }
+                        }
+                    }
+                    ResetDragState();
+                }
+                else if (!_isDraggingTool)
+                {
+                    _draggedToolItem = null;
+                    _draggedBorder = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"工具项鼠标释放事件错误: {ex.Message}");
+                ResetDragState();
+            }
+        }
+
+        private void ResetDragState()
+        {
+            try
+            {
+                if (_currentHoverBorder != null)
+                {
+                    _currentHoverBorder.BorderBrush = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb(0xCC, 0x20, 0x20, 0x20));
+                    _currentHoverBorder.BorderThickness = new Thickness(1);
+                    _currentHoverBorder = null;
+                }
+                
+                if (_draggedBorder != null)
+                {
+                    _draggedBorder.ReleaseMouseCapture();
+                    _draggedBorder.Cursor = Cursors.Hand;
+                    _draggedBorder.Opacity = 1.0;
+                }
+                
+                _isDraggingTool = false;
+                _draggedToolItem = null;
+                _draggedBorder = null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"重置拖拽状态错误: {ex.Message}");
+            }
+        }
+
+        private Border FindParentBorder(FrameworkElement element)
+        {
+            try
+            {
+                var current = element;
+                while (current != null)
+                {
+                    if (current is Border border && border.DataContext is ToolItem)
+                    {
+                        return border;
+                    }
+                    current = current.Parent as FrameworkElement ?? 
+                              System.Windows.Media.VisualTreeHelper.GetParent(current) as FrameworkElement;
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        private void ReorderToolItems(CustomToolViewModel viewModel, ToolItem draggedItem, ToolItem targetItem)
+        {
+            try
+            {
+                int draggedIndex = viewModel.ToolItems.IndexOf(draggedItem);
+                int targetIndex = viewModel.ToolItems.IndexOf(targetItem);
+
+                if (draggedIndex != -1 && targetIndex != -1 && draggedIndex != targetIndex)
+                {
+                    viewModel.ToolItems.Move(draggedIndex, targetIndex);
+                }
+                else
+                {
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"重新排列工具项错误: {ex.Message}");
+                MessageBox.Show($"重新排列工具项时发生错误: {ex.Message}", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
