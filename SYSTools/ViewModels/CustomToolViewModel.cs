@@ -139,7 +139,7 @@ namespace SYSTools.ViewModels
         {
             try
             {
-                Model.CustomToolSettings.Instance.SaveCustomTools(ToolItems);
+                CustomToolSettings.Instance.SaveCustomTools(ToolItems);
                 Debug.WriteLine($"已保存 {ToolItems.Count} 个自定义工具");
             }
             catch (Exception ex)
