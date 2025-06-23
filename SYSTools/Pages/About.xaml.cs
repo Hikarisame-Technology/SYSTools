@@ -195,6 +195,10 @@ namespace SYSTools.Pages
             Process.Start(new ProcessStartInfo("https://github.com/Hikarisame-Technology/SYSTools/issues") { UseShellExecute = true });
         }
 
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            UpdateVersion.Text = Application.ResourceAssembly.GetName().Version.ToString();
+        }
     }
 
     public class Library

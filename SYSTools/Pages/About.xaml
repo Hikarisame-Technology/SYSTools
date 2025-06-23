@@ -11,7 +11,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="610" d:DesignWidth="1040"
       KeepAlive="True"
-      Title="About" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610" >
+      Title="About" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610" Loaded="Page_Loaded" >
     <Grid>
         <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="/SYSTools;component/Resources/B-LOGO.png" Margin="0,0,-100,-100" Opacity="0.1" Grid.Column="1" Height="430"/>
 
@@ -23,7 +23,7 @@
                     <muxc:SettingsExpander.HeaderIcon>
                         <Image Source="/SYSTools_LOGO_256.ico" RenderOptions.BitmapScalingMode="HighQuality"/>
                     </muxc:SettingsExpander.HeaderIcon>
-                    <TextBlock Foreground="{DynamicResource {x:Static muxc:ThemeKeys.TextFillColorSecondaryBrushKey}}" Text="0.7.5"/>
+                    <TextBlock x:Name="UpdateVersion" Foreground="{DynamicResource {x:Static muxc:ThemeKeys.TextFillColorSecondaryBrushKey}}"/>
                     <muxc:SettingsExpander.Items>
 
                         <muxc:SettingsCard ContentAlignment="Vertical" VerticalAlignment="Center">
