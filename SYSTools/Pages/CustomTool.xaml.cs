@@ -152,6 +152,7 @@ namespace SYSTools.Pages
                 }
                 catch (Exception ex)
                 {
+                    Debug.WriteLine(ex.Message);
                     failureCount++;
                 }
             }
@@ -178,6 +179,7 @@ namespace SYSTools.Pages
             }
             catch (Exception ex)
             {
+                Debug.WriteLine(ex.Message);
                 return false;
             }
         }
@@ -386,6 +388,7 @@ namespace SYSTools.Pages
             }
             catch (Exception ex)
             {
+                Debug.WriteLine(ex.Message);
             }
 
             try
@@ -404,7 +407,7 @@ namespace SYSTools.Pages
             }
             catch (Exception ex)
             {
-
+                Debug.WriteLine(ex.Message);
             }
 
         }
@@ -433,7 +436,7 @@ namespace SYSTools.Pages
             }
             catch (Exception ex)
             {
-
+                Debug.WriteLine(ex.Message);
             }
         }
 
@@ -456,7 +459,7 @@ namespace SYSTools.Pages
             }
             catch (Exception ex)
             {
-
+                Debug.WriteLine(ex.Message);
             }
         }
 
