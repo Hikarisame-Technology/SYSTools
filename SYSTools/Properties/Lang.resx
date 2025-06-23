@@ -381,4 +381,13 @@
   <data name="ConfirmModifyTitle" xml:space="preserve">
     <value></value>
   </data>
+  <data name="AdministratorMode" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ProcessTotal" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ProcessTotalTitle" xml:space="preserve">
+    <value></value>
+  </data>
 </root>

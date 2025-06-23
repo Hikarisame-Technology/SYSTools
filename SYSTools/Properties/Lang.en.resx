@@ -381,4 +381,13 @@
   <data name="ConfirmModifyTitle" xml:space="preserve">
     <value>Confirm Modification</value>
   </data>
+  <data name="AdministratorMode" xml:space="preserve">
+    <value>[Administrator Mode]</value>
+  </data>
+  <data name="ProcessTotal" xml:space="preserve">
+    <value>A process with the same name is running!</value>
+  </data>
+  <data name="ProcessTotalTitle" xml:space="preserve">
+    <value>Program Conflict!</value>
+  </data>
 </root>

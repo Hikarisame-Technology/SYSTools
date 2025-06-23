@@ -11,6 +11,7 @@ using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using SYSTools.Model;
 using SYSTools.Pages;
+using SYSTools.Properties;
 using Page = System.Windows.Controls.Page;
 
 namespace SYSTools
@@ -29,7 +30,7 @@ namespace SYSTools
             { typeof(Toolkit), new Toolkit() },
             { typeof(HardwareMonitor), new HardwareMonitor() },
             { typeof(WindowsTools), new WindowsTools() },
-            { typeof(WSATools), new WSATools() },
+            { typeof(ADBTools), new ADBTools() },
             { typeof(CustomTool), new CustomTool() },
             { typeof(Configuration), new Configuration() },
             { typeof(About), new About() }
@@ -74,8 +75,8 @@ namespace SYSTools
             if (processTotal > 1)
             {
                 iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(
-                    "有一个同名进程正在运行！",
-                    "程序冲突!",
+                    Lang.ProcessTotal,
+                    Lang.ProcessTotalTitle,
                     MessageBoxButton.OK
                 );
                 Close();
@@ -86,7 +87,7 @@ namespace SYSTools
                 .IsInRole(WindowsBuiltInRole.Administrator);
             
             // 在标题后添加管理员标识
-            string adminFlag = isAdmin ? " [管理员模式]" : "";
+            string adminFlag = isAdmin ? " " + Lang.AdministratorMode : "";
             TitleBarTextBlock.Text = "SYSTools Ver" + (Application.ResourceAssembly.GetName().Version.ToString()) + adminFlag;
             
             // 设置默认启动Page页

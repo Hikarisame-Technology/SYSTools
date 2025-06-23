@@ -381,4 +381,13 @@
   <data name="ConfirmModifyTitle" xml:space="preserve">
     <value>确认修改</value>
   </data>
+  <data name="AdministratorMode" xml:space="preserve">
+    <value>[管理员模式]</value>
+  </data>
+  <data name="ProcessTotal" xml:space="preserve">
+    <value>有一个同名进程正在运行！</value>
+  </data>
+  <data name="ProcessTotalTitle" xml:space="preserve">
+    <value>程序冲突！</value>
+  </data>
 </root>

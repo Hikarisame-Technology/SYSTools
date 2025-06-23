@@ -81,6 +81,15 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
+        public static string AdministratorMode {
+            get {
+                return ResourceManager.GetString("AdministratorMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
         public static string Args {
             get {
                 return ResourceManager.GetString("Args", resourceCulture);
@@ -552,6 +561,24 @@ namespace SYSTools.Properties {
         public static string PrivacyPolicy {
             get {
                 return ResourceManager.GetString("PrivacyPolicy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string ProcessTotal {
+            get {
+                return ResourceManager.GetString("ProcessTotal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string ProcessTotalTitle {
+            get {
+                return ResourceManager.GetString("ProcessTotalTitle", resourceCulture);
             }
         }
         

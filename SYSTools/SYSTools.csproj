@@ -103,8 +103,8 @@
     <Compile Include="Pages\Toolkit.xaml.cs">
       <DependentUpon>Toolkit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\WSATools.xaml.cs">
-      <DependentUpon>WSATools.xaml</DependentUpon>
+    <Compile Include="Pages\ADBTools.xaml.cs">
+      <DependentUpon>ADBTools.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Configuration.xaml.cs">
       <DependentUpon>Configuration.xaml</DependentUpon>
@@ -178,7 +178,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\WSATools.xaml">
+    <Page Include="Pages\ADBTools.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -310,7 +310,7 @@
     <Resource Include="SYSTools_LOGO_256.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Pages\WSAPage\" />
+    <Folder Include="Pages\ADBPages\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\NoBackImage.png" />
