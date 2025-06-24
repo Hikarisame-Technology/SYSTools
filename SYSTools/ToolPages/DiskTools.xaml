@@ -5,14 +5,12 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:muxc="http://schemas.inkore.net/lib/ui/wpf/modern"
       xmlns:local="clr-namespace:SYSTools.ToolPages"
+      xmlns:model="clr-namespace:SYSTools.Model"
       mc:Ignorable="d" 
       d:DesignWidth="1040" d:DesignHeight="560"
       KeepAlive="True"
       Title="DiskTools" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  MinWidth="1040" MinHeight="560" Loaded="Page_Loaded">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        
-        <Border  BorderThickness="1" CornerRadius="5" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
-        
         <ScrollViewer  VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <TextBlock Text="该页工具存放于'应用根目录/Software Package/DiskTools/'文件夹内(鼠标右键点击这条文字可打开文件夹)       下列工具请单击打开" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" FontSize="10" Height="13" MouseRightButtonDown="TextBlock_MouseRightButtonDown"/>
@@ -23,7 +21,7 @@
                         </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
                             <TextBlock Text="AS SSD" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
                         </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="AS SSD Benchmark是一款功能强大、免费实用的硬盘性能测试工具,软件能够帮助用户测出固态硬盘持续读写等的性能" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13" Width="650"/>
+                            <TextBlock Text="{model:Resource Key=AS-SSD_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13"/>
                         </InlineUIContainer>
 
                     </TextBlock>
@@ -34,7 +32,7 @@
                         </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
                             <TextBlock Text="CrystalDiskInfo" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
                         </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="CrystalDiskInfo是一个硬盘健康监测工具。它显示了硬盘驱动器的基本信息，智能监控和磁盘的温度。可以迅速读到本机硬盘的详细信息" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13" Width="650"/>
+                            <TextBlock Text="{model:Resource Key=CrystalDiskInfo_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13"/>
                         </InlineUIContainer>
 
                     </TextBlock>
@@ -45,7 +43,7 @@
                         </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
                             <TextBlock Text="CrystalDiskMark" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
                         </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="衡量各种存储（HDD、SSD、USB 内存等）速度的基准软件。" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Width="650" Height="13"/>
+                            <TextBlock Text="{model:Resource Key=CrystalDiskMark_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13"/>
                         </InlineUIContainer>
 
                     </TextBlock>
@@ -56,7 +54,7 @@
                         </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
                             <TextBlock Text="Disk Benchmark" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
                         </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="ATTO Disk Benchmark 可以测量硬盘驱动器、固态驱动器、RAID 阵列以及主机连接到附加存储的性能" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Width="650" Height="13"/>
+                            <TextBlock Text="{model:Resource Key=DiskBenchmark_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13"/>
                         </InlineUIContainer>
 
                     </TextBlock>
@@ -67,7 +65,7 @@
                         </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
                             <TextBlock Text="DiskGenius" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
                         </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="DiskGenius是一款硬盘分区及数据维护软件" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Width="650" Height="13"/>
+                            <TextBlock Text="{model:Resource Key=DiskGenius_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13"/>
                         </InlineUIContainer>
 
                     </TextBlock>
@@ -78,7 +76,7 @@
                         </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
                             <TextBlock Text="HD Tune" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
                         </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="HD Tune是一款具有多种功能的硬盘/SSD 实用程序。它可用于测量驱动器的性能、扫描错误、检查健康状态 (SMART)、安全擦除所有数据等等。" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Width="650" Height="13"/>
+                            <TextBlock Text="{model:Resource Key=HDTune_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13"/>
                         </InlineUIContainer>
 
                     </TextBlock>
@@ -89,7 +87,7 @@
                         </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
                             <TextBlock Text="LLFTOOL" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
                         </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="LLFTOOL万能低格工具是一款适用于windows操作系统的硬盘低级格式化工具，该硬盘低格工具使用方便，操作简单" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Width="650" Height="13"/>
+                            <TextBlock Text="{model:Resource Key=LLFTOOL_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13"/>
                         </InlineUIContainer>
 
                     </TextBlock>
@@ -100,7 +98,7 @@
                         </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
                             <TextBlock Text="PartAssist" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
                         </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="傲梅分区助手是一款免费、专业级的无损分区工具，提供简单、易用的磁盘分区管理操作" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Width="650" Height="13"/>
+                            <TextBlock Text="{model:Resource Key=PartAssist_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13"/>
                         </InlineUIContainer>
 
                     </TextBlock>
@@ -111,7 +109,7 @@
                         </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
                             <TextBlock Text="SSD-Z" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
                         </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="SSD-Z是一款针对SSD设备的高可靠性的测试软件" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Width="650" Height="13"/>
+                            <TextBlock Text="{model:Resource Key=SSD-Z_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13"/>
                         </InlineUIContainer>
 
                     </TextBlock>
@@ -122,7 +120,7 @@
                         </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
                             <TextBlock Text="Victoria" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
                         </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="Victoria是Windows环境下强大的硬盘维护工具，具备硬盘表面检测/硬盘坏道修复/S.M.A.R.T.信息察看保存/Cache缓存控制等多功能的工具" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Width="650" Height="13"/>
+                            <TextBlock Text="{model:Resource Key=Victoria_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13"/>
                         </InlineUIContainer>
 
                     </TextBlock>
@@ -133,7 +131,7 @@
                         </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
                             <TextBlock Text="H2TestW" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
                         </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="H2testw是一款u盘读写速度测试和坏块检测软件，通过往待测目录写入数据的方式测试u盘的实际写入速度校验写入的数据是否正确" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Width="650" Height="13"/>
+                            <TextBlock Text="{model:Resource Key=H2TestW_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13"/>
                         </InlineUIContainer>
 
                     </TextBlock>

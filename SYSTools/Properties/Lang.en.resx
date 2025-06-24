@@ -390,4 +390,88 @@
   <data name="ProcessTotalTitle" xml:space="preserve">
     <value>Program Conflict!</value>
   </data>
+  <data name="DetectionTools_Content" xml:space="preserve">
+    <value>Detect Tools</value>
+  </data>
+  <data name="TestTools_Content" xml:space="preserve">
+    <value>Hardware Test Tools</value>
+  </data>
+  <data name="DiskTools_Content" xml:space="preserve">
+    <value>Disk Tools</value>
+  </data>
+  <data name="PeripheralsTools_Content" xml:space="preserve">
+    <value>Peripheral Test Tools</value>
+  </data>
+  <data name="RepairingTools_Content" xml:space="preserve">
+    <value>Runtime Install Tools</value>
+  </data>
+  <data name="AIDA64_Text" xml:space="preserve">
+    <value>AIDA64 offers overclocking support, hardware diagnostics, stress tests, sensor monitoring, and performance benchmarks for CPU, memory, and drives.</value>
+  </data>
+  <data name="CPU-Z_Text" xml:space="preserve">
+    <value>CPU-Z shows processor details—manufacturer, model, architecture, packaging, clock speeds, and max overclock potential.</value>
+  </data>
+  <data name="GPU-Z_Text" xml:space="preserve">
+    <value>GPU-Z is a lightweight tool that reports key information about your graphics card and GPU.</value>
+  </data>
+  <data name="HWiNFO_Text" xml:space="preserve">
+    <value>HWiNFO provides all-in-one hardware analysis and monitoring, from quick overviews to in-depth component data, always up to date.</value>
+  </data>
+  <data name="HWMonitor_Text" xml:space="preserve">
+    <value>HWMonitor reads a PC’s main health sensors—voltages, temperatures, and fan speeds.</value>
+  </data>
+  <data name="Prime95_Text" xml:space="preserve">
+    <value>Prime95 – a dedicated system stability tester. </value>
+  </data>
+  <data name="IntelBurnTest_Text" xml:space="preserve">
+    <value>IntelBurnTest – a Linpack-based stress tool for Intel/AMD CPUs.  </value>
+  </data>
+  <data name="FurMark_Text" xml:space="preserve">
+    <value>FurMark (oZone3D) – an OpenGL fur-rendering benchmark for GPU performance and stability.</value>
+  </data>
+  <data name="MemTest_Text" xml:space="preserve">
+    <value>TechPowerUp MemTest – a memory stability tester.</value>
+  </data>
+  <data name="HKBTest_Text" xml:space="preserve">
+    <value>HKBTest – a keyboard tester for key ghosting detection.</value>
+  </data>
+  <data name="MouseTest_Text" xml:space="preserve">
+    <value>MouseTest – a mouse click-rate tester by MouseHome.</value>
+  </data>
+  <data name="MouseRate_Text" xml:space="preserve">
+    <value>MouseRate – a tool measuring mouse DPI and polling-rate performance.</value>
+  </data>
+  <data name="AS-SSD_Text" xml:space="preserve">
+    <value>AS SSD Benchmark – free SSD tester for sequential/random read &amp; write.</value>
+  </data>
+  <data name="CrystalDiskInfo_Text" xml:space="preserve">
+    <value>CrystalDiskInfo – disk health monitor with drive info, SMART data, and temperature.</value>
+  </data>
+  <data name="CrystalDiskMark_Text" xml:space="preserve">
+    <value>CrystalDiskMark – measures speeds of HDDs, SSDs, and USB drives.</value>
+  </data>
+  <data name="DiskBenchmark_Text" xml:space="preserve">
+    <value>ATTO Disk Benchmark – tests performance of HDDs, SSDs, RAID arrays, and external storage.</value>
+  </data>
+  <data name="DiskGenius_Text" xml:space="preserve">
+    <value>DiskGenius – partition manager and data maintenance tool.</value>
+  </data>
+  <data name="HDTune_Text" xml:space="preserve">
+    <value>HD Tune – all-in-one HDD/SSD utility for benchmarking, error scanning, SMART health, and secure erase.</value>
+  </data>
+  <data name="LLFTOOL_Text" xml:space="preserve">
+    <value>LLFTOOL – simple Windows low-level disk formatter.</value>
+  </data>
+  <data name="PartAssist_Text" xml:space="preserve">
+    <value>AOMEI Partition Assistant – free, professional non-destructive partition manager.</value>
+  </data>
+  <data name="SSD-Z_Text" xml:space="preserve">
+    <value>SSD-Z – reliable SSD info and testing tool.</value>
+  </data>
+  <data name="Victoria_Text" xml:space="preserve">
+    <value>Victoria – Windows disk utility for surface tests, bad-sector repair, SMART/log handling, and cache control.</value>
+  </data>
+  <data name="H2TestW_Text" xml:space="preserve">
+    <value>H2testw – USB drive speed and bad-block tester via write/read verification.</value>
+  </data>
 </root>

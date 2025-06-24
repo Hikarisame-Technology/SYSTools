@@ -390,4 +390,88 @@
   <data name="ProcessTotalTitle" xml:space="preserve">
     <value>程序冲突！</value>
   </data>
+  <data name="DetectionTools_Content" xml:space="preserve">
+    <value>检测工具</value>
+  </data>
+  <data name="TestTools_Content" xml:space="preserve">
+    <value>硬件测试工具</value>
+  </data>
+  <data name="DiskTools_Content" xml:space="preserve">
+    <value>硬盘工具</value>
+  </data>
+  <data name="PeripheralsTools_Content" xml:space="preserve">
+    <value>外设检测工具</value>
+  </data>
+  <data name="RepairingTools_Content" xml:space="preserve">
+    <value>运行库安装工具</value>
+  </data>
+  <data name="AIDA64_Text" xml:space="preserve">
+    <value>AIDA64提供了诸如协助超频，硬件侦错，压力测试和传感器监测等多种功能，而且还可以对处理器，系统内存和磁盘驱动器的性能进行全面评估。</value>
+  </data>
+  <data name="CPU-Z_Text" xml:space="preserve">
+    <value>CPU-Z提供一些关于处理器的信息，包含了制造厂及处理器名称，核心构造及封装技术，内部、外部频率，最大超频速度检测。</value>
+  </data>
+  <data name="GPU-Z_Text" xml:space="preserve">
+    <value>GPU-Z 是一个轻量级的系统实用程序，旨在提供有关您的显卡和图形处理器的重要信息。</value>
+  </data>
+  <data name="HWiNFO_Text" xml:space="preserve">
+    <value>HWiNFO 是一种用于硬件分析和监控的一体化解决方案，从快速概览展开到所有硬件组件的深度。始终保持最新状态，支持最新的技术和标准。</value>
+  </data>
+  <data name="HWMonitor_Text" xml:space="preserve">
+    <value>HWMonitor是一个硬件监控程序，它读取 PC 系统的主要健康传感器：电压、温度、风扇速度。</value>
+  </data>
+  <data name="Prime95_Text" xml:space="preserve">
+    <value>Prime95是一个专用测试系统稳定的软件。</value>
+  </data>
+  <data name="IntelBurnTest_Text" xml:space="preserve">
+    <value>IntelBurnTest是一款Intel/AMD处理器稳定性强力测试工具，简化了使用英特尔Linpack。</value>
+  </data>
+  <data name="FurMark_Text" xml:space="preserve">
+    <value>FurMark是oZone3D开发的一款OpenGL基准测试工具，通过皮毛渲染算法来衡量显卡的性能，同时还能借此考验显卡的稳定性。</value>
+  </data>
+  <data name="MemTest_Text" xml:space="preserve">
+    <value>TechPowerUp出品的MemTest内存稳定性测试工具。</value>
+  </data>
+  <data name="HKBTest_Text" xml:space="preserve">
+    <value>HKBTest是一款键盘测试工具，可以用于键盘按键冲突检测。</value>
+  </data>
+  <data name="MouseTest_Text" xml:space="preserve">
+    <value>MouseTest是鼠标之家出品的鼠标按键连点检测工具</value>
+  </data>
+  <data name="MouseRate_Text" xml:space="preserve">
+    <value>MouseRate是一款检测鼠标DPI和扫描率综合性能的软件</value>
+  </data>
+  <data name="AS-SSD_Text" xml:space="preserve">
+    <value>AS SSD Benchmark是一款功能强大、免费实用的硬盘性能测试工具,软件能够帮助用户测出固态硬盘持续读写等的性能。</value>
+  </data>
+  <data name="CrystalDiskInfo_Text" xml:space="preserve">
+    <value>CrystalDiskInfo是一个硬盘健康监测工具。它显示了硬盘驱动器的基本信息，智能监控和磁盘的温度。可以迅速读到本机硬盘的详细信息。</value>
+  </data>
+  <data name="CrystalDiskMark_Text" xml:space="preserve">
+    <value>CrystalDiskMark是一个衡量各种存储（HDD、SSD、USB 内存等）速度的基准软件。</value>
+  </data>
+  <data name="DiskBenchmark_Text" xml:space="preserve">
+    <value>ATTO Disk Benchmark 可以测量硬盘驱动器、固态驱动器、RAID 阵列以及主机连接到附加存储的性能。</value>
+  </data>
+  <data name="DiskGenius_Text" xml:space="preserve">
+    <value>DiskGenius是一款硬盘分区及数据维护软件。</value>
+  </data>
+  <data name="HDTune_Text" xml:space="preserve">
+    <value>HD Tune是一款具有多种功能的硬盘/SSD 实用程序。它可用于测量驱动器的性能、扫描错误、检查健康状态 (SMART)、安全擦除所有数据等等。</value>
+  </data>
+  <data name="LLFTOOL_Text" xml:space="preserve">
+    <value>LLFTOOL万能低格工具是一款适用于windows操作系统的硬盘低级格式化工具，该硬盘低格工具使用方便，操作简单。</value>
+  </data>
+  <data name="PartAssist_Text" xml:space="preserve">
+    <value>傲梅分区助手是一款免费、专业级的无损分区工具，提供简单、易用的磁盘分区管理操作。</value>
+  </data>
+  <data name="SSD-Z_Text" xml:space="preserve">
+    <value>SSD-Z是一款针对SSD设备的高可靠性的测试软件。</value>
+  </data>
+  <data name="Victoria_Text" xml:space="preserve">
+    <value>Victoria是Windows环境下强大的硬盘维护工具，具备硬盘表面检测/硬盘坏道修复/S.M.A.R.T.信息察看保存/Cache缓存控制等多功能的工具。</value>
+  </data>
+  <data name="H2TestW_Text" xml:space="preserve">
+    <value>H2testw是一款u盘读写速度测试和坏块检测软件，通过往待测目录写入数据的方式测试u盘的实际写入速度校验写入的数据是否正确。</value>
+  </data>
 </root>

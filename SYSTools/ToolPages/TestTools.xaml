@@ -5,17 +5,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:muxc="http://schemas.inkore.net/lib/ui/wpf/modern"
       xmlns:local="clr-namespace:SYSTools.ToolPages"
+      xmlns:model="clr-namespace:SYSTools.Model"
       mc:Ignorable="d" 
       d:DesignWidth="1040" d:DesignHeight="560"
       KeepAlive="True"
       Title="TestTools" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  MinWidth="1040" MinHeight="560" Loaded="Page_Loaded">
 
         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <!--<Border  BorderThickness="1" CornerRadius="5" Grid.RowSpan="3" Grid.ColumnSpan="2">
-                <Border.Background>
-                    <SolidColorBrush Color="#FF202020" Opacity="0.5"/>
-                </Border.Background>
-            </Border>-->
             <ScrollViewer  VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <!--按钮固定上下大小66(px?)-->
@@ -27,7 +23,7 @@
                         </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
                             <TextBlock Text="Prime95" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
                         </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="Prime95是一个专用测试系统稳定的软件" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13" Width="650"/>
+                            <TextBlock Text="{model:Resource Key=Prime95_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13"/>
                         </InlineUIContainer>
                     </TextBlock>
                     </Button>
@@ -38,7 +34,7 @@
                         </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
                             <TextBlock Text="IntelBurnTest" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
                         </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="IntelBurnTest是一款Intel/AMD处理器稳定性强力测试工具，简化了使用英特尔Linpack" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13" Width="650"/>
+                            <TextBlock Text="{model:Resource Key=IntelBurnTest_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13"/>
                         </InlineUIContainer>
                     </TextBlock>
                     </Button>
@@ -49,7 +45,7 @@
                         </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
                             <TextBlock Text="FurMark" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
                         </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="FurMark是oZone3D开发的一款OpenGL基准测试工具，通过皮毛渲染算法来衡量显卡的性能，同时还能借此考验显卡的稳定性。" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13" Width="650"/>
+                            <TextBlock Text="{model:Resource Key=FurMark_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13"/>
                         </InlineUIContainer>
                     </TextBlock>
                     </Button>
@@ -60,7 +56,7 @@
                         </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
                             <TextBlock Text="MemTest" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
                         </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="TechPowerUp出品的MemTest内存稳定性测试工具" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13" Width="650"/>
+                            <TextBlock Text="{model:Resource Key=MemTest_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13"/>
                         </InlineUIContainer>
                     </TextBlock>
                     </Button>

@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:muxc="http://schemas.inkore.net/lib/ui/wpf/modern"
       xmlns:local="clr-namespace:SYSTools.Pages"
+      xmlns:model="clr-namespace:SYSTools.Model"
       mc:Ignorable="d" 
       d:DesignHeight="610" d:DesignWidth="1040"
       KeepAlive="True"
@@ -24,31 +25,31 @@
 
             <muxc:NavigationView.MenuItems>
 
-                <muxc:NavigationViewItem Content="检测工具" Tag="SYSTools.ToolPages.DetectionTools" x:Name="DetectionTools" IsTabStop="False" IsSelected="True">
+                <muxc:NavigationViewItem Content="{model:Resource Key=DetectionTools_Content}" Tag="SYSTools.ToolPages.DetectionTools" x:Name="DetectionTools" IsTabStop="False" IsSelected="True">
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE9D9;" />
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
 
-                <muxc:NavigationViewItem Content="硬件测试工具" Tag="SYSTools.ToolPages.TestTools" x:Name="TestTools" IsTabStop="False">
+                <muxc:NavigationViewItem Content="{model:Resource Key=TestTools_Content}" Tag="SYSTools.ToolPages.TestTools" x:Name="TestTools" IsTabStop="False">
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE950;" />
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
 
-                <muxc:NavigationViewItem Content="硬盘工具" Tag="SYSTools.ToolPages.DiskTools" x:Name="DiskTools" IsTabStop="False">
+                <muxc:NavigationViewItem Content="{model:Resource Key=DiskTools_Content}" Tag="SYSTools.ToolPages.DiskTools" x:Name="DiskTools" IsTabStop="False">
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xEB05;" />
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
 
-                <muxc:NavigationViewItem Content="外设检测工具" Tag="SYSTools.ToolPages.PeripheralsTools" x:Name="PeripheralsTools" IsTabStop="False">
+                <muxc:NavigationViewItem Content="{model:Resource Key=PeripheralsTools_Content}" Tag="SYSTools.ToolPages.PeripheralsTools" x:Name="PeripheralsTools" IsTabStop="False">
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE961;" />
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
 
-                <muxc:NavigationViewItem Content="运行库安装工具" Tag="SYSTools.ToolPages.RepairingTools" x:Name="RepairingTools" IsTabStop="False">
+                <muxc:NavigationViewItem Content="{model:Resource Key=RepairingTools_Content}" Tag="SYSTools.ToolPages.RepairingTools" x:Name="RepairingTools" IsTabStop="False">
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE945;" />
                     </muxc:NavigationViewItem.Icon>

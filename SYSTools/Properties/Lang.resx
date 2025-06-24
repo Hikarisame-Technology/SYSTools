@@ -390,4 +390,88 @@
   <data name="ProcessTotalTitle" xml:space="preserve">
     <value></value>
   </data>
+  <data name="DetectionTools_Content" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="TestTools_Content" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiskTools_Content" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="PeripheralsTools_Content" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="RepairingTools_Content" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="AIDA64_Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="CPU-Z_Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="GPU-Z_Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="HWiNFO_Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="HWMonitor_Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Prime95_Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="IntelBurnTest_Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="FurMark_Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="MemTest_Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="HKBTest_Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="MouseTest_Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="MouseRate_Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="AS-SSD_Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="CrystalDiskInfo_Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="CrystalDiskMark_Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiskBenchmark_Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiskGenius_Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="HDTune_Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="LLFTOOL_Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="PartAssist_Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SSD-Z_Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Victoria_Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="H2TestW_Text" xml:space="preserve">
+    <value></value>
+  </data>
 </root>
