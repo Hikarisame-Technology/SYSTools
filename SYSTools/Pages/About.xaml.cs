@@ -166,7 +166,7 @@ namespace SYSTools.Pages
             // 设定Url跳转地址
             if (result == iNKORE.UI.WPF.Modern.Controls.ContentDialogResult.Primary)
             {
-                Process.Start(new ProcessStartInfo("https://systools.hksstudio.work/privacy.html") { UseShellExecute = true });
+                Process.Start(new ProcessStartInfo("https://systools.hksstudio.work/privacy") { UseShellExecute = true });
             }
         }
 
