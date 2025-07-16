@@ -95,7 +95,7 @@
 
                 <muxc:NavigationViewItemSeparator/>
 
-                <muxc:NavigationViewItem Content="WSA工具" Tag="SYSTools.Pages.WSATools" x:Name="WSATools" ToolTip= "功能准备中" IsTabStop="False">
+                <muxc:NavigationViewItem Content="WSA工具" Tag="SYSTools.Pages.ADBTools" x:Name="ADBTools" ToolTip= "功能准备中" IsTabStop="False">
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE1C9;" />
                     </muxc:NavigationViewItem.Icon>
