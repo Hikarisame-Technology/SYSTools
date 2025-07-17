@@ -9,16 +9,17 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using SYSTools.Utils;
+using SYSTools.Helpers;
+using iNKORE.UI.WPF.Modern.Controls;
 
 namespace SYSTools.Pages
 {
     /// <summary>
     /// About.xaml 的交互逻辑
     /// </summary>
-    public partial class About : Page
+    public partial class About : System.Windows.Controls.Page
     {
         private static readonly HttpClient Client = new HttpClient();
-
         public About()
         {
             InitializeComponent();
@@ -65,12 +66,14 @@ namespace SYSTools.Pages
         {
             try
             {
+                ContentDialogHelper.ResetDialogState();
+                
                 var currentVersion = System.Windows.Application.ResourceAssembly.GetName().Version;
                 var updateInfo = await CustomUpdater.CheckForUpdate("https://systools.hksstudio.work/SYSTools_Update_Version");
                 
                 if (currentVersion >= updateInfo.Version)
                 {
-                    iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("暂未获取更新", "暂无更新🤐", MessageBoxButton.OK, SegoeFluentIcons.UpdateRestore);
+                    iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("暂无更新🤐", "暂未获取更新");
                 }
                 else
                 {
@@ -79,7 +82,7 @@ namespace SYSTools.Pages
             }
             catch (Exception ex)
             {
-                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(ex.Message, "检查更新失败",MessageBoxButton.OK,SegoeFluentIcons.Error);
+                await ContentDialogHelper.ShowMessageAsync("检查更新失败", ex.Message);
             }
         }
 
@@ -108,17 +111,15 @@ namespace SYSTools.Pages
         {
             try
             {
+                // Reset dialog state to ensure no stuck dialogs
+                ContentDialogHelper.ResetDialogState();
+                
                 var currentVersion = GetToolkitVersion();
                 var updateInfo = await CustomUpdater.CheckForUpdate("https://systools.hksstudio.work/Tools_Update/Tools_Update_Version");
 
                 if (currentVersion >= updateInfo.Version)
                 {
-                    iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(
-                        "暂未获取更新", 
-                        "暂无更新🤐", 
-                        MessageBoxButton.OK, 
-                        SegoeFluentIcons.UpdateRestore
-                    );
+                    iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("暂无更新🤐", "暂未获取更新");
                 }
                 else
                 {
@@ -127,46 +128,44 @@ namespace SYSTools.Pages
             }
             catch (Exception ex)
             {
-                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(
-                    ex.Message, 
-                    "检查更新失败", 
-                    MessageBoxButton.OK, 
-                    SegoeFluentIcons.Error
-                );
+                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("检查更新失败", ex.Message);
             }
         }
 
         private async void Privacy_Click(object sender, RoutedEventArgs e)
         {
-            // 从URL下载txt内容
-            string url = "https://systools.hksstudio.work/Agree_Privacy/Privacy.txt";
-            string txtContent = await GetTxtFromUrlAsync(url);
-
-            // 创建并显示ContentDialog
-            iNKORE.UI.WPF.Modern.Controls.ContentDialog dialog = new iNKORE.UI.WPF.Modern.Controls.ContentDialog
+            try
             {
-                Title = "SYSTools 隐私协议",
-                Content = new System.Windows.Controls.TextBox
+                // 从URL下载txt内容
+                string url = "https://systools.hksstudio.work/Agree_Privacy/Privacy.txt";
+                string txtContent = await GetTxtFromUrlAsync(url);
+
+                // 使用ContentDialogHelper显示文本内容对话框
+                var result = await ContentDialogHelper.ShowTextContentAsync(
+                    "SYSTools 隐私协议",
+                    txtContent,
+                    "打开Url查看",
+                    "关闭"
+                );
+
+                // 设定Url跳转地址
+                if (result == iNKORE.UI.WPF.Modern.Controls.ContentDialogResult.Primary)
                 {
-                    Text = txtContent,
-                    AcceptsReturn = true,
-                    AcceptsTab = true,
-                    TextWrapping = TextWrapping.Wrap,
-                    VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
-                    IsReadOnly = true,
-                    Padding = new Thickness(10, 0, 20, 0)
-                },
-
-                CloseButtonText = "关闭",
-                PrimaryButtonText = "打开Url查看",
-                DefaultButton = iNKORE.UI.WPF.Modern.Controls.ContentDialogButton.Close
-            };
-
-            var result = await dialog.ShowAsync();
-            // 设定Url跳转地址
-            if (result == iNKORE.UI.WPF.Modern.Controls.ContentDialogResult.Primary)
+                    Process.Start(new ProcessStartInfo("https://systools.hksstudio.work/privacy") { UseShellExecute = true });
+                }
+            }
+            catch (Exception ex)
             {
-                Process.Start(new ProcessStartInfo("https://systools.hksstudio.work/privacy") { UseShellExecute = true });
+                // 最后的备用方案 - 直接使用 MessageBox
+                try
+                {
+                    System.Windows.MessageBox.Show($"加载隐私协议失败: {ex.Message}\n\n点击确定打开网页查看", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Process.Start(new ProcessStartInfo("https://systools.hksstudio.work/privacy") { UseShellExecute = true });
+                }
+                catch (Exception ex2)
+                {
+                    // Ignore final fallback errors
+                }
             }
         }
 

@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using SYSTools.Helpers;
 
 namespace SYSTools.WindowsToolsPages
 {
@@ -503,28 +504,12 @@ namespace SYSTools.WindowsToolsPages
         // 窗口提示
         private async void ShowMessage(string message)
         {
-            var scrollViewer = new ScrollViewer
-            {
-                MaxHeight = 400, // 设置最大高度
-                VerticalScrollBarVisibility = ScrollBarVisibility.Auto
-            };
-
-            var textBlock = new TextBlock
-            {
-                Text = message,
-                TextWrapping = TextWrapping.Wrap
-            };
-
-            scrollViewer.Content = textBlock;
-
-            ContentDialog dialog = new ContentDialog
-            {
-                Title = "命令执行结果",
-                Content = scrollViewer,
-                CloseButtonText = "确定"
-            };
-
-            await dialog.ShowAsync();
+            await ContentDialogHelper.ShowTextContentAsync(
+                "命令执行结果",
+                message,
+                null,
+                "确定"
+            );
         }
     }
 }

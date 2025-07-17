@@ -12,6 +12,8 @@ using System.Linq;
 using iNKORE.UI.WPF.Modern.Common.IconKeys;
 using System.Windows.Controls;
 using SYSTools.Pages;
+using SYSTools.Helpers;
+using MessageBox = iNKORE.UI.WPF.Modern.Controls.MessageBox;
 
 namespace SYSTools.Utils
 {
@@ -89,49 +91,31 @@ namespace SYSTools.Utils
         {
             if (updateInfo.FileType == UpdateFileType.Unknown)
             {
-                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(
-                    "无法识别更新文件类型，更新已取消", 
-                    "更新错误",
-                    MessageBoxButton.OK,
-                    SegoeFluentIcons.Error
+                await ContentDialogHelper.ShowMessageAsync(
+                    "更新错误", 
+                    "无法识别更新文件类型，更新已取消\n\n请前往Github提交Issue和联系开发者。"
                 );
                 return;
             }
 
             // 计算文件大小显示
-            string sizeDisplay;
-            if (updateInfo.FileSize < 1024) // 小于1KB
-            {
-                sizeDisplay = $"{updateInfo.FileSize} B";
-            }
-            else if (updateInfo.FileSize < 1024 * 1024) // 小于1MB
-            {
-                sizeDisplay = $"{updateInfo.FileSize / 1024.0:F2} KB";
-            }
-            else if (updateInfo.FileSize < 1024 * 1024 * 1024) // 小于1GB
-            {
-                sizeDisplay = $"{updateInfo.FileSize / 1024.0 / 1024.0:F2} MB";
-            }
-            else // GB及以上
-            {
-                sizeDisplay = $"{updateInfo.FileSize / 1024.0 / 1024.0 / 1024.0:F2} GB";
-            }
+            string sizeDisplay = FormatFileSize(updateInfo.FileSize);
 
-            var dialog = new ContentDialog
-            {
-                Title = "发现新版本",
-                Content = $"当前有新版本 {updateInfo.Version} 可用\n" +
-                         $"━━━━━━━━━━━━━━━━━━━━━━\n" +
-                         $"更新说明:\n" +
-                         $"{updateInfo.ReleaseNotes}\n" +
-                         $"━━━━━━━━━━━━━━━━━━━━━━\n" +
-                         $"文件大小: {sizeDisplay}\n" +
-                         $"更新类型: {(updateInfo.FileType == UpdateFileType.Executable ? "可执行文件" : "压缩包")}",
-                PrimaryButtonText = "立即更新",
-                CloseButtonText = "取消"
-            };
+            // 创建更美观的更新内容
+            string content = $"🎉 发现新版本 v{updateInfo.Version}\n\n" +
+                           $"📝 更新说明：\n" +
+                           $"{updateInfo.ReleaseNotes}\n\n" +
+                           $"📦 文件大小：{sizeDisplay}\n" +
+                           $"🔧 更新类型：{(updateInfo.FileType == UpdateFileType.Executable ? "可执行文件" : "压缩包")}\n\n" +
+                           $"是否立即下载并安装此更新？";
 
-            var result = await dialog.ShowAsync();
+            var result = await ContentDialogHelper.ShowConfirmationAsync(
+                "发现新版本",
+                content,
+                "立即更新",
+                "取消"
+            );
+
             if (result == ContentDialogResult.Primary)
             {
                 await DownloadAndInstall(updateInfo);
@@ -140,6 +124,8 @@ namespace SYSTools.Utils
 
         private static async Task DownloadAndInstall(UpdateInfo updateInfo)
         {
+            Debug.WriteLine($"开始下载和安装: FileType={updateInfo.FileType}, URL={updateInfo.DownloadUrl}");
+            
             // 根据更新类型和文件类型确定临时文件名
             string tempFileName;
             if (updateInfo.DownloadUrl.Contains("ToolsPack.zip"))
@@ -153,50 +139,147 @@ namespace SYSTools.Utils
             }
 
             var tempPath = Path.Combine(Path.GetTempPath(), tempFileName);
+            Debug.WriteLine($"临时文件路径: {tempPath}");
 
-            var progressGrid = new Grid
+            // 创建自定义下载窗口
+            var progressWindow = new Window
             {
+                Title = "📥 下载更新",
+                Width = 450,
+                Height = 220,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                ResizeMode = ResizeMode.CanMinimize,
+                WindowStyle = WindowStyle.SingleBorderWindow,
+                ShowInTaskbar = true,
+                Topmost = false
+            };
+
+            // 创建窗口内容
+            var mainGrid = new Grid
+            {
+                Margin = new Thickness(30, 20, 30, 20),
                 RowDefinitions =
                 {
                     new RowDefinition { Height = GridLength.Auto },
+                    new RowDefinition { Height = new GridLength(15) },
+                    new RowDefinition { Height = GridLength.Auto },
+                    new RowDefinition { Height = new GridLength(10) },
+                    new RowDefinition { Height = GridLength.Auto },
+                    new RowDefinition { Height = new GridLength(10) },
+                    new RowDefinition { Height = GridLength.Auto },
+                    new RowDefinition { Height = new GridLength(20) },
                     new RowDefinition { Height = GridLength.Auto }
                 }
             };
 
+            // 标题文本
+            var titleText = new TextBlock
+            {
+                Text = "正在下载更新文件...",
+                FontSize = 16,
+                FontWeight = FontWeights.SemiBold,
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
+
+            // 进度条
             var progressBar = new iNKORE.UI.WPF.Modern.Controls.ProgressBar
             {
                 IsIndeterminate = false,
                 Minimum = 0,
                 Maximum = 100,
-                Height = 4,
-                Margin = new Thickness(0, 0, 0, 5)
+                Height = 10,
+                CornerRadius = new CornerRadius(5)
             };
 
+            // 进度文本
             var statusText = new TextBlock
             {
                 Text = "准备下载...",
-                TextWrapping = TextWrapping.Wrap
+                TextWrapping = TextWrapping.Wrap,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                FontSize = 12,
+                Opacity = 0.8
             };
 
-            progressGrid.Children.Add(progressBar);
-            progressGrid.Children.Add(statusText);
-            Grid.SetRow(statusText, 1);
-
-            var progressDialog = new ContentDialog
+            // 速度文本
+            var speedText = new TextBlock
             {
-                Title = "正在下载更新",
-                Content = progressGrid
+                Text = "",
+                TextWrapping = TextWrapping.Wrap,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                FontSize = 11,
+                Opacity = 0.6
+            };
+
+            // 按钮面板
+            var buttonPanel = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
+
+            var cancelButton = new Button
+            {
+                Content = "取消下载",
+                Width = 100,
+                Height = 32,
+                IsEnabled = true
+            };
+
+            buttonPanel.Children.Add(cancelButton);
+
+            // 添加控件到网格
+            mainGrid.Children.Add(titleText);
+            mainGrid.Children.Add(progressBar);
+            mainGrid.Children.Add(statusText);
+            mainGrid.Children.Add(speedText);
+            mainGrid.Children.Add(buttonPanel);
+
+            Grid.SetRow(titleText, 0);
+            Grid.SetRow(progressBar, 2);
+            Grid.SetRow(statusText, 4);
+            Grid.SetRow(speedText, 6);
+            Grid.SetRow(buttonPanel, 8);
+
+            progressWindow.Content = mainGrid;
+
+            // WebClient 用于下载
+            WebClient webClient = null;
+            bool downloadCancelled = false;
+            bool downloadCompleted = false;
+            Exception downloadException = null; // 统一保存异常信息
+
+            // 取消按钮事件
+            cancelButton.Click += (s, e) =>
+            {
+                downloadCancelled = true;
+                webClient?.CancelAsync();
+                progressWindow.Close();
+            };
+
+            // 窗口关闭事件
+            progressWindow.Closing += (s, e) =>
+            {
+                // 只有在下载未完成且用户主动关闭时才取消下载
+                if (!downloadCompleted && !downloadCancelled && webClient != null)
+                {
+                    downloadCancelled = true;
+                    webClient.CancelAsync();
+                }
             };
 
             try
             {
-                using (var webClient = new WebClient())
-                {
-                    var lastBytes = 0L;
-                    var lastTime = DateTime.Now;
-                    var updateInterval = TimeSpan.FromSeconds(1);
+                webClient = new WebClient();
+                var lastBytes = 0L;
+                var lastTime = DateTime.Now;
+                var updateInterval = TimeSpan.FromSeconds(1);
 
-                    webClient.DownloadProgressChanged += (s, e) =>
+                webClient.DownloadProgressChanged += (s, e) =>
+                {
+                    if (downloadCancelled) return;
+
+                    Application.Current.Dispatcher.Invoke(() =>
                     {
                         progressBar.Value = e.ProgressPercentage;
                         
@@ -206,77 +289,168 @@ namespace SYSTools.Utils
                             var bytesChange = e.BytesReceived - lastBytes;
                             var speed = bytesChange / (now - lastTime).TotalSeconds;
                             
-                            string speedText;
+                            string speedText_value;
                             if (speed >= 1024 * 1024) // MB/s
                             {
-                                speedText = $"{speed / 1024 / 1024:F2} MB/s";
+                                speedText_value = $"下载速度：{speed / 1024 / 1024:F2} MB/s";
                             }
                             else if (speed >= 1024) // KB/s
                             {
-                                speedText = $"{speed / 1024:F2} KB/s";
+                                speedText_value = $"下载速度：{speed / 1024:F2} KB/s";
                             }
                             else // B/s
                             {
-                                speedText = $"{speed:F0} B/s";
+                                speedText_value = $"下载速度：{speed:F0} B/s";
                             }
 
-                            statusText.Text = $"已下载: {FormatFileSize(e.BytesReceived)} / {FormatFileSize(e.TotalBytesToReceive)} ({e.ProgressPercentage}%)\n" +
-                                            $"下载速度: {speedText}";
+                            statusText.Text = $"已下载：{FormatFileSize(e.BytesReceived)} / {FormatFileSize(e.TotalBytesToReceive)} ({e.ProgressPercentage}%)";
+                            speedText.Text = speedText_value;
 
                             lastBytes = e.BytesReceived;
                             lastTime = now;
                         }
-                    };
+                    });
+                };
 
-                    webClient.DownloadFileCompleted += async (s, e) =>
+                // 使用TaskCompletionSource来统一处理异步完成
+                var downloadTask = new TaskCompletionSource<bool>();
+
+                webClient.DownloadFileCompleted += (s, e) =>
+                {
+                    downloadCompleted = true;
+                    
+                    Application.Current.Dispatcher.Invoke(() =>
                     {
-                        progressDialog.Hide();
-                        if (e.Error == null && !e.Cancelled)
-                        {
-                            // 下载完成后再次验证文件类型
-                            byte[] fileHeader = new byte[4];
-                            using (var fs = File.OpenRead(tempPath))
-                            {
-                                fs.Read(fileHeader, 0, 4);
-                            }
-                            var actualFileType = DetectFileType(fileHeader);
+                        progressWindow.Close();
+                    });
 
-                            if (actualFileType != updateInfo.FileType)
-                            {
-                                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(
-                                    "更新文件类型验证失败，更新已取消", 
-                                    "更新错误",
-                                    MessageBoxButton.OK,
-                                    SegoeFluentIcons.Error
-                                );
-                                return;
-                            }
+                    if (downloadCancelled)
+                    {
+                        downloadTask.SetCanceled();
+                        return;
+                    }
 
-                            if (updateInfo.FileType == UpdateFileType.Executable)
-                            {
-                                Process.Start(tempPath);
-                                Application.Current.Shutdown();
-                            }
-                            else
-                            {
-                                await InstallZipUpdate(tempPath);
-                            }
-                        }
-                    };
+                    if (e.Error != null)
+                    {
+                        downloadException = e.Error;
+                        downloadTask.SetException(e.Error);
+                    }
+                    else if (e.Cancelled)
+                    {
+                        downloadTask.SetCanceled();
+                    }
+                    else
+                    {
+                        downloadTask.SetResult(true);
+                    }
+                };
 
-                    _ = progressDialog.ShowAsync();
-                    await webClient.DownloadFileTaskAsync(new Uri(updateInfo.DownloadUrl), tempPath);
-                }
+                // 显示窗口并开始下载
+                progressWindow.Show();
+                
+                // 开始下载并等待完成
+                webClient.DownloadFileAsync(new Uri(updateInfo.DownloadUrl), tempPath);
+                await downloadTask.Task;
+
+                // 下载成功后处理文件
+                await ProcessDownloadedFile(updateInfo, tempPath);
+            }
+            catch (OperationCanceledException)
+            {
+                // 用户取消，不显示错误
+                Debug.WriteLine("下载被用户取消");
             }
             catch (Exception ex)
             {
-                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(
-                    "下载更新失败: " + ex.Message, 
-                    "更新错误", 
-                    MessageBoxButton.OK, 
-                    SegoeFluentIcons.Error
-                );
+                if (progressWindow.IsVisible)
+                {
+                    progressWindow.Close();
+                }
+
+                if (!downloadCancelled)
+                {
+                    // 统一的错误处理
+                    string errorMessage = GetFriendlyErrorMessage(ex);
+                    MessageBox.Show(
+                        errorMessage + "\n\n请前往Github提交Issue和联系开发者。",
+                        "❌ 下载失败",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error
+                    );
+                }
             }
+            finally
+            {
+                webClient?.Dispose();
+            }
+        }
+
+        private static async Task ProcessDownloadedFile(UpdateInfo updateInfo, string tempPath)
+        {
+            // 下载完成后再次验证文件类型
+            byte[] fileHeader = new byte[4];
+            using (var fs = File.OpenRead(tempPath))
+            {
+                await fs.ReadAsync(fileHeader, 0, 4);
+            }
+            var actualFileType = DetectFileType(fileHeader);
+            Debug.WriteLine($"下载文件类型检测: 期望类型={updateInfo.FileType}, 实际类型={actualFileType}");
+
+            if (actualFileType != updateInfo.FileType)
+            {
+                throw new InvalidOperationException("更新文件类型验证失败，文件可能已损坏或不是有效的更新包。");
+            }
+
+            if (updateInfo.FileType == UpdateFileType.Executable)
+            {
+                Debug.WriteLine("检测到可执行文件更新，准备重启程序");
+                // 显示即将重启的提示
+                MessageBox.Show(
+                    "更新文件下载完成，程序将自动重启以完成更新。",
+                    "✅ 下载完成",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information
+                );
+                
+                Process.Start(tempPath);
+                Application.Current.Shutdown();
+            }
+            else
+            {
+                Debug.WriteLine("检测到ZIP包更新，准备调用 InstallZipUpdate");
+                Debug.WriteLine($"开始调用 InstallZipUpdate: {tempPath}");
+                await InstallZipUpdate(tempPath);
+                Debug.WriteLine("InstallZipUpdate 调用完成");
+            }
+        }
+
+        private static string GetFriendlyErrorMessage(Exception ex)
+        {
+            return ex switch
+            {
+                System.Net.WebException webEx when webEx.Status == System.Net.WebExceptionStatus.NameResolutionFailure => 
+                    "无法连接到更新服务器，请检查网络连接。",
+                
+                System.Net.WebException webEx when webEx.Status == System.Net.WebExceptionStatus.Timeout => 
+                    "下载超时，请检查网络连接或稍后重试。",
+                
+                System.Net.WebException webEx when webEx.Status == System.Net.WebExceptionStatus.ConnectFailure => 
+                    "无法连接到服务器，请检查网络设置。",
+                
+                UnauthorizedAccessException => 
+                    "权限不足，请以管理员身份运行程序。",
+                
+                DirectoryNotFoundException => 
+                    "目标目录不存在，请检查程序安装路径。",
+                
+                IOException ioEx when ioEx.Message.Contains("space") => 
+                    "磁盘空间不足，请清理磁盘空间后重试。",
+                
+                InvalidOperationException => 
+                    ex.Message,
+                
+                _ => $"下载更新时发生错误：\n{ex.Message}\n\n请检查网络连接或稍后重试。"
+            };
         }
 
         private static string FormatFileSize(long bytes)
@@ -319,11 +493,11 @@ namespace SYSTools.Utils
                 }
                 else
                 {
-                    iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(
-                        "找不到更新器程序", 
-                        "更新错误",
+                    MessageBox.Show(
+                        "❌ 更新失败",
+                        "找不到更新器程序文件。\n\n请确保 SYSTools.Updater.exe 文件存在于程序目录中，\n或前往Github提交Issue和联系开发者。",
                         MessageBoxButton.OK,
-                        SegoeFluentIcons.Error
+                        MessageBoxImage.Error
                     );
                     return;
                 }
@@ -350,19 +524,35 @@ namespace SYSTools.Utils
 
                 Process.Start(startInfo);
 
-                // 如果是软件更新，关闭当前进程
-                if (updateType == "software") { 
+                // 如果是软件更新，显示提示并关闭当前进程
+                if (updateType == "software") 
+                { 
+                    MessageBox.Show(
+                        "🔄 正在更新",
+                        "程序将在更新完成后自动重启。\n请稍等片刻...",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information
+                    );
                     Application.Current.Shutdown();
+                }
+                else
+                {
+                    MessageBox.Show(
+                        "🔄 工具包正在更新",
+                        "工具包正在更新，请稍等片刻...\n待工具解压完成",
+                        MessageBoxButton.OK, 
+                        MessageBoxImage.Information
+                    );
                 }
                 
             }
             catch (Exception ex)
             {
-                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(
-                    "启动更新失败: " + ex.Message, 
-                    "更新错误",
+                MessageBox.Show(
+                    "❌ 更新失败",
+                    $"启动更新程序时发生错误：\n{ex.Message}\n\n请稍后重试，或前往Github提交Issue和联系开发者。",
                     MessageBoxButton.OK,
-                    SegoeFluentIcons.Error
+                    MessageBoxImage.Error
                 );
             }
         }
