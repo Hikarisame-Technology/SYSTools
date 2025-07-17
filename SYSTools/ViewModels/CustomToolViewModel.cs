@@ -45,7 +45,7 @@ namespace SYSTools.ViewModels
         private async void AddTool()
         {
             AddToolDialog dialog = new AddToolDialog();
-            var result = await dialog.ShowAsync();
+            var result = await ContentDialogHelper.ShowAsync(dialog);
             if (result == iNKORE.UI.WPF.Modern.Controls.ContentDialogResult.Primary)
             {
                 var item = new ToolItem
@@ -73,24 +73,41 @@ namespace SYSTools.ViewModels
                 ToolItems.Add(item);
             }
         }
-        private void DeleteTool(ToolItem? item)
+
+        private async void DeleteTool(ToolItem? item)
         {
             if (item == null) return;
+            
             string message = string.Format(Lang.ConfirmDeleteMessage, item.Name);
-            var confirm = MessageBox.Show(message, Lang.ConfirmDeleteTitle, MessageBoxButton.OKCancel, MessageBoxImage.Question);
-            if (confirm == MessageBoxResult.OK)
+            var confirm = await ContentDialogHelper.ShowConfirmationAsync(
+                Lang.ConfirmDeleteTitle, 
+                message, 
+                "确定", 
+                "取消"
+            );
+            
+            if (confirm == iNKORE.UI.WPF.Modern.Controls.ContentDialogResult.Primary)
             {
                 ToolItems.Remove(item);
             }
         }
+
         private async void ModifyTool(ToolItem? item)
         {
             if (item == null) return;
+            
             string message = string.Format(Lang.ConfirmModifyMessage, item.Name);
-            var confirm = MessageBox.Show(message, Lang.ConfirmModifyTitle, MessageBoxButton.OKCancel, MessageBoxImage.Question);
-            if (confirm != MessageBoxResult.OK) return;
+            var confirm = await ContentDialogHelper.ShowConfirmationAsync(
+                Lang.ConfirmModifyTitle, 
+                message, 
+                "确定", 
+                "取消"
+            );
+            
+            if (confirm != iNKORE.UI.WPF.Modern.Controls.ContentDialogResult.Primary) return;
+            
             var dialog = new AddToolDialog(item);
-            var result = await dialog.ShowAsync();
+            var result = await ContentDialogHelper.ShowAsync(dialog);
             if (result == iNKORE.UI.WPF.Modern.Controls.ContentDialogResult.Primary)
             {
                 item.Name = dialog.ToolName;
