@@ -19,20 +19,6 @@ namespace SYSTools.Helpers
         private static readonly object _lock = new object();
         private static bool _isWindowStateMonitored = false;
 
-        private static string GetDialogTitle(ContentDialog dialog)
-        {
-            return dialog.Title?.ToString() ?? "Dialog";
-        }
-
-        private static string GetDialogContent(ContentDialog dialog)
-        {
-            if (dialog.Content is string str)
-                return str;
-            if (dialog.Content is TextBox tb)
-                return tb.Text;
-            return dialog.Content?.ToString() ?? "No content";
-        }
-
         public static async Task<ContentDialogResult> ShowAsync(ContentDialog dialog)
         {
             EnsureWindowStateMonitoring();
