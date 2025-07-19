@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using SYSTools.Utils;
 using SYSTools.Helpers;
 using iNKORE.UI.WPF.Modern.Controls;
+using System.Windows.Threading;
 
 namespace SYSTools.Pages
 {
@@ -197,6 +198,18 @@ namespace SYSTools.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             UpdateVersion.Text = Application.ResourceAssembly.GetName().Version.ToString();
+        }
+
+        private void SYSTools_SettingsExpander_Loaded(object sender, RoutedEventArgs e)
+        {
+            var expander = sender as SettingsExpander;
+            expander.Dispatcher.BeginInvoke(new Action(() => expander.IsExpanded = true), DispatcherPriority.Loaded);
+        }
+
+        private void Update_SettingsExpander_Loaded(object sender, RoutedEventArgs e)
+        {
+            var expander = sender as SettingsExpander;
+            expander.Dispatcher.BeginInvoke(new Action(() => expander.IsExpanded = true), DispatcherPriority.Loaded);
         }
     }
 

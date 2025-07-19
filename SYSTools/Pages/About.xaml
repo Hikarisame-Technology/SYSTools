@@ -19,7 +19,7 @@
 
             <ikw:SimpleStackPanel Spacing="10">
 
-                <muxc:SettingsExpander Header="SYSTools" Description="© 2025 Hikarisame Technology Studio. All rights reserved." IsExpanded="True">
+                <muxc:SettingsExpander Header="SYSTools" x:Name="SYSTools_SettingsExpander" Description="© 2025 Hikarisame Technology Studio. All rights reserved." Loaded="SYSTools_SettingsExpander_Loaded">
                     <muxc:SettingsExpander.HeaderIcon>
                         <Image Source="/SYSTools_LOGO_256.ico" RenderOptions.BitmapScalingMode="HighQuality"/>
                     </muxc:SettingsExpander.HeaderIcon>
@@ -91,7 +91,7 @@
 
                     </muxc:SettingsExpander.Items>
                 </muxc:SettingsExpander>
-                <muxc:SettingsExpander Header="{model:Resource Key=SYSToolsUpdate}" IsExpanded="True" Margin="0,0,0,10">
+                <muxc:SettingsExpander x:Name="Update_SettingsExpander" Header="{model:Resource Key=SYSToolsUpdate}" Margin="0,0,0,10" Loaded="Update_SettingsExpander_Loaded">
                     <muxc:SettingsExpander.HeaderIcon>
                         <muxc:FontIcon Glyph="&#xE117;"/>
                     </muxc:SettingsExpander.HeaderIcon>
