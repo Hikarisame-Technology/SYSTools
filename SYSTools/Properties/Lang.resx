@@ -474,4 +474,7 @@
   <data name="H2TestW_Text" xml:space="preserve">
     <value></value>
   </data>
+  <data name="OpenFolder" xml:space="preserve">
+    <value>Open Folder</value>
+  </data>
 </root>

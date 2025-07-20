@@ -474,4 +474,7 @@
   <data name="H2TestW_Text" xml:space="preserve">
     <value>H2testw是一款u盘读写速度测试和坏块检测软件，通过往待测目录写入数据的方式测试u盘的实际写入速度校验写入的数据是否正确。</value>
   </data>
+  <data name="OpenFolder" xml:space="preserve">
+    <value>打开目录</value>
+  </data>
 </root>
