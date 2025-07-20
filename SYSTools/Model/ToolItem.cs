@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using SYSTools.Helpers;
 using System.Windows.Media;
+using System.IO;
 
 namespace SYSTools.Model
 {
@@ -95,7 +96,8 @@ namespace SYSTools.Model
                 {
                     FileName = ExePath,
                     Arguments = Arguments,
-                    UseShellExecute = true
+                    UseShellExecute = true,
+                    WorkingDirectory = Path.GetDirectoryName(ExePath) ?? string.Empty
                 };
                 Process.Start(psi);
             }
