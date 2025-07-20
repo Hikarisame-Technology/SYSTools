@@ -846,6 +846,15 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
+        public static string SDI_Text {
+            get {
+                return ResourceManager.GetString("SDI_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
         public static string SelectBackgroundImage {
             get {
                 return ResourceManager.GetString("SelectBackgroundImage", resourceCulture);
@@ -1020,6 +1029,15 @@ namespace SYSTools.Properties {
         public static string ToolkitUpdate {
             get {
                 return ResourceManager.GetString("ToolkitUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string UncategorizedTools_Content {
+            get {
+                return ResourceManager.GetString("UncategorizedTools_Content", resourceCulture);
             }
         }
         

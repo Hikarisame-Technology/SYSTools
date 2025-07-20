@@ -55,6 +55,15 @@
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
 
+                <muxc:NavigationViewItemSeparator/>
+
+
+                <muxc:NavigationViewItem Content="{model:Resource Key=UncategorizedTools_Content}" Tag="SYSTools.ToolPages.UncategorizedTools" x:Name="UncategorizedTools" IsTabStop="False">
+                    <muxc:NavigationViewItem.Icon>
+                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE8B1;" />
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+
             </muxc:NavigationView.MenuItems>
 
             <muxc:Frame x:Name="CurrentPage" />

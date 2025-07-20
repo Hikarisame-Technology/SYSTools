@@ -477,4 +477,10 @@
   <data name="OpenFolder" xml:space="preserve">
     <value>Open Folder</value>
   </data>
+  <data name="UncategorizedTools_Content" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SDI_Text" xml:space="preserve">
+    <value></value>
+  </data>
 </root>

@@ -19,7 +19,8 @@ namespace SYSTools.Pages
             { typeof(TestTools), new TestTools() },
             { typeof(DiskTools), new DiskTools() },
             { typeof(PeripheralsTools), new PeripheralsTools() },
-            { typeof(RepairingTools), new RepairingTools() }
+            { typeof(RepairingTools), new RepairingTools() },
+            { typeof(UncategorizedTools), new UncategorizedTools() }
         };
 
         public Toolkit()

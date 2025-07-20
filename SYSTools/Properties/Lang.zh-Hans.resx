@@ -477,4 +477,10 @@
   <data name="OpenFolder" xml:space="preserve">
     <value>打开目录</value>
   </data>
+  <data name="UncategorizedTools_Content" xml:space="preserve">
+    <value>未分类工具</value>
+  </data>
+  <data name="SDI_Text" xml:space="preserve">
+    <value>使用该工具可快速查找并安装所有丢失的驱动程序。</value>
+  </data>
 </root>

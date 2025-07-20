@@ -477,4 +477,10 @@
   <data name="OpenFolder">
     <value>Open Folder</value>
   </data>
+  <data name="UncategorizedTools_Content" xml:space="preserve">
+    <value>Uncategorized Tools</value>
+  </data>
+  <data name="SDI_Text" xml:space="preserve">
+    <value>Use this tool to quickly find and install all missing drivers.</value>
+  </data>
 </root>
