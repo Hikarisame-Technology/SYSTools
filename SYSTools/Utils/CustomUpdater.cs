@@ -97,24 +97,57 @@ namespace SYSTools.Utils
                 );
                 return;
             }
-
-            // 计算文件大小显示
+            // 仅将 ReleaseNotes 设为可滚动区域，其他信息保持静态
             string sizeDisplay = FormatFileSize(updateInfo.FileSize);
-
-            // 创建更美观的更新内容
-            string content = $"🎉 发现新版本 v{updateInfo.Version}\n\n" +
-                           $"📝 更新说明：\n" +
-                           $"{updateInfo.ReleaseNotes}\n\n" +
-                           $"📦 文件大小：{sizeDisplay}\n" +
-                           $"🔧 更新类型：{(updateInfo.FileType == UpdateFileType.Executable ? "可执行文件" : "压缩包")}\n\n" +
-                           $"是否立即下载并安装此更新？";
-
-            var result = await ContentDialogHelper.ShowConfirmationAsync(
-                "发现新版本",
-                content,
-                "立即更新",
-                "取消"
-            );
+            // 创建显示控件
+            var headerText = new TextBlock
+            {
+                Text = $"🎉 发现新版本 v{updateInfo.Version}",
+                FontSize = 16,
+                FontWeight = FontWeights.SemiBold,
+                Margin = new Thickness(0, 0, 0, 10)
+            };
+            var infoText = new TextBlock
+            {
+                Text = $"📦 文件大小：{sizeDisplay}  🔧 更新类型：{(updateInfo.FileType == UpdateFileType.Executable ? "可执行文件" : "压缩包")}",
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(0, 0, 0, 10)
+            };
+            var notesLabel = new TextBlock
+            {
+                Text = "📝 更新说明：",
+                FontWeight = FontWeights.SemiBold,
+                Margin = new Thickness(0, 0, 0, 5)
+            };
+            var notesBox = new TextBox
+            {
+                Text = updateInfo.ReleaseNotes,
+                AcceptsReturn = true,
+                TextWrapping = TextWrapping.Wrap,
+                VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+                IsReadOnly = true,
+                MaxHeight = 200
+            };
+            var footerText = new TextBlock
+            {
+                Text = "是否立即下载并安装此更新？",
+                Margin = new Thickness(0, 10, 0, 0)
+            };
+            var panel = new StackPanel();
+            panel.Children.Add(headerText);
+            panel.Children.Add(infoText);
+            panel.Children.Add(notesLabel);
+            panel.Children.Add(notesBox);
+            panel.Children.Add(footerText);
+            var dialog = new ContentDialog
+            {
+                Title = "发现新版本",
+                Content = panel,
+                PrimaryButtonText = "立即更新",
+                CloseButtonText = "取消",
+                DefaultButton = ContentDialogButton.Primary
+            };
+            var result = await ContentDialogHelper.ShowAsync(dialog);
 
             if (result == ContentDialogResult.Primary)
             {
