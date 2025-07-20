@@ -84,6 +84,7 @@
     </Compile>
     <Compile Include="Helpers\ContentDialogHelper.cs" />
     <Compile Include="Helpers\DragDropHelper.cs" />
+    <Compile Include="Helpers\ExeHelper.cs" />
     <Compile Include="Helpers\IconHelper.cs" />
     <Compile Include="Helpers\LocalizationManager.cs" />
     <Compile Include="Helpers\LowLevelDragDrop.cs" />
@@ -138,6 +139,9 @@
     </Compile>
     <Compile Include="ToolPages\TestTools.xaml.cs">
       <DependentUpon>TestTools.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ToolPages\UncategorizedTools.xaml.cs">
+      <DependentUpon>UncategorizedTools.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\CustomUpdater.cs" />
     <Compile Include="ViewModels\CustomToolViewModel.cs" />
@@ -216,6 +220,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ToolPages\TestTools.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ToolPages\UncategorizedTools.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -343,6 +351,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\UncategorizedToolsICON\SDI.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
