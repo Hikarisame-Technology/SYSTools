@@ -9,6 +9,7 @@ using SYSTools.Helpers;
 using SYSTools.Model;
 using SYSTools.Properties;
 using MessageBox = iNKORE.UI.WPF.Modern.Controls.MessageBox;
+using System.IO;
 
 namespace SYSTools.ViewModels
 {
@@ -32,12 +33,14 @@ namespace SYSTools.ViewModels
         public ICommand AddToolCommand { get; }
         public ICommand DeleteToolCommand { get; }
         public ICommand ModifyToolCommand { get; }
+        public ICommand OpenFolderCommand { get; }
 
         public CustomToolViewModel()
         {
             AddToolCommand = new RelayCommand(_ => AddTool());
             DeleteToolCommand = new RelayCommand(p => DeleteTool(p as ToolItem));
             ModifyToolCommand = new RelayCommand(p => ModifyTool(p as ToolItem));
+            OpenFolderCommand = new RelayCommand(p => OpenFolder(p as ToolItem));
             LoadCustomTools();
             ToolItems.CollectionChanged += (s, e) => SaveCustomTools();
         }
@@ -124,6 +127,28 @@ namespace SYSTools.ViewModels
                     try { item.IconSource = new System.Windows.Media.Imaging.BitmapImage(new Uri(dialog.IconPath)); }
                     catch { }
                 }
+            }
+        }
+
+        private void OpenFolder(ToolItem item)
+        {
+            if (item == null) return;
+            try
+            {
+                var folder = Path.GetDirectoryName(item.ExePath);
+                if (!string.IsNullOrEmpty(folder) && Directory.Exists(folder))
+                {
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = "explorer.exe",
+                        Arguments = folder,
+                        UseShellExecute = true
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"无法打开目录 '{item.Name}': {ex.Message}", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

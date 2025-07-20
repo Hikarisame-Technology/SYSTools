@@ -65,6 +65,9 @@
                                         <MenuItem Header="{model:Resource Key=Modify}"
                                                   Command="{Binding PlacementTarget.Tag.ModifyToolCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
                                                   CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                                        <MenuItem Header="{model:Resource Key=OpenFolder}"
+                                                  Command="{Binding PlacementTarget.Tag.OpenFolderCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                                  CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
                                         <MenuItem Header="{model:Resource Key=Delete}"
                                                   Command="{Binding PlacementTarget.Tag.DeleteToolCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
                                                   CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
