@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using SYSTools.Helpers;
 
 namespace SYSTools.ToolPages
 {
@@ -12,8 +13,9 @@ namespace SYSTools.ToolPages
     /// </summary>
     public partial class PeripheralsTools : Page
     {
+        private readonly ExeHelper _exeHelper = new ExeHelper();
         string AppPath = Directory.GetCurrentDirectory();
-        string PeripheralsTools_Path = @"Software Package\PeripheralsTools\";       
+        string Tools_Path = @"Software Package\PeripheralsTools\";       
 
         public PeripheralsTools()
         {
@@ -34,51 +36,33 @@ namespace SYSTools.ToolPages
 
         public void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (!DirExist(Path.Combine(AppPath, PeripheralsTools_Path)))
+            if (!DirExist(Path.Combine(AppPath, Tools_Path)))
             {
-                Directory.CreateDirectory(Path.Combine(AppPath, PeripheralsTools_Path));
+                Directory.CreateDirectory(Path.Combine(AppPath, Tools_Path));
             }
         }
 
         public void TextBlock_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (DirExist(Path.Combine(AppPath, PeripheralsTools_Path)))
+            if (DirExist(Path.Combine(AppPath, Tools_Path)))
             {
-                Process.Start("explorer.exe", Path.Combine(AppPath, PeripheralsTools_Path));
+                Process.Start("explorer.exe", Path.Combine(AppPath, Tools_Path));
             }
         }
-        public void HandleMouseClick(string ToolName, string ExeName)
-        {
-            string ExePath = Path.Combine(AppPath, PeripheralsTools_Path, ToolName, ExeName + ".exe");
-            if (FileExist(ExePath))
-            {
-                try
-                {
-                    Process.Start(ExePath);
-                }
-                catch (Exception e)
-                {
-                    iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("请检查程序包内是否存在该工具, 或工具存放位置是否正确 \r\n 或检查杀毒软件是否拦截.", "找不到工具启动文件", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-            }
-            else
-            {
-                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("请检查程序包内是否存在该工具 \r\n 或工具存放位置是否正确", "无法打开该工具", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-        }
+
         private void HKBTest_Click(object sender, RoutedEventArgs e)
         {
-            HandleMouseClick("HKBTest", "HKBTest");
+            _exeHelper.HandleMouseClick(Tools_Path,"HKBTest", "HKBTest");
         }
 
         private void MouseTest_Click(object sender, RoutedEventArgs e)
         {
-            HandleMouseClick("MouseTest", "MouseTest");
+            _exeHelper.HandleMouseClick(Tools_Path,"MouseTest", "MouseTest");
         }
 
         private void MouseRate_Click(object sender, RoutedEventArgs e)
         {
-            HandleMouseClick("MouseRate", "MouseRate");
+            _exeHelper.HandleMouseClick(Tools_Path,"MouseRate", "MouseRate");
         }
     }
 }

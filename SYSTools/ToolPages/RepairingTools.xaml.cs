@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using SYSTools.Helpers;
 
 namespace SYSTools.ToolPages
 {
@@ -12,8 +13,9 @@ namespace SYSTools.ToolPages
     /// </summary>
     public partial class RepairingTools : Page
     {
+        private readonly ExeHelper _exeHelper = new ExeHelper();
         string AppPath = Directory.GetCurrentDirectory();
-        string RepairingTools_Path = @"Software Package\RepairingTools\";        
+        string Tools_Path = @"Software Package\RepairingTools\";        
 
         public RepairingTools()
         {
@@ -34,47 +36,28 @@ namespace SYSTools.ToolPages
 
         public void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (!DirExist(Path.Combine(AppPath, RepairingTools_Path)))
+            if (!DirExist(Path.Combine(AppPath, Tools_Path)))
             {
-                Directory.CreateDirectory(Path.Combine(AppPath, RepairingTools_Path));
+                Directory.CreateDirectory(Path.Combine(AppPath, Tools_Path));
             }
         }
 
         public void TextBlock_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (DirExist(Path.Combine(AppPath, RepairingTools_Path)))
+            if (DirExist(Path.Combine(AppPath, Tools_Path)))
             {
-                Process.Start("explorer.exe", Path.Combine(AppPath, RepairingTools_Path));
-            }
-        }
-        public void HandleMouseClick(string ToolName, string ExeName)
-        {
-            string ExePath = Path.Combine(AppPath, RepairingTools_Path, ToolName, ExeName + ".exe");
-            if (FileExist(ExePath))
-            {
-                try
-                {
-                    Process.Start(ExePath);
-                }
-                catch (Exception e)
-                {
-                    iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("请检查程序包内是否存在该工具, 或工具存放位置是否正确 \r\n 或检查杀毒软件是否拦截.", "找不到工具启动文件", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-            }
-            else
-            {
-                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("请检查程序包内是否存在该工具 \r\n 或工具存放位置是否正确", "无法打开该工具", MessageBoxButton.OK, MessageBoxImage.Information);
+                Process.Start("explorer.exe", Path.Combine(AppPath, Tools_Path));
             }
         }
 
         private void DirectX_Click(object sender, RoutedEventArgs e)
         {
-            HandleMouseClick("DirectX", "DirectXInstall");
+            _exeHelper.HandleMouseClick(Tools_Path,"DirectX", "DirectXInstall");
         }
 
         private void VisualC_Click(object sender, RoutedEventArgs e)
         {
-            HandleMouseClick("Visual-C-Runtimes", "VisualCInstall");
+            _exeHelper.HandleMouseClick(Tools_Path,"Visual-C-Runtimes", "VisualCInstall");
         }
     }
 }
