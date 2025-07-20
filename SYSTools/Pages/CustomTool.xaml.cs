@@ -259,18 +259,42 @@ namespace SYSTools.Pages
 
         private async Task<bool> AddShortcutFile(string lnkPath, CustomToolViewModel viewModel)
         {
-            // 解析快捷方式
+            // 解析快捷方式路径和参数
             try
             {
-                var targetPath = GetShortcutTarget(lnkPath);
+                string targetPath = null;
+                string arguments = string.Empty;
+                // 尝试通过 WScript.Shell 获取快捷方式属性
+                try
+                {
+                    Type shellType = Type.GetTypeFromProgID("WScript.Shell");
+                    if (shellType != null)
+                    {
+                        dynamic shell = Activator.CreateInstance(shellType);
+                        dynamic shortcut = shell.CreateShortcut(lnkPath);
+                        if (shortcut != null)
+                        {
+                            targetPath = shortcut.TargetPath as string;
+                            arguments = shortcut.Arguments as string ?? string.Empty;
+                        }
+                    }
+                }
+                catch
+                {
+                }
+                // 回退到原有方法解析目标路径
+                if (string.IsNullOrEmpty(targetPath) || !File.Exists(targetPath))
+                {
+                    targetPath = GetShortcutTarget(lnkPath);
+                }
                 if (string.IsNullOrEmpty(targetPath) || !File.Exists(targetPath))
                 {
                     MessageBox.Show($"无法解析快捷方式: {Path.GetFileName(lnkPath)}", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
                 }
-
+                 
                 var toolName = Path.GetFileNameWithoutExtension(lnkPath);
-                
+                 
                 if (viewModel.ToolItems.Any(t => t.Name.Equals(toolName, StringComparison.OrdinalIgnoreCase)))
                 {
                     var result = MessageBox.Show($"已存在名为 '{toolName}' 的工具，是否替换？", "确认", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -287,7 +311,7 @@ namespace SYSTools.Pages
                     Name = toolName,
                     ExePath = targetPath,
                     IconPath = targetPath,
-                    Arguments = ""
+                    Arguments = arguments
                 };
                 try
                 {
