@@ -402,9 +402,10 @@ namespace SYSTools.Utils
 
                 if (!downloadCancelled)
                 {
-                    // 统一的错误处理
+                    // 统一的错误处理 - 添加owner参数
                     string errorMessage = GetFriendlyErrorMessage(ex);
                     MessageBox.Show(
+                        Application.Current.MainWindow, // 添加owner参数
                         errorMessage + "\n\n请前往Github提交Issue和联系开发者。",
                         "❌ 下载失败",
                         MessageBoxButton.OK,
@@ -437,8 +438,9 @@ namespace SYSTools.Utils
             if (updateInfo.FileType == UpdateFileType.Executable)
             {
                 Debug.WriteLine("检测到可执行文件更新，准备重启程序");
-                // 显示即将重启的提示
+                // 显示即将重启的提示 - 添加owner参数
                 MessageBox.Show(
+                    Application.Current.MainWindow, // 添加owner参数
                     "更新文件下载完成，程序将自动重启以完成更新。",
                     "✅ 下载完成",
                     MessageBoxButton.OK,
@@ -527,8 +529,9 @@ namespace SYSTools.Utils
                 else
                 {
                     MessageBox.Show(
-                        "❌ 更新失败",
+                        Application.Current.MainWindow, // 添加owner参数
                         "找不到更新器程序文件。\n\n请确保 SYSTools.Updater.exe 文件存在于程序目录中，\n或前往Github提交Issue和联系开发者。",
+                        "❌ 更新失败",
                         MessageBoxButton.OK,
                         MessageBoxImage.Error
                     );
@@ -561,8 +564,9 @@ namespace SYSTools.Utils
                 if (updateType == "software") 
                 { 
                     MessageBox.Show(
-                        "🔄 正在更新",
+                        Application.Current.MainWindow, // 添加owner参数
                         "程序将在更新完成后自动重启。\n请稍等片刻...",
+                        "🔄 正在更新",
                         MessageBoxButton.OK,
                         MessageBoxImage.Information
                     );
@@ -571,8 +575,9 @@ namespace SYSTools.Utils
                 else
                 {
                     MessageBox.Show(
-                        "🔄 工具包正在更新",
+                        Application.Current.MainWindow, // 添加owner参数
                         "工具包正在更新，请稍等片刻...\n待工具解压完成",
+                        "🔄 工具包正在更新",
                         MessageBoxButton.OK, 
                         MessageBoxImage.Information
                     );
@@ -582,8 +587,9 @@ namespace SYSTools.Utils
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "❌ 更新失败",
+                    Application.Current.MainWindow, // 添加owner参数
                     $"启动更新程序时发生错误：\n{ex.Message}\n\n请稍后重试，或前往Github提交Issue和联系开发者。",
+                    "❌ 更新失败",
                     MessageBoxButton.OK,
                     MessageBoxImage.Error
                 );

@@ -74,7 +74,7 @@ namespace SYSTools.Pages
                 
                 if (currentVersion >= updateInfo.Version)
                 {
-                    iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("暂无更新🤐", "暂未获取更新");
+                    iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(Application.Current.MainWindow, "暂无更新🤐", "暂未获取更新");
                 }
                 else
                 {
@@ -120,7 +120,7 @@ namespace SYSTools.Pages
 
                 if (currentVersion >= updateInfo.Version)
                 {
-                    iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("暂无更新🤐", "暂未获取更新");
+                    iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(Application.Current.MainWindow, "暂无更新🤐", "暂未获取更新");
                 }
                 else
                 {
@@ -129,7 +129,7 @@ namespace SYSTools.Pages
             }
             catch (Exception ex)
             {
-                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("检查更新失败", ex.Message);
+                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(Application.Current.MainWindow, "检查更新失败", ex.Message);
             }
         }
 

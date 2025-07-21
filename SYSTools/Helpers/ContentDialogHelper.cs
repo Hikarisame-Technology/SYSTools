@@ -297,10 +297,25 @@ namespace SYSTools.Helpers
                 {
                     try
                     {
-                        // If window is minimized, restore it
+                        // Store the current state before any modifications
+                        var currentState = mainWindow.WindowState;
+                        
+                        // If window is minimized, restore it to its previous state
+                        // We need to check if it was maximized before being minimized
                         if (mainWindow.WindowState == WindowState.Minimized)
                         {
-                            mainWindow.WindowState = WindowState.Normal;
+                            // Try to restore to maximized if that was the previous state
+                            // Check if the window was maximized by looking at its RestoreBounds
+                            if (mainWindow.RestoreBounds.IsEmpty || 
+                                (mainWindow.RestoreBounds.Width >= SystemParameters.PrimaryScreenWidth * 0.9 &&
+                                 mainWindow.RestoreBounds.Height >= SystemParameters.PrimaryScreenHeight * 0.9))
+                            {
+                                mainWindow.WindowState = WindowState.Maximized;
+                            }
+                            else
+                            {
+                                mainWindow.WindowState = WindowState.Normal;
+                            }
                         }
 
                         // Make sure the window is visible
@@ -328,7 +343,12 @@ namespace SYSTools.Helpers
                             if (handle != IntPtr.Zero)
                             {
                                 SetForegroundWindow(handle);
-                                ShowWindow(handle, 9); // SW_RESTORE
+                                // Only restore if the window is actually minimized
+                                // SW_RESTORE (9) would change maximized windows to normal size
+                                if (mainWindow.WindowState == WindowState.Minimized)
+                                {
+                                    ShowWindow(handle, 9); // SW_RESTORE
+                                }
                                 SetForegroundWindow(handle); // Call twice for better results
                             }
                         }
