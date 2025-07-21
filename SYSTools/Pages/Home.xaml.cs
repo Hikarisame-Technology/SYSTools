@@ -110,8 +110,8 @@ namespace SYSTools.Pages
             {
                 // 根据当前语言选择公告URL
                 string noticeUrl = System.Globalization.CultureInfo.CurrentUICulture.Name.StartsWith("zh") 
-                    ? "http://systools.hksstudio.work/PublicNotice"          // 中文公告 Notice变更News但Url不修改
-                    : "http://systools.hksstudio.work/PublicNotice_EN";      // 英文公告
+                    ? "https://systools.hksstudio.work/PublicNotice"          // 中文公告 Notice变更News但Url不修改
+                    : "https://systools.hksstudio.work/PublicNotice_EN";      // 英文公告
 
                 HttpResponseMessage response = await client.GetAsync(noticeUrl);
                 response.EnsureSuccessStatusCode();
