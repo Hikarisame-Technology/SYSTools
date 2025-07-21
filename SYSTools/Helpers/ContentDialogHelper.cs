@@ -296,16 +296,9 @@ namespace SYSTools.Helpers
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     try
-                    {
-                        // Store the current state before any modifications
-                        var currentState = mainWindow.WindowState;
-                        
-                        // If window is minimized, restore it to its previous state
-                        // We need to check if it was maximized before being minimized
+                    {                        
                         if (mainWindow.WindowState == WindowState.Minimized)
                         {
-                            // Try to restore to maximized if that was the previous state
-                            // Check if the window was maximized by looking at its RestoreBounds
                             if (mainWindow.RestoreBounds.IsEmpty || 
                                 (mainWindow.RestoreBounds.Width >= SystemParameters.PrimaryScreenWidth * 0.9 &&
                                  mainWindow.RestoreBounds.Height >= SystemParameters.PrimaryScreenHeight * 0.9))
@@ -318,17 +311,14 @@ namespace SYSTools.Helpers
                             }
                         }
 
-                        // Make sure the window is visible
                         if (!mainWindow.IsVisible)
                         {
                             mainWindow.Show();
                         }
 
-                        // Bring window to front and activate it
                         mainWindow.Activate();
                         mainWindow.Focus();
 
-                        // Force the window to be on top temporarily
                         var wasTopmost = mainWindow.Topmost;
                         mainWindow.Topmost = true;
                         Application.Current.Dispatcher.BeginInvoke(new Action(() =>
@@ -336,30 +326,27 @@ namespace SYSTools.Helpers
                             mainWindow.Topmost = wasTopmost;
                         }), System.Windows.Threading.DispatcherPriority.Background);
 
-                        // Alternative method to bring to front on Windows
                         try
                         {
                             var handle = new System.Windows.Interop.WindowInteropHelper(mainWindow).Handle;
                             if (handle != IntPtr.Zero)
                             {
                                 SetForegroundWindow(handle);
-                                // Only restore if the window is actually minimized
-                                // SW_RESTORE (9) would change maximized windows to normal size
                                 if (mainWindow.WindowState == WindowState.Minimized)
                                 {
-                                    ShowWindow(handle, 9); // SW_RESTORE
+                                    ShowWindow(handle, 9); 
                                 }
-                                SetForegroundWindow(handle); // Call twice for better results
+                                SetForegroundWindow(handle);
                             }
                         }
                         catch
                         {
-                            // Fallback if P/Invoke fails
+
                         }
                     }
                     catch
                     {
-                        // Ignore window management errors
+                        
                     }
                 });
             }
