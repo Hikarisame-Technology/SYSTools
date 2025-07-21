@@ -57,12 +57,12 @@ namespace SYSTools.ToolPages
 
         private void CrystalDiskInfo_Click(object sender, RoutedEventArgs e)
         {
-            _exeHelper.HandleMouseClick(Tools_Path,"CrystalDiskInfo", "CrystalDiskInfo");
+            _exeHelper.HandleMouseClick(Tools_Path,"CrystalDiskInfo", "DiskInfo32S", "DiskInfo64S");
         }
 
         private void CrystalDiskMark_Click(object sender, RoutedEventArgs e)
         {
-            _exeHelper.HandleMouseClick(Tools_Path,"CrystalDiskMark", "CrystalDiskMark");
+            _exeHelper.HandleMouseClick(Tools_Path,"CrystalDiskMark", "DiskMark32S", "DiskMark64S");
         }
 
         private void DiskBenchmark_Click(object sender, RoutedEventArgs e)
@@ -72,7 +72,7 @@ namespace SYSTools.ToolPages
 
         private void DiskGenius_Click(object sender, RoutedEventArgs e)
         {
-            _exeHelper.HandleMouseClick(Tools_Path,"DiskGenius", "DiskGenius");
+            _exeHelper.HandleMouseClick(Tools_Path,"DiskGenius", "DiskGenius_x86/DiskGenius", "DiskGenius_x64/DiskGenius");
         }
 
         private void HDTune_Click(object sender, RoutedEventArgs e)
@@ -92,7 +92,7 @@ namespace SYSTools.ToolPages
 
         private void SSDZ_Click(object sender, RoutedEventArgs e)
         {
-            _exeHelper.HandleMouseClick(Tools_Path,"SSDZ", "SSDZ");
+            _exeHelper.HandleMouseClick(Tools_Path,"SSDZ", "SSD-Z");
         }
 
         private void Victoria_Click(object sender, RoutedEventArgs e)

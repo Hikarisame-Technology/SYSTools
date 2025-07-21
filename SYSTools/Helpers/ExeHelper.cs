@@ -37,7 +37,6 @@ namespace SYSTools.Helpers
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ExePath);
                     iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(
                         "请检查程序包内是否存在该工具, 或工具存放位置是否正确 \r\n 或检查杀毒软件是否拦截.",
                         "找不到工具启动文件",
@@ -47,7 +46,6 @@ namespace SYSTools.Helpers
             }
             else
             {
-                MessageBox.Show(ExePath);
                 iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(
                     "请检查程序包内是否存在该工具 \r\n 或工具存放位置是否正确",
                     "无法打开该工具",

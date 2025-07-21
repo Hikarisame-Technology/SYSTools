@@ -51,17 +51,17 @@ namespace SYSTools.ToolPages
 
         private void Prime95_Click(object sender, RoutedEventArgs e)
         {
-            _exeHelper.HandleMouseClick(Tools_Path,"Prime95", "Prime95");
+            _exeHelper.HandleMouseClick(Tools_Path,"Prime95", "p95.win32/prime95", "p95.win64/prime95");
         }
 
         private void IntelBurnTest_Click(object sender, RoutedEventArgs e)
         {
-            _exeHelper.HandleMouseClick(Tools_Path,"IntelBurnTest", "IntelBurnTest");
+            _exeHelper.HandleMouseClick(Tools_Path,"IntelBurnTest", "IntelBurnTestV2");
         }
 
         private void FurMark_Click(object sender, RoutedEventArgs e)
         {
-            _exeHelper.HandleMouseClick(Tools_Path,"FurMark", "FurMark");
+            _exeHelper.HandleMouseClick(Tools_Path,"FurMark", "FurMark_win32/FurMark_GUI", "FurMark_win64/FurMark_GUI");
         }
 
         private void MemTest_Click(object sender, RoutedEventArgs e)

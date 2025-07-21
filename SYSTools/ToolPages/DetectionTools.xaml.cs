@@ -59,22 +59,22 @@ namespace SYSTools.ToolPages
 
         private void CPUZ_Click(object sender, RoutedEventArgs e)
         {
-            _exeHelper.HandleMouseClick(Tools_Path,"CPUZ", "CPUZ");
+            _exeHelper.HandleMouseClick(Tools_Path, "CPUZ", "cpuz_x32", "cpuz_x64");
         }
 
         private void GPUZ_Click(object sender, RoutedEventArgs e)
         {
-            _exeHelper.HandleMouseClick(Tools_Path,"GPUZ", "GPUZ");
+            _exeHelper.HandleMouseClick(Tools_Path,"GPUZ", "GPU-Z");
         }
 
         private void HWinfo_Click(object sender, RoutedEventArgs e)
         {
-            _exeHelper.HandleMouseClick(Tools_Path,"HWinfo", "HWinfo");
+            _exeHelper.HandleMouseClick(Tools_Path,"HWinfo", "HWiNFO32", "HWiNFO64");
         }
 
         private void HWmonitor_Click(object sender, RoutedEventArgs e)
         {
-            _exeHelper.HandleMouseClick(Tools_Path,"HWmonitor", "HWmonitor");
+            _exeHelper.HandleMouseClick(Tools_Path,"HWmonitor", "HWMonitor_x32", "HWMonitor_x64");
         }
 
     }
