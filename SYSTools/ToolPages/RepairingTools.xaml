@@ -9,43 +9,30 @@
       d:DesignWidth="1040" d:DesignHeight="560"
       KeepAlive="True"
       Title="RepairingTools" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="560" Loaded="Page_Loaded" >
-
-
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <ScrollViewer  VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <!--按钮固定上下大小66(px?)-->
                 <TextBlock Text="该页工具存放于'应用根目录/Software Package/RepairingTools/'文件夹内(鼠标右键点击这条文字可打开文件夹)       下列工具请单击打开" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" FontSize="10" Height="13" MouseRightButtonDown="TextBlock_MouseRightButtonDown"/>
-
-                <Button x:Name="DirectX" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="DirectX_Click" Background="{x:Null}" IsEnabled="False">
-                    <TextBlock><InlineUIContainer>
-                            <Image Source="/SYSTools;component/Resources/Icon/RepairingToolsICON/DirectX.png" Width="50" Height="50"/>
-                        </InlineUIContainer>
-                        <InlineUIContainer>
-                            <TextBlock Text="DirectX安装工具" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
-                        </InlineUIContainer>
-                        <InlineUIContainer>
-                            <TextBlock Text="用于安装DirectX运行库" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13"/>
-                        </InlineUIContainer>
-                    </TextBlock>
+                <Button x:Name="DirectX" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="DirectX_Click" Background="Transparent" IsEnabled="False">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" IsHitTestVisible="False">
+                        <Image Source="/SYSTools;component/Resources/Icon/RepairingToolsICON/DirectX.png" Width="50" Height="50"  Margin="0,0,20,0"/>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <TextBlock Text="DirectX安装工具" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="15"/>
+                            <TextBlock Text="用于安装DirectX运行库" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="10" Height="13"/>
+                        </StackPanel>
+                    </StackPanel>
                 </Button>
-
-                <Button x:Name="VisualC" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="VisualC_Click" Background="{x:Null}" IsEnabled="False">
-                    <TextBlock><InlineUIContainer>
-                            <Image Source="/SYSTools;component/Resources/Icon/RepairingToolsICON/Visual-C-Runtimes.png" Width="50" Height="50"/>
-                        </InlineUIContainer>
-                        <InlineUIContainer>
-                            <TextBlock Text="VisualC运行库安装工具" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="166"/>
-                        </InlineUIContainer>
-                        <InlineUIContainer>
-                            <TextBlock Text="用于安装VisualC运行库" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-170,-11,0,0" FontSize="10" Height="13"/>
-                        </InlineUIContainer>
-                    </TextBlock>
+                <Button x:Name="VisualC" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="VisualC_Click" Background="Transparent" IsEnabled="False">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" IsHitTestVisible="False">
+                        <Image Source="/SYSTools;component/Resources/Icon/RepairingToolsICON/Visual-C-Runtimes.png" Width="50" Height="50"  Margin="0,0,20,0"/>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <TextBlock Text="VisualC运行库安装工具" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="15"/>
+                            <TextBlock Text="用于安装VisualC运行库" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="10" Height="13"/>
+                        </StackPanel>
+                    </StackPanel>
                 </Button>
-
             </StackPanel>
         </ScrollViewer>
-
     </Grid>
-
 </Page>

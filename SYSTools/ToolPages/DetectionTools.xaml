@@ -10,73 +10,57 @@
       d:DesignWidth="1040" d:DesignHeight="560"
       KeepAlive="True"
       Title="DetectionTools" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  MinWidth="1040" MinHeight="560" Loaded="Page_Loaded" >
-
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <ScrollViewer  VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <TextBlock Text="该页工具存放于'应用根目录/Software Package/DetectionTools/'文件夹内(鼠标右键点击这条文字可打开文件夹)       下列工具请单击打开" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" FontSize="10" Height="13" MouseRightButtonDown="TextBlock_MouseRightButtonDown"/>
                 <!--按钮固定上下大小66(px?)-->
-                <Button x:Name="Aida64" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="Aida64_Click" Background="{x:Null}">
-                    <TextBlock><InlineUIContainer>
-                            <Image Source="/SYSTools;component/Resources/Icon/DetectionICON/Aida64.png" Width="50" Height="50"/>
-                        </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="Aida64" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
-                        </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="{model:Resource Key=AIDA64_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,10,0" FontSize="10" Height="13"/>
-                        </InlineUIContainer>
-
-                    </TextBlock>
+                <Button x:Name="Aida64" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="Aida64_Click" Background="Transparent">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" IsHitTestVisible="False">
+                        <Image Source="/SYSTools;component/Resources/Icon/DetectionICON/Aida64.png" Width="50" Height="50" Margin="0,0,20,0"/>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <TextBlock Text="Aida64" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="15"/>
+                            <TextBlock Text="{model:Resource Key=AIDA64_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="10" Height="13"/>
+                        </StackPanel>
+                    </StackPanel>
                 </Button>
-                <Button x:Name="CPUZ" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="CPUZ_Click" Background="{x:Null}">
-                    <TextBlock><InlineUIContainer>
-                            <Image Source="/SYSTools;component/Resources/Icon/DetectionICON/CPU-Z.png" Width="50" Height="50"/>
-                        </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="CPU-Z" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
-                        </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="{model:Resource Key=CPU-Z_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,10,0" FontSize="10" Height="13"/>
-                        </InlineUIContainer>
-
-                    </TextBlock>
+                <Button x:Name="CPUZ" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="CPUZ_Click" Background="Transparent">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" IsHitTestVisible="False">
+                        <Image Source="/SYSTools;component/Resources/Icon/DetectionICON/CPU-Z.png" Width="50" Height="50" Margin="0,0,20,0"/>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <TextBlock Text="CPU-Z" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="15"/>
+                            <TextBlock Text="{model:Resource Key=CPU-Z_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="10" Height="13"/>
+                        </StackPanel>
+                    </StackPanel>
                 </Button>
-                <Button x:Name="GPUZ" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="GPUZ_Click" Background="{x:Null}">
-                    <TextBlock><InlineUIContainer>
-                            <Image Source="/SYSTools;component/Resources/Icon/DetectionICON/GPU-Z.png" Width="50" Height="50"/>
-                        </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="GPU-Z" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
-                        </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="{model:Resource Key=GPU-Z_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,10,0" FontSize="10" Height="13"/>
-                        </InlineUIContainer>
-
-                    </TextBlock>
+                <Button x:Name="GPUZ" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="GPUZ_Click" Background="Transparent">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" IsHitTestVisible="False">
+                        <Image Source="/SYSTools;component/Resources/Icon/DetectionICON/GPU-Z.png" Width="50" Height="50" Margin="0,0,20,0"/>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <TextBlock Text="GPU-Z" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="15"/>
+                            <TextBlock Text="{model:Resource Key=GPU-Z_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="10" Height="13"/>
+                        </StackPanel>
+                    </StackPanel>
                 </Button>
-                <Button x:Name="HWinfo" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="HWinfo_Click" Background="{x:Null}">
-                    <TextBlock><InlineUIContainer>
-                            <Image Source="/SYSTools;component/Resources/Icon/DetectionICON/HWiNFO.png" Width="50" Height="50"/>
-                        </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="HWiNFO" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
-                        </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="{model:Resource Key=HWiNFO_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,10,0" FontSize="10" Height="13"/>
-                        </InlineUIContainer>
-
-                    </TextBlock>
+                <Button x:Name="HWinfo" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="HWinfo_Click" Background="Transparent">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" IsHitTestVisible="False">
+                        <Image Source="/SYSTools;component/Resources/Icon/DetectionICON/HWiNFO.png" Width="50" Height="50" Margin="0,0,20,0"/>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <TextBlock Text="HWiNFO" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="15"/>
+                            <TextBlock Text="{model:Resource Key=HWiNFO_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="10" Height="13"/>
+                        </StackPanel>
+                    </StackPanel>
                 </Button>
-                <Button x:Name="HWmonitor" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="HWmonitor_Click" Background="{x:Null}">
-                    <TextBlock>
-                        <InlineUIContainer>
-                            <Image Source="/SYSTools;component/Resources/Icon/DetectionICON/HWMonitor.png" Width="50" Height="50"/>
-                        </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="HWMonitor" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
-                        </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="{model:Resource Key=HWMonitor_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,10,0" FontSize="10" Height="13"/>
-                        </InlineUIContainer>
-
-                    </TextBlock>
+                <Button x:Name="HWmonitor" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="HWmonitor_Click" Background="Transparent">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" IsHitTestVisible="False">
+                        <Image Source="/SYSTools;component/Resources/Icon/DetectionICON/HWMonitor.png" Width="50" Height="50" Margin="0,0,20,0"/>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <TextBlock Text="HWMonitor" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="15"/>
+                            <TextBlock Text="{model:Resource Key=HWMonitor_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="10" Height="13"/>
+                        </StackPanel>
+                    </StackPanel>
                 </Button>
-
-
             </StackPanel>
         </ScrollViewer>
-
-
     </Grid>
 </Page>

@@ -10,59 +10,48 @@
       d:DesignWidth="1040" d:DesignHeight="560"
       KeepAlive="True"
       Title="TestTools" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  MinWidth="1040" MinHeight="560" Loaded="Page_Loaded">
-
-        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <ScrollViewer  VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <!--按钮固定上下大小66(px?)-->
-                    <TextBlock Text="该页工具存放于'应用根目录/Software Package/TestTools/'文件夹内(鼠标右键点击这条文字可打开文件夹)       下列工具请单击打开" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" FontSize="10" Height="13" MouseRightButtonDown="TextBlock_MouseRightButtonDown"/>
-                    
-                    <Button x:Name="Prime95" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="Prime95_Click" Background="{x:Null}" >
-                        <TextBlock><InlineUIContainer>
-                            <Image Source="/SYSTools;component/Resources/Icon/TestToolsICON/Prime95.png" Width="50" Height="50"/>
-                        </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="Prime95" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
-                        </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="{model:Resource Key=Prime95_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13"/>
-                        </InlineUIContainer>
-                    </TextBlock>
-                    </Button>
-
-                <Button x:Name="IntelBurnTest" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="IntelBurnTest_Click" Background="{x:Null}" >
-                        <TextBlock><InlineUIContainer>
-                            <Image Source="/SYSTools;component/Resources/Icon/TestToolsICON/IntelBurnTest.png" Width="50" Height="50"/>
-                        </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="IntelBurnTest" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
-                        </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="{model:Resource Key=IntelBurnTest_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13"/>
-                        </InlineUIContainer>
-                    </TextBlock>
-                    </Button>
-
-                <Button x:Name="FurMark" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="FurMark_Click" Background="{x:Null}" >
-                        <TextBlock><InlineUIContainer>
-                            <Image Source="/SYSTools;component/Resources/Icon/TestToolsICON/FurMark.png" Width="50" Height="50"/>
-                        </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="FurMark" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
-                        </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="{model:Resource Key=FurMark_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13"/>
-                        </InlineUIContainer>
-                    </TextBlock>
-                    </Button>
-
-                <Button x:Name="MemTest" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="MemTest_Click" Background="{x:Null}" >
-                        <TextBlock><InlineUIContainer>
-                            <Image Source="/SYSTools;component/Resources/Icon/TestToolsICON/MemTest.png" Width="50" Height="50"/>
-                        </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="MemTest" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
-                        </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="{model:Resource Key=MemTest_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13"/>
-                        </InlineUIContainer>
-                    </TextBlock>
-                    </Button>
-
-                </StackPanel>
-            </ScrollViewer>
-        </Grid>
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <ScrollViewer  VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <!--按钮固定上下大小66(px?)-->
+                <TextBlock Text="该页工具存放于'应用根目录/Software Package/TestTools/'文件夹内(鼠标右键点击这条文字可打开文件夹)       下列工具请单击打开" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" FontSize="10" Height="13" MouseRightButtonDown="TextBlock_MouseRightButtonDown"/>
+                <Button x:Name="Prime95" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="Prime95_Click" Background="Transparent">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" IsHitTestVisible="False">
+                        <Image Source="/SYSTools;component/Resources/Icon/TestToolsICON/Prime95.png" Width="50" Height="50" Margin="0,0,20,0"/>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <TextBlock Text="Prime95" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="15"/>
+                            <TextBlock Text="{model:Resource Key=Prime95_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="10" Height="13"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="IntelBurnTest" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="IntelBurnTest_Click" Background="Transparent">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" IsHitTestVisible="False">
+                        <Image Source="/SYSTools;component/Resources/Icon/TestToolsICON/IntelBurnTest.png" Width="50" Height="50" Margin="0,0,20,0"/>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <TextBlock Text="IntelBurnTest" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="15"/>
+                            <TextBlock Text="{model:Resource Key=IntelBurnTest_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left"  FontSize="10" Height="13"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="FurMark" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="FurMark_Click" Background="Transparent">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" IsHitTestVisible="False">
+                        <Image Source="/SYSTools;component/Resources/Icon/TestToolsICON/FurMark.png" Width="50" Height="50" Margin="0,0,20,0"/>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <TextBlock Text="FurMark" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="15"/>
+                            <TextBlock Text="{model:Resource Key=FurMark_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left"  FontSize="10" Height="13"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="MemTest" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="MemTest_Click" Background="Transparent">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" IsHitTestVisible="False">
+                        <Image Source="/SYSTools;component/Resources/Icon/TestToolsICON/MemTest.png" Width="50" Height="50" Margin="0,0,20,0"/>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <TextBlock Text="MemTest" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="15"/>
+                            <TextBlock Text="{model:Resource Key=MemTest_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left"  FontSize="10" Height="13"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
 </Page>
-

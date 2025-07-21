@@ -10,45 +10,37 @@
       d:DesignWidth="1040" d:DesignHeight="560"
       KeepAlive="True"
       Title="PeripheralsTools" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="560" Loaded="Page_Loaded">
-
-
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <ScrollViewer  VerticalScrollBarVisibility="Auto" MinWidth="1040" MinHeight="610" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <TextBlock Text="该页工具存放于'应用根目录/Software Package/PeripheralsTools/'文件夹内(鼠标右键点击这条文字可打开文件夹)       下列工具请单击打开" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" FontSize="10" Height="13" MouseRightButtonDown="TextBlock_MouseRightButtonDown"/>
-                <Button x:Name="HKBTest" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="HKBTest_Click" Background="{x:Null}">
-                    <TextBlock><InlineUIContainer>
-                            <Image Source="/SYSTools;component/Resources/Icon/PeripheralsToolsICON/HKBTest.png" Width="50" Height="50"/>
-                        </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="HKBTest" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
-                        </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="{model:Resource Key=HKBTest_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13"/>
-                        </InlineUIContainer>
-                    </TextBlock>
+                <Button x:Name="HKBTest" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="HKBTest_Click" Background="Transparent">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" IsHitTestVisible="False">
+                        <Image Source="/SYSTools;component/Resources/Icon/PeripheralsToolsICON/HKBTest.png" Width="50" Height="50"  Margin="0,0,20,0"/>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <TextBlock Text="HKBTest" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="15"/>
+                            <TextBlock Text="{model:Resource Key=HKBTest_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="10" Height="13"/>
+                        </StackPanel>
+                    </StackPanel>
                 </Button>
-
-                <Button x:Name="MouseTest" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="MouseTest_Click" Background="{x:Null}">
-                    <TextBlock><InlineUIContainer>
-                            <Image Source="/SYSTools;component/Resources/Icon/PeripheralsToolsICON/MouseTest.png" Width="50" Height="50"/>
-                        </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="MouseTest" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
-                        </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="{model:Resource Key=MouseTest_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13"/>
-                        </InlineUIContainer>
-                    </TextBlock>
+                <Button x:Name="MouseTest" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="MouseTest_Click" Background="Transparent">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" IsHitTestVisible="False">
+                        <Image Source="/SYSTools;component/Resources/Icon/PeripheralsToolsICON/MouseTest.png" Width="50" Height="50"  Margin="0,0,20,0"/>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <TextBlock Text="MouseTest" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="15"/>
+                            <TextBlock Text="{model:Resource Key=MouseTest_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="10" Height="13"/>
+                        </StackPanel>
+                    </StackPanel>
                 </Button>
-
-                <Button x:Name="MouseRate" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="MouseRate_Click" Background="{x:Null}">
-                    <TextBlock><InlineUIContainer>
-                            <Image Source="/SYSTools;component/Resources/Icon/PeripheralsToolsICON/MouseRate.png" Width="50" Height="50"/>
-                        </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="MouseRate" VerticalAlignment="Top" Margin="20,-26,0,0" HorizontalAlignment="Left" FontSize="15" Width="142"/>
-                        </InlineUIContainer><Run Text=" "/><InlineUIContainer>
-                            <TextBlock Text="{model:Resource Key=MouseRate_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-146,-11,0,0" FontSize="10" Height="13"/>
-                        </InlineUIContainer>
-                    </TextBlock>
+                <Button x:Name="MouseRate" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="MouseRate_Click" Background="Transparent">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" IsHitTestVisible="False">
+                        <Image Source="/SYSTools;component/Resources/Icon/PeripheralsToolsICON/MouseRate.png" Width="50" Height="50"  Margin="0,0,20,0"/>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <TextBlock Text="MouseRate" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="15"/>
+                            <TextBlock Text="{model:Resource Key=MouseRate_Text}" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="10" Height="13"/>
+                        </StackPanel>
+                    </StackPanel>
                 </Button>
-
             </StackPanel>
         </ScrollViewer>
     </Grid>
