@@ -15,21 +15,18 @@
         <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="3" Source="/SYSTools;component/Resources/LOGO.png" Opacity="0.5" Width="160" Height="90"/>
         <muxc:ScrollViewerEx Grid.Row="1" Padding="0,0,20,0">
             <ikw:SimpleStackPanel Spacing="10">
-
                 <muxc:SettingsExpander x:Name="BackImageSettingsExpander"
                                 Description="{model:Resource Key=BackImageSetting_Description}"
-                                Header="{model:Resource Key=BackImageSetting_Header}">
+                                Header="{model:Resource Key=BackImageSetting_Header}"
+                                Loaded="BackImageSettingsExpander_Loaded">
                     <muxc:ToggleSwitch x:Name="BackgroundToggle" 
                                        IsOn="{Binding Source={x:Static model:AppSettings.Instance}, Path=IsBackgroundEnabled, Mode=TwoWay}"
                                        Toggled="BackgroundToggle_Toggled"/>
                     <muxc:SettingsExpander.HeaderIcon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xee71;"/>
                     </muxc:SettingsExpander.HeaderIcon>
-
                     <muxc:SettingsExpander.Items>
-
                         <muxc:SettingsCard Header="{model:Resource Key=BackImagePreview}">
-
                             <Image x:Name="BackgroundPreview" Height="150" HorizontalAlignment="Left" Margin="15,0,0,0"
                                    Opacity="{Binding Source={x:Static model:AppSettings.Instance}, Path=ActualOpacity, Mode=OneWay}"
                                    IsEnabled="{Binding Source={x:Static model:AppSettings.Instance}, Path=IsBackgroundEnabled}">
@@ -37,21 +34,17 @@
                                     <BlurEffect Radius="{Binding Source={x:Static model:AppSettings.Instance}, Path=BackgroundImageBlurRadius, Mode=TwoWay}"/>
                                 </Image.Effect>
                             </Image>
-
                         </muxc:SettingsCard>
-
                         <muxc:SettingsCard ContentAlignment="Left">
                             <StackPanel Orientation="Horizontal" IsEnabled="{Binding Source={x:Static model:AppSettings.Instance}, Path=IsBackgroundEnabled}">
                                 <Button Content="{model:Resource Key=SelectBackgroundImage}" Click="SelectBackgroundButton_Click" FontSize="15" VerticalAlignment="Center" Margin="0,0,10,0" HorizontalAlignment="Center"/>
                                 <Button Content="{model:Resource Key=ClearBackgroundImage}" Click="DeleteBackgroundButton_Click" FontSize="15" VerticalAlignment="Center" Margin="0,0,10,0" HorizontalAlignment="Center"/>
                             </StackPanel>
                         </muxc:SettingsCard>
-
                         <muxc:SettingsCard Description="{model:Resource Key=BackgroundImageBlurRadius_Description}" Header="{model:Resource Key=BackgroundImageBlurRadius_Header}">
                             <Slider VerticalAlignment="Center" Width="150" Minimum="0" Maximum="20" Value="{Binding Source={x:Static model:AppSettings.Instance}, Path=BackgroundImageBlurRadius, Mode=TwoWay}"
                                     IsEnabled="{Binding Source={x:Static model:AppSettings.Instance}, Path=IsBackgroundEnabled}"/>
                         </muxc:SettingsCard>
-
                         <muxc:SettingsCard Header="{model:Resource Key=BackgroundImageOpacity_Header}">
                             <Slider VerticalAlignment="Center" 
                                    Width="150" 
@@ -62,11 +55,8 @@
                                    TickPlacement="BottomRight"
                                    IsEnabled="{Binding Source={x:Static model:AppSettings.Instance}, Path=IsBackgroundEnabled}"/>
                         </muxc:SettingsCard>
-
                     </muxc:SettingsExpander.Items>
-                    
                 </muxc:SettingsExpander>
-
                 <muxc:SettingsCard Header="{model:Resource Key=ProgramThemeSetting_Header}"
                          Description="{model:Resource Key=ProgramThemeSetting_Description}">
                     <muxc:SettingsCard.HeaderIcon>
@@ -79,7 +69,6 @@
                         <ComboBoxItem Content="{model:Resource Key=ThemeModeSetting_Light}"/>
                     </ComboBox>
                 </muxc:SettingsCard>
-
                 <muxc:SettingsCard Header="{model:Resource Key=LanguageSetting_Header}"
                          Description="{model:Resource Key=LanguageSetting_Description}">
                     <muxc:SettingsCard.HeaderIcon>
@@ -89,10 +78,8 @@
                         <!--这里不添加文本到Lang.resx中-->
                         <ComboBoxItem Content="简体中文" Tag="zh-CN"/>
                         <ComboBoxItem Content="English" Tag="en"/>
-                        
                     </ComboBox>
                 </muxc:SettingsCard>
-
             </ikw:SimpleStackPanel>
         </muxc:ScrollViewerEx>
     </Grid>

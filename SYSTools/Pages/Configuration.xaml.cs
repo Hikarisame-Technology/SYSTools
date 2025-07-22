@@ -1,8 +1,10 @@
-﻿using System;
+﻿using iNKORE.UI.WPF.Modern.Controls;
+using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using SYSTools.Helpers;
 using SYSTools.Model;
 using SYSTools.Properties;
@@ -12,7 +14,7 @@ namespace SYSTools.Pages
     /// <summary>
     /// Configuration.xaml 的交互逻辑
     /// </summary>
-    public partial class Configuration : Page
+    public partial class Configuration : System.Windows.Controls.Page
     {
         public Configuration()
         {
@@ -124,10 +126,42 @@ namespace SYSTools.Pages
             }
         }
 
-        private void BackgroundToggle_Toggled(object sender, RoutedEventArgs e)
+        private void BackImageSettingsExpander_Loaded(object sender, RoutedEventArgs e)
         {
-            BackImageSettingsExpander.IsExpanded = BackgroundToggle.IsOn;
+            // 确保UI完全渲染后再设置展开状态
+            var expander = sender as iNKORE.UI.WPF.Modern.Controls.SettingsExpander;
+            if (expander != null)
+            {
+                expander.Dispatcher.BeginInvoke(new Action(() => 
+                {
+                    bool shouldExpand = AppSettings.Instance.IsBackgroundEnabled;
+                    if (shouldExpand)
+                    {
+                        // UI抽风 需要先缩起再展开才能显示内容
+                        expander.IsExpanded = false;
+                        expander.Dispatcher.BeginInvoke(new Action(() => 
+                        {
+                            expander.IsExpanded = true;
+                        }), DispatcherPriority.Background);
+                    }
+                    else
+                    {
+                        expander.IsExpanded = false;
+                    }
+                }), DispatcherPriority.Render);
+            }
         }
 
+        private void BackgroundToggle_Toggled(object sender, RoutedEventArgs e)
+        {
+            // 手动切换时更新展开器状态
+            if (BackImageSettingsExpander != null)
+            {
+                BackImageSettingsExpander.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    BackImageSettingsExpander.IsExpanded = BackgroundToggle.IsOn;
+                }), DispatcherPriority.Loaded);
+            }
+        }
     }
 }
