@@ -13,9 +13,9 @@ namespace SYSTools.Updater.Services
 
         public UILogger(TextBlock logTextBlock, TextBlock statusText, ProgressBar progressBar)
         {
-            _logTextBlock = logTextBlock;
-            _statusText = statusText;
-            _progressBar = progressBar;
+            _logTextBlock = logTextBlock ?? throw new ArgumentNullException(nameof(logTextBlock));
+            _statusText = statusText ?? throw new ArgumentNullException(nameof(statusText));
+            _progressBar = progressBar ?? throw new ArgumentNullException(nameof(progressBar));
         }
 
         public void Log(string message)
@@ -30,8 +30,17 @@ namespace SYSTools.Updater.Services
             
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
-                var scrollViewer = (ScrollViewer)_logTextBlock.Parent;
-                scrollViewer.ScrollToVerticalOffset(scrollViewer.ExtentHeight);
+                try
+                {
+                    if (_logTextBlock.Parent is ScrollViewer scrollViewer)
+                    {
+                        scrollViewer.ScrollToVerticalOffset(scrollViewer.ExtentHeight);
+                    }
+                }
+                catch
+                {
+                    // 忽略滚动错误，不影响主要功能
+                }
             }), System.Windows.Threading.DispatcherPriority.Loaded);
         }
 

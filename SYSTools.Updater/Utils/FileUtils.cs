@@ -24,6 +24,7 @@ namespace SYSTools.Updater.Utils
 
             int totalFiles = files.Count();
             int processedFiles = 0;
+            int lastReportedProgress = -1;
 
             foreach (string file in files)
             {
@@ -38,13 +39,25 @@ namespace SYSTools.Updater.Utils
 
                     File.Copy(file, backupFile, true);
                     processedFiles++;
-                    logger.UpdateProgress((double)processedFiles / totalFiles * 100);
+                    
+                    double progress = (double)processedFiles / totalFiles * 100;
+                    int currentProgress = (int)progress;
+                    
+                    // 只在进度变化超过10%时更新UI
+                    if (currentProgress - lastReportedProgress >= 10)
+                    {
+                        logger.UpdateProgress(progress);
+                        lastReportedProgress = currentProgress;
+                    }
                 }
                 catch (Exception ex)
                 {
                     logger.Log($"备份文件失败: {file}, 错误: {ex.Message}");
                 }
             }
+            
+            logger.UpdateProgress(100);
+            logger.Log($"备份完成: {processedFiles} 个文件");
         }
 
         public static void ExtractUpdate(string zipPath, string targetPath, ILogger logger)
@@ -55,6 +68,10 @@ namespace SYSTools.Updater.Utils
                 int processedEntries = 0;
                 long totalSize = archive.Entries.Sum(entry => entry.Length);
                 long processedSize = 0;
+
+                // 批量更新UI，减少频率
+                int lastReportedProgress = -1;
+                int filesProcessedSinceLastLog = 0;
 
                 foreach (var entry in archive.Entries)
                 {
@@ -70,17 +87,26 @@ namespace SYSTools.Updater.Utils
 
                             if (File.Exists(destinationPath))
                             {
-                                ForceDeleteFile(destinationPath);
+                                SmartDeleteFile(destinationPath);
                             }
 
                             entry.ExtractToFile(destinationPath, true);
                             
                             processedEntries++;
                             processedSize += entry.Length;
+                            filesProcessedSinceLastLog++;
                             
                             double progress = ((double)processedSize / totalSize) * 100;
-                            logger.UpdateProgress(progress);
-                            logger.Log($"已更新: {entry.FullName} ({processedEntries}/{totalEntries})");
+                            int currentProgress = (int)progress;
+                            
+                            // 只在进度变化超过5%或每处理10个文件时更新UI
+                            if (currentProgress - lastReportedProgress >= 5 || filesProcessedSinceLastLog >= 10)
+                            {
+                                logger.UpdateProgress(progress);
+                                logger.Log($"正在更新文件... ({processedEntries}/{totalEntries}) - {currentProgress}%");
+                                lastReportedProgress = currentProgress;
+                                filesProcessedSinceLastLog = 0;
+                            }
                         }
                     }
                     catch (Exception ex)
@@ -88,6 +114,10 @@ namespace SYSTools.Updater.Utils
                         logger.Log($"更新文件失败: {entry.FullName}, 错误: {ex.Message}");
                     }
                 }
+                
+                // 确保最终进度为100%
+                logger.UpdateProgress(100);
+                logger.Log($"文件解压完成: {processedEntries} 个文件");
             }
         }
 
@@ -115,37 +145,88 @@ namespace SYSTools.Updater.Utils
             }
         }
 
-        private static void ForceDeleteFile(string path)
+        private static void SmartDeleteFile(string path)
         {
             try
             {
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
+                // 先尝试简单删除
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                    return;
+                }
+            }
+            catch
+            {
+                // 简单删除失败，尝试其他方法
+            }
 
-                var processes = Process.GetProcesses();
+            try
+            {
+                // 尝试设置文件属性后删除
+                if (File.Exists(path))
+                {
+                    File.SetAttributes(path, FileAttributes.Normal);
+                    File.Delete(path);
+                    return;
+                }
+            }
+            catch
+            {
+                // 继续尝试其他方法
+            }
+
+            try
+            {
+                // 最后的手段：只查找可能锁定此文件的进程
+                if (File.Exists(path))
+                {
+                    KillProcessesUsingFile(path);
+                    System.Threading.Thread.Sleep(100); // 短暂等待
+                    File.Delete(path);
+                }
+            }
+            catch
+            {
+                // 如果所有方法都失败，忽略错误继续
+            }
+        }
+
+        private static void KillProcessesUsingFile(string filePath)
+        {
+            try
+            {
+                string fileName = Path.GetFileName(filePath);
+                var processes = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(fileName));
+                
                 foreach (var process in processes)
                 {
                     try
                     {
-                        foreach (var module in process.Modules.Cast<ProcessModule>())
+                        if (!process.HasExited && process.Id != Process.GetCurrentProcess().Id)
                         {
-                            if (module.FileName.Equals(path, StringComparison.OrdinalIgnoreCase))
-                            {
-                                process.Kill();
-                                process.WaitForExit(5000);
-                                break;
-                            }
+                            process.Kill();
+                            process.WaitForExit(1000); // 等待最多1秒
                         }
                     }
-                    catch { }
-                }
-
-                if (File.Exists(path))
-                {
-                    File.Delete(path);
+                    catch
+                    {
+                        // 忽略单个进程处理错误
+                    }
+                    finally
+                    {
+                        try
+                        {
+                            process?.Dispose();
+                        }
+                        catch { }
+                    }
                 }
             }
-            catch { }
+            catch
+            {
+                // 忽略进程查找错误
+            }
         }
 
         public static string CleanPath(string path)

@@ -2,11 +2,21 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:SYSTools.Updater"
+        xmlns:muxc="http://schemas.inkore.net/lib/ui/wpf/modern"
         Title="{Binding UpdateTitle, RelativeSource={RelativeSource Self}}" 
         Height="300" 
         Width="500"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        muxc:ThemeManager.IsThemeAware="True"
+        muxc:WindowHelper.UseModernWindowStyle="True"
+        muxc:WindowHelper.SystemBackdropType="Acrylic11"
+        muxc:WindowHelper.CornerStyle="Round"
+        muxc:TitleBar.IsBackButtonVisible="False"
+        muxc:TitleBar.ButtonGlyphStyle="Fluent"
+        muxc:TitleBar.Height="48"
+        muxc:TitleBar.ExtendViewIntoTitleBar="True"
+        >
     
     <Window.Resources>
         <local:ThemeConverter x:Key="ThemeConverter"/>
