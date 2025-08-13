@@ -54,5 +54,20 @@ namespace SYSTools.ToolPages
         {
             _exeHelper.HandleMouseClick(Tools_Path, "SnappyDriverInstaller", "SDI", "SDI_x64");
         }
+
+        private void Rufus_Click(object sender, RoutedEventArgs e)
+        {
+            _exeHelper.HandleMouseClick(Tools_Path, "Rufus", "rufus");
+        }
+
+        private void Etcher_Click(object sender, RoutedEventArgs e)
+        {
+            _exeHelper.HandleMouseClick(Tools_Path, "balenaEtcher", "balenaEtcher");
+        }
+
+        private void Ventoy_Click(object sender, RoutedEventArgs e)
+        {
+            _exeHelper.HandleMouseClick(Tools_Path, "Ventoy", "Ventoy2Disk", "Ventoy2Disk_X64");
+        }
     }
 }

@@ -475,12 +475,21 @@
     <value></value>
   </data>
   <data name="OpenFolder" xml:space="preserve">
-    <value>Open Folder</value>
+    <value></value>
   </data>
   <data name="UncategorizedTools_Content" xml:space="preserve">
     <value></value>
   </data>
   <data name="SDI_Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Rufus_Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Etcher_Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Ventoy_Text" xml:space="preserve">
     <value></value>
   </data>
 </root>

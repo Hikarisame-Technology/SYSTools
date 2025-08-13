@@ -355,6 +355,15 @@
   <ItemGroup>
     <Resource Include="Resources\Icon\UncategorizedToolsICON\SDI.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\UncategorizedToolsICON\Rufus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\UncategorizedToolsICON\Etcher.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\UncategorizedToolsICON\Ventoy.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>del /f /q "$(TargetDir)*.pdb"

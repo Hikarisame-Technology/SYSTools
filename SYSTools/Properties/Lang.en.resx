@@ -483,4 +483,13 @@
   <data name="SDI_Text" xml:space="preserve">
     <value>Use this tool to quickly find and install all missing drivers.</value>
   </data>
+  <data name="Rufus_Text" xml:space="preserve">
+    <value>Lightweight utility to create bootable USB drives from ISO files; supports various OS images and advanced partition schemes.</value>
+  </data>
+  <data name="Etcher_Text" xml:space="preserve">
+    <value>Cross-platform tool for flashing OS images to SD cards or USB drives with a simple, user-friendly interface.</value>
+  </data>
+  <data name="Ventoy_Text" xml:space="preserve">
+    <value>Enables creation of bootable USB drives that can store and boot multiple ISO/WIM/IMG/VHD(x) files without reformatting.</value>
+  </data>
 </root>

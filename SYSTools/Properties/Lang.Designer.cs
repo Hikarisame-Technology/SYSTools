@@ -387,6 +387,15 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
+        public static string Etcher_Text {
+            get {
+                return ResourceManager.GetString("Etcher_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
         public static string EXEFilter {
             get {
                 return ResourceManager.GetString("EXEFilter", resourceCulture);
@@ -727,7 +736,7 @@ namespace SYSTools.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Open Folder 的本地化字符串。
+        ///   查找类似  的本地化字符串。
         /// </summary>
         public static string OpenFolder {
             get {
@@ -840,6 +849,15 @@ namespace SYSTools.Properties {
         public static string RepairingTools_Content {
             get {
                 return ResourceManager.GetString("RepairingTools_Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Rufus_Text {
+            get {
+                return ResourceManager.GetString("Rufus_Text", resourceCulture);
             }
         }
         
@@ -1128,6 +1146,15 @@ namespace SYSTools.Properties {
         public static string UserAgreement {
             get {
                 return ResourceManager.GetString("UserAgreement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Ventoy_Text {
+            get {
+                return ResourceManager.GetString("Ventoy_Text", resourceCulture);
             }
         }
         

@@ -483,4 +483,13 @@
   <data name="SDI_Text" xml:space="preserve">
     <value>使用该工具可快速查找并安装所有丢失的驱动程序。</value>
   </data>
+  <data name="Rufus_Text" xml:space="preserve">
+    <value>轻量级工具，用于从ISO文件创建可启动USB驱动器；支持多种操作系统镜像和高级分区方案。</value>
+  </data>
+  <data name="Etcher_Text" xml:space="preserve">
+    <value>跨平台工具，用于将操作系统镜像刷写到SD卡或USB驱动器，配备简单易用的用户界面。</value>
+  </data>
+  <data name="Ventoy_Text" xml:space="preserve">
+    <value>支持创建可启动的USB驱动器，该驱动器可存储并启动多个ISO/WIM/IMG/VHD(x)文件，且无需重新格式化。</value>
+  </data>
 </root>
