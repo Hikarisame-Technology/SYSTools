@@ -23,6 +23,9 @@ namespace SYSTools.Pages
             { typeof(UncategorizedTools), new UncategorizedTools() }
         };
 
+        private Type _currentPageType = typeof(DetectionTools);
+        private bool _isInitialized = false;
+
         public Toolkit()
         {
             InitializeComponent();
@@ -38,6 +41,8 @@ namespace SYSTools.Pages
                 Type targetType = Type.GetType(tag);
                 if (targetType != null)
                 {
+                    // 更新当前页面类型跟踪
+                    _currentPageType = targetType;
                     // 统一切换动画
                     NavigateTo(targetType, new DrillInNavigationTransitionInfo());
                 }
@@ -61,10 +66,39 @@ namespace SYSTools.Pages
             }
         }
 
+        private void SetSelectedNavigationItem(Type pageType)
+        {
+            // 根据页面类型设置NavigationView的选中状态
+            foreach (var item in ToolsNavigation.MenuItems)
+            {
+                if (item is NavigationViewItem navItem && navItem.Tag is string tag)
+                {
+                    Type itemType = Type.GetType(tag);
+                    if (itemType == pageType)
+                    {
+                        ToolsNavigation.SelectedItem = navItem;
+                        break;
+                    }
+                }
+            }
+        }
+
 
         private void Window_Loading(object sender, System.Windows.RoutedEventArgs e)
         {
-            NavigateTo(typeof(DetectionTools), new DrillInNavigationTransitionInfo());
+            // 只在第一次初始化时导航到默认页面
+            if (!_isInitialized)
+            {
+                NavigateTo(_currentPageType, new DrillInNavigationTransitionInfo());
+                SetSelectedNavigationItem(_currentPageType);
+                _isInitialized = true;
+            }
+            else
+            {
+                // 如果已经初始化过，恢复到之前的页面状态
+                NavigateTo(_currentPageType, new DrillInNavigationTransitionInfo());
+                SetSelectedNavigationItem(_currentPageType);
+            }
         }
     }
 }

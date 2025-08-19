@@ -10,64 +10,48 @@
       d:DesignHeight="610" d:DesignWidth="1040"
       KeepAlive="True"
       Title="Toolkit" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610" Loaded="Window_Loading">
-
     <Grid>
-
         <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="3" Source="/SYSTools;component/Resources/LOGO.png" Opacity="0.5" Width="160" Height="90"/>
-
         <muxc:NavigationView x:Name="ToolsNavigation" PaneDisplayMode="Top" SelectionFollowsFocus="Enabled" IsBackButtonVisible="Collapsed" HorizontalContentAlignment="Center" IsTitleBarAutoPaddingEnabled="True" IsSettingsVisible="False" IsBackEnabled="False" AlwaysShowHeader="True" ItemInvoked="NavigationTriggered">
-
             <FrameworkElement.Resources>
                 <SolidColorBrush x:Key="{x:Static muxc:ThemeKeys.NavigationViewContentBackgroundKey}" Color="Transparent"/>
                 <SolidColorBrush x:Key="{x:Static muxc:ThemeKeys.ExpanderHeaderBorderBrushKey}" Color="Transparent"/>
                 <Thickness x:Key="NavigationViewContentGridBorderThickness">0,0,0,0</Thickness>
             </FrameworkElement.Resources>
-
             <muxc:NavigationView.MenuItems>
-
-                <muxc:NavigationViewItem Content="{model:Resource Key=DetectionTools_Content}" Tag="SYSTools.ToolPages.DetectionTools" x:Name="DetectionTools" IsTabStop="False" IsSelected="True">
+                <muxc:NavigationViewItem Content="{model:Resource Key=DetectionTools_Content}" Tag="SYSTools.ToolPages.DetectionTools" x:Name="DetectionTools" IsTabStop="False">
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE9D9;" />
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
-
                 <muxc:NavigationViewItem Content="{model:Resource Key=TestTools_Content}" Tag="SYSTools.ToolPages.TestTools" x:Name="TestTools" IsTabStop="False">
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE950;" />
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
-
                 <muxc:NavigationViewItem Content="{model:Resource Key=DiskTools_Content}" Tag="SYSTools.ToolPages.DiskTools" x:Name="DiskTools" IsTabStop="False">
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xEB05;" />
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
-
                 <muxc:NavigationViewItem Content="{model:Resource Key=PeripheralsTools_Content}" Tag="SYSTools.ToolPages.PeripheralsTools" x:Name="PeripheralsTools" IsTabStop="False">
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE961;" />
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
-
                 <muxc:NavigationViewItem Content="{model:Resource Key=RepairingTools_Content}" Tag="SYSTools.ToolPages.RepairingTools" x:Name="RepairingTools" IsTabStop="False">
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE945;" />
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
-
                 <muxc:NavigationViewItemSeparator/>
-
-
                 <muxc:NavigationViewItem Content="{model:Resource Key=UncategorizedTools_Content}" Tag="SYSTools.ToolPages.UncategorizedTools" x:Name="UncategorizedTools" IsTabStop="False">
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE8B1;" />
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
-
             </muxc:NavigationView.MenuItems>
-
             <muxc:Frame x:Name="CurrentPage" />
-            
         </muxc:NavigationView>
     </Grid>
 </Page>
