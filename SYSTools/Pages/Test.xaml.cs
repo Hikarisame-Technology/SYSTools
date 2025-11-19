@@ -188,12 +188,14 @@ namespace SYSTools.Pages
                             {
                                 string resolution = DeskTop_Info.GetPropertyValue("VideoModeDescription")?.ToString() ?? "未知";
                                 string refreshRate = DeskTop_Info.GetPropertyValue("CurrentRefreshRate")?.ToString() ?? "未知";
-                                resolutionInfo.Add($"{DeskTop_Info.GetPropertyValue("Name")}: {resolution} {refreshRate} Hz");
+                                resolutionInfo.Add($"{DeskTop_Info.GetPropertyValue("Name")}:");
+                                resolutionInfo.Add($"    {resolution} {refreshRate} Hz");
                             }
                         }
                         catch (NullReferenceException)
                         {
-                            resolutionInfo.Add($"{DeskTop_Info.GetPropertyValue("Name")}: 屏幕未接入");
+                            resolutionInfo.Add($"{DeskTop_Info.GetPropertyValue("Name")}:");
+                            resolutionInfo.Add($"    屏幕未接入");
                         }
                     }
                 }

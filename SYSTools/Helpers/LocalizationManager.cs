@@ -22,6 +22,8 @@ namespace SYSTools.Helpers
                 if (_currentCulture != value)
                 {
                     _currentCulture = value;
+                    // 传递属性名以便订阅者识别变化，同时兼容空字符串（触发所有绑定更新）
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentCulture)));
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(string.Empty));
                 }
             }

@@ -14,6 +14,9 @@ using System.Windows.Media.Animation;
 using System.Threading.Tasks;
 using System.Windows.Media.Effects;
 using System.Windows.Controls.Primitives;
+using System.ComponentModel;
+using SYSTools.Helpers;
+using MessageBox = iNKORE.UI.WPF.Modern.Controls.MessageBox;
 
 namespace SYSTools.Pages
 {
@@ -39,6 +42,8 @@ namespace SYSTools.Pages
         private PerformanceCounter ramCounter;
         private TextBlock cpuValueText, memValueText, diskValueText;
         private Border cpuProgressBar, memProgressBar, diskProgressBar;
+        private List<Border> allCards; // 缓存卡片列表
+        private bool isLanguageEventSubscribed = false; // 标记是否已订阅语言变化事件
 
         public Home()
         {
@@ -67,10 +72,90 @@ namespace SYSTools.Pages
             // 初始化公告计时器
             noticeTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
             noticeTimer.Tick += NoticeTimer_Tick;
+            
+            // 监听窗口大小变化，重新布局
+            this.SizeChanged += (s, e) =>
+            {
+                Dispatcher.BeginInvoke(new Action(() => BuildCardsLayout()), 
+                    System.Windows.Threading.DispatcherPriority.Background);
+            };
+            
+            // 订阅语言变化事件
+            SubscribeLanguageChanged();
+        }
+
+        // 订阅语言变化事件（防止重复订阅）
+        private void SubscribeLanguageChanged()
+        {
+            if (!isLanguageEventSubscribed)
+            {
+                LocalizationManager.Instance.PropertyChanged += OnLanguageChanged;
+                isLanguageEventSubscribed = true;
+            }
+        }
+        
+        private void OnLanguageChanged(object sender, PropertyChangedEventArgs e)
+        {
+            // LocalizationManager触发PropertyChanged时传递空字符串
+            // 所以我们不检查PropertyName，或者检查空字符串/null
+            if (string.IsNullOrEmpty(e.PropertyName) || e.PropertyName == nameof(LocalizationManager.CurrentCulture))
+            {
+                // 使用BeginInvoke确保在UI线程上执行
+                Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    try
+                    {
+                        // 清空卡片缓存，强制重新创建
+                        allCards = null;
+                        
+                        // 刷新语言缓存
+                        RefreshLanguageCache();
+                        
+                        // 更新欢迎区域的用户名
+                        UsernameText.Text = Properties.Lang.ResourceManager.GetString("Hello", 
+                            System.Globalization.CultureInfo.CurrentUICulture) + " " + Environment.UserName;
+                        
+                        // 重新构建卡片布局（会重新创建所有卡片并应用新语言）
+                        BuildCardsLayout();
+                        
+                        // 重新加载一言（切换语言后加载对应语言的一言）
+                        _ = LoadHitokotoAsync();
+                        
+                        // 重新加载公告（切换语言后加载对应语言的公告）
+                        _ = LoadNoticesAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"Home页面语言更新失败: {ex.Message}");
+                    }
+                }), System.Windows.Threading.DispatcherPriority.Normal);
+            }
+        }
+
+        // 安全注册名称的辅助方法
+        private void SafeRegisterName(string name, object scopedElement)
+        {
+            try
+            {
+                UnregisterName(name);
+            }
+            catch { }
+            
+            try
+            {
+                RegisterName(name, scopedElement);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error registering name {name}: {ex}");
+            }
         }
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            // 确保语言变化事件已订阅（KeepAlive页面可能被重新加载）
+            SubscribeLanguageChanged();
+            
             // 刷新语言缓存
             RefreshLanguageCache();
             
@@ -109,87 +194,73 @@ namespace SYSTools.Pages
             resourceTimer?.Stop();
             cpuCounter?.Dispose();
             ramCounter?.Dispose();
+            
+            // 注意：不在这里取消订阅语言变化事件
+            // 因为页面使用 KeepAlive="True"，可能会被重新加载
+            // 事件订阅会在 Page_Loaded 中检查并确保存在
         }
 
         private void BuildCardsLayout()
         {
+            // 如果卡片已存在，先从父容器中移除
+            if (allCards != null)
+            {
+                foreach (var card in allCards)
+                {
+                    if (card.Parent is Panel parentPanel)
+                    {
+                        parentPanel.Children.Remove(card);
+                    }
+                }
+            }
+            
             CardsPanel.Children.Clear();
             CardsPanel.ColumnDefinitions.Clear();
             CardsPanel.RowDefinitions.Clear();
             
-            // 计算列数
+            // 计算列数 (每列约300px，默认3列)
             double availableWidth = this.ActualWidth - 50;
             if (availableWidth < 400) availableWidth = 1000;
-            int columnCount = Math.Max(2, (int)(availableWidth / 350));
+            int columnCount = Math.Max(2, (int)(availableWidth / 300));
             
-            // 创建列定义
+            // 创建列定义和列容器
+            var columnStacks = new List<StackPanel>();
             for (int i = 0; i < columnCount; i++)
             {
                 CardsPanel.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                
+                var stackPanel = new StackPanel
+                {
+                    Orientation = Orientation.Vertical,
+                    Margin = new Thickness(0, 0, i < columnCount - 1 ? 8 : 0, 0) // 最后一列无右边距
+                };
+                Grid.SetColumn(stackPanel, i);
+                CardsPanel.Children.Add(stackPanel);
+                columnStacks.Add(stackPanel);
             }
             
-            // 创建行定义（3行）
-            for (int i = 0; i < 3; i++)
+            // 只在第一次调用时创建卡片
+            if (allCards == null)
             {
-                CardsPanel.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+                allCards = new List<Border>
+                {
+                    CreateSystemTimeCard(),      // 1. 系统时间卡片
+                    CreateSystemInfoCard(),       // 2. 系统信息卡片
+                    CreateResourceMonitorCard(),  // 3. 系统资源卡片
+                    CreateSystemHealthCard(),     // 4. 系统健康卡片
+                    CreateQuickActionsCard(),     // 5. 快速操作卡片
+                    CreateNetworkInfoCard(),      // 6. 网络信息卡片
+                    CreateWeatherCard(),          // 7. 天气卡片
+                    CreateHitokotoCard()          // 8. 一言卡片
+                };
             }
             
-            int col = 0, row = 0;
-            
-            // 1. 系统时间卡片
-            var timeCard = CreateSystemTimeCard();
-            Grid.SetColumn(timeCard, col++);
-            Grid.SetRow(timeCard, row);
-            CardsPanel.Children.Add(timeCard);
-            
-            // 2. 系统信息卡片
-            if (col >= columnCount) { col = 0; row++; }
-            var sysInfoCard = CreateSystemInfoCard();
-            Grid.SetColumn(sysInfoCard, col++);
-            Grid.SetRow(sysInfoCard, row);
-            CardsPanel.Children.Add(sysInfoCard);
-            
-            // 3. 系统资源卡片
-            if (col >= columnCount) { col = 0; row++; }
-            var resourceCard = CreateResourceMonitorCard();
-            Grid.SetColumn(resourceCard, col++);
-            Grid.SetRow(resourceCard, row);
-            CardsPanel.Children.Add(resourceCard);
-            
-            // 4. 系统健康卡片
-            if (col >= columnCount) { col = 0; row++; }
-            var healthCard = CreateSystemHealthCard();
-            Grid.SetColumn(healthCard, col++);
-            Grid.SetRow(healthCard, row);
-            CardsPanel.Children.Add(healthCard);
-            
-            // 5. 快速操作卡片
-            if (col >= columnCount) { col = 0; row++; }
-            var quickActionsCard = CreateQuickActionsCard();
-            Grid.SetColumn(quickActionsCard, col++);
-            Grid.SetRow(quickActionsCard, row);
-            CardsPanel.Children.Add(quickActionsCard);
-            
-            // 6. 网络信息卡片
-            if (col >= columnCount) { col = 0; row++; }
-            var networkCard = CreateNetworkInfoCard();
-            Grid.SetColumn(networkCard, col++);
-            Grid.SetRow(networkCard, row);
-            CardsPanel.Children.Add(networkCard);
-            
-            // 7. 天气卡片
-            if (col >= columnCount) { col = 0; row++; }
-            var weatherCard = CreateWeatherCard();
-            Grid.SetColumn(weatherCard, col++);
-            Grid.SetRow(weatherCard, row);
-            CardsPanel.Children.Add(weatherCard);
-            
-            // 8. 一言卡片
-            if (col >= columnCount) { col = 0; row++; }
-            var hitokotoCard = CreateHitokotoCard();
-            Grid.SetColumn(hitokotoCard, col++);
-            Grid.SetRow(hitokotoCard, row);
-            CardsPanel.Children.Add(hitokotoCard);
+            // 将卡片轮询分配到各列
+            for (int i = 0; i < allCards.Count; i++)
+            {
+                int targetColumn = i % columnCount;
+                columnStacks[targetColumn].Children.Add(allCards[i]);
+            }
         }
 
         #region 卡片创建方法
@@ -198,8 +269,8 @@ namespace SYSTools.Pages
         {
             var card = new Border
             {
-                Margin = new Thickness(0, 0, 8, 12),
-                Padding = new Thickness(16,16,14,14),
+                Margin = new Thickness(0, 0, 0, 8),
+                Padding = new Thickness(16,14,16,14),
                 CornerRadius = new CornerRadius(8),
                 BorderThickness = new Thickness(1),
                 HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -290,7 +361,7 @@ namespace SYSTools.Pages
                 Margin = new Thickness(0, 0, 0, 12)
             };
             openTime.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorPrimaryBrush");
-            RegisterName("OpenTimeText", openTime);
+            SafeRegisterName("OpenTimeText", openTime);
             
             var runTimeLabel = new TextBlock
             {
@@ -310,7 +381,7 @@ namespace SYSTools.Pages
                 FontFamily = new FontFamily("Consolas, Microsoft YaHei UI")
             };
             runTime.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorPrimaryBrush");
-            RegisterName("RunTimeText", runTime);
+            SafeRegisterName("RunTimeText", runTime);
             
             content.Children.Add(startTimeLabel);
             content.Children.Add(openTime);
@@ -469,7 +540,7 @@ namespace SYSTools.Pages
                 Margin = new Thickness(0, 0, 10, 0),
                 VerticalAlignment = VerticalAlignment.Center
             };
-            RegisterName("HealthIcon", statusIcon);
+            SafeRegisterName("HealthIcon", statusIcon);
             
             var statusText = new TextBlock
             {
@@ -481,7 +552,7 @@ namespace SYSTools.Pages
                 VerticalAlignment = VerticalAlignment.Center
             };
             statusText.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorPrimaryBrush");
-            RegisterName("HealthStatus", statusText);
+            SafeRegisterName("HealthStatus", statusText);
             
             statusPanel.Children.Add(statusIcon);
             statusPanel.Children.Add(statusText);
@@ -495,7 +566,7 @@ namespace SYSTools.Pages
                 TextWrapping = TextWrapping.Wrap
             };
             detailsText.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorSecondaryBrush");
-            RegisterName("HealthDetails", detailsText);
+            SafeRegisterName("HealthDetails", detailsText);
             content.Children.Add(detailsText);
             
             return CreateCard("\uEA37", Properties.Lang.ResourceManager.GetString("SystemHealth", 
@@ -529,6 +600,9 @@ namespace SYSTools.Pages
                 Margin = new Thickness(2),
                 Padding = new Thickness(5),
                 Height = 50,
+                Width = 80,
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                VerticalContentAlignment = VerticalAlignment.Center,
                 Background = Brushes.Transparent,
                 BorderThickness = new Thickness(1)
             };
@@ -543,7 +617,7 @@ namespace SYSTools.Pages
                              ?? new FontFamily("Segoe MDL2 Assets"),
                 FontSize = 16,
                 HorizontalAlignment = HorizontalAlignment.Center,
-                Margin = new Thickness(0, 0, 0, 2)
+                Margin = new Thickness(0, 0, 0, 4)
             };
             iconText.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorPrimaryBrush");
             
@@ -580,11 +654,11 @@ namespace SYSTools.Pages
             var content = new StackPanel();
             
             var ipv4Panel = CreateIPPanel("IPv4", out TextBlock ipv4Text, IPv4_MouseLeftButtonDown, IPv4_MouseRightButtonDown);
-            RegisterName("IPv4Text", ipv4Text);
+            SafeRegisterName("IPv4Text", ipv4Text);
             content.Children.Add(ipv4Panel);
             
             var ipv6Panel = CreateIPPanel("IPv6", out TextBlock ipv6Text, IPv6_MouseLeftButtonDown, IPv6_MouseRightButtonDown);
-            RegisterName("IPv6Text", ipv6Text);
+            SafeRegisterName("IPv6Text", ipv6Text);
             content.Children.Add(ipv6Panel);
             
             var providerText = new TextBlock
@@ -617,9 +691,12 @@ namespace SYSTools.Pages
             valueText = new TextBlock
             {
                 Text = "***.***.***.**" + (label == "IPv6" ? "*" : ""),
-                FontSize = 13,
-                FontFamily = new FontFamily("Consolas"),
+                FontSize = 12,
+                FontFamily = new FontFamily("Consolas, Microsoft YaHei UI"),
                 Cursor = Cursors.Hand,
+                TextWrapping = TextWrapping.Wrap,
+                MaxWidth = 280,
+                LineHeight = 18,
                 ToolTip = Properties.Lang.ResourceManager.GetString("LR_ToolTip", 
                     System.Globalization.CultureInfo.CurrentUICulture)
             };
@@ -650,7 +727,7 @@ namespace SYSTools.Pages
                 FontSize = 32,
                 Margin = new Thickness(0, 0, 10, 0)
             };
-            RegisterName("WeatherIcon", weatherIcon);
+            SafeRegisterName("WeatherIcon", weatherIcon);
             
             var weatherInfo = new StackPanel();
             
@@ -662,7 +739,7 @@ namespace SYSTools.Pages
                 FontWeight = FontWeights.SemiBold
             };
             tempText.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorPrimaryBrush");
-            RegisterName("WeatherTemp", tempText);
+            SafeRegisterName("WeatherTemp", tempText);
             
             var locationText = new TextBlock
             {
@@ -672,7 +749,7 @@ namespace SYSTools.Pages
                 FontSize = 11
             };
             locationText.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorSecondaryBrush");
-            RegisterName("WeatherLocation", locationText);
+            SafeRegisterName("WeatherLocation", locationText);
             
             weatherInfo.Children.Add(tempText);
             weatherInfo.Children.Add(locationText);
@@ -698,7 +775,7 @@ namespace SYSTools.Pages
                 LineHeight = 20
             };
             content.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorSecondaryBrush");
-            RegisterName("HitokotoText", content);
+            SafeRegisterName("HitokotoText", content);
             
             return CreateCard("\uE8F2", Properties.Lang.ResourceManager.GetString("Hitokoto", 
                 System.Globalization.CultureInfo.CurrentUICulture) ?? "一言", content);
@@ -877,26 +954,156 @@ namespace SYSTools.Pages
 
         private async Task LoadWeatherAsync()
         {
-            // 简化版天气API（这里可以接入真实的天气API）
             try
             {
-                // 示例：可以接入和风天气、OpenWeatherMap等API
-                await Task.Delay(100); // 模拟请求
+                // 第一步：通过ip.sb获取地理位置
+                var ipResponse = await client.GetAsync("https://api.ip.sb/geoip");
+                ipResponse.EnsureSuccessStatusCode();
+                string ipData = await ipResponse.Content.ReadAsStringAsync();
                 
-                // 这里需要实际的天气API，暂时显示占位符
+                var city = ExtractJsonValue(ipData, "city");
+                var country = ExtractJsonValue(ipData, "country");
+                
+                if (string.IsNullOrEmpty(city))
+                {
+                    throw new Exception("无法获取城市信息");
+                }
+                
+                // 第二步：使用wttr.in API根据城市名获取天气
+                // 使用城市名查询，wttr.in会自动识别
+                var weatherUrl = $"https://wttr.in/{Uri.EscapeDataString(city)}?format=j1";
+                var weatherResponse = await client.GetAsync(weatherUrl);
+                weatherResponse.EnsureSuccessStatusCode();
+                string weatherData = await weatherResponse.Content.ReadAsStringAsync();
+                
+                // 解析wttr.in的JSON数据
+                var temp = ExtractJsonValue(weatherData, "temp_C");
+                var weatherDesc = ExtractJsonValue(weatherData, "weatherDesc");
+                
                 if (FindName("WeatherTemp") is TextBlock tempText)
-                    tempText.Text = "--°C";
-                    
+                {
+                    if (!string.IsNullOrEmpty(temp))
+                    {
+                        // 温度可能包含小数点，格式化为整数
+                        if (double.TryParse(temp, System.Globalization.NumberStyles.Any, 
+                            System.Globalization.CultureInfo.InvariantCulture, out double tempValue))
+                        {
+                            tempText.Text = $"{Math.Round(tempValue)}°C";
+                        }
+                        else
+                        {
+                            tempText.Text = $"{temp}°C";
+                        }
+                    }
+                    else
+                    {
+                        tempText.Text = "--°C";
+                    }
+                }
+                
                 if (FindName("WeatherLocation") is TextBlock locationText)
                 {
-                    locationText.Text = Properties.Lang.ResourceManager.GetString("WeatherNotConfigured", 
-                        System.Globalization.CultureInfo.CurrentUICulture) ?? "未配置天气服务";
+                    string location = "";
+                    if (!string.IsNullOrEmpty(city))
+                    {
+                        location = city;
+                        if (!string.IsNullOrEmpty(country) && country != city)
+                        {
+                            location += $", {country}";
+                        }
+                    }
+                    else if (!string.IsNullOrEmpty(country))
+                    {
+                        location = country;
+                    }
+                    else
+                    {
+                        location = Properties.Lang.ResourceManager.GetString("WeatherNotConfigured", 
+                            System.Globalization.CultureInfo.CurrentUICulture) ?? "未配置天气服务";
+                    }
+                    locationText.Text = location;
+                }
+                
+                if (FindName("WeatherIcon") is TextBlock iconText && !string.IsNullOrEmpty(weatherDesc))
+                {
+                    iconText.Text = GetWeatherEmojiFromDesc(weatherDesc);
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error loading weather: {ex}");
+                
+                if (FindName("WeatherTemp") is TextBlock tempText)
+                    tempText.Text = "--°C";
+                    
+                if (FindName("WeatherLocation") is TextBlock locationText)
+                {
+                    locationText.Text = Properties.Lang.ResourceManager.GetString("NetError", 
+                        System.Globalization.CultureInfo.CurrentUICulture) ?? "网络错误";
+                }
             }
+        }
+        
+        private string ExtractJsonValue(string json, string key)
+        {
+            try
+            {
+                // 尝试匹配字符串值："key":"value"
+                string pattern = $"\"{key}\"\\s*:\\s*\"([^\"]+)\"";
+                var match = Regex.Match(json, pattern);
+                if (match.Success)
+                {
+                    return match.Groups[1].Value;
+                }
+                
+                // 尝试匹配数字值："key":123 或 "key":123.45
+                pattern = $"\"{key}\"\\s*:\\s*([\\d\\.\\-]+)";
+                match = Regex.Match(json, pattern);
+                if (match.Success)
+                {
+                    return match.Groups[1].Value;
+                }
+                
+                // 尝试数组中的第一个元素
+                pattern = $"\"{key}\"\\s*:\\s*\\[\\s*{{[^}}]*\"value\"\\s*:\\s*\"([^\"]+)\"";
+                match = Regex.Match(json, pattern);
+                if (match.Success)
+                {
+                    return match.Groups[1].Value;
+                }
+            }
+            catch { }
+            return string.Empty;
+        }
+        
+        // 根据wttr.in天气描述转换为emoji图标
+        private string GetWeatherEmojiFromDesc(string weatherDesc)
+        {
+            if (string.IsNullOrEmpty(weatherDesc))
+                return "🌤️";
+            
+            weatherDesc = weatherDesc.ToLower();
+            
+            if (weatherDesc.Contains("sunny") || weatherDesc.Contains("clear"))
+                return "☀️";
+            else if (weatherDesc.Contains("partly cloudy") || weatherDesc.Contains("partly cloud"))
+                return "⛅";
+            else if (weatherDesc.Contains("cloudy") || weatherDesc.Contains("overcast"))
+                return "☁️";
+            else if (weatherDesc.Contains("mist") || weatherDesc.Contains("fog"))
+                return "🌫️";
+            else if (weatherDesc.Contains("thunder") || weatherDesc.Contains("storm"))
+                return "⛈️";
+            else if (weatherDesc.Contains("snow") || weatherDesc.Contains("blizzard"))
+                return "❄️";
+            else if (weatherDesc.Contains("sleet") || weatherDesc.Contains("ice"))
+                return "🌨️";
+            else if (weatherDesc.Contains("rain") || weatherDesc.Contains("drizzle") || weatherDesc.Contains("shower"))
+                return "🌧️";
+            else if (weatherDesc.Contains("wind"))
+                return "💨";
+            else
+                return "🌤️";
         }
 
         private async Task LoadNoticesAsync()
