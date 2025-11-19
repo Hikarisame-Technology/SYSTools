@@ -9,22 +9,41 @@
       KeepAlive="True"
       d:DesignHeight="610" d:DesignWidth="1040"
       Title="Test" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610">
-
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-
         <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="/SYSTools;component/Resources/LOGO.png" Opacity="0.5" Height="90" Width="160"/>
-
         <Border  BorderThickness="1" CornerRadius="5" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
-
         <TextBlock x:Name="textBlock" Margin="20,17,0,0" TextWrapping="Wrap" Text="系统配置快速检测 ( 基于 Windows Management Instrumentation ) 信息仅供参考" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" UseLayoutRounding="True"/>
-
         <Border BorderBrush="#CC202020" BorderThickness="1" CornerRadius="5" Margin="10,60,10,10">
-            <TreeView x:Name="TestView" IsTabStop="False" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderThickness="0" Loaded="TestView_Loaded">
-            </TreeView>
+            <Grid>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Padding="15">
+                    <Grid x:Name="MainPanel" HorizontalAlignment="Left">
+                        <!-- 动态创建列 -->
+                    </Grid>
+                </ScrollViewer>
+                <StackPanel x:Name="PlaceholderText" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="&#xE977;" 
+                               FontFamily="{DynamicResource SegoeIcons}" 
+                               FontSize="48" 
+                               HorizontalAlignment="Center" 
+                               Margin="0,0,0,15" 
+                               Opacity="0.5" 
+                               Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                    <TextBlock Text='点击"检测配置"按钮开始获取系统信息' 
+                               FontSize="15" 
+                               Foreground="{DynamicResource TextFillColorSecondaryBrush}" 
+                               HorizontalAlignment="Center"
+                               FontFamily="Microsoft YaHei UI, Segoe UI"
+                               FontWeight="Normal"/>
+                    <TextBlock Text="基于 Windows Management Instrumentation" 
+                               FontSize="12" 
+                               Foreground="{DynamicResource TextFillColorTertiaryBrush}" 
+                               HorizontalAlignment="Center"
+                               Margin="0,8,0,0"
+                               FontFamily="Microsoft YaHei UI, Segoe UI"/>
+                </StackPanel>
+            </Grid>
         </Border>
-
-        <Button x:Name="TestBotton" Content="检测配置" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="800,13.5,0,0" MinWidth="70" FontSize="15" MinHeight="32.05" IsTabStop="False" ToolTip="配置保存至软件根目录Info.xml文件夹内" Click="TestBotton_Click" Background="{x:Null}" BorderBrush="#33000000"/>
+        <Button x:Name="TestBotton" Content="检测配置" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="800,13.5,0,0" MinWidth="70" FontSize="15" MinHeight="32.05" IsTabStop="False" ToolTip="实时获取系统硬件配置信息" Click="TestBotton_Click" Background="{x:Null}" BorderBrush="#33000000"/>
         <Button x:Name="Info" Content="?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="920,13.5,0,0" MinWidth="70" FontSize="15" MinHeight="32.05" IsTabStop="False" Click="Info_Click" Background="{x:Null}" BorderBrush="#33000000"/>
-
     </Grid>
 </Page>
