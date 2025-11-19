@@ -9,23 +9,21 @@
       mc:Ignorable="d" 
       KeepAlive="True"
       d:DesignHeight="610" d:DesignWidth="1040"
-      Title="Test" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610">
-
+      Title="HardwareMonitor" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-
         <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="/SYSTools;component/Resources/LOGO.png" Opacity="0.5" Height="90" Width="160"/>
-
-        <Border  BorderThickness="1" CornerRadius="5" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
-
+        <Border BorderThickness="1" CornerRadius="5" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
         <TextBlock Margin="20,17,0,0" TextWrapping="Wrap" Text="{model:Resource Key=HardwareMonitor_TextBlock}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" UseLayoutRounding="True"/>
-
-        <Button x:Name="CollapseAllButton" Content="{model:Resource Key=CollapseAll}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,13.5,35,0" MinWidth="70" FontSize="15" MinHeight="32.05" IsTabStop="False" Click="CollapseAllButton_Click" Background="{x:Null}" BorderBrush="#33000000"/>
-        <Button x:Name="ExpandAllButton" Content="{model:Resource Key=ExpandAll}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,13.5,155,0" MinWidth="70" FontSize="15" MinHeight="32.05" IsTabStop="False" Click="ExpandAllButton_Click" Background="{x:Null}" BorderBrush="#33000000"/>
-
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,13.5,10,0">
+            <TextBlock x:Name="RefreshStatusText" Text="自动刷新: 2s" FontSize="13" VerticalAlignment="Center" Margin="0,0,15,0" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+            <Button x:Name="RefreshButton" Content="&#xE72C;" FontFamily="{DynamicResource SegoeIcons}" ToolTip="立即刷新" MinWidth="40" FontSize="16" MinHeight="32.05" IsTabStop="False" Click="RefreshButton_Click" Background="{x:Null}" BorderBrush="#33000000"/>
+        </StackPanel>
         <Border BorderBrush="#CC202020" BorderThickness="1" CornerRadius="5" Margin="10,60,10,10">
-            <TreeView x:Name="TestView" IsTabStop="False" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderThickness="0" >
-            </TreeView>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Padding="15">
+                <Grid x:Name="MainPanel" HorizontalAlignment="Stretch">
+                    <!-- 动态创建列 -->
+                </Grid>
+            </ScrollViewer>
         </Border>
-
     </Grid>
 </Page>
