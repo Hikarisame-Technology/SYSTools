@@ -29,7 +29,7 @@ namespace SYSTools.Pages
             var libraries = new List<Library>
             {
                 new Library { Name = "iNKORE.UI.WPF", Uri = "https://github.com/iNKORE-NET/UI.WPF" },
-                new Library { Name = "iNKORE.UI.WPF.Modern(I.U.W.M L)", Uri = "https://github.com/iNKORE-Public/UI.WPF.Modern" },
+                new Library { Name = "iNKORE.UI.WPF.Modern (iUWM License)", Uri = "https://github.com/iNKORE-Public/UI.WPF.Modern" },
                 new Library { Name = "LibreHardwareMonitorLib (MPL-2.0 License)", Uri = "https://github.com/LibreHardwareMonitor/LibreHardwareMonitor" },
                 new Library { Name = "Log4Net (Apache-2.0 License)", Uri = "https://logging.apache.org/log4net/" },
                 new Library { Name = "Microsoft.Windows.SDK.Contracts", Uri = "https://aka.ms/WinSDKProjectURL" },

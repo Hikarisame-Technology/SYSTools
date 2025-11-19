@@ -29,7 +29,7 @@
                         <muxc:SettingsCard ContentAlignment="Vertical" VerticalAlignment="Center">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
                                 <DockPanel HorizontalAlignment="Left" LastChildFill="False">
-                                    <TextBlock FontSize="12">SYSTools is licensed under the Mozilla Public License Version 2.0 license Powered by .NET Framework 4.7.2 ＆ iNKORE.UI.WPF</TextBlock>
+                                    <TextBlock FontSize="12">SYSTools is licensed under the Mozilla Public License Version 2.0 license. ( Powered by .NET Framework 4.7.2 ＆ iNKORE.UI.WPF )</TextBlock>
                                 </DockPanel>
                             </StackPanel>
                         </muxc:SettingsCard>
