@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+    <!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,437 +59,500 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+        <xsd:element name="root" msdata:IsDataSet="true">
             <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+                <xsd:choice maxOccurs="unbounded">
+                    <xsd:element name="metadata">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                            </xsd:sequence>
+                            <xsd:attribute name="name" use="required" type="xsd:string" />
+                            <xsd:attribute name="type" type="xsd:string" />
+                            <xsd:attribute name="mimetype" type="xsd:string" />
+                            <xsd:attribute ref="xml:space" />
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="assembly">
+                        <xsd:complexType>
+                            <xsd:attribute name="alias" type="xsd:string" />
+                            <xsd:attribute name="name" type="xsd:string" />
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="data">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+                            <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+                            <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+                            <xsd:attribute ref="xml:space" />
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="resheader">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required" />
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:choice>
             </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="ContactUs" xml:space="preserve">
-    <value>联系我们</value>
-  </data>
-  <data name="QQGroup" xml:space="preserve">
-    <value>QQ群</value>
-  </data>
-  <data name="WebSite" xml:space="preserve">
-    <value>官网</value>
-  </data>
-  <data name="GithubRepo" xml:space="preserve">
-    <value>Github仓库</value>
-  </data>
-  <data name="Developers" xml:space="preserve">
-    <value>开发人员 ＆ 设计人员 ＆ 外部支援</value>
-  </data>
-  <data name="ComponentsLicense" xml:space="preserve">
-    <value>软件中使用的组件及对应仓库</value>
-  </data>
-  <data name="SYSToolsUpdate" xml:space="preserve">
-    <value>SYSTools更新</value>
-  </data>
-  <data name="SoftwareToolkitUpdate" xml:space="preserve">
-    <value>软件更新 ＆ 工具包更新</value>
-  </data>
-  <data name="SoftwareUpdate" xml:space="preserve">
-    <value>软件更新</value>
-  </data>
-  <data name="ToolkitUpdate" xml:space="preserve">
-    <value>工具包更新</value>
-  </data>
-  <data name="PolicyAgreement" xml:space="preserve">
-    <value>隐私协议 ＆ 用户协议</value>
-  </data>
-  <data name="PrivacyPolicy" xml:space="preserve">
-    <value>隐私协议</value>
-  </data>
-  <data name="UserAgreement" xml:space="preserve">
-    <value>用户协议</value>
-  </data>
-  <data name="BackImageSetting_Description" xml:space="preserve">
-    <value>预览/设置 图片＆模糊度＆透明度</value>
-  </data>
-  <data name="BackImageSetting_Header" xml:space="preserve">
-    <value>背景图片设置</value>
-  </data>
-  <data name="BackImagePreview" xml:space="preserve">
-    <value>背景图片预览</value>
-  </data>
-  <data name="SelectBackgroundImage" xml:space="preserve">
-    <value>选择背景图片</value>
-  </data>
-  <data name="ClearBackgroundImage" xml:space="preserve">
-    <value>清空背景图片</value>
-  </data>
-  <data name="BackgroundImageBlurRadius_Description" xml:space="preserve">
-    <value>模糊效果过高容易导致卡顿</value>
-  </data>
-  <data name="BackgroundImageBlurRadius_Header" xml:space="preserve">
-    <value>图片模糊效果(实验性)</value>
-  </data>
-  <data name="BackgroundImageOpacity_Header" xml:space="preserve">
-    <value>图片不透明度(实验性)</value>
-  </data>
-  <data name="ProgramThemeSetting_Header" xml:space="preserve">
-    <value>程序主题设定</value>
-  </data>
-  <data name="ProgramThemeSetting_Description" xml:space="preserve">
-    <value>设定程序的主题风格为深/浅色模式</value>
-  </data>
-  <data name="ThemeModeSetting_Auto" xml:space="preserve">
-    <value>跟随系统</value>
-  </data>
-  <data name="ThemeModeSetting_Dark" xml:space="preserve">
-    <value>深色</value>
-  </data>
-  <data name="ThemeModeSetting_Light" xml:space="preserve">
-    <value>浅色</value>
-  </data>
-  <data name="LanguageSetting_Header" xml:space="preserve">
-    <value>语言设定</value>
-  </data>
-  <data name="LanguageSetting_Description" xml:space="preserve">
-    <value>设定程序显示的语言</value>
-  </data>
-  <data name="OpenWebsite" xml:space="preserve">
-    <value>打开网页</value>
-  </data>
-  <data name="HardwareMonitor_TextBlock" xml:space="preserve">
-    <value>传感器信息收集 ( 基于 LibreHardwareMonitor ) 信息仅供参考</value>
-  </data>
-  <data name="CollapseAll" xml:space="preserve">
-    <value>全部收起</value>
-  </data>
-  <data name="ExpandAll" xml:space="preserve">
-    <value>全部展开</value>
-  </data>
-  <data name="ErrorTitle" xml:space="preserve">
-    <value>错误</value>
-  </data>
-  <data name="HardwareMonitorInitError" xml:space="preserve">
-    <value>初始化硬件监控时出错:</value>
-  </data>
-  <data name="Welcome" xml:space="preserve">
-    <value>欢迎使用SYSTools工具箱</value>
-  </data>
-  <data name="News" xml:space="preserve">
-    <value>公告</value>
-  </data>
-  <data name="Hello" xml:space="preserve">
-    <value>您好：</value>
-  </data>
-  <data name="LoadingNews" xml:space="preserve">
-    <value>正在加载公告...</value>
-  </data>
-  <data name="NetError" xml:space="preserve">
-    <value>网络或网站出现问题</value>
-  </data>
-  <data name="NoticeInfo" xml:space="preserve">
-    <value>暂无公告</value>
-  </data>
-  <data name="NoticeError" xml:space="preserve">
-    <value>无法获取公告</value>
-  </data>
-  <data name="TimeUnitDay" xml:space="preserve">
-    <value>天</value>
-  </data>
-  <data name="TimeUnitHour" xml:space="preserve">
-    <value>时</value>
-  </data>
-  <data name="TimeUnitMinute" xml:space="preserve">
-    <value>分</value>
-  </data>
-  <data name="TimeUnitSecond" xml:space="preserve">
-    <value>秒</value>
-  </data>
-  <data name="SystemTime" xml:space="preserve">
-    <value>系统时间</value>
-  </data>
-  <data name="SystemStartTime" xml:space="preserve">
-    <value>启动日期</value>
-  </data>
-  <data name="SystemRunTime" xml:space="preserve">
-    <value>运行时间</value>
-  </data>
-  <data name="CurrentSystem" xml:space="preserve">
-    <value>系统版本</value>
-  </data>
-  <data name="UpdateHistory" xml:space="preserve">
-    <value>Windows 更新历史记录</value>
-  </data>
-  <data name="UpdateTitle" xml:space="preserve">
-    <value>更新标题</value>
-  </data>
-  <data name="UpdateDate" xml:space="preserve">
-    <value>日期</value>
-  </data>
-  <data name="UpdateStatus" xml:space="preserve">
-    <value>状态</value>
-  </data>
-  <data name="UpdateHistoryError" xml:space="preserve">
-    <value>加载更新历史记录失败</value>
-  </data>
-  <data name="UpdateStatusSuccess" xml:space="preserve">
-    <value>成功</value>
-  </data>
-  <data name="UpdateStatusFailed" xml:space="preserve">
-    <value>失败</value>
-  </data>
-  <data name="UpdateStatusUnknown" xml:space="preserve">
-    <value>未知</value>
-  </data>
-  <data name="LoadUpdateHistory" xml:space="preserve">
-    <value>加载更新历史</value>
-  </data>
-  <data name="ClearList" xml:space="preserve">
-    <value>清空列表</value>
-  </data>
-  <data name="ServiceProvider" xml:space="preserve">
-    <value>IPv4: ipip.net &amp; IPv6: neu6.edu</value>
-  </data>
-  <data name="IP" xml:space="preserve">
-    <value>公网IP</value>
-  </data>
-  <data name="LR_ToolTip" xml:space="preserve">
-    <value>左键单击获取 右键单击隐藏</value>
-  </data>
-  <data name="CustomTool_TextBlock" xml:space="preserve">
-    <value>自定义工具</value>
-  </data>
-  <data name="AddNewTool" xml:space="preserve">
-    <value>添加新工具</value>
-  </data>
-  <data name="AddCustomTool_TextBlock" xml:space="preserve">
-    <value>添加自定义工具</value>
-  </data>
-  <data name="OK" xml:space="preserve">
-    <value>确定</value>
-  </data>
-  <data name="Close" xml:space="preserve">
-    <value>取消</value>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>名称:</value>
-  </data>
-  <data name="IconPath" xml:space="preserve">
-    <value>图标路径:</value>
-  </data>
-  <data name="EXEPath" xml:space="preserve">
-    <value>可执行文件:</value>
-  </data>
-  <data name="Args" xml:space="preserve">
-    <value>参数:</value>
-  </data>
-  <data name="CustomIcon" xml:space="preserve">
-    <value>自定义图标</value>
-  </data>
-  <data name="UseEXEEmbeddedIcon" xml:space="preserve">
-    <value>使用 exe 内嵌图标</value>
-  </data>
-  <data name="Browse" xml:space="preserve">
-    <value>浏览...</value>
-  </data>
-  <data name="Modify" xml:space="preserve">
-    <value>修改</value>
-  </data>
-  <data name="Delete" xml:space="preserve">
-    <value>删除</value>
-  </data>
-  <data name="SelectIcon" xml:space="preserve">
-    <value>选择图标</value>
-  </data>
-  <data name="SelectEXEFile" xml:space="preserve">
-    <value>选择可执行文件</value>
-  </data>
-  <data name="ImageFilter" xml:space="preserve">
-    <value>图像文件|*.png;*.jpg;*.ico|所有文件|*.*</value>
-  </data>
-  <data name="EXEFilter" xml:space="preserve">
-    <value>可执行文件|*.exe|所有文件|*.*</value>
-  </data>
-  <data name="Info" xml:space="preserve">
-    <value>提示</value>
-  </data>
-  <data name="NameAndExecutableRequired" xml:space="preserve">
-    <value>名称和可执行文件为必填项.</value>
-  </data>
-  <data name="Open" xml:space="preserve">
-    <value>启动</value>
-  </data>
-  <data name="ImageFilter_JPng" xml:space="preserve">
-    <value>图像文件 (*.jpg;*.png)|*.jpg;*.png</value>
-  </data>
-  <data name="ConfirmDeleteMessage" xml:space="preserve">
-    <value>确定要删除工具 '{0}' 吗？</value>
-  </data>
-  <data name="ConfirmModifyMessage" xml:space="preserve">
-    <value>是否要修改工具 '{0}' ？</value>
-  </data>
-  <data name="ConfirmDeleteTitle" xml:space="preserve">
-    <value>确认删除</value>
-  </data>
-  <data name="ConfirmModifyTitle" xml:space="preserve">
-    <value>确认修改</value>
-  </data>
-  <data name="AdministratorMode" xml:space="preserve">
-    <value>[管理员模式]</value>
-  </data>
-  <data name="ProcessTotal" xml:space="preserve">
-    <value>有一个同名进程正在运行！</value>
-  </data>
-  <data name="ProcessTotalTitle" xml:space="preserve">
-    <value>程序冲突！</value>
-  </data>
-  <data name="DetectionTools_Content" xml:space="preserve">
-    <value>检测工具</value>
-  </data>
-  <data name="TestTools_Content" xml:space="preserve">
-    <value>硬件测试工具</value>
-  </data>
-  <data name="DiskTools_Content" xml:space="preserve">
-    <value>硬盘工具</value>
-  </data>
-  <data name="PeripheralsTools_Content" xml:space="preserve">
-    <value>外设检测工具</value>
-  </data>
-  <data name="RepairingTools_Content" xml:space="preserve">
-    <value>运行库安装工具</value>
-  </data>
-  <data name="AIDA64_Text" xml:space="preserve">
-    <value>AIDA64提供了诸如协助超频，硬件侦错，压力测试和传感器监测等多种功能，而且还可以对处理器，系统内存和磁盘驱动器的性能进行全面评估。</value>
-  </data>
-  <data name="CPU-Z_Text" xml:space="preserve">
-    <value>CPU-Z提供一些关于处理器的信息，包含了制造厂及处理器名称，核心构造及封装技术，内部、外部频率，最大超频速度检测。</value>
-  </data>
-  <data name="GPU-Z_Text" xml:space="preserve">
-    <value>GPU-Z 是一个轻量级的系统实用程序，旨在提供有关您的显卡和图形处理器的重要信息。</value>
-  </data>
-  <data name="HWiNFO_Text" xml:space="preserve">
-    <value>HWiNFO 是一种用于硬件分析和监控的一体化解决方案，从快速概览展开到所有硬件组件的深度。始终保持最新状态，支持最新的技术和标准。</value>
-  </data>
-  <data name="HWMonitor_Text" xml:space="preserve">
-    <value>HWMonitor是一个硬件监控程序，它读取 PC 系统的主要健康传感器：电压、温度、风扇速度。</value>
-  </data>
-  <data name="Prime95_Text" xml:space="preserve">
-    <value>Prime95是一个专用测试系统稳定的软件。</value>
-  </data>
-  <data name="IntelBurnTest_Text" xml:space="preserve">
-    <value>IntelBurnTest是一款Intel/AMD处理器稳定性强力测试工具，简化了使用英特尔Linpack。</value>
-  </data>
-  <data name="FurMark_Text" xml:space="preserve">
-    <value>FurMark是oZone3D开发的一款OpenGL基准测试工具，通过皮毛渲染算法来衡量显卡的性能，同时还能借此考验显卡的稳定性。</value>
-  </data>
-  <data name="MemTest_Text" xml:space="preserve">
-    <value>TechPowerUp出品的MemTest内存稳定性测试工具。</value>
-  </data>
-  <data name="HKBTest_Text" xml:space="preserve">
-    <value>HKBTest是一款键盘测试工具，可以用于键盘按键冲突检测。</value>
-  </data>
-  <data name="MouseTest_Text" xml:space="preserve">
-    <value>MouseTest是鼠标之家出品的鼠标按键连点检测工具</value>
-  </data>
-  <data name="MouseRate_Text" xml:space="preserve">
-    <value>MouseRate是一款检测鼠标DPI和扫描率综合性能的软件</value>
-  </data>
-  <data name="AS-SSD_Text" xml:space="preserve">
-    <value>AS SSD Benchmark是一款功能强大、免费实用的硬盘性能测试工具,软件能够帮助用户测出固态硬盘持续读写等的性能。</value>
-  </data>
-  <data name="CrystalDiskInfo_Text" xml:space="preserve">
-    <value>CrystalDiskInfo是一个硬盘健康监测工具。它显示了硬盘驱动器的基本信息，智能监控和磁盘的温度。可以迅速读到本机硬盘的详细信息。</value>
-  </data>
-  <data name="CrystalDiskMark_Text" xml:space="preserve">
-    <value>CrystalDiskMark是一个衡量各种存储（HDD、SSD、USB 内存等）速度的基准软件。</value>
-  </data>
-  <data name="DiskBenchmark_Text" xml:space="preserve">
-    <value>ATTO Disk Benchmark 可以测量硬盘驱动器、固态驱动器、RAID 阵列以及主机连接到附加存储的性能。</value>
-  </data>
-  <data name="DiskGenius_Text" xml:space="preserve">
-    <value>DiskGenius是一款硬盘分区及数据维护软件。</value>
-  </data>
-  <data name="HDTune_Text" xml:space="preserve">
-    <value>HD Tune是一款具有多种功能的硬盘/SSD 实用程序。它可用于测量驱动器的性能、扫描错误、检查健康状态 (SMART)、安全擦除所有数据等等。</value>
-  </data>
-  <data name="LLFTOOL_Text" xml:space="preserve">
-    <value>LLFTOOL万能低格工具是一款适用于windows操作系统的硬盘低级格式化工具，该硬盘低格工具使用方便，操作简单。</value>
-  </data>
-  <data name="PartAssist_Text" xml:space="preserve">
-    <value>傲梅分区助手是一款免费、专业级的无损分区工具，提供简单、易用的磁盘分区管理操作。</value>
-  </data>
-  <data name="SSD-Z_Text" xml:space="preserve">
-    <value>SSD-Z是一款针对SSD设备的高可靠性的测试软件。</value>
-  </data>
-  <data name="Victoria_Text" xml:space="preserve">
-    <value>Victoria是Windows环境下强大的硬盘维护工具，具备硬盘表面检测/硬盘坏道修复/S.M.A.R.T.信息察看保存/Cache缓存控制等多功能的工具。</value>
-  </data>
-  <data name="H2TestW_Text" xml:space="preserve">
-    <value>H2testw是一款u盘读写速度测试和坏块检测软件，通过往待测目录写入数据的方式测试u盘的实际写入速度校验写入的数据是否正确。</value>
-  </data>
-  <data name="OpenFolder" xml:space="preserve">
-    <value>打开目录</value>
-  </data>
-  <data name="UncategorizedTools_Content" xml:space="preserve">
-    <value>未分类工具</value>
-  </data>
-  <data name="SDI_Text" xml:space="preserve">
-    <value>使用该工具可快速查找并安装所有丢失的驱动程序。</value>
-  </data>
-  <data name="Rufus_Text" xml:space="preserve">
-    <value>轻量级工具，用于从ISO文件创建可启动USB驱动器；支持多种操作系统镜像和高级分区方案。</value>
-  </data>
-  <data name="Etcher_Text" xml:space="preserve">
-    <value>跨平台工具，用于将操作系统镜像刷写到SD卡或USB驱动器，配备简单易用的用户界面。</value>
-  </data>
-  <data name="Ventoy_Text" xml:space="preserve">
-    <value>支持创建可启动的USB驱动器，该驱动器可存储并启动多个ISO/WIM/IMG/VHD(x)文件，且无需重新格式化。</value>
-  </data>
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="ContactUs" xml:space="preserve">
+        <value>联系我们</value>
+    </data>
+    <data name="QQGroup" xml:space="preserve">
+        <value>QQ群</value>
+    </data>
+    <data name="WebSite" xml:space="preserve">
+        <value>官网</value>
+    </data>
+    <data name="GithubRepo" xml:space="preserve">
+        <value>Github仓库</value>
+    </data>
+    <data name="Developers" xml:space="preserve">
+        <value>开发人员 ＆ 设计人员 ＆ 外部支援</value>
+    </data>
+    <data name="ComponentsLicense" xml:space="preserve">
+        <value>软件中使用的组件及对应仓库</value>
+    </data>
+    <data name="SYSToolsUpdate" xml:space="preserve">
+        <value>SYSTools更新</value>
+    </data>
+    <data name="SoftwareToolkitUpdate" xml:space="preserve">
+        <value>软件更新 ＆ 工具包更新</value>
+    </data>
+    <data name="SoftwareUpdate" xml:space="preserve">
+        <value>软件更新</value>
+    </data>
+    <data name="ToolkitUpdate" xml:space="preserve">
+        <value>工具包更新</value>
+    </data>
+    <data name="PolicyAgreement" xml:space="preserve">
+        <value>隐私协议 ＆ 用户协议</value>
+    </data>
+    <data name="PrivacyPolicy" xml:space="preserve">
+        <value>隐私协议</value>
+    </data>
+    <data name="UserAgreement" xml:space="preserve">
+        <value>用户协议</value>
+    </data>
+    <data name="BackImageSetting_Description" xml:space="preserve">
+        <value>预览/设置 图片＆模糊度＆透明度</value>
+    </data>
+    <data name="BackImageSetting_Header" xml:space="preserve">
+        <value>背景图片设置</value>
+    </data>
+    <data name="BackImagePreview" xml:space="preserve">
+        <value>背景图片预览</value>
+    </data>
+    <data name="SelectBackgroundImage" xml:space="preserve">
+        <value>选择背景图片</value>
+    </data>
+    <data name="ClearBackgroundImage" xml:space="preserve">
+        <value>清空背景图片</value>
+    </data>
+    <data name="BackgroundImageBlurRadius_Description" xml:space="preserve">
+        <value>模糊效果过高容易导致卡顿</value>
+    </data>
+    <data name="BackgroundImageBlurRadius_Header" xml:space="preserve">
+        <value>图片模糊效果(实验性)</value>
+    </data>
+    <data name="BackgroundImageOpacity_Header" xml:space="preserve">
+        <value>图片不透明度(实验性)</value>
+    </data>
+    <data name="ProgramThemeSetting_Header" xml:space="preserve">
+        <value>程序主题设定</value>
+    </data>
+    <data name="ProgramThemeSetting_Description" xml:space="preserve">
+        <value>设定程序的主题风格为深/浅色模式</value>
+    </data>
+    <data name="ThemeModeSetting_Auto" xml:space="preserve">
+        <value>跟随系统</value>
+    </data>
+    <data name="ThemeModeSetting_Dark" xml:space="preserve">
+        <value>深色</value>
+    </data>
+    <data name="ThemeModeSetting_Light" xml:space="preserve">
+        <value>浅色</value>
+    </data>
+    <data name="LanguageSetting_Header" xml:space="preserve">
+        <value>语言设定</value>
+    </data>
+    <data name="LanguageSetting_Description" xml:space="preserve">
+        <value>设定程序显示的语言</value>
+    </data>
+    <data name="OpenWebsite" xml:space="preserve">
+        <value>打开网页</value>
+    </data>
+    <data name="HardwareMonitor_TextBlock" xml:space="preserve">
+        <value>传感器信息收集 ( 基于 LibreHardwareMonitor ) 信息仅供参考</value>
+    </data>
+    <data name="CollapseAll" xml:space="preserve">
+        <value>全部收起</value>
+    </data>
+    <data name="ExpandAll" xml:space="preserve">
+        <value>全部展开</value>
+    </data>
+    <data name="ErrorTitle" xml:space="preserve">
+        <value>错误</value>
+    </data>
+    <data name="HardwareMonitorInitError" xml:space="preserve">
+        <value>初始化硬件监控时出错:</value>
+    </data>
+    <data name="Welcome" xml:space="preserve">
+        <value>欢迎使用SYSTools工具箱</value>
+    </data>
+    <data name="News" xml:space="preserve">
+        <value>公告</value>
+    </data>
+    <data name="Hello" xml:space="preserve">
+        <value>您好：</value>
+    </data>
+    <data name="LoadingNews" xml:space="preserve">
+        <value>正在加载公告...</value>
+    </data>
+    <data name="NetError" xml:space="preserve">
+        <value>网络或网站出现问题</value>
+    </data>
+    <data name="NoticeInfo" xml:space="preserve">
+        <value>暂无公告</value>
+    </data>
+    <data name="NoticeError" xml:space="preserve">
+        <value>无法获取公告</value>
+    </data>
+    <data name="TimeUnitDay" xml:space="preserve">
+        <value>天</value>
+    </data>
+    <data name="TimeUnitHour" xml:space="preserve">
+        <value>时</value>
+    </data>
+    <data name="TimeUnitMinute" xml:space="preserve">
+        <value>分</value>
+    </data>
+    <data name="TimeUnitSecond" xml:space="preserve">
+        <value>秒</value>
+    </data>
+    <data name="SystemTime" xml:space="preserve">
+        <value>系统时间</value>
+    </data>
+    <data name="SystemStartTime" xml:space="preserve">
+        <value>启动日期</value>
+    </data>
+    <data name="SystemRunTime" xml:space="preserve">
+        <value>运行时间</value>
+    </data>
+    <data name="CurrentSystem" xml:space="preserve">
+        <value>系统版本</value>
+    </data>
+    <data name="UpdateHistory" xml:space="preserve">
+        <value>Windows 更新历史记录</value>
+    </data>
+    <data name="UpdateTitle" xml:space="preserve">
+        <value>更新标题</value>
+    </data>
+    <data name="UpdateDate" xml:space="preserve">
+        <value>日期</value>
+    </data>
+    <data name="UpdateStatus" xml:space="preserve">
+        <value>状态</value>
+    </data>
+    <data name="UpdateHistoryError" xml:space="preserve">
+        <value>加载更新历史记录失败</value>
+    </data>
+    <data name="UpdateStatusSuccess" xml:space="preserve">
+        <value>成功</value>
+    </data>
+    <data name="UpdateStatusFailed" xml:space="preserve">
+        <value>失败</value>
+    </data>
+    <data name="UpdateStatusUnknown" xml:space="preserve">
+        <value>未知</value>
+    </data>
+    <data name="LoadUpdateHistory" xml:space="preserve">
+        <value>加载更新历史</value>
+    </data>
+    <data name="ClearList" xml:space="preserve">
+        <value>清空列表</value>
+    </data>
+    <data name="ServiceProvider" xml:space="preserve">
+        <value>IPv4: ipip.net &amp; IPv6: neu6.edu</value>
+    </data>
+    <data name="IP" xml:space="preserve">
+        <value>公网IP</value>
+    </data>
+    <data name="LR_ToolTip" xml:space="preserve">
+        <value>左键单击获取 右键单击隐藏</value>
+    </data>
+    <data name="CustomTool_TextBlock" xml:space="preserve">
+        <value>自定义工具</value>
+    </data>
+    <data name="AddNewTool" xml:space="preserve">
+        <value>添加新工具</value>
+    </data>
+    <data name="AddCustomTool_TextBlock" xml:space="preserve">
+        <value>添加自定义工具</value>
+    </data>
+    <data name="OK" xml:space="preserve">
+        <value>确定</value>
+    </data>
+    <data name="Close" xml:space="preserve">
+        <value>取消</value>
+    </data>
+    <data name="Name" xml:space="preserve">
+        <value>名称:</value>
+    </data>
+    <data name="IconPath" xml:space="preserve">
+        <value>图标路径:</value>
+    </data>
+    <data name="EXEPath" xml:space="preserve">
+        <value>可执行文件:</value>
+    </data>
+    <data name="Args" xml:space="preserve">
+        <value>参数:</value>
+    </data>
+    <data name="CustomIcon" xml:space="preserve">
+        <value>自定义图标</value>
+    </data>
+    <data name="UseEXEEmbeddedIcon" xml:space="preserve">
+        <value>使用 exe 内嵌图标</value>
+    </data>
+    <data name="Browse" xml:space="preserve">
+        <value>浏览...</value>
+    </data>
+    <data name="Modify" xml:space="preserve">
+        <value>修改</value>
+    </data>
+    <data name="Delete" xml:space="preserve">
+        <value>删除</value>
+    </data>
+    <data name="SelectIcon" xml:space="preserve">
+        <value>选择图标</value>
+    </data>
+    <data name="SelectEXEFile" xml:space="preserve">
+        <value>选择可执行文件</value>
+    </data>
+    <data name="ImageFilter" xml:space="preserve">
+        <value>图像文件|*.png;*.jpg;*.ico|所有文件|*.*</value>
+    </data>
+    <data name="EXEFilter" xml:space="preserve">
+        <value>可执行文件|*.exe|所有文件|*.*</value>
+    </data>
+    <data name="Info" xml:space="preserve">
+        <value>提示</value>
+    </data>
+    <data name="NameAndExecutableRequired" xml:space="preserve">
+        <value>名称和可执行文件为必填项.</value>
+    </data>
+    <data name="Open" xml:space="preserve">
+        <value>启动</value>
+    </data>
+    <data name="ImageFilter_JPng" xml:space="preserve">
+        <value>图像文件 (*.jpg;*.png)|*.jpg;*.png</value>
+    </data>
+    <data name="ConfirmDeleteMessage" xml:space="preserve">
+        <value>确定要删除工具 '{0}' 吗？</value>
+    </data>
+    <data name="ConfirmModifyMessage" xml:space="preserve">
+        <value>是否要修改工具 '{0}' ？</value>
+    </data>
+    <data name="ConfirmDeleteTitle" xml:space="preserve">
+        <value>确认删除</value>
+    </data>
+    <data name="ConfirmModifyTitle" xml:space="preserve">
+        <value>确认修改</value>
+    </data>
+    <data name="AdministratorMode" xml:space="preserve">
+        <value>[管理员模式]</value>
+    </data>
+    <data name="ProcessTotal" xml:space="preserve">
+        <value>有一个同名进程正在运行！</value>
+    </data>
+    <data name="ProcessTotalTitle" xml:space="preserve">
+        <value>程序冲突！</value>
+    </data>
+    <data name="DetectionTools_Content" xml:space="preserve">
+        <value>检测工具</value>
+    </data>
+    <data name="TestTools_Content" xml:space="preserve">
+        <value>硬件测试工具</value>
+    </data>
+    <data name="DiskTools_Content" xml:space="preserve">
+        <value>硬盘工具</value>
+    </data>
+    <data name="PeripheralsTools_Content" xml:space="preserve">
+        <value>外设检测工具</value>
+    </data>
+    <data name="RepairingTools_Content" xml:space="preserve">
+        <value>运行库安装工具</value>
+    </data>
+    <data name="AIDA64_Text" xml:space="preserve">
+        <value>AIDA64提供了诸如协助超频，硬件侦错，压力测试和传感器监测等多种功能，而且还可以对处理器，系统内存和磁盘驱动器的性能进行全面评估。</value>
+    </data>
+    <data name="CPU-Z_Text" xml:space="preserve">
+        <value>CPU-Z提供一些关于处理器的信息，包含了制造厂及处理器名称，核心构造及封装技术，内部、外部频率，最大超频速度检测。</value>
+    </data>
+    <data name="GPU-Z_Text" xml:space="preserve">
+        <value>GPU-Z 是一个轻量级的系统实用程序，旨在提供有关您的显卡和图形处理器的重要信息。</value>
+    </data>
+    <data name="HWiNFO_Text" xml:space="preserve">
+        <value>HWiNFO 是一种用于硬件分析和监控的一体化解决方案，从快速概览展开到所有硬件组件的深度。始终保持最新状态，支持最新的技术和标准。</value>
+    </data>
+    <data name="HWMonitor_Text" xml:space="preserve">
+        <value>HWMonitor是一个硬件监控程序，它读取 PC 系统的主要健康传感器：电压、温度、风扇速度。</value>
+    </data>
+    <data name="Prime95_Text" xml:space="preserve">
+        <value>Prime95是一个专用测试系统稳定的软件。</value>
+    </data>
+    <data name="IntelBurnTest_Text" xml:space="preserve">
+        <value>IntelBurnTest是一款Intel/AMD处理器稳定性强力测试工具，简化了使用英特尔Linpack。</value>
+    </data>
+    <data name="FurMark_Text" xml:space="preserve">
+        <value>FurMark是oZone3D开发的一款OpenGL基准测试工具，通过皮毛渲染算法来衡量显卡的性能，同时还能借此考验显卡的稳定性。</value>
+    </data>
+    <data name="MemTest_Text" xml:space="preserve">
+        <value>TechPowerUp出品的MemTest内存稳定性测试工具。</value>
+    </data>
+    <data name="HKBTest_Text" xml:space="preserve">
+        <value>HKBTest是一款键盘测试工具，可以用于键盘按键冲突检测。</value>
+    </data>
+    <data name="MouseTest_Text" xml:space="preserve">
+        <value>MouseTest是鼠标之家出品的鼠标按键连点检测工具</value>
+    </data>
+    <data name="MouseRate_Text" xml:space="preserve">
+        <value>MouseRate是一款检测鼠标DPI和扫描率综合性能的软件</value>
+    </data>
+    <data name="AS-SSD_Text" xml:space="preserve">
+        <value>AS SSD Benchmark是一款功能强大、免费实用的硬盘性能测试工具,软件能够帮助用户测出固态硬盘持续读写等的性能。</value>
+    </data>
+    <data name="CrystalDiskInfo_Text" xml:space="preserve">
+        <value>CrystalDiskInfo是一个硬盘健康监测工具。它显示了硬盘驱动器的基本信息，智能监控和磁盘的温度。可以迅速读到本机硬盘的详细信息。</value>
+    </data>
+    <data name="CrystalDiskMark_Text" xml:space="preserve">
+        <value>CrystalDiskMark是一个衡量各种存储（HDD、SSD、USB 内存等）速度的基准软件。</value>
+    </data>
+    <data name="DiskBenchmark_Text" xml:space="preserve">
+        <value>ATTO Disk Benchmark 可以测量硬盘驱动器、固态驱动器、RAID 阵列以及主机连接到附加存储的性能。</value>
+    </data>
+    <data name="DiskGenius_Text" xml:space="preserve">
+        <value>DiskGenius是一款硬盘分区及数据维护软件。</value>
+    </data>
+    <data name="HDTune_Text" xml:space="preserve">
+        <value>HD Tune是一款具有多种功能的硬盘/SSD 实用程序。它可用于测量驱动器的性能、扫描错误、检查健康状态 (SMART)、安全擦除所有数据等等。</value>
+    </data>
+    <data name="LLFTOOL_Text" xml:space="preserve">
+        <value>LLFTOOL万能低格工具是一款适用于windows操作系统的硬盘低级格式化工具，该硬盘低格工具使用方便，操作简单。</value>
+    </data>
+    <data name="PartAssist_Text" xml:space="preserve">
+        <value>傲梅分区助手是一款免费、专业级的无损分区工具，提供简单、易用的磁盘分区管理操作。</value>
+    </data>
+    <data name="SSD-Z_Text" xml:space="preserve">
+        <value>SSD-Z是一款针对SSD设备的高可靠性的测试软件。</value>
+    </data>
+    <data name="Victoria_Text" xml:space="preserve">
+        <value>Victoria是Windows环境下强大的硬盘维护工具，具备硬盘表面检测/硬盘坏道修复/S.M.A.R.T.信息察看保存/Cache缓存控制等多功能的工具。</value>
+    </data>
+    <data name="H2TestW_Text" xml:space="preserve">
+        <value>H2testw是一款u盘读写速度测试和坏块检测软件，通过往待测目录写入数据的方式测试u盘的实际写入速度校验写入的数据是否正确。</value>
+    </data>
+    <data name="OpenFolder" xml:space="preserve">
+        <value>打开目录</value>
+    </data>
+    <data name="UncategorizedTools_Content" xml:space="preserve">
+        <value>未分类工具</value>
+    </data>
+    <data name="SDI_Text" xml:space="preserve">
+        <value>使用该工具可快速查找并安装所有丢失的驱动程序。</value>
+    </data>
+    <data name="Rufus_Text" xml:space="preserve">
+        <value>轻量级工具，用于从ISO文件创建可启动USB驱动器；支持多种操作系统镜像和高级分区方案。</value>
+    </data>
+    <data name="Etcher_Text" xml:space="preserve">
+        <value>跨平台工具，用于将操作系统镜像刷写到SD卡或USB驱动器，配备简单易用的用户界面。</value>
+    </data>
+    <data name="Ventoy_Text" xml:space="preserve">
+        <value>支持创建可启动的USB驱动器，该驱动器可存储并启动多个ISO/WIM/IMG/VHD(x)文件，且无需重新格式化。</value>
+    </data>
+    <data name="Version" xml:space="preserve">
+        <value>版本</value>
+    </data>
+    <data name="Memory" xml:space="preserve">
+        <value>内存</value>
+    </data>
+    <data name="Disk" xml:space="preserve">
+        <value>磁盘</value>
+    </data>
+    <data name="SystemResources" xml:space="preserve">
+        <value>系统资源</value>
+    </data>
+    <data name="SystemHealth" xml:space="preserve">
+        <value>系统健康</value>
+    </data>
+    <data name="SystemHealthGood" xml:space="preserve">
+        <value>良好</value>
+    </data>
+    <data name="SystemHealthWarning" xml:space="preserve">
+        <value>警告</value>
+    </data>
+    <data name="SystemHealthCritical" xml:space="preserve">
+        <value>严重</value>
+    </data>
+    <data name="QuickActions" xml:space="preserve">
+        <value>快速操作</value>
+    </data>
+    <data name="Weather" xml:space="preserve">
+        <value>天气</value>
+    </data>
+    <data name="LoadingWeather" xml:space="preserve">
+        <value>加载中...</value>
+    </data>
+    <data name="WeatherNotConfigured" xml:space="preserve">
+        <value>未配置天气服务</value>
+    </data>
+    <data name="Hitokoto" xml:space="preserve">
+        <value>一言</value>
+    </data>
+    <data name="LoadingHitokoto" xml:space="preserve">
+        <value>正在加载...</value>
+    </data>
+    <data name="Loading" xml:space="preserve">
+        <value>加载中...</value>
+    </data>
+    <data name="IPv4Error" xml:space="preserve">
+        <value>当前网络可能没有IPv4地址或获取失败</value>
+    </data>
+    <data name="IPv6Error" xml:space="preserve">
+        <value>当前网络可能没有IPv6地址或获取失败</value>
+    </data>
+    <data name="ConfirmAction" xml:space="preserve">
+        <value>确认执行此操作？</value>
+    </data>
+    <data name="Confirmation" xml:space="preserve">
+        <value>确认</value>
+    </data>
+    <data name="ExecutionError" xml:space="preserve">
+        <value>执行失败</value>
+    </data>
+    <data name="Error" xml:space="preserve">
+        <value>错误</value>
+    </data>
 </root>

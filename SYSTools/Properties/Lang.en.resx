@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+    <!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,437 +59,500 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+        <xsd:element name="root" msdata:IsDataSet="true">
             <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+                <xsd:choice maxOccurs="unbounded">
+                    <xsd:element name="metadata">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                            </xsd:sequence>
+                            <xsd:attribute name="name" use="required" type="xsd:string" />
+                            <xsd:attribute name="type" type="xsd:string" />
+                            <xsd:attribute name="mimetype" type="xsd:string" />
+                            <xsd:attribute ref="xml:space" />
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="assembly">
+                        <xsd:complexType>
+                            <xsd:attribute name="alias" type="xsd:string" />
+                            <xsd:attribute name="name" type="xsd:string" />
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="data">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+                            <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+                            <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+                            <xsd:attribute ref="xml:space" />
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="resheader">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required" />
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:choice>
             </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="ContactUs" xml:space="preserve">
-    <value>Contact Us</value>
-  </data>
-  <data name="QQGroup" xml:space="preserve">
-    <value>QQ Group</value>
-  </data>
-  <data name="WebSite" xml:space="preserve">
-    <value>Website</value>
-  </data>
-  <data name="GithubRepo" xml:space="preserve">
-    <value>Github Repository</value>
-  </data>
-  <data name="Developers" xml:space="preserve">
-    <value>Developers &amp; Designers &amp; External Contributors</value>
-  </data>
-  <data name="ComponentsLicense" xml:space="preserve">
-    <value>Third-Party Libraries</value>
-  </data>
-  <data name="SYSToolsUpdate" xml:space="preserve">
-    <value>Update</value>
-  </data>
-  <data name="SoftwareToolkitUpdate" xml:space="preserve">
-    <value>Software &amp; Toolkit Update</value>
-  </data>
-  <data name="SoftwareUpdate" xml:space="preserve">
-    <value>Software Update</value>
-  </data>
-  <data name="ToolkitUpdate" xml:space="preserve">
-    <value>Toolkit Update</value>
-  </data>
-  <data name="PolicyAgreement" xml:space="preserve">
-    <value>Privacy Policy &amp; User Agreement</value>
-  </data>
-  <data name="PrivacyPolicy" xml:space="preserve">
-    <value>Privacy Policy</value>
-  </data>
-  <data name="UserAgreement" xml:space="preserve">
-    <value>User Agreement</value>
-  </data>
-  <data name="BackImageSetting_Description" xml:space="preserve">
-    <value>Preview and set the background image, blur, and opacity.</value>
-  </data>
-  <data name="BackImageSetting_Header" xml:space="preserve">
-    <value>Background &amp; Effects</value>
-  </data>
-  <data name="BackImagePreview" xml:space="preserve">
-    <value>Preview your background image</value>
-  </data>
-  <data name="SelectBackgroundImage" xml:space="preserve">
-    <value>Select</value>
-  </data>
-  <data name="ClearBackgroundImage" xml:space="preserve">
-    <value>Clear</value>
-  </data>
-  <data name="BackgroundImageBlurRadius_Description" xml:space="preserve">
-    <value>High blur settings may cause lag.</value>
-  </data>
-  <data name="BackgroundImageBlurRadius_Header" xml:space="preserve">
-    <value>Image Blur Effect (Experimental)</value>
-  </data>
-  <data name="BackgroundImageOpacity_Header" xml:space="preserve">
-    <value>Image Opacity (Experimental)</value>
-  </data>
-  <data name="ProgramThemeSetting_Header" xml:space="preserve">
-    <value>Themes</value>
-  </data>
-  <data name="ProgramThemeSetting_Description" xml:space="preserve">
-    <value>Choose a light/dark theme.</value>
-  </data>
-  <data name="ThemeModeSetting_Auto" xml:space="preserve">
-    <value>Auto</value>
-  </data>
-  <data name="ThemeModeSetting_Dark" xml:space="preserve">
-    <value>Dark</value>
-  </data>
-  <data name="ThemeModeSetting_Light" xml:space="preserve">
-    <value>Light</value>
-  </data>
-  <data name="LanguageSetting_Header" xml:space="preserve">
-    <value>Languages</value>
-  </data>
-  <data name="LanguageSetting_Description" xml:space="preserve">
-    <value>Your preferred language is here.</value>
-  </data>
-  <data name="OpenWebsite" xml:space="preserve">
-    <value>Open WebSite</value>
-  </data>
-  <data name="HardwareMonitor_TextBlock" xml:space="preserve">
-    <value>Hardware Monitoring (powered by LibreHardwareMonitor)</value>
-  </data>
-  <data name="CollapseAll" xml:space="preserve">
-    <value>Collapse All</value>
-  </data>
-  <data name="ExpandAll" xml:space="preserve">
-    <value>Expand All</value>
-  </data>
-  <data name="HardwareMonitorInitError" xml:space="preserve">
-    <value>Hardware Monitor Init Error:</value>
-  </data>
-  <data name="ErrorTitle" xml:space="preserve">
-    <value>Error</value>
-  </data>
-  <data name="Welcome" xml:space="preserve">
-    <value>Welcome to SYSTools</value>
-  </data>
-  <data name="News" xml:space="preserve">
-    <value>News</value>
-  </data>
-  <data name="Hello" xml:space="preserve">
-    <value>Hello：</value>
-  </data>
-  <data name="LoadingNews" xml:space="preserve">
-    <value>Loading news...</value>
-  </data>
-  <data name="NetError" xml:space="preserve">
-    <value>Network or website issue detected.</value>
-  </data>
-  <data name="NoticeInfo" xml:space="preserve">
-    <value>No news available.</value>
-  </data>
-  <data name="NoticeError" xml:space="preserve">
-    <value>Unable to retrieve news.</value>
-  </data>
-  <data name="TimeUnitDay" xml:space="preserve">
-    <value>d</value>
-  </data>
-  <data name="TimeUnitHour" xml:space="preserve">
-    <value>h</value>
-  </data>
-  <data name="TimeUnitMinute" xml:space="preserve">
-    <value>m</value>
-  </data>
-  <data name="TimeUnitSecond" xml:space="preserve">
-    <value>s</value>
-  </data>
-  <data name="SystemTime" xml:space="preserve">
-    <value>System Time</value>
-  </data>
-  <data name="SystemStartTime" xml:space="preserve">
-    <value>Up Time</value>
-  </data>
-  <data name="SystemRunTime" xml:space="preserve">
-    <value>Since</value>
-  </data>
-  <data name="CurrentSystem" xml:space="preserve">
-    <value>System Version</value>
-  </data>
-  <data name="UpdateHistory" xml:space="preserve">
-    <value>Windows Update History</value>
-  </data>
-  <data name="UpdateTitle" xml:space="preserve">
-    <value>Update Title</value>
-  </data>
-  <data name="UpdateDate" xml:space="preserve">
-    <value>Date</value>
-  </data>
-  <data name="UpdateStatus" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="UpdateHistoryError" xml:space="preserve">
-    <value>Error loading update history</value>
-  </data>
-  <data name="UpdateStatusSuccess" xml:space="preserve">
-    <value>Success</value>
-  </data>
-  <data name="UpdateStatusFailed" xml:space="preserve">
-    <value>Failed</value>
-  </data>
-  <data name="UpdateStatusUnknown" xml:space="preserve">
-    <value>Unknown</value>
-  </data>
-  <data name="LoadUpdateHistory" xml:space="preserve">
-    <value>Load Update History</value>
-  </data>
-  <data name="ClearList" xml:space="preserve">
-    <value>Clear List</value>
-  </data>
-  <data name="ServiceProvider" xml:space="preserve">
-    <value>IPv4: ipip.net &amp; IPv6: neu6.edu</value>
-  </data>
-  <data name="IP" xml:space="preserve">
-    <value>Public IP</value>
-  </data>
-  <data name="LR_ToolTip" xml:space="preserve">
-    <value>Left-click to get, right-click to hide.</value>
-  </data>
-  <data name="CustomTool_TextBlock" xml:space="preserve">
-    <value>CustomTool</value>
-  </data>
-  <data name="AddNewTool" xml:space="preserve">
-    <value>Add New Tool</value>
-  </data>
-  <data name="AddCustomTool_TextBlock" xml:space="preserve">
-    <value>Add CustomTool</value>
-  </data>
-  <data name="OK" xml:space="preserve">
-    <value>OK</value>
-  </data>
-  <data name="Close" xml:space="preserve">
-    <value>Close</value>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>Name:</value>
-  </data>
-  <data name="IconPath" xml:space="preserve">
-    <value>IconPath:</value>
-  </data>
-  <data name="EXEPath" xml:space="preserve">
-    <value>EXEPath:</value>
-  </data>
-  <data name="Args" xml:space="preserve">
-    <value>Args:</value>
-  </data>
-  <data name="CustomIcon" xml:space="preserve">
-    <value>Custom Icon</value>
-  </data>
-  <data name="UseEXEEmbeddedIcon" xml:space="preserve">
-    <value>Use EXE Embedded Icon</value>
-  </data>
-  <data name="Browse" xml:space="preserve">
-    <value>Browse...</value>
-  </data>
-  <data name="Modify" xml:space="preserve">
-    <value>Modify</value>
-  </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="SelectIcon" xml:space="preserve">
-    <value>Select Icon</value>
-  </data>
-  <data name="SelectEXEFile" xml:space="preserve">
-    <value>Select EXE File</value>
-  </data>
-  <data name="ImageFilter" xml:space="preserve">
-    <value>Image File|*.png;*.jpg;*.ico|All File|*.*</value>
-  </data>
-  <data name="EXEFilter" xml:space="preserve">
-    <value>EXE File|*.exe|All File|*.*</value>
-  </data>
-  <data name="Info" xml:space="preserve">
-    <value>Info</value>
-  </data>
-  <data name="NameAndExecutableRequired" xml:space="preserve">
-    <value>Name and executable file are required fields.</value>
-  </data>
-  <data name="Open" xml:space="preserve">
-    <value>Open</value>
-  </data>
-  <data name="ImageFilter_JPng" xml:space="preserve">
-    <value>Image files (*.jpg;*.png)|*.jpg;*.png</value>
-  </data>
-  <data name="ConfirmDeleteMessage" xml:space="preserve">
-    <value>Are you sure you want to delete the tool '{0}' ?</value>
-  </data>
-  <data name="ConfirmModifyMessage" xml:space="preserve">
-    <value>Do you want to modify the tool '{0}' ?</value>
-  </data>
-  <data name="ConfirmDeleteTitle" xml:space="preserve">
-    <value>Confirm Deletion</value>
-  </data>
-  <data name="ConfirmModifyTitle" xml:space="preserve">
-    <value>Confirm Modification</value>
-  </data>
-  <data name="AdministratorMode" xml:space="preserve">
-    <value>[Administrator Mode]</value>
-  </data>
-  <data name="ProcessTotal" xml:space="preserve">
-    <value>A process with the same name is running!</value>
-  </data>
-  <data name="ProcessTotalTitle" xml:space="preserve">
-    <value>Program Conflict!</value>
-  </data>
-  <data name="DetectionTools_Content" xml:space="preserve">
-    <value>Detect Tools</value>
-  </data>
-  <data name="TestTools_Content" xml:space="preserve">
-    <value>Hardware Test Tools</value>
-  </data>
-  <data name="DiskTools_Content" xml:space="preserve">
-    <value>Disk Tools</value>
-  </data>
-  <data name="PeripheralsTools_Content" xml:space="preserve">
-    <value>Peripheral Test Tools</value>
-  </data>
-  <data name="RepairingTools_Content" xml:space="preserve">
-    <value>Runtime Install Tools</value>
-  </data>
-  <data name="AIDA64_Text" xml:space="preserve">
-    <value>AIDA64 offers overclocking support, hardware diagnostics, stress tests, sensor monitoring, and performance benchmarks for CPU, memory, and drives.</value>
-  </data>
-  <data name="CPU-Z_Text" xml:space="preserve">
-    <value>CPU-Z shows processor details—manufacturer, model, architecture, packaging, clock speeds, and max overclock potential.</value>
-  </data>
-  <data name="GPU-Z_Text" xml:space="preserve">
-    <value>GPU-Z is a lightweight tool that reports key information about your graphics card and GPU.</value>
-  </data>
-  <data name="HWiNFO_Text" xml:space="preserve">
-    <value>HWiNFO provides all-in-one hardware analysis and monitoring, from quick overviews to in-depth component data, always up to date.</value>
-  </data>
-  <data name="HWMonitor_Text" xml:space="preserve">
-    <value>HWMonitor reads a PC’s main health sensors—voltages, temperatures, and fan speeds.</value>
-  </data>
-  <data name="Prime95_Text" xml:space="preserve">
-    <value>Prime95 – a dedicated system stability tester. </value>
-  </data>
-  <data name="IntelBurnTest_Text" xml:space="preserve">
-    <value>IntelBurnTest – a Linpack-based stress tool for Intel/AMD CPUs.  </value>
-  </data>
-  <data name="FurMark_Text" xml:space="preserve">
-    <value>FurMark (oZone3D) – an OpenGL fur-rendering benchmark for GPU performance and stability.</value>
-  </data>
-  <data name="MemTest_Text" xml:space="preserve">
-    <value>TechPowerUp MemTest – a memory stability tester.</value>
-  </data>
-  <data name="HKBTest_Text" xml:space="preserve">
-    <value>HKBTest – a keyboard tester for key ghosting detection.</value>
-  </data>
-  <data name="MouseTest_Text" xml:space="preserve">
-    <value>MouseTest – a mouse click-rate tester by MouseHome.</value>
-  </data>
-  <data name="MouseRate_Text" xml:space="preserve">
-    <value>MouseRate – a tool measuring mouse DPI and polling-rate performance.</value>
-  </data>
-  <data name="AS-SSD_Text" xml:space="preserve">
-    <value>AS SSD Benchmark – free SSD tester for sequential/random read &amp; write.</value>
-  </data>
-  <data name="CrystalDiskInfo_Text" xml:space="preserve">
-    <value>CrystalDiskInfo – disk health monitor with drive info, SMART data, and temperature.</value>
-  </data>
-  <data name="CrystalDiskMark_Text" xml:space="preserve">
-    <value>CrystalDiskMark – measures speeds of HDDs, SSDs, and USB drives.</value>
-  </data>
-  <data name="DiskBenchmark_Text" xml:space="preserve">
-    <value>ATTO Disk Benchmark – tests performance of HDDs, SSDs, RAID arrays, and external storage.</value>
-  </data>
-  <data name="DiskGenius_Text" xml:space="preserve">
-    <value>DiskGenius – partition manager and data maintenance tool.</value>
-  </data>
-  <data name="HDTune_Text" xml:space="preserve">
-    <value>HD Tune – all-in-one HDD/SSD utility for benchmarking, error scanning, SMART health, and secure erase.</value>
-  </data>
-  <data name="LLFTOOL_Text" xml:space="preserve">
-    <value>LLFTOOL – simple Windows low-level disk formatter.</value>
-  </data>
-  <data name="PartAssist_Text" xml:space="preserve">
-    <value>AOMEI Partition Assistant – free, professional non-destructive partition manager.</value>
-  </data>
-  <data name="SSD-Z_Text" xml:space="preserve">
-    <value>SSD-Z – reliable SSD info and testing tool.</value>
-  </data>
-  <data name="Victoria_Text" xml:space="preserve">
-    <value>Victoria – Windows disk utility for surface tests, bad-sector repair, SMART/log handling, and cache control.</value>
-  </data>
-  <data name="H2TestW_Text" xml:space="preserve">
-    <value>H2testw – USB drive speed and bad-block tester via write/read verification.</value>
-  </data>
-  <data name="OpenFolder">
-    <value>Open Folder</value>
-  </data>
-  <data name="UncategorizedTools_Content" xml:space="preserve">
-    <value>Uncategorized Tools</value>
-  </data>
-  <data name="SDI_Text" xml:space="preserve">
-    <value>Use this tool to quickly find and install all missing drivers.</value>
-  </data>
-  <data name="Rufus_Text" xml:space="preserve">
-    <value>Lightweight utility to create bootable USB drives from ISO files; supports various OS images and advanced partition schemes.</value>
-  </data>
-  <data name="Etcher_Text" xml:space="preserve">
-    <value>Cross-platform tool for flashing OS images to SD cards or USB drives with a simple, user-friendly interface.</value>
-  </data>
-  <data name="Ventoy_Text" xml:space="preserve">
-    <value>Enables creation of bootable USB drives that can store and boot multiple ISO/WIM/IMG/VHD(x) files without reformatting.</value>
-  </data>
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="ContactUs" xml:space="preserve">
+        <value>Contact Us</value>
+    </data>
+    <data name="QQGroup" xml:space="preserve">
+        <value>QQ Group</value>
+    </data>
+    <data name="WebSite" xml:space="preserve">
+        <value>Website</value>
+    </data>
+    <data name="GithubRepo" xml:space="preserve">
+        <value>Github Repository</value>
+    </data>
+    <data name="Developers" xml:space="preserve">
+        <value>Developers &amp; Designers &amp; External Contributors</value>
+    </data>
+    <data name="ComponentsLicense" xml:space="preserve">
+        <value>Third-Party Libraries</value>
+    </data>
+    <data name="SYSToolsUpdate" xml:space="preserve">
+        <value>Update</value>
+    </data>
+    <data name="SoftwareToolkitUpdate" xml:space="preserve">
+        <value>Software &amp; Toolkit Update</value>
+    </data>
+    <data name="SoftwareUpdate" xml:space="preserve">
+        <value>Software Update</value>
+    </data>
+    <data name="ToolkitUpdate" xml:space="preserve">
+        <value>Toolkit Update</value>
+    </data>
+    <data name="PolicyAgreement" xml:space="preserve">
+        <value>Privacy Policy &amp; User Agreement</value>
+    </data>
+    <data name="PrivacyPolicy" xml:space="preserve">
+        <value>Privacy Policy</value>
+    </data>
+    <data name="UserAgreement" xml:space="preserve">
+        <value>User Agreement</value>
+    </data>
+    <data name="BackImageSetting_Description" xml:space="preserve">
+        <value>Preview and set the background image, blur, and opacity.</value>
+    </data>
+    <data name="BackImageSetting_Header" xml:space="preserve">
+        <value>Background &amp; Effects</value>
+    </data>
+    <data name="BackImagePreview" xml:space="preserve">
+        <value>Preview your background image</value>
+    </data>
+    <data name="SelectBackgroundImage" xml:space="preserve">
+        <value>Select</value>
+    </data>
+    <data name="ClearBackgroundImage" xml:space="preserve">
+        <value>Clear</value>
+    </data>
+    <data name="BackgroundImageBlurRadius_Description" xml:space="preserve">
+        <value>High blur settings may cause lag.</value>
+    </data>
+    <data name="BackgroundImageBlurRadius_Header" xml:space="preserve">
+        <value>Image Blur Effect (Experimental)</value>
+    </data>
+    <data name="BackgroundImageOpacity_Header" xml:space="preserve">
+        <value>Image Opacity (Experimental)</value>
+    </data>
+    <data name="ProgramThemeSetting_Header" xml:space="preserve">
+        <value>Themes</value>
+    </data>
+    <data name="ProgramThemeSetting_Description" xml:space="preserve">
+        <value>Choose a light/dark theme.</value>
+    </data>
+    <data name="ThemeModeSetting_Auto" xml:space="preserve">
+        <value>Auto</value>
+    </data>
+    <data name="ThemeModeSetting_Dark" xml:space="preserve">
+        <value>Dark</value>
+    </data>
+    <data name="ThemeModeSetting_Light" xml:space="preserve">
+        <value>Light</value>
+    </data>
+    <data name="LanguageSetting_Header" xml:space="preserve">
+        <value>Languages</value>
+    </data>
+    <data name="LanguageSetting_Description" xml:space="preserve">
+        <value>Your preferred language is here.</value>
+    </data>
+    <data name="OpenWebsite" xml:space="preserve">
+        <value>Open WebSite</value>
+    </data>
+    <data name="HardwareMonitor_TextBlock" xml:space="preserve">
+        <value>Hardware Monitoring (powered by LibreHardwareMonitor)</value>
+    </data>
+    <data name="CollapseAll" xml:space="preserve">
+        <value>Collapse All</value>
+    </data>
+    <data name="ExpandAll" xml:space="preserve">
+        <value>Expand All</value>
+    </data>
+    <data name="HardwareMonitorInitError" xml:space="preserve">
+        <value>Hardware Monitor Init Error:</value>
+    </data>
+    <data name="ErrorTitle" xml:space="preserve">
+        <value>Error</value>
+    </data>
+    <data name="Welcome" xml:space="preserve">
+        <value>Welcome to SYSTools</value>
+    </data>
+    <data name="News" xml:space="preserve">
+        <value>News</value>
+    </data>
+    <data name="Hello" xml:space="preserve">
+        <value>Hello：</value>
+    </data>
+    <data name="LoadingNews" xml:space="preserve">
+        <value>Loading news...</value>
+    </data>
+    <data name="NetError" xml:space="preserve">
+        <value>Network or website issue detected.</value>
+    </data>
+    <data name="NoticeInfo" xml:space="preserve">
+        <value>No news available.</value>
+    </data>
+    <data name="NoticeError" xml:space="preserve">
+        <value>Unable to retrieve news.</value>
+    </data>
+    <data name="TimeUnitDay" xml:space="preserve">
+        <value>d</value>
+    </data>
+    <data name="TimeUnitHour" xml:space="preserve">
+        <value>h</value>
+    </data>
+    <data name="TimeUnitMinute" xml:space="preserve">
+        <value>m</value>
+    </data>
+    <data name="TimeUnitSecond" xml:space="preserve">
+        <value>s</value>
+    </data>
+    <data name="SystemTime" xml:space="preserve">
+        <value>System Time</value>
+    </data>
+    <data name="SystemStartTime" xml:space="preserve">
+        <value>Up Time</value>
+    </data>
+    <data name="SystemRunTime" xml:space="preserve">
+        <value>Since</value>
+    </data>
+    <data name="CurrentSystem" xml:space="preserve">
+        <value>System Version</value>
+    </data>
+    <data name="UpdateHistory" xml:space="preserve">
+        <value>Windows Update History</value>
+    </data>
+    <data name="UpdateTitle" xml:space="preserve">
+        <value>Update Title</value>
+    </data>
+    <data name="UpdateDate" xml:space="preserve">
+        <value>Date</value>
+    </data>
+    <data name="UpdateStatus" xml:space="preserve">
+        <value>Status</value>
+    </data>
+    <data name="UpdateHistoryError" xml:space="preserve">
+        <value>Error loading update history</value>
+    </data>
+    <data name="UpdateStatusSuccess" xml:space="preserve">
+        <value>Success</value>
+    </data>
+    <data name="UpdateStatusFailed" xml:space="preserve">
+        <value>Failed</value>
+    </data>
+    <data name="UpdateStatusUnknown" xml:space="preserve">
+        <value>Unknown</value>
+    </data>
+    <data name="LoadUpdateHistory" xml:space="preserve">
+        <value>Load Update History</value>
+    </data>
+    <data name="ClearList" xml:space="preserve">
+        <value>Clear List</value>
+    </data>
+    <data name="ServiceProvider" xml:space="preserve">
+        <value>IPv4: ipip.net &amp; IPv6: neu6.edu</value>
+    </data>
+    <data name="IP" xml:space="preserve">
+        <value>Public IP</value>
+    </data>
+    <data name="LR_ToolTip" xml:space="preserve">
+        <value>Left-click to get, right-click to hide.</value>
+    </data>
+    <data name="CustomTool_TextBlock" xml:space="preserve">
+        <value>CustomTool</value>
+    </data>
+    <data name="AddNewTool" xml:space="preserve">
+        <value>Add New Tool</value>
+    </data>
+    <data name="AddCustomTool_TextBlock" xml:space="preserve">
+        <value>Add CustomTool</value>
+    </data>
+    <data name="OK" xml:space="preserve">
+        <value>OK</value>
+    </data>
+    <data name="Close" xml:space="preserve">
+        <value>Close</value>
+    </data>
+    <data name="Name" xml:space="preserve">
+        <value>Name:</value>
+    </data>
+    <data name="IconPath" xml:space="preserve">
+        <value>IconPath:</value>
+    </data>
+    <data name="EXEPath" xml:space="preserve">
+        <value>EXEPath:</value>
+    </data>
+    <data name="Args" xml:space="preserve">
+        <value>Args:</value>
+    </data>
+    <data name="CustomIcon" xml:space="preserve">
+        <value>Custom Icon</value>
+    </data>
+    <data name="UseEXEEmbeddedIcon" xml:space="preserve">
+        <value>Use EXE Embedded Icon</value>
+    </data>
+    <data name="Browse" xml:space="preserve">
+        <value>Browse...</value>
+    </data>
+    <data name="Modify" xml:space="preserve">
+        <value>Modify</value>
+    </data>
+    <data name="Delete" xml:space="preserve">
+        <value>Delete</value>
+    </data>
+    <data name="SelectIcon" xml:space="preserve">
+        <value>Select Icon</value>
+    </data>
+    <data name="SelectEXEFile" xml:space="preserve">
+        <value>Select EXE File</value>
+    </data>
+    <data name="ImageFilter" xml:space="preserve">
+        <value>Image File|*.png;*.jpg;*.ico|All File|*.*</value>
+    </data>
+    <data name="EXEFilter" xml:space="preserve">
+        <value>EXE File|*.exe|All File|*.*</value>
+    </data>
+    <data name="Info" xml:space="preserve">
+        <value>Info</value>
+    </data>
+    <data name="NameAndExecutableRequired" xml:space="preserve">
+        <value>Name and executable file are required fields.</value>
+    </data>
+    <data name="Open" xml:space="preserve">
+        <value>Open</value>
+    </data>
+    <data name="ImageFilter_JPng" xml:space="preserve">
+        <value>Image files (*.jpg;*.png)|*.jpg;*.png</value>
+    </data>
+    <data name="ConfirmDeleteMessage" xml:space="preserve">
+        <value>Are you sure you want to delete the tool '{0}' ?</value>
+    </data>
+    <data name="ConfirmModifyMessage" xml:space="preserve">
+        <value>Do you want to modify the tool '{0}' ?</value>
+    </data>
+    <data name="ConfirmDeleteTitle" xml:space="preserve">
+        <value>Confirm Deletion</value>
+    </data>
+    <data name="ConfirmModifyTitle" xml:space="preserve">
+        <value>Confirm Modification</value>
+    </data>
+    <data name="AdministratorMode" xml:space="preserve">
+        <value>[Administrator Mode]</value>
+    </data>
+    <data name="ProcessTotal" xml:space="preserve">
+        <value>A process with the same name is running!</value>
+    </data>
+    <data name="ProcessTotalTitle" xml:space="preserve">
+        <value>Program Conflict!</value>
+    </data>
+    <data name="DetectionTools_Content" xml:space="preserve">
+        <value>Detect Tools</value>
+    </data>
+    <data name="TestTools_Content" xml:space="preserve">
+        <value>Hardware Test Tools</value>
+    </data>
+    <data name="DiskTools_Content" xml:space="preserve">
+        <value>Disk Tools</value>
+    </data>
+    <data name="PeripheralsTools_Content" xml:space="preserve">
+        <value>Peripheral Test Tools</value>
+    </data>
+    <data name="RepairingTools_Content" xml:space="preserve">
+        <value>Runtime Install Tools</value>
+    </data>
+    <data name="AIDA64_Text" xml:space="preserve">
+        <value>AIDA64 offers overclocking support, hardware diagnostics, stress tests, sensor monitoring, and performance benchmarks for CPU, memory, and drives.</value>
+    </data>
+    <data name="CPU-Z_Text" xml:space="preserve">
+        <value>CPU-Z shows processor details—manufacturer, model, architecture, packaging, clock speeds, and max overclock potential.</value>
+    </data>
+    <data name="GPU-Z_Text" xml:space="preserve">
+        <value>GPU-Z is a lightweight tool that reports key information about your graphics card and GPU.</value>
+    </data>
+    <data name="HWiNFO_Text" xml:space="preserve">
+        <value>HWiNFO provides all-in-one hardware analysis and monitoring, from quick overviews to in-depth component data, always up to date.</value>
+    </data>
+    <data name="HWMonitor_Text" xml:space="preserve">
+        <value>HWMonitor reads a PC’s main health sensors—voltages, temperatures, and fan speeds.</value>
+    </data>
+    <data name="Prime95_Text" xml:space="preserve">
+        <value>Prime95 – a dedicated system stability tester. </value>
+    </data>
+    <data name="IntelBurnTest_Text" xml:space="preserve">
+        <value>IntelBurnTest – a Linpack-based stress tool for Intel/AMD CPUs.  </value>
+    </data>
+    <data name="FurMark_Text" xml:space="preserve">
+        <value>FurMark (oZone3D) – an OpenGL fur-rendering benchmark for GPU performance and stability.</value>
+    </data>
+    <data name="MemTest_Text" xml:space="preserve">
+        <value>TechPowerUp MemTest – a memory stability tester.</value>
+    </data>
+    <data name="HKBTest_Text" xml:space="preserve">
+        <value>HKBTest – a keyboard tester for key ghosting detection.</value>
+    </data>
+    <data name="MouseTest_Text" xml:space="preserve">
+        <value>MouseTest – a mouse click-rate tester by MouseHome.</value>
+    </data>
+    <data name="MouseRate_Text" xml:space="preserve">
+        <value>MouseRate – a tool measuring mouse DPI and polling-rate performance.</value>
+    </data>
+    <data name="AS-SSD_Text" xml:space="preserve">
+        <value>AS SSD Benchmark – free SSD tester for sequential/random read &amp; write.</value>
+    </data>
+    <data name="CrystalDiskInfo_Text" xml:space="preserve">
+        <value>CrystalDiskInfo – disk health monitor with drive info, SMART data, and temperature.</value>
+    </data>
+    <data name="CrystalDiskMark_Text" xml:space="preserve">
+        <value>CrystalDiskMark – measures speeds of HDDs, SSDs, and USB drives.</value>
+    </data>
+    <data name="DiskBenchmark_Text" xml:space="preserve">
+        <value>ATTO Disk Benchmark – tests performance of HDDs, SSDs, RAID arrays, and external storage.</value>
+    </data>
+    <data name="DiskGenius_Text" xml:space="preserve">
+        <value>DiskGenius – partition manager and data maintenance tool.</value>
+    </data>
+    <data name="HDTune_Text" xml:space="preserve">
+        <value>HD Tune – all-in-one HDD/SSD utility for benchmarking, error scanning, SMART health, and secure erase.</value>
+    </data>
+    <data name="LLFTOOL_Text" xml:space="preserve">
+        <value>LLFTOOL – simple Windows low-level disk formatter.</value>
+    </data>
+    <data name="PartAssist_Text" xml:space="preserve">
+        <value>AOMEI Partition Assistant – free, professional non-destructive partition manager.</value>
+    </data>
+    <data name="SSD-Z_Text" xml:space="preserve">
+        <value>SSD-Z – reliable SSD info and testing tool.</value>
+    </data>
+    <data name="Victoria_Text" xml:space="preserve">
+        <value>Victoria – Windows disk utility for surface tests, bad-sector repair, SMART/log handling, and cache control.</value>
+    </data>
+    <data name="H2TestW_Text" xml:space="preserve">
+        <value>H2testw – USB drive speed and bad-block tester via write/read verification.</value>
+    </data>
+    <data name="OpenFolder">
+        <value>Open Folder</value>
+    </data>
+    <data name="UncategorizedTools_Content" xml:space="preserve">
+        <value>Uncategorized Tools</value>
+    </data>
+    <data name="SDI_Text" xml:space="preserve">
+        <value>Use this tool to quickly find and install all missing drivers.</value>
+    </data>
+    <data name="Rufus_Text" xml:space="preserve">
+        <value>Lightweight utility to create bootable USB drives from ISO files; supports various OS images and advanced partition schemes.</value>
+    </data>
+    <data name="Etcher_Text" xml:space="preserve">
+        <value>Cross-platform tool for flashing OS images to SD cards or USB drives with a simple, user-friendly interface.</value>
+    </data>
+    <data name="Ventoy_Text" xml:space="preserve">
+        <value>Enables creation of bootable USB drives that can store and boot multiple ISO/WIM/IMG/VHD(x) files without reformatting.</value>
+    </data>
+    <data name="Version" xml:space="preserve">
+        <value>Version</value>
+    </data>
+    <data name="Memory" xml:space="preserve">
+        <value>Memory</value>
+    </data>
+    <data name="Disk" xml:space="preserve">
+        <value>Disk</value>
+    </data>
+    <data name="SystemResources" xml:space="preserve">
+        <value>System Resources</value>
+    </data>
+    <data name="SystemHealth" xml:space="preserve">
+        <value>System Health</value>
+    </data>
+    <data name="SystemHealthGood" xml:space="preserve">
+        <value>Good</value>
+    </data>
+    <data name="SystemHealthWarning" xml:space="preserve">
+        <value>Warning</value>
+    </data>
+    <data name="SystemHealthCritical" xml:space="preserve">
+        <value>Critical</value>
+    </data>
+    <data name="QuickActions" xml:space="preserve">
+        <value>Quick Actions</value>
+    </data>
+    <data name="Weather" xml:space="preserve">
+        <value>Weather</value>
+    </data>
+    <data name="LoadingWeather" xml:space="preserve">
+        <value>Loading...</value>
+    </data>
+    <data name="WeatherNotConfigured" xml:space="preserve">
+        <value>Weather service not configured</value>
+    </data>
+    <data name="Hitokoto" xml:space="preserve">
+        <value>Hitokoto</value>
+    </data>
+    <data name="LoadingHitokoto" xml:space="preserve">
+        <value>Loading...</value>
+    </data>
+    <data name="Loading" xml:space="preserve">
+        <value>Loading...</value>
+    </data>
+    <data name="IPv4Error" xml:space="preserve">
+        <value>No IPv4 address available or failed to retrieve</value>
+    </data>
+    <data name="IPv6Error" xml:space="preserve">
+        <value>No IPv6 address available or failed to retrieve</value>
+    </data>
+    <data name="ConfirmAction" xml:space="preserve">
+        <value>Confirm this action?</value>
+    </data>
+    <data name="Confirmation" xml:space="preserve">
+        <value>Confirmation</value>
+    </data>
+    <data name="ExecutionError" xml:space="preserve">
+        <value>Execution failed</value>
+    </data>
+    <data name="Error" xml:space="preserve">
+        <value>Error</value>
+    </data>
 </root>
