@@ -251,7 +251,7 @@
       <Version>0.10.2.1</Version>
     </PackageReference>
     <PackageReference Include="LibreHardwareMonitorLib">
-      <Version>0.9.4</Version>
+      <Version>0.9.5-pre548</Version>
     </PackageReference>
     <PackageReference Include="log4net">
       <Version>3.2.0</Version>

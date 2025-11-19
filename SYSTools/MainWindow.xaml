@@ -18,7 +18,7 @@
         Loaded="Window_Loaded"
         Closed="Window_Closed"
         Deactivated="Window_Deactivated"
-        Height="670" Width="1100" MinWidth="1100" MinHeight="670" >
+        Height="700" Width="1100" MinWidth="1100" MinHeight="700" >
 
     <Grid>
         <!--设定为预设无背景图片-->
