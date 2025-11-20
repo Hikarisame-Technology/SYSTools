@@ -34,5 +34,5 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: SYSTools
-        path: .\SYSTools\bin\Release
+        path: .\SYSTools\bin\x64\Release
         retention-days: 5
