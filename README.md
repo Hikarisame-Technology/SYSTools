@@ -6,16 +6,16 @@
 
 [![](https://img.shields.io/badge/Language-C%23-512BD4?style=for-the-badge&logo=dotnet)](https://learn.microsoft.com/en-us/dotnet/csharp)
 [![](https://github.com/iNKORE-NET/UI.WPF.Modern/blob/main/assets/images/badges/UI.WPF.Modern_Main_Button.svg)](https://docs.inkore.net/ui-wpf-modern/introduction)
+![Platform Only-x64](https://img.shields.io/badge/Platform-X64-512BD4?style=for-the-badge&logo=dotnet)
   
-[![Build .NET Framework 4.7.2](https://github.com/Hikarisame-Technology/SYSTools/actions/workflows/main.yml/badge.svg?branch=C%23)](https://github.com/Hikarisame-Technology/SYSTools/actions/workflows/main.yml)
-[![CodeQL](https://github.com/Hikarisame-Technology/SYSTools/actions/workflows/github-code-scanning/codeql/badge.svg?branch=C%23)](https://github.com/Hikarisame-Technology/SYSTools/actions/workflows/github-code-scanning/codeql)
-
+[![Build .NET Framework 4.7.2](https://img.shields.io/github/actions/workflow/status/Hikarisame-Technology/SYSTools/main.yml?style=for-the-badge&logo=github)](https://github.com/Hikarisame-Technology/SYSTools/actions/workflows/main.yml)
+[![CodeQL](https://img.shields.io/github/actions/workflow/status/Hikarisame-Technology/SYSTools/codeql.yml?style=for-the-badge&logo=github&label=CodeQL%20Advanced)](https://github.com/Hikarisame-Technology/SYSTools/actions/workflows/codeql.yml)
 </div>  
 
 
 ### 截图
   
-~~软件还没写完~~ 暂无
+查看[官网](https://systools.hksstudio.work/)获取更多软件截图
 
 ### 功能 / 特点
 
@@ -54,9 +54,21 @@
 
 [iNKORE.UI.WPF](https://github.com/iNKORE-NET/UI.WPF)
 
-<img src="https://visualstudio.microsoft.com/wp-content/uploads/2021/10/Product-Icon.svg" width="60"/>
+[LibreHardwareMonitor](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor)
 
->本项目使用 Visual Studio 2022 + .NET Framework 4.7.2
+<img src="https://visualstudio.microsoft.com/wp-content/uploads/2025/11/visual-studio-26-icon.webp" width="60"/>
+
+## 开发平台
+
+- **Operating System**: Windows 11 25H2  
+- **IDE**: Visual Studio 2026  
+- **Runtime Framework**: .NET Framework 4.7.2  
+
+本项目的开发、调试与构建均在以上环境完成。建议在相同或更高版本环境中进行二次开发或编译。
+
+![Windows 11 25H2](https://img.shields.io/badge/Windows-11%2025H2-blue?style=for-the-badge)
+![Visual Studio 2026](https://img.shields.io/badge/Visual%20Studio-2026-9b4f96?style=for-the-badge)
+![.NET Framework 4.7.2](https://img.shields.io/badge/.NET%20Framework-4.7.2-512bd4?style=for-the-badge)
 
 ## 交流
 
