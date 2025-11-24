@@ -504,8 +504,8 @@
     <data name="SystemResources" xml:space="preserve">
         <value>System Resources</value>
     </data>
-    <data name="SystemHealth" xml:space="preserve">
-        <value>System Health</value>
+    <data name="SystemTemperature" xml:space="preserve">
+        <value>System Temperature</value>
     </data>
     <data name="SystemHealthGood" xml:space="preserve">
         <value>Good</value>
@@ -554,5 +554,23 @@
     </data>
     <data name="Error" xml:space="preserve">
         <value>Error</value>
+    </data>
+    <data name="Restart" xml:space="preserve">
+        <value>Restart</value>
+    </data>
+    <data name="Shutdown" xml:space="preserve">
+        <value>Shutdown</value>
+    </data>
+    <data name="Sleep" xml:space="preserve">
+        <value>Sleep</value>
+    </data>
+    <data name="Cleanup" xml:space="preserve">
+        <value>Cleanup</value>
+    </data>
+    <data name="TaskManager" xml:space="preserve">
+        <value>Task Manager</value>
+    </data>
+    <data name="Settings" xml:space="preserve">
+        <value>Settings</value>
     </data>
 </root>

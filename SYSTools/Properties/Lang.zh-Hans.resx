@@ -504,8 +504,8 @@
     <data name="SystemResources" xml:space="preserve">
         <value>系统资源</value>
     </data>
-    <data name="SystemHealth" xml:space="preserve">
-        <value>系统健康</value>
+    <data name="SystemTemperature" xml:space="preserve">
+        <value>系统温度</value>
     </data>
     <data name="SystemHealthGood" xml:space="preserve">
         <value>良好</value>
@@ -554,5 +554,23 @@
     </data>
     <data name="Error" xml:space="preserve">
         <value>错误</value>
+    </data>
+    <data name="Restart" xml:space="preserve">
+        <value>重启</value>
+    </data>
+    <data name="Shutdown" xml:space="preserve">
+        <value>关机</value>
+    </data>
+    <data name="Sleep" xml:space="preserve">
+        <value>睡眠</value>
+    </data>
+    <data name="Cleanup" xml:space="preserve">
+        <value>清理</value>
+    </data>
+    <data name="TaskManager" xml:space="preserve">
+        <value>任务管理器</value>
+    </data>
+    <data name="Settings" xml:space="preserve">
+        <value>设置</value>
     </data>
 </root>

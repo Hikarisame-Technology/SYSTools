@@ -7,6 +7,7 @@ using System.Windows.Media;
 using LibreHardwareMonitor.Hardware;
 using System.Linq;
 using System.Diagnostics;
+using SYSTools.Services;
 
 namespace SYSTools.Pages
 {
@@ -15,7 +16,8 @@ namespace SYSTools.Pages
     /// </summary>
     public partial class HardwareMonitor : Page
     {
-        private readonly Computer computer;
+        private readonly HardwareMonitorService hardwareService;
+        private readonly Computer computer; // 从服务获取的 Computer 引用
         private readonly DispatcherTimer timer;
         private const int RefreshInterval = 2; // 刷新间隔（秒）
         private readonly Dictionary<string, Dictionary<string, TextBlock>> sensorTextBlocks = new Dictionary<string, Dictionary<string, TextBlock>>();
@@ -25,36 +27,10 @@ namespace SYSTools.Pages
         {
             InitializeComponent();
             
-            // 初始化硬件监控
-            computer = new Computer
-            {
-                IsCpuEnabled = true,
-                IsGpuEnabled = true,
-                IsMemoryEnabled = true,
-                IsMotherboardEnabled = true,
-                IsStorageEnabled = true,
-                IsNetworkEnabled = true,
-                IsBatteryEnabled = true
-            };
-            
-            try
-            {
-                computer.Open();
-                computer.Accept(new UpdateVisitor());
-                Debug.WriteLine("Hardware monitoring initialized successfully");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Error initializing hardware monitoring: {ex}");
-                var errorMessage = Properties.Lang.ResourceManager.GetString("HardwareMonitorInitError", System.Globalization.CultureInfo.CurrentUICulture);
-                var errorTitle = Properties.Lang.ResourceManager.GetString("ErrorTitle", System.Globalization.CultureInfo.CurrentUICulture);
-                
-                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(
-                    string.Format(errorMessage ?? "Hardware monitor initialization error: {0}", ex.Message),
-                    errorTitle ?? "Error",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Warning);
-            }
+            // 使用共享的硬件监控服务
+            hardwareService = HardwareMonitorService.Instance;
+            hardwareService.Initialize();
+            computer = hardwareService.GetComputer();
 
             // 初始化定时器
             timer = new DispatcherTimer
@@ -179,7 +155,7 @@ namespace SYSTools.Pages
                 columnStacks.Add(stackPanel);
             }
 
-            computer.Accept(new UpdateVisitor());
+            hardwareService.Update();
 
             // 按硬件类型分组，过滤掉没有有效传感器的硬件
             var hardwareGroups = computer.Hardware
@@ -394,7 +370,7 @@ namespace SYSTools.Pages
 
         private void UpdateSensorValues()
         {
-            computer.Accept(new UpdateVisitor());
+            hardwareService.Update();
 
             foreach (IHardware hardware in computer.Hardware)
             {
@@ -570,33 +546,5 @@ namespace SYSTools.Pages
                 _ => "\uE8F1"                        // GenericScan
             };
         }
-    }
-
-    public class UpdateVisitor : IVisitor
-    {
-        public void VisitComputer(IComputer computer)
-        {
-            computer.Traverse(this);
-        }
-
-        public void VisitHardware(IHardware hardware)
-        {
-            try
-            {
-                hardware.Update();
-                foreach (IHardware subHardware in hardware.SubHardware)
-                {
-                    subHardware.Accept(this);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Error updating hardware {hardware.Name}: {ex}");
-            }
-        }
-
-        public void VisitSensor(ISensor sensor) { }
-
-        public void VisitParameter(IParameter parameter) { }
     }
 }

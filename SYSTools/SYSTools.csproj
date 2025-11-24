@@ -138,6 +138,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Lang.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\HardwareMonitorService.cs" />
     <Compile Include="ToolPages\RepairingTools.xaml.cs">
       <DependentUpon>RepairingTools.xaml</DependentUpon>
     </Compile>
