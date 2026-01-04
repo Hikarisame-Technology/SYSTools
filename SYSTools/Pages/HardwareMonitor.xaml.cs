@@ -451,7 +451,7 @@ namespace SYSTools.Pages
                 SensorType.SmallData => sensor.Value.Value >= 1024 ? $"{sensor.Value.Value / 1024:F2} GB" : $"{sensor.Value:F0} MB",
                 SensorType.Voltage => $"{sensor.Value:F2} V",
                 SensorType.Clock => sensor.Value.Value >= 1000 ? $"{sensor.Value.Value / 1000:F2} GHz" : $"{sensor.Value:F0} MHz",
-                SensorType.Throughput => $"{sensor.Value:F1} MB/s",
+                SensorType.Throughput => FormatThroughput(sensor.Value.Value),
                 SensorType.TimeSpan => $"{TimeSpan.FromSeconds((double)sensor.Value):hh\\:mm\\:ss}",
                 SensorType.Energy => $"{sensor.Value:F2} Wh",
                 SensorType.Factor => $"{sensor.Value:F2}",
@@ -479,6 +479,31 @@ namespace SYSTools.Pages
                                   baseName.Contains("Available") ? "可用" : baseName,
                 _ => baseName
             };
+        }
+
+        private string FormatThroughput(float bytesPerSecond)
+        {
+            // 传感器返回的是字节/s，根据大小自动转换单位
+            const float KB = 1024f;
+            const float MB = KB * 1024f;
+            const float GB = MB * 1024f;
+
+            if (bytesPerSecond >= GB)
+            {
+                return $"{bytesPerSecond / GB:F2} GB/s";
+            }
+            else if (bytesPerSecond >= MB)
+            {
+                return $"{bytesPerSecond / MB:F1} MB/s";
+            }
+            else if (bytesPerSecond >= KB)
+            {
+                return $"{bytesPerSecond / KB:F1} KB/s";
+            }
+            else
+            {
+                return $"{bytesPerSecond:F0} B/s";
+            }
         }
 
         private int GetHardwareTypePriority(HardwareType type)
