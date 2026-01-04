@@ -297,7 +297,7 @@ namespace SYSTools.WindowsToolsPages
         private void DisplaySettings_Click(object sender, RoutedEventArgs e)
         {
             // 显示设置
-            Process.Start("displays.cpl");
+            Process.Start("desk.cpl");
         }
 
         private void Explorer_Restart_Click(object sender, RoutedEventArgs e)
