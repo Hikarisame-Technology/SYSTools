@@ -7,6 +7,7 @@ using System.Windows.Media;
 using LibreHardwareMonitor.Hardware;
 using System.Linq;
 using System.Diagnostics;
+using SYSTools.Services;
 
 namespace SYSTools.Pages
 {
@@ -15,7 +16,8 @@ namespace SYSTools.Pages
     /// </summary>
     public partial class HardwareMonitor : Page
     {
-        private readonly Computer computer;
+        private readonly HardwareMonitorService hardwareService;
+        private readonly Computer computer; // 从服务获取的 Computer 引用
         private readonly DispatcherTimer timer;
         private const int RefreshInterval = 2; // 刷新间隔（秒）
         private readonly Dictionary<string, Dictionary<string, TextBlock>> sensorTextBlocks = new Dictionary<string, Dictionary<string, TextBlock>>();
@@ -26,36 +28,10 @@ namespace SYSTools.Pages
         {
             InitializeComponent();
             
-            // 初始化硬件监控
-            computer = new Computer
-            {
-                IsCpuEnabled = true,
-                IsGpuEnabled = true,
-                IsMemoryEnabled = true,
-                IsMotherboardEnabled = true,
-                IsStorageEnabled = true,
-                IsNetworkEnabled = true,
-                IsBatteryEnabled = true
-            };
-            
-            try
-            {
-                computer.Open();
-                computer.Accept(new UpdateVisitor());
-                Debug.WriteLine("Hardware monitoring initialized successfully");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Error initializing hardware monitoring: {ex}");
-                var errorMessage = Properties.Lang.ResourceManager.GetString("HardwareMonitorInitError", System.Globalization.CultureInfo.CurrentUICulture);
-                var errorTitle = Properties.Lang.ResourceManager.GetString("ErrorTitle", System.Globalization.CultureInfo.CurrentUICulture);
-                
-                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(
-                    string.Format(errorMessage ?? "Hardware monitor initialization error: {0}", ex.Message),
-                    errorTitle ?? "Error",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Warning);
-            }
+            // 使用共享的硬件监控服务
+            hardwareService = HardwareMonitorService.Instance;
+            hardwareService.Initialize();
+            computer = hardwareService.GetComputer();
 
             // 初始化定时器
             timer = new DispatcherTimer
@@ -198,7 +174,7 @@ namespace SYSTools.Pages
                 columnStacks.Add(stackPanel);
             }
 
-            computer.Accept(new UpdateVisitor());
+            hardwareService.Update();
 
             // 按硬件类型分组，过滤掉没有有效传感器的硬件
             var hardwareGroups = computer.Hardware
@@ -419,7 +395,7 @@ namespace SYSTools.Pages
 
         private void UpdateSensorValues()
         {
-            computer.Accept(new UpdateVisitor());
+            hardwareService.Update();
 
             foreach (IHardware hardware in computer.Hardware)
             {
@@ -721,6 +697,31 @@ namespace SYSTools.Pages
             string localized = Properties.Lang.ResourceManager.GetString(key,
                 System.Globalization.CultureInfo.CurrentUICulture);
             return !string.IsNullOrEmpty(localized) ? localized : type.ToString();
+        }
+
+        private string FormatThroughput(float bytesPerSecond)
+        {
+            // 传感器返回的是字节/s，根据大小自动转换单位
+            const float KB = 1024f;
+            const float MB = KB * 1024f;
+            const float GB = MB * 1024f;
+
+            if (bytesPerSecond >= GB)
+            {
+                return $"{bytesPerSecond / GB:F2} GB/s";
+            }
+            else if (bytesPerSecond >= MB)
+            {
+                return $"{bytesPerSecond / MB:F1} MB/s";
+            }
+            else if (bytesPerSecond >= KB)
+            {
+                return $"{bytesPerSecond / KB:F1} KB/s";
+            }
+            else
+            {
+                return $"{bytesPerSecond:F0} B/s";
+            }
         }
 
         private int GetHardwareTypePriority(HardwareType type)

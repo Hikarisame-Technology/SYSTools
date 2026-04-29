@@ -16,6 +16,7 @@ using System.Windows.Media.Effects;
 using System.Windows.Controls.Primitives;
 using System.ComponentModel;
 using SYSTools.Helpers;
+using SYSTools.Services;
 using MessageBox = iNKORE.UI.WPF.Modern.Controls.MessageBox;
 
 namespace SYSTools.Pages
@@ -38,12 +39,13 @@ namespace SYSTools.Pages
         private bool isChineseLanguage;
         
         // 资源监控相关
-        private PerformanceCounter cpuCounter;
-        private PerformanceCounter ramCounter;
-        private TextBlock cpuValueText, memValueText, diskValueText;
-        private Border cpuProgressBar, memProgressBar, diskProgressBar;
+        private HardwareMonitorService hardwareService;
+        private TextBlock cpuValueText, memValueText, diskValueText, gpuValueText;
+        private Border cpuProgressBar, memProgressBar, diskProgressBar, gpuProgressBar;
+        private TextBlock cpuTempText, gpuTempText, memTempText; // 温度显示文本
         private List<Border> allCards; // 缓存卡片列表
         private bool isLanguageEventSubscribed = false; // 标记是否已订阅语言变化事件
+        private bool isInitialized = false; // 标记页面是否已初始化
 
         public Home()
         {
@@ -108,9 +110,6 @@ namespace SYSTools.Pages
                 {
                     try
                     {
-                        // 清空卡片缓存，强制重新创建
-                        allCards = null;
-                        
                         // 刷新语言缓存
                         RefreshLanguageCache();
                         
@@ -159,6 +158,9 @@ namespace SYSTools.Pages
             // 确保语言变化事件已订阅（KeepAlive页面可能被重新加载）
             SubscribeLanguageChanged();
             
+            if (!isInitialized)
+            {
+                // 首次加载：完整初始化
             // 刷新语言缓存
             RefreshLanguageCache();
             
@@ -188,35 +190,63 @@ namespace SYSTools.Pages
             
             // 加载系统健康状态
             UpdateSystemHealth();
+                
+                // 标记为已初始化
+                isInitialized = true;
+            }
+            else
+            {
+                // 后续加载：只恢复被暂停的定时器
+                // mainTimer 一直在运行，无需恢复
+                if (!resourceTimer.IsEnabled)
+                {
+                    // 立即更新一次资源数据，然后启动定时器
+                    UpdateResourceMonitor();
+                    UpdateSystemHealth();
+                    resourceTimer.Start();
+                }
+                    
+                if (notices.Count > 1 && !noticeTimer.IsEnabled)
+                    noticeTimer.Start();
+            }
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
-            mainTimer?.Stop();
+            // 页面切换时：
+            // - mainTimer 继续运行（需要持续计算开机时间）
+            // - resourceTimer 暂停（避免不必要的性能计数器查询）
+            // - noticeTimer 暂停（UI 动画在后台无意义）
             noticeTimer?.Stop();
             resourceTimer?.Stop();
-            cpuCounter?.Dispose();
-            ramCounter?.Dispose();
+        }
+
+        private void UnregisterCardNames()
+        {
+            // 取消注册所有卡片相关的名称
+            string[] registeredNames = new[] 
+            {
+                "OpenTimeText", "RunTimeText", "IPv4Text", "IPv6Text",
+                "HealthIcon", "HealthStatus",
+                "WeatherIcon", "WeatherTemp", "WeatherLocation", "HitokotoText"
+            };
             
-            // 注意：不在这里取消订阅语言变化事件
-            // 因为页面使用 KeepAlive="True"，可能会被重新加载
-            // 事件订阅会在 Page_Loaded 中检查并确保存在
+            foreach (var name in registeredNames)
+            {
+                try
+                {
+                    if (FindName(name) != null)
+                        UnregisterName(name);
+                }
+                catch { /* 忽略未注册的名称 */ }
+            }
         }
 
         private void BuildCardsLayout()
         {
-            // 如果卡片已存在，先从父容器中移除
-            if (allCards != null)
-            {
-                foreach (var card in allCards)
-                {
-                    if (card.Parent is Panel parentPanel)
-                    {
-                        parentPanel.Children.Remove(card);
-                    }
-                }
-            }
-            
+            // 先取消注册所有已注册的名称，避免重复调用时冲突
+            UnregisterCardNames();
+
             CardsPanel.Children.Clear();
             CardsPanel.ColumnDefinitions.Clear();
             CardsPanel.RowDefinitions.Clear();
@@ -242,21 +272,18 @@ namespace SYSTools.Pages
                 columnStacks.Add(stackPanel);
             }
             
-            // 只在第一次调用时创建卡片
-            if (allCards == null)
+            // 每次都重新创建卡片（确保使用最新的语言设置）
+            allCards = new List<Border>
             {
-                allCards = new List<Border>
-                {
-                    CreateSystemTimeCard(),      // 1. 系统时间卡片
-                    CreateSystemInfoCard(),       // 2. 系统信息卡片
-                    CreateResourceMonitorCard(),  // 3. 系统资源卡片
-                    CreateSystemHealthCard(),     // 4. 系统健康卡片
-                    CreateQuickActionsCard(),     // 5. 快速操作卡片
-                    CreateNetworkInfoCard(),      // 6. 网络信息卡片
-                    CreateWeatherCard(),          // 7. 天气卡片
-                    CreateHitokotoCard()          // 8. 一言卡片
-                };
-            }
+                CreateSystemTimeCard(),      // 1. 系统时间卡片
+                CreateSystemInfoCard(),       // 2. 系统信息卡片
+                CreateResourceMonitorCard(),  // 3. 系统资源卡片（包含温度）
+                CreateSystemHealthCard(),     // 4. 系统健康卡片
+                CreateQuickActionsCard(),     // 5. 快速操作卡片
+                CreateNetworkInfoCard(),      // 6. 网络信息卡片
+                CreateWeatherCard(),          // 7. 天气卡片
+                CreateHitokotoCard()          // 8. 一言卡片
+            };
             
             // 将卡片轮询分配到各列
             for (int i = 0; i < allCards.Count; i++)
@@ -273,11 +300,11 @@ namespace SYSTools.Pages
             var card = new Border
             {
                 Margin = new Thickness(0, 0, 0, 8),
-                Padding = new Thickness(16,14,16,14),
+                Padding = new Thickness(18, 16, 18, 16),  // 调整内边距，使内容更加均衡和居中
                 CornerRadius = new CornerRadius(8),
                 BorderThickness = new Thickness(1),
                 HorizontalAlignment = HorizontalAlignment.Stretch,
-                VerticalAlignment = VerticalAlignment.Top
+                VerticalAlignment = VerticalAlignment.Stretch  // 改为 Stretch 实现底部对齐
             };
             
             card.SetResourceReference(Border.BackgroundProperty, "CardBackgroundFillColorDefaultBrush");
@@ -298,7 +325,8 @@ namespace SYSTools.Pages
             var headerPanel = new StackPanel
             {
                 Orientation = Orientation.Horizontal,
-                Margin = new Thickness(0, 0, 0, 12)
+                Margin = new Thickness(2, 0, 2, 12),  // 添加左右边距，使其更居中
+                HorizontalAlignment = HorizontalAlignment.Left
             };
             
             var iconText = new TextBlock
@@ -330,7 +358,130 @@ namespace SYSTools.Pages
             var separator = new Border
             {
                 Height = 1,
-                Margin = new Thickness(0, 0, 0, 10)
+                Margin = new Thickness(-2, 0, -2, 10)  // 负边距使分割线延伸到卡片边缘，更加整齐
+            };
+            separator.SetResourceReference(Border.BackgroundProperty, "DividerStrokeColorDefaultBrush");
+            stack.Children.Add(separator);
+            
+            // 内容
+            stack.Children.Add(content);
+            
+            card.Child = stack;
+            return card;
+        }
+        
+        private Border CreateCardWithStatus(string icon, string title, UIElement content)
+        {
+            var card = new Border
+            {
+                Margin = new Thickness(0, 0, 0, 8),
+                Padding = new Thickness(18, 16, 18, 16),
+                CornerRadius = new CornerRadius(8),
+                BorderThickness = new Thickness(1),
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Stretch
+            };
+            
+            card.SetResourceReference(Border.BackgroundProperty, "CardBackgroundFillColorDefaultBrush");
+            card.SetResourceReference(Border.BorderBrushProperty, "CardStrokeColorDefaultBrush");
+            
+            card.Effect = new DropShadowEffect
+            {
+                Color = Colors.Black,
+                Direction = 270,
+                ShadowDepth = 2,
+                BlurRadius = 6,
+                Opacity = 0.15
+            };
+            
+            var stack = new StackPanel();
+            
+            // 标题行（使用Grid布局以支持左右两侧内容）
+            var headerGrid = new Grid
+            {
+                Margin = new Thickness(2, 0, 2, 12)
+            };
+            headerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            headerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            headerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            
+            // 左侧：图标和标题
+            var leftPanel = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                HorizontalAlignment = HorizontalAlignment.Left
+            };
+            
+            var iconText = new TextBlock
+            {
+                Text = icon,
+                FontFamily = (FontFamily)Application.Current.TryFindResource("SegoeIcons") 
+                             ?? new FontFamily("Segoe MDL2 Assets"),
+                FontSize = 18,
+                Margin = new Thickness(0, 0, 8, 0),
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            iconText.SetResourceReference(TextBlock.ForegroundProperty, "AccentTextFillColorPrimaryBrush");
+            
+            var titleText = new TextBlock
+            {
+                Text = title,
+                FontSize = 15,
+                FontWeight = FontWeights.SemiBold,
+                VerticalAlignment = VerticalAlignment.Center,
+                FontFamily = new FontFamily("Microsoft YaHei UI, Segoe UI")
+            };
+            titleText.SetResourceReference(TextBlock.ForegroundProperty, "AccentTextFillColorPrimaryBrush");
+            
+            leftPanel.Children.Add(iconText);
+            leftPanel.Children.Add(titleText);
+            Grid.SetColumn(leftPanel, 0);
+            headerGrid.Children.Add(leftPanel);
+            
+            // 右侧：状态显示
+            var statusPanel = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                HorizontalAlignment = HorizontalAlignment.Right
+            };
+            
+            var statusIcon = new TextBlock
+            {
+                Name = "HealthIcon",
+                Text = "\uE73E",  // StatusCircleCheckmark
+                FontFamily = (FontFamily)Application.Current.TryFindResource("SegoeIcons") 
+                             ?? new FontFamily("Segoe MDL2 Assets"),
+                FontSize = 16,
+                Margin = new Thickness(0, 0, 6, 0),
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            statusIcon.SetResourceReference(TextBlock.ForegroundProperty, "SystemFillColorSuccessBrush");
+            SafeRegisterName("HealthIcon", statusIcon);
+            
+            var statusText = new TextBlock
+            {
+                Name = "HealthStatus",
+                Text = Properties.Lang.ResourceManager.GetString("SystemHealthGood", 
+                    System.Globalization.CultureInfo.CurrentUICulture) ?? "良好",
+                FontSize = 13,
+                FontWeight = FontWeights.Medium,
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            statusText.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorPrimaryBrush");
+            SafeRegisterName("HealthStatus", statusText);
+            
+            statusPanel.Children.Add(statusIcon);
+            statusPanel.Children.Add(statusText);
+            Grid.SetColumn(statusPanel, 2);
+            headerGrid.Children.Add(statusPanel);
+            
+            stack.Children.Add(headerGrid);
+            
+            // 分隔线
+            var separator = new Border
+            {
+                Height = 1,
+                Margin = new Thickness(-2, 0, -2, 10)
             };
             separator.SetResourceReference(Border.BackgroundProperty, "DividerStrokeColorDefaultBrush");
             stack.Children.Add(separator);
@@ -457,13 +608,78 @@ namespace SYSTools.Pages
                 System.Globalization.CultureInfo.CurrentUICulture) ?? "内存", out memValueText, out memProgressBar);
             content.Children.Add(memRow);
             
+            // GPU（如果可用）
+            if (hardwareService?.HasGpu() == true)
+            {
+                var gpuRow = CreateResourceRow("GPU", out gpuValueText, out gpuProgressBar);
+                content.Children.Add(gpuRow);
+            }
+            
             // 磁盘
             var diskRow = CreateResourceRow(Properties.Lang.ResourceManager.GetString("Disk", 
                 System.Globalization.CultureInfo.CurrentUICulture) ?? "磁盘", out diskValueText, out diskProgressBar);
             content.Children.Add(diskRow);
             
-            return CreateCard("\uE950", Properties.Lang.ResourceManager.GetString("SystemResources", 
+            return CreateCardWithStatus("\uE950", Properties.Lang.ResourceManager.GetString("SystemResources", 
                 System.Globalization.CultureInfo.CurrentUICulture) ?? "系统资源", content);
+        }
+        
+        private Border CreateTemperatureItem(string icon, string label, out TextBlock valueTextBlock)
+        {
+            var border = new Border
+            {
+                Padding = new Thickness(6, 4, 6, 4),
+                Margin = new Thickness(2),
+                CornerRadius = new CornerRadius(4),
+                BorderThickness = new Thickness(1)
+            };
+            border.SetResourceReference(Border.BorderBrushProperty, "ControlStrokeColorDefaultBrush");
+            border.SetResourceReference(Border.BackgroundProperty, "CardBackgroundFillColorSecondaryBrush");
+            
+            var stack = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
+            
+            var iconText = new TextBlock
+            {
+                Text = icon,
+                FontFamily = (FontFamily)Application.Current.TryFindResource("SegoeIcons") 
+                             ?? new FontFamily("Segoe MDL2 Assets"),
+                FontSize = 12,
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(0, 0, 4, 0)
+            };
+            iconText.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorSecondaryBrush");
+            
+            var labelText = new TextBlock
+            {
+                Text = label + ":",
+                FontSize = 11,
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(0, 0, 4, 0)
+            };
+            labelText.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorSecondaryBrush");
+            
+            valueTextBlock = new TextBlock
+            {
+                Text = "--°C",
+                FontSize = 11,
+                FontWeight = FontWeights.SemiBold,
+                FontFamily = new FontFamily("Consolas"),
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            valueTextBlock.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorPrimaryBrush");
+            
+            stack.Children.Add(iconText);
+            stack.Children.Add(labelText);
+            stack.Children.Add(valueTextBlock);
+            
+            border.Child = stack;
+            
+            // 返回 border 用于添加到UI
+            return border;
         }
 
         private StackPanel CreateResourceRow(string label, out TextBlock valueText, out Border progressBar)
@@ -529,51 +745,32 @@ namespace SYSTools.Pages
         {
             var content = new StackPanel();
             
-            var statusPanel = new StackPanel
+            var tempGrid = new UniformGrid
             {
-                Orientation = Orientation.Horizontal,
-                Margin = new Thickness(0, 0, 0, 8)
+                Columns = hardwareService?.HasGpu() == true ? 3 : 2,
+                HorizontalAlignment = HorizontalAlignment.Stretch
             };
             
-            var statusIcon = new TextBlock
+            // CPU 温度
+            var cpuTempBorder = CreateTemperatureItem("\uE950", "CPU", out cpuTempText);
+            tempGrid.Children.Add(cpuTempBorder);
+            
+            // GPU 温度（如果可用）
+            if (hardwareService?.HasGpu() == true)
             {
-                Name = "HealthIcon",
-                Text = "🟢",
-                FontSize = 20,
-                Margin = new Thickness(0, 0, 10, 0),
-                VerticalAlignment = VerticalAlignment.Center
-            };
-            SafeRegisterName("HealthIcon", statusIcon);
+                var gpuTempBorder = CreateTemperatureItem("\uE7FC", "GPU", out gpuTempText);
+                tempGrid.Children.Add(gpuTempBorder);
+            }
             
-            var statusText = new TextBlock
-            {
-                Name = "HealthStatus",
-                Text = Properties.Lang.ResourceManager.GetString("SystemHealthGood", 
-                    System.Globalization.CultureInfo.CurrentUICulture) ?? "良好",
-                FontSize = 16,
-                FontWeight = FontWeights.SemiBold,
-                VerticalAlignment = VerticalAlignment.Center
-            };
-            statusText.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorPrimaryBrush");
-            SafeRegisterName("HealthStatus", statusText);
+            // 内存温度（通常不显示）
+            var memTempBorder = CreateTemperatureItem("\uE7B8", Properties.Lang.ResourceManager.GetString("Memory", 
+                System.Globalization.CultureInfo.CurrentUICulture) ?? "内存", out memTempText);
+            tempGrid.Children.Add(memTempBorder);
             
-            statusPanel.Children.Add(statusIcon);
-            statusPanel.Children.Add(statusText);
-            content.Children.Add(statusPanel);
+            content.Children.Add(tempGrid);
             
-            var detailsText = new TextBlock
-            {
-                Name = "HealthDetails",
-                Text = "温度: 正常 | 性能: 良好",
-                FontSize = 12,
-                TextWrapping = TextWrapping.Wrap
-            };
-            detailsText.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorSecondaryBrush");
-            SafeRegisterName("HealthDetails", detailsText);
-            content.Children.Add(detailsText);
-            
-            return CreateCard("\uEA37", Properties.Lang.ResourceManager.GetString("SystemHealth", 
-                System.Globalization.CultureInfo.CurrentUICulture) ?? "系统健康", content);
+            return CreateCard("\uE7F8", Properties.Lang.ResourceManager.GetString("SystemTemperature", 
+                System.Globalization.CultureInfo.CurrentUICulture) ?? "系统温度", content);
         }
 
         private Border CreateQuickActionsCard()
@@ -581,16 +778,24 @@ namespace SYSTools.Pages
             var content = new UniformGrid
             {
                 Columns = 3,
-                Rows = 2
+                Rows = 2,
+                HorizontalAlignment = HorizontalAlignment.Center,  // 水平居中
+                VerticalAlignment = VerticalAlignment.Center  // 垂直居中
             };
             
             // 创建快速操作按钮
-            content.Children.Add(CreateActionButton("\uE7E8", "重启", () => ExecuteSystemCommand("shutdown /r /t 0")));
-            content.Children.Add(CreateActionButton("\uE7E8", "关机", () => ExecuteSystemCommand("shutdown /s /t 0")));
-            content.Children.Add(CreateActionButton("\uE708", "睡眠", () => ExecuteSystemCommand("rundll32.exe powrprof.dll,SetSuspendState 0,1,0")));
-            content.Children.Add(CreateActionButton("\uE74D", "清理", () => ExecuteSystemCommand("cleanmgr")));
-            content.Children.Add(CreateActionButton("\uE8B8", "任务管理器", () => Process.Start("taskmgr")));
-            content.Children.Add(CreateActionButton("\uE713", "设置", () => ExecuteSystemCommand("ms-settings:")));
+            content.Children.Add(CreateActionButton("\uE7E8", Properties.Lang.ResourceManager.GetString("Restart",
+                System.Globalization.CultureInfo.CurrentUICulture) ?? "重启", () => ExecuteSystemCommand("shutdown /r /t 0")));
+            content.Children.Add(CreateActionButton("\uE7E8", Properties.Lang.ResourceManager.GetString("Shutdown",
+                System.Globalization.CultureInfo.CurrentUICulture) ?? "关机", () => ExecuteSystemCommand("shutdown /s /t 0")));
+            content.Children.Add(CreateActionButton("\uE708", Properties.Lang.ResourceManager.GetString("Sleep",
+                System.Globalization.CultureInfo.CurrentUICulture) ?? "睡眠", () => ExecuteSystemCommand("rundll32.exe powrprof.dll,SetSuspendState 0,1,0")));
+            content.Children.Add(CreateActionButton("\uE74D", Properties.Lang.ResourceManager.GetString("Cleanup",
+                System.Globalization.CultureInfo.CurrentUICulture) ?? "清理", () => ExecuteSystemCommand("cleanmgr")));
+            content.Children.Add(CreateActionButton("\uE8B8", Properties.Lang.ResourceManager.GetString("TaskManager",
+                System.Globalization.CultureInfo.CurrentUICulture) ?? "任务管理器", () => Process.Start("taskmgr")));
+            content.Children.Add(CreateActionButton("\uE713", Properties.Lang.ResourceManager.GetString("Settings",
+                System.Globalization.CultureInfo.CurrentUICulture) ?? "设置", () => ExecuteSystemCommand("ms-settings:")));
             
             return CreateCard("\uE90F", Properties.Lang.ResourceManager.GetString("QuickActions", 
                 System.Globalization.CultureInfo.CurrentUICulture) ?? "快速操作", content);
@@ -611,24 +816,29 @@ namespace SYSTools.Pages
             };
             button.SetResourceReference(Button.BorderBrushProperty, "ControlStrokeColorDefaultBrush");
             
-            var stack = new StackPanel { HorizontalAlignment = HorizontalAlignment.Center };
+            var stack = new StackPanel 
+            { 
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center
+            };
             
             var iconText = new TextBlock
             {
                 Text = icon,
                 FontFamily = (FontFamily)Application.Current.TryFindResource("SegoeIcons") 
                              ?? new FontFamily("Segoe MDL2 Assets"),
-                FontSize = 16,
+                FontSize = 18,  // 稍微增大图标
                 HorizontalAlignment = HorizontalAlignment.Center,
-                Margin = new Thickness(0, 0, 0, 4)
+                Margin = new Thickness(0, 0, 0, 6)  // 增加图标和文字的间距
             };
             iconText.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorPrimaryBrush");
             
             var labelText = new TextBlock
             {
                 Text = label,
-                FontSize = 11,
-                HorizontalAlignment = HorizontalAlignment.Center
+                FontSize = 12,  // 增大文字尺寸
+                HorizontalAlignment = HorizontalAlignment.Center,
+                TextAlignment = TextAlignment.Center
             };
             labelText.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorSecondaryBrush");
             
@@ -819,22 +1029,105 @@ namespace SYSTools.Pages
         {
             try
             {
-                // CPU
-                float cpuUsage = cpuCounter?.NextValue() ?? 0;
+                // 更新所有硬件数据
+                hardwareService?.Update();
+                
+                // CPU使用率
+                float cpuUsage = hardwareService?.GetCpuUsage() ?? 0;
                 UpdateResourceDisplay(cpuValueText, cpuProgressBar, cpuUsage);
                 
-                // 内存
-                float memUsage = ramCounter?.NextValue() ?? 0;
+                // 内存使用率
+                float memUsage = hardwareService?.GetMemoryUsage() ?? 0;
                 UpdateResourceDisplay(memValueText, memProgressBar, memUsage);
+                
+                // GPU使用率（如果可用）
+                if (hardwareService?.HasGpu() == true)
+                {
+                    float gpuUsage = hardwareService.GetGpuUsage();
+                    
+                    // 调试输出：每10秒打印一次 GPU 信息
+                    //if (DateTime.Now.Second % 10 == 0)
+                    //{
+                    //    Debug.WriteLine($"GPU Usage: {gpuUsage}%");
+                    //    // 取消下面这行注释可以查看详细的 GPU 传感器信息
+                    //    Debug.WriteLine(hardwareService.GetGpuInfo());
+                    //}
+                    
+                    UpdateResourceDisplay(gpuValueText, gpuProgressBar, gpuUsage);
+                }
                 
                 // 磁盘（获取C盘使用率）
                 float diskUsage = GetDiskUsage();
                 UpdateResourceDisplay(diskValueText, diskProgressBar, diskUsage);
+                
+                // 更新温度
+                UpdateTemperatureDisplay();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error updating resources: {ex}");
             }
+        }
+        
+        private void UpdateTemperatureDisplay()
+        {
+            try
+            {
+                // CPU 温度
+                if (cpuTempText != null)
+                {
+                    float cpuTemp = hardwareService?.GetCpuTemperature() ?? 0;
+                    cpuTempText.Text = cpuTemp > 0 ? $"{cpuTemp:F0}°C" : "--°C";
+                    ApplyTemperatureColor(cpuTempText, cpuTemp);
+                }
+                
+                // 内存温度（通常不可用）
+                if (memTempText != null)
+                {
+                    memTempText.Text = "N/A";
+                    memTempText.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorTertiaryBrush");
+                }
+                
+                // GPU 温度
+                if (gpuTempText != null && hardwareService?.HasGpu() == true)
+                {
+                    float gpuTemp = hardwareService.GetGpuTemperature();
+                    gpuTempText.Text = gpuTemp > 0 ? $"{gpuTemp:F0}°C" : "--°C";
+                    ApplyTemperatureColor(gpuTempText, gpuTemp);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error updating temperatures: {ex}");
+            }
+        }
+        
+        private void ApplyTemperatureColor(TextBlock textBlock, float temperature)
+        {
+            if (temperature <= 0)
+            {
+                textBlock.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorSecondaryBrush");
+                return;
+            }
+            
+            Color color;
+            if (temperature < 60)
+            {
+                // 绿色 - 安全温度
+                color = Color.FromRgb(16, 185, 129);
+            }
+            else if (temperature < 80)
+            {
+                // 黄色 - 警告温度
+                color = Color.FromRgb(245, 158, 11);
+            }
+            else
+            {
+                // 红色 - 危险温度
+                color = Color.FromRgb(239, 68, 68);
+            }
+            
+            textBlock.Foreground = new SolidColorBrush(color);
         }
 
         private void UpdateResourceDisplay(TextBlock valueText, Border progressBar, float percentage)
@@ -889,41 +1182,41 @@ namespace SYSTools.Pages
         {
             try
             {
-                float cpuUsage = cpuCounter?.NextValue() ?? 0;
-                float memUsage = ramCounter?.NextValue() ?? 0;
+                float cpuUsage = hardwareService?.GetCpuUsage() ?? 0;
+                float memUsage = hardwareService?.GetMemoryUsage() ?? 0;
                 
                 string status, icon;
+                SolidColorBrush iconColor;
                 if (cpuUsage < 70 && memUsage < 80)
                 {
                     status = Properties.Lang.ResourceManager.GetString("SystemHealthGood", 
                         System.Globalization.CultureInfo.CurrentUICulture) ?? "良好";
-                    icon = "🟢";
+                    icon = "\uE73E";  // StatusCircleCheckmark - 绿色勾
+                    iconColor = new SolidColorBrush(Color.FromRgb(16, 185, 129));
                 }
                 else if (cpuUsage < 85 && memUsage < 90)
                 {
                     status = Properties.Lang.ResourceManager.GetString("SystemHealthWarning", 
                         System.Globalization.CultureInfo.CurrentUICulture) ?? "警告";
-                    icon = "🟡";
+                    icon = "\uE7BA";  // StatusCircleErrorX - 黄色警告
+                    iconColor = new SolidColorBrush(Color.FromRgb(245, 158, 11));
                 }
                 else
                 {
                     status = Properties.Lang.ResourceManager.GetString("SystemHealthCritical", 
                         System.Globalization.CultureInfo.CurrentUICulture) ?? "严重";
-                    icon = "🔴";
+                    icon = "\uEA39";  // StatusCircleBlock - 红色禁止
+                    iconColor = new SolidColorBrush(Color.FromRgb(239, 68, 68));
                 }
                 
                 if (FindName("HealthIcon") is TextBlock healthIcon)
+                {
                     healthIcon.Text = icon;
+                    healthIcon.Foreground = iconColor;
+                }
                     
                 if (FindName("HealthStatus") is TextBlock healthStatus)
                     healthStatus.Text = status;
-                    
-                if (FindName("HealthDetails") is TextBlock healthDetails)
-                {
-                    healthDetails.Text = $"CPU: {cpuUsage:F0}% | " + 
-                        Properties.Lang.ResourceManager.GetString("Memory", System.Globalization.CultureInfo.CurrentUICulture) + 
-                        $": {memUsage:F0}%";
-                }
             }
             catch (Exception ex)
             {
@@ -1000,10 +1293,10 @@ namespace SYSTools.Pages
                     }
                     else
                     {
-                        tempText.Text = "--°C";
+                    tempText.Text = "--°C";
                     }
                 }
-                
+                    
                 if (FindName("WeatherLocation") is TextBlock locationText)
                 {
                     string location = "";
@@ -1022,7 +1315,7 @@ namespace SYSTools.Pages
                     else
                     {
                         location = Properties.Lang.ResourceManager.GetString("WeatherNotConfigured", 
-                            System.Globalization.CultureInfo.CurrentUICulture) ?? "未配置天气服务";
+                        System.Globalization.CultureInfo.CurrentUICulture) ?? "未配置天气服务";
                     }
                     locationText.Text = location;
                 }
@@ -1162,8 +1455,8 @@ namespace SYSTools.Pages
 
         private void ResourceTimer_Tick(object sender, EventArgs e)
         {
-            UpdateResourceMonitor();
-            UpdateSystemHealth();
+            UpdateResourceMonitor();  // 包含了温度更新
+            UpdateSystemHealth();     // 更新系统健康状态
         }
 
         private void NoticeTimer_Tick(object sender, EventArgs e)
@@ -1222,7 +1515,15 @@ namespace SYSTools.Pages
                 var response = await client.GetAsync("https://myip.ipip.net/");
                 response.EnsureSuccessStatusCode();
                 string IPv4 = await response.Content.ReadAsStringAsync();
-                ipv4Text.Text = Regex.Replace(IPv4, "[\r\n]", "");
+                
+                // 移除首尾空白字符
+                IPv4 = IPv4.Trim();
+                
+                // 将"来自于"替换为换行符，使信息更易读
+                IPv4 = IPv4.Replace("来自于：", "\n来自：");
+                IPv4 = IPv4.Replace("来自于", "\n来自：");
+                
+                ipv4Text.Text = IPv4;
             }
             catch (Exception ex)
             {
