@@ -777,4 +777,10 @@
     <data name="Settings" xml:space="preserve">
         <value>设置</value>
     </data>
+    <data name="SystemAmbientTemp" xml:space="preserve">
+        <value>系统</value>
+    </data>
+    <data name="AmbientTempTooltip" xml:space="preserve">
+        <value>当前为环境温度，以管理员身份运行可获取准确的CPU核心温度</value>
+    </data>
 </root>

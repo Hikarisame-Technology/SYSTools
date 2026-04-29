@@ -99,6 +99,15 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
+        public static string AmbientTempTooltip {
+            get {
+                return ResourceManager.GetString("AmbientTempTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
         public static string Args {
             get {
                 return ResourceManager.GetString("Args", resourceCulture);
@@ -1452,6 +1461,15 @@ namespace SYSTools.Properties {
         public static string SSD_Z_Text {
             get {
                 return ResourceManager.GetString("SSD-Z_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string SystemAmbientTemp {
+            get {
+                return ResourceManager.GetString("SystemAmbientTemp", resourceCulture);
             }
         }
         

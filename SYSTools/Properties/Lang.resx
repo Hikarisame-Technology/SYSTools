@@ -666,4 +666,10 @@
   <data name="Sensor_Temperature" xml:space="preserve">
     <value></value>
   </data>
+    <data name="SystemAmbientTemp" xml:space="preserve">
+        <value></value>
+    </data>
+    <data name="AmbientTempTooltip" xml:space="preserve">
+        <value></value>
+    </data>
 </root>

@@ -32,17 +32,19 @@ namespace SYSTools.Pages
         private int currentNoticeIndex = 0;
         private DispatcherTimer noticeTimer;
         private DispatcherTimer mainTimer;
-        private DispatcherTimer resourceTimer; // 资源监控定时器
+        // 资源监控使用 mainTimer 每秒统一刷新
         
         // 缓存本地化字符串
         private string dayUnit, hourUnit, minuteUnit, secondUnit;
         private bool isChineseLanguage;
-        
+
         // 资源监控相关
+        private PerformanceCounter cpuCounter;
+        private PerformanceCounter ramCounter;
         private HardwareMonitorService hardwareService;
         private TextBlock cpuValueText, memValueText, diskValueText, gpuValueText;
         private Border cpuProgressBar, memProgressBar, diskProgressBar, gpuProgressBar;
-        private TextBlock cpuTempText, gpuTempText, memTempText; // 温度显示文本
+        private TextBlock cpuTempText, gpuTempText; // 温度显示文本
         private List<Border> allCards; // 缓存卡片列表
         private bool isLanguageEventSubscribed = false; // 标记是否已订阅语言变化事件
         private bool isInitialized = false; // 标记页面是否已初始化
@@ -66,13 +68,20 @@ namespace SYSTools.Pages
                 Debug.WriteLine($"Error initializing performance counters: {ex}");
             }
             
-            // 初始化主计时器（降低频率到每秒）
+            // 初始化硬件监控服务（获取 GPU 占用率、温度等）
+            try
+            {
+                hardwareService = HardwareMonitorService.Instance;
+                hardwareService.Initialize();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error initializing hardware monitor service: {ex}");
+            }
+
+            // 初始化主计时器（每秒刷新，统管时间和资源更新）
             mainTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             mainTimer.Tick += Timer_Tick;
-            
-            // 初始化资源监控定时器（2秒更新一次）
-            resourceTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
-            resourceTimer.Tick += ResourceTimer_Tick;
             
             // 初始化公告计时器
             noticeTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
@@ -171,13 +180,11 @@ namespace SYSTools.Pages
             // 构建卡片布局
             BuildCardsLayout();
             
-            // 启动定时器
+            // 启动主定时器（统管时间、资源和健康状态刷新）
             UpdateTimeDisplay();
-            mainTimer.Start();
-            
-            // 启动资源监控
             UpdateResourceMonitor();
-            resourceTimer.Start();
+            UpdateSystemHealth();
+            mainTimer.Start();
             
             // 加载一言卡片
             await LoadHitokotoAsync();
@@ -196,15 +203,7 @@ namespace SYSTools.Pages
             }
             else
             {
-                // 后续加载：只恢复被暂停的定时器
-                // mainTimer 一直在运行，无需恢复
-                if (!resourceTimer.IsEnabled)
-                {
-                    // 立即更新一次资源数据，然后启动定时器
-                    UpdateResourceMonitor();
-                    UpdateSystemHealth();
-                    resourceTimer.Start();
-                }
+                // 后续加载：mainTimer 一直运行，无需额外操作
                     
                 if (notices.Count > 1 && !noticeTimer.IsEnabled)
                     noticeTimer.Start();
@@ -214,11 +213,9 @@ namespace SYSTools.Pages
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
             // 页面切换时：
-            // - mainTimer 继续运行（需要持续计算开机时间）
-            // - resourceTimer 暂停（避免不必要的性能计数器查询）
+            // - mainTimer 继续运行（持续刷新时间和资源）
             // - noticeTimer 暂停（UI 动画在后台无意义）
             noticeTimer?.Stop();
-            resourceTimer?.Stop();
         }
 
         private void UnregisterCardNames()
@@ -747,12 +744,20 @@ namespace SYSTools.Pages
             
             var tempGrid = new UniformGrid
             {
-                Columns = hardwareService?.HasGpu() == true ? 3 : 2,
+                Columns = hardwareService?.HasGpu() == true ? 2 : 1,
                 HorizontalAlignment = HorizontalAlignment.Stretch
             };
             
-            // CPU 温度
-            var cpuTempBorder = CreateTemperatureItem("\uE950", "CPU", out cpuTempText);
+            // CPU 温度（使用 WMI 回退时标明是系统环境温度）
+            string cpuLabel = hardwareService?.IsWmiFallbackActive == true ? 
+                Properties.Lang.ResourceManager.GetString("SystemAmbientTemp", 
+                    System.Globalization.CultureInfo.CurrentUICulture) ?? "系统" : "CPU";
+            var cpuTempBorder = CreateTemperatureItem("\uE950", cpuLabel, out cpuTempText);
+            if (hardwareService?.IsWmiFallbackActive == true)
+            {
+                cpuTempBorder.ToolTip = Properties.Lang.ResourceManager.GetString("AmbientTempTooltip",
+                    System.Globalization.CultureInfo.CurrentUICulture) ?? "当前为环境温度，以管理员身份运行可获取CPU核心温度";
+            }
             tempGrid.Children.Add(cpuTempBorder);
             
             // GPU 温度（如果可用）
@@ -761,11 +766,6 @@ namespace SYSTools.Pages
                 var gpuTempBorder = CreateTemperatureItem("\uE7FC", "GPU", out gpuTempText);
                 tempGrid.Children.Add(gpuTempBorder);
             }
-            
-            // 内存温度（通常不显示）
-            var memTempBorder = CreateTemperatureItem("\uE7B8", Properties.Lang.ResourceManager.GetString("Memory", 
-                System.Globalization.CultureInfo.CurrentUICulture) ?? "内存", out memTempText);
-            tempGrid.Children.Add(memTempBorder);
             
             content.Children.Add(tempGrid);
             
@@ -1079,13 +1079,6 @@ namespace SYSTools.Pages
                     float cpuTemp = hardwareService?.GetCpuTemperature() ?? 0;
                     cpuTempText.Text = cpuTemp > 0 ? $"{cpuTemp:F0}°C" : "--°C";
                     ApplyTemperatureColor(cpuTempText, cpuTemp);
-                }
-                
-                // 内存温度（通常不可用）
-                if (memTempText != null)
-                {
-                    memTempText.Text = "N/A";
-                    memTempText.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorTertiaryBrush");
                 }
                 
                 // GPU 温度
@@ -1451,12 +1444,8 @@ namespace SYSTools.Pages
         private void Timer_Tick(object sender, EventArgs e)
         {
             UpdateTimeDisplay();
-        }
-
-        private void ResourceTimer_Tick(object sender, EventArgs e)
-        {
-            UpdateResourceMonitor();  // 包含了温度更新
-            UpdateSystemHealth();     // 更新系统健康状态
+            UpdateResourceMonitor();
+            UpdateSystemHealth();
         }
 
         private void NoticeTimer_Tick(object sender, EventArgs e)

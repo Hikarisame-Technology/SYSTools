@@ -777,4 +777,10 @@
     <data name="Settings" xml:space="preserve">
         <value>Settings</value>
     </data>
+    <data name="SystemAmbientTemp" xml:space="preserve">
+        <value>System</value>
+    </data>
+    <data name="AmbientTempTooltip" xml:space="preserve">
+        <value>Showing ambient temperature. Run as administrator for accurate CPU core temperature.</value>
+    </data>
 </root>

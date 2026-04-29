@@ -699,31 +699,6 @@ namespace SYSTools.Pages
             return !string.IsNullOrEmpty(localized) ? localized : type.ToString();
         }
 
-        private string FormatThroughput(float bytesPerSecond)
-        {
-            // 传感器返回的是字节/s，根据大小自动转换单位
-            const float KB = 1024f;
-            const float MB = KB * 1024f;
-            const float GB = MB * 1024f;
-
-            if (bytesPerSecond >= GB)
-            {
-                return $"{bytesPerSecond / GB:F2} GB/s";
-            }
-            else if (bytesPerSecond >= MB)
-            {
-                return $"{bytesPerSecond / MB:F1} MB/s";
-            }
-            else if (bytesPerSecond >= KB)
-            {
-                return $"{bytesPerSecond / KB:F1} KB/s";
-            }
-            else
-            {
-                return $"{bytesPerSecond:F0} B/s";
-            }
-        }
-
         private int GetHardwareTypePriority(HardwareType type)
         {
             return type switch

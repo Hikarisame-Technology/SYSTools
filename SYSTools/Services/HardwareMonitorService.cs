@@ -1,6 +1,8 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Management;
+using System.Security.Principal;
 using LibreHardwareMonitor.Hardware;
 
 namespace SYSTools.Services
@@ -19,6 +21,32 @@ namespace SYSTools.Services
         private readonly Computer computer;
         private bool isInitialized = false;
         private bool isDisposed = false;
+        private bool _isWmiFallbackActive = false; // 是否正在使用 WMI 回退
+        
+        /// <summary>
+        /// 是否正在使用 WMI 回退（环境温度而非真实的 CPU 核心温度）
+        /// </summary>
+        public bool IsWmiFallbackActive => _isWmiFallbackActive;
+        
+        /// <summary>
+        /// 当前进程是否以管理员权限运行
+        /// </summary>
+        public static bool IsRunningAsAdmin
+        {
+            get
+            {
+                try
+                {
+                    var identity = System.Security.Principal.WindowsIdentity.GetCurrent();
+                    var principal = new System.Security.Principal.WindowsPrincipal(identity);
+                    return principal.IsInRole(System.Security.Principal.WindowsBuiltInRole.Administrator);
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
         
         // 硬件缓存
         private IHardware cpuHardware;
@@ -141,22 +169,111 @@ namespace SYSTools.Services
         
         /// <summary>
         /// 获取 CPU 温度
+        /// 优先使用 LibreHardwareMonitor，回退到 WMI
         /// </summary>
         public float GetCpuTemperature()
         {
             try
             {
-                if (cpuHardware == null) return 0;
-                
+                if (cpuHardware == null)
+                {
+                    _isWmiFallbackActive = true;
+                    return GetCpuTemperatureWmi();
+                }
+
+                // 优先使用封装温度或核心平均温度（大小写不敏感）
                 var tempSensor = cpuHardware.Sensors
-                    .FirstOrDefault(s => s.SensorType == SensorType.Temperature && 
-                                        (s.Name.Contains("Package") || s.Name.Contains("Core Average")));
-                
-                return tempSensor?.Value ?? 0;
+                    .FirstOrDefault(s => s.SensorType == SensorType.Temperature &&
+                                        (s.Name.ToLowerInvariant().Contains("package") ||
+                                         s.Name.ToLowerInvariant().Contains("core average")));
+
+                // 如果没有找到，使用第一个有值的温度传感器
+                if (tempSensor == null || !tempSensor.Value.HasValue)
+                {
+                    tempSensor = cpuHardware.Sensors
+                        .FirstOrDefault(s => s.SensorType == SensorType.Temperature && s.Value.HasValue);
+                }
+
+                var result = tempSensor?.Value ?? 0;
+
+                // LibreHardwareMonitor 无数据时回退到 WMI
+                if (result <= 0)
+                {
+                    _isWmiFallbackActive = true;
+                    result = GetCpuTemperatureWmi();
+                }
+                else
+                {
+                    _isWmiFallbackActive = false;
+                }
+
+                return result;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error getting CPU temperature: {ex}");
+                _isWmiFallbackActive = true;
+                return GetCpuTemperatureWmi();
+            }
+        }
+
+        /// <summary>
+        /// 通过 WMI 获取 CPU 温度（回退方案）
+        /// 使用 Win32_PerfFormattedData_Counters_ThermalZoneInformation
+        /// 温度单位为十进制的开尔文（除以10再减去273.15得摄氏度）
+        /// </summary>
+        private static float GetCpuTemperatureWmi()
+        {
+            try
+            {
+                using (var searcher = new ManagementObjectSearcher(
+                    @"root\cimv2",
+                    "SELECT Temperature FROM Win32_PerfFormattedData_Counters_ThermalZoneInformation"))
+                {
+                    float maxTemp = 0;
+                    foreach (ManagementObject obj in searcher.Get())
+                    {
+                        var tempValue = obj["Temperature"];
+                        if (tempValue != null && ulong.TryParse(tempValue.ToString(), out var rawTemp))
+                        {
+                            // Temperature 是整开尔文
+                            float celsius = rawTemp - 273.15f;
+                            if (celsius > maxTemp)
+                                maxTemp = celsius;
+                        }
+                    }
+
+                    if (maxTemp > 0)
+                        return maxTemp;
+                }
+
+                // 备用: MSAcpi_ThermalZoneTemperature
+                // CurrentTemperature 是十分之一开尔文
+                using (var searcher = new ManagementObjectSearcher(
+                    @"root\wmi",
+                    "SELECT CurrentTemperature FROM MSAcpi_ThermalZoneTemperature"))
+                {
+                    float maxTemp = 0;
+                    foreach (ManagementObject obj in searcher.Get())
+                    {
+                        var tempValue = obj["CurrentTemperature"];
+                        if (tempValue != null && uint.TryParse(tempValue.ToString(), out var rawTemp))
+                        {
+                            float celsius = (rawTemp / 10.0f) - 273.15f;
+                            if (celsius > maxTemp)
+                                maxTemp = celsius;
+                        }
+                    }
+
+                    if (maxTemp > 0)
+                        return maxTemp;
+                }
+
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error getting CPU temperature via WMI: {ex}");
                 return 0;
             }
         }
