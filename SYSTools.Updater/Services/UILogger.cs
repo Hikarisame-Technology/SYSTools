@@ -27,21 +27,19 @@ namespace SYSTools.Updater.Services
             }
 
             _logTextBlock.Text += message + "\n";
-            
-            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+
+            // 更新后自动滚动到底部
+            try
             {
-                try
+                if (_logTextBlock.Parent is ScrollViewer scrollViewer)
                 {
-                    if (_logTextBlock.Parent is ScrollViewer scrollViewer)
-                    {
-                        scrollViewer.ScrollToVerticalOffset(scrollViewer.ExtentHeight);
-                    }
+                    scrollViewer.ScrollToVerticalOffset(scrollViewer.ExtentHeight);
                 }
-                catch
-                {
-                    // 忽略滚动错误，不影响主要功能
-                }
-            }), System.Windows.Threading.DispatcherPriority.Loaded);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[UILogger] 自动滚动失败: {ex.Message}");
+            }
         }
 
         public void LogError(string message)

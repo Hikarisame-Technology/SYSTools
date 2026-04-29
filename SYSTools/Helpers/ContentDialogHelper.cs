@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -90,8 +91,9 @@ namespace SYSTools.Helpers
 
                 return await ShowAsync(dialog);
             }
-            catch
+            catch (Exception ex)
             {
+                Debug.WriteLine($"[ContentDialogHelper] ShowMessageAsync 失败: {ex.Message}");
                 MessageBox.Show("显示对话框失败，请联系开发者", "ContentDialog组件错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return ContentDialogResult.None;
             }
@@ -113,8 +115,9 @@ namespace SYSTools.Helpers
 
                 return await ShowAsync(dialog);
             }
-            catch
+            catch (Exception ex)
             {
+                Debug.WriteLine($"[ContentDialogHelper] ShowConfirmationAsync 失败: {ex.Message}");
                 MessageBox.Show("显示对话框失败，请联系开发者", "ContentDialog组件错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return ContentDialogResult.None;
             }
@@ -154,8 +157,9 @@ namespace SYSTools.Helpers
 
                 return await ShowAsync(dialog);
             }
-            catch
+            catch (Exception ex)
             {
+                Debug.WriteLine($"[ContentDialogHelper] ShowTextContentAsync 失败: {ex.Message}");
                 MessageBox.Show("显示对话框失败，请联系开发者", "ContentDialog组件错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return ContentDialogResult.None;
             }
@@ -171,9 +175,9 @@ namespace SYSTools.Helpers
                     {
                         _currentDialog.Hide();
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        // Ignore errors
+                        Debug.WriteLine($"[ContentDialogHelper] CloseCurrentDialog 关闭对话框失败: {ex.Message}");
                     }
                     _currentDialog = null;
                 }
@@ -204,9 +208,9 @@ namespace SYSTools.Helpers
                     {
                         _currentDialog.Hide();
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        // Ignore errors
+                        Debug.WriteLine($"[ContentDialogHelper] ForceCloseAllDialogs 关闭当前对话框失败: {ex.Message}");
                     }
                     _currentDialog = null;
                 }
@@ -226,17 +230,17 @@ namespace SYSTools.Helpers
                             {
                                 dialog.Hide();
                             }
-                            catch
+                            catch (Exception ex)
                             {
-                                // Ignore errors
+                                Debug.WriteLine($"[ContentDialogHelper] 关闭子对话框失败: {ex.Message}");
                             }
                         }
                     }
                 });
             }
-            catch
+            catch (Exception ex)
             {
-                // Ignore errors during cleanup
+                Debug.WriteLine($"[ContentDialogHelper] ForceCloseAllDialogs 清理对话框时出错: {ex.Message}");
             }
         }
 
@@ -273,9 +277,9 @@ namespace SYSTools.Helpers
                     _isWindowStateMonitored = true;
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                // Ignore errors during setup
+                Debug.WriteLine($"[ContentDialogHelper] EnsureWindowStateMonitoring 失败: {ex.Message}");
             }
         }
 
@@ -339,14 +343,14 @@ namespace SYSTools.Helpers
                                 SetForegroundWindow(handle);
                             }
                         }
-                        catch
+                        catch (Exception ex)
                         {
-
+                            Debug.WriteLine($"[ContentDialogHelper] 设置前台窗口失败: {ex.Message}");
                         }
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        
+                        Debug.WriteLine($"[ContentDialogHelper] 确保窗口可见失败: {ex.Message}");
                     }
                 });
             }

@@ -54,7 +54,10 @@ namespace SYSTools.Pages
             {
                 cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
                 ramCounter = new PerformanceCounter("Memory", "% Committed Bytes In Use");
-                cpuCounter.NextValue(); // 首次调用
+                // 首次调用 NextValue() 总是返回 0，需要第二次调用才能获取实际值
+                // 这里先预热计数器，在 Page_Loaded 中会再次采样获取有效值
+                cpuCounter.NextValue();
+                ramCounter.NextValue();
             }
             catch (Exception ex)
             {

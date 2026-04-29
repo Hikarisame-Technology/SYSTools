@@ -492,4 +492,178 @@
   <data name="Ventoy_Text" xml:space="preserve">
     <value></value>
   </data>
+  <data name="Sensor_Package_Temp" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Core_Temp" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_GPU_Temp" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Memory_Temp" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Hotspot_Temp" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Total_Load" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Core_Load" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_GPU_Load" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Memory_Load" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Package_Power" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Core_Power" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_GPU_Power" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Core_Clock" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Memory_Clock" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_GPU_Clock" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_VCore" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_GPU_Fan" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_CPU_Fan" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Pump_Fan" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Download" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Upload" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Used" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Available" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Total" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="HardwareType_Cpu" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="HardwareType_GpuNvidia" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="HardwareType_GpuAmd" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="HardwareType_GpuIntel" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="HardwareType_Memory" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="HardwareType_Motherboard" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="HardwareType_Storage" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="HardwareType_Network" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="HardwareType_Battery" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_CPU_Memory" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_CPU_Platform" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Network_Utilization" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Virtual_Memory" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Total_Memory" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Data_Uploaded" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Data_Downloaded" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Used_Space" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Read_Activity" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Write_Activity" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Read_Rate" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Write_Rate" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Data_Read" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Data_Written" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Life" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_PowerOn_Count" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_PowerOn_Hours" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Temp_Warning" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Temp_Critical" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Available_Space" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Available_Space_Threshold" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Percentage_Used" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_PCIe_Rx" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_PCIe_Tx" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Sensor_Temperature" xml:space="preserve">
+    <value></value>
+  </data>
 </root>

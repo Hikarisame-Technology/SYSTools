@@ -29,7 +29,7 @@ namespace SYSTools.Updater.Services
             try
             {
                 ValidateParameters();
-                await Task.Run(() => WaitForMainProcess());
+                await WaitForMainProcess();
                 await CreateBackup();
                 await ExtractUpdate();
                 await CleanupAndStart();
@@ -55,12 +55,12 @@ namespace SYSTools.Updater.Services
             }
         }
 
-        private void WaitForMainProcess()
+        private async Task WaitForMainProcess()
         {
             if (!_isToolkitUpdate)
             {
                 _logger.UpdateStatus("等待主程序退出...");
-                System.Threading.Thread.Sleep(1000);
+                await Task.Delay(1000);
                 foreach (var process in Process.GetProcessesByName("SYSTools"))
                 {
                     process.WaitForExit();

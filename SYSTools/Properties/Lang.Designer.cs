@@ -477,6 +477,87 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
+        public static string HardwareType_Battery {
+            get {
+                return ResourceManager.GetString("HardwareType_Battery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string HardwareType_Cpu {
+            get {
+                return ResourceManager.GetString("HardwareType_Cpu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string HardwareType_GpuAmd {
+            get {
+                return ResourceManager.GetString("HardwareType_GpuAmd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string HardwareType_GpuIntel {
+            get {
+                return ResourceManager.GetString("HardwareType_GpuIntel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string HardwareType_GpuNvidia {
+            get {
+                return ResourceManager.GetString("HardwareType_GpuNvidia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string HardwareType_Memory {
+            get {
+                return ResourceManager.GetString("HardwareType_Memory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string HardwareType_Motherboard {
+            get {
+                return ResourceManager.GetString("HardwareType_Motherboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string HardwareType_Network {
+            get {
+                return ResourceManager.GetString("HardwareType_Network", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string HardwareType_Storage {
+            get {
+                return ResourceManager.GetString("HardwareType_Storage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
         public static string HDTune_Text {
             get {
                 return ResourceManager.GetString("HDTune_Text", resourceCulture);
@@ -894,6 +975,447 @@ namespace SYSTools.Properties {
         public static string SelectIcon {
             get {
                 return ResourceManager.GetString("SelectIcon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Available {
+            get {
+                return ResourceManager.GetString("Sensor_Available", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Available_Space {
+            get {
+                return ResourceManager.GetString("Sensor_Available_Space", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Available_Space_Threshold {
+            get {
+                return ResourceManager.GetString("Sensor_Available_Space_Threshold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Core_Clock {
+            get {
+                return ResourceManager.GetString("Sensor_Core_Clock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Core_Load {
+            get {
+                return ResourceManager.GetString("Sensor_Core_Load", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Core_Power {
+            get {
+                return ResourceManager.GetString("Sensor_Core_Power", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Core_Temp {
+            get {
+                return ResourceManager.GetString("Sensor_Core_Temp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_CPU_Fan {
+            get {
+                return ResourceManager.GetString("Sensor_CPU_Fan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_CPU_Memory {
+            get {
+                return ResourceManager.GetString("Sensor_CPU_Memory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_CPU_Platform {
+            get {
+                return ResourceManager.GetString("Sensor_CPU_Platform", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Data_Downloaded {
+            get {
+                return ResourceManager.GetString("Sensor_Data_Downloaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Data_Read {
+            get {
+                return ResourceManager.GetString("Sensor_Data_Read", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Data_Uploaded {
+            get {
+                return ResourceManager.GetString("Sensor_Data_Uploaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Data_Written {
+            get {
+                return ResourceManager.GetString("Sensor_Data_Written", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Download {
+            get {
+                return ResourceManager.GetString("Sensor_Download", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_GPU_Clock {
+            get {
+                return ResourceManager.GetString("Sensor_GPU_Clock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_GPU_Fan {
+            get {
+                return ResourceManager.GetString("Sensor_GPU_Fan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_GPU_Load {
+            get {
+                return ResourceManager.GetString("Sensor_GPU_Load", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_GPU_Power {
+            get {
+                return ResourceManager.GetString("Sensor_GPU_Power", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_GPU_Temp {
+            get {
+                return ResourceManager.GetString("Sensor_GPU_Temp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Hotspot_Temp {
+            get {
+                return ResourceManager.GetString("Sensor_Hotspot_Temp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Life {
+            get {
+                return ResourceManager.GetString("Sensor_Life", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Memory_Clock {
+            get {
+                return ResourceManager.GetString("Sensor_Memory_Clock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Memory_Load {
+            get {
+                return ResourceManager.GetString("Sensor_Memory_Load", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Memory_Temp {
+            get {
+                return ResourceManager.GetString("Sensor_Memory_Temp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Network_Utilization {
+            get {
+                return ResourceManager.GetString("Sensor_Network_Utilization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Package_Power {
+            get {
+                return ResourceManager.GetString("Sensor_Package_Power", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Package_Temp {
+            get {
+                return ResourceManager.GetString("Sensor_Package_Temp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_PCIe_Rx {
+            get {
+                return ResourceManager.GetString("Sensor_PCIe_Rx", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_PCIe_Tx {
+            get {
+                return ResourceManager.GetString("Sensor_PCIe_Tx", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Percentage_Used {
+            get {
+                return ResourceManager.GetString("Sensor_Percentage_Used", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_PowerOn_Count {
+            get {
+                return ResourceManager.GetString("Sensor_PowerOn_Count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_PowerOn_Hours {
+            get {
+                return ResourceManager.GetString("Sensor_PowerOn_Hours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Pump_Fan {
+            get {
+                return ResourceManager.GetString("Sensor_Pump_Fan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Read_Activity {
+            get {
+                return ResourceManager.GetString("Sensor_Read_Activity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Read_Rate {
+            get {
+                return ResourceManager.GetString("Sensor_Read_Rate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Temp_Critical {
+            get {
+                return ResourceManager.GetString("Sensor_Temp_Critical", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Temp_Warning {
+            get {
+                return ResourceManager.GetString("Sensor_Temp_Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Temperature {
+            get {
+                return ResourceManager.GetString("Sensor_Temperature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Total {
+            get {
+                return ResourceManager.GetString("Sensor_Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Total_Load {
+            get {
+                return ResourceManager.GetString("Sensor_Total_Load", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Total_Memory {
+            get {
+                return ResourceManager.GetString("Sensor_Total_Memory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Upload {
+            get {
+                return ResourceManager.GetString("Sensor_Upload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Used {
+            get {
+                return ResourceManager.GetString("Sensor_Used", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Used_Space {
+            get {
+                return ResourceManager.GetString("Sensor_Used_Space", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_VCore {
+            get {
+                return ResourceManager.GetString("Sensor_VCore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Virtual_Memory {
+            get {
+                return ResourceManager.GetString("Sensor_Virtual_Memory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Write_Activity {
+            get {
+                return ResourceManager.GetString("Sensor_Write_Activity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Sensor_Write_Rate {
+            get {
+                return ResourceManager.GetString("Sensor_Write_Rate", resourceCulture);
             }
         }
         

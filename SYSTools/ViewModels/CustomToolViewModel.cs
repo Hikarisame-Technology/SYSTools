@@ -69,8 +69,9 @@ namespace SYSTools.ViewModels
                     {
                         item.IconSource = new System.Windows.Media.Imaging.BitmapImage(new Uri(dialog.IconPath));
                     }
-                    catch
+                    catch (Exception ex)
                     {
+                        Debug.WriteLine($"[CustomToolViewModel] 加载图标失败: {ex.Message}");
                     }
                 }
                 ToolItems.Add(item);
@@ -124,8 +125,14 @@ namespace SYSTools.ViewModels
                 else
                 {
                     item.IconPath = dialog.IconPath;
-                    try { item.IconSource = new System.Windows.Media.Imaging.BitmapImage(new Uri(dialog.IconPath)); }
-                    catch { }
+                    try
+                    {
+                        item.IconSource = new System.Windows.Media.Imaging.BitmapImage(new Uri(dialog.IconPath));
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"[CustomToolViewModel] 修改工具时加载图标失败: {ex.Message}");
+                    }
                 }
             }
         }

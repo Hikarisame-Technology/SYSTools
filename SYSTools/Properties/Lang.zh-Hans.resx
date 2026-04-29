@@ -555,4 +555,208 @@
     <data name="Error" xml:space="preserve">
         <value>错误</value>
     </data>
+    <data name="Sensor_Package_Temp" xml:space="preserve">
+        <value>封装温度</value>
+    </data>
+    <data name="Sensor_Core_Temp" xml:space="preserve">
+        <value>核心温度</value>
+    </data>
+    <data name="Sensor_GPU_Temp" xml:space="preserve">
+        <value>GPU温度</value>
+    </data>
+    <data name="Sensor_Memory_Temp" xml:space="preserve">
+        <value>显存温度</value>
+    </data>
+    <data name="Sensor_Hotspot_Temp" xml:space="preserve">
+        <value>热点温度</value>
+    </data>
+    <data name="Sensor_Total_Load" xml:space="preserve">
+        <value>总使用率</value>
+    </data>
+    <data name="Sensor_Core_Load" xml:space="preserve">
+        <value>核心使用率</value>
+    </data>
+    <data name="Sensor_GPU_Load" xml:space="preserve">
+        <value>GPU使用率</value>
+    </data>
+    <data name="Sensor_Memory_Load" xml:space="preserve">
+        <value>内存占用</value>
+    </data>
+    <data name="Sensor_Package_Power" xml:space="preserve">
+        <value>封装功耗</value>
+    </data>
+    <data name="Sensor_Core_Power" xml:space="preserve">
+        <value>核心功耗</value>
+    </data>
+    <data name="Sensor_GPU_Power" xml:space="preserve">
+        <value>GPU功耗</value>
+    </data>
+    <data name="Sensor_Core_Clock" xml:space="preserve">
+        <value>核心频率</value>
+    </data>
+    <data name="Sensor_Memory_Clock" xml:space="preserve">
+        <value>显存频率</value>
+    </data>
+    <data name="Sensor_GPU_Clock" xml:space="preserve">
+        <value>GPU频率</value>
+    </data>
+    <data name="Sensor_VCore" xml:space="preserve">
+        <value>核心电压</value>
+    </data>
+    <data name="Sensor_GPU_Fan" xml:space="preserve">
+        <value>GPU风扇</value>
+    </data>
+    <data name="Sensor_CPU_Fan" xml:space="preserve">
+        <value>CPU风扇</value>
+    </data>
+    <data name="Sensor_Pump_Fan" xml:space="preserve">
+        <value>水泵</value>
+    </data>
+    <data name="Sensor_Download" xml:space="preserve">
+        <value>下载速度</value>
+    </data>
+    <data name="Sensor_Upload" xml:space="preserve">
+        <value>上传速度</value>
+    </data>
+    <data name="Sensor_Used" xml:space="preserve">
+        <value>已使用</value>
+    </data>
+    <data name="Sensor_Available" xml:space="preserve">
+        <value>可用</value>
+    </data>
+    <data name="Sensor_Total" xml:space="preserve">
+        <value>总计</value>
+    </data>
+    <data name="HardwareType_Cpu" xml:space="preserve">
+        <value>处理器</value>
+    </data>
+    <data name="HardwareType_GpuNvidia" xml:space="preserve">
+        <value>NVIDIA 显卡</value>
+    </data>
+    <data name="HardwareType_GpuAmd" xml:space="preserve">
+        <value>AMD 显卡</value>
+    </data>
+    <data name="HardwareType_GpuIntel" xml:space="preserve">
+        <value>Intel 显卡</value>
+    </data>
+    <data name="HardwareType_Memory" xml:space="preserve">
+        <value>内存</value>
+    </data>
+    <data name="HardwareType_Motherboard" xml:space="preserve">
+        <value>主板</value>
+    </data>
+    <data name="HardwareType_Storage" xml:space="preserve">
+        <value>存储</value>
+    </data>
+    <data name="HardwareType_Network" xml:space="preserve">
+        <value>网络</value>
+    </data>
+    <data name="HardwareType_Battery" xml:space="preserve">
+        <value>电池</value>
+    </data>
+    <data name="Sensor_CPU_Memory" xml:space="preserve">
+        <value>CPU内存</value>
+    </data>
+    <data name="Sensor_CPU_Platform" xml:space="preserve">
+        <value>CPU平台</value>
+    </data>
+    <data name="Sensor_Network_Utilization" xml:space="preserve">
+        <value>网络利用率</value>
+    </data>
+    <data name="Sensor_Virtual_Memory" xml:space="preserve">
+        <value>虚拟内存</value>
+    </data>
+    <data name="Sensor_Total_Memory" xml:space="preserve">
+        <value>总内存</value>
+    </data>
+    <data name="Sensor_Data_Uploaded" xml:space="preserve">
+        <value>已上传数据</value>
+    </data>
+    <data name="Sensor_Data_Downloaded" xml:space="preserve">
+        <value>已下载数据</value>
+    </data>
+    <data name="Sensor_Used_Space" xml:space="preserve">
+        <value>已用空间</value>
+    </data>
+    <data name="Sensor_Read_Activity" xml:space="preserve">
+        <value>读取活动</value>
+    </data>
+    <data name="Sensor_Write_Activity" xml:space="preserve">
+        <value>写入活动</value>
+    </data>
+    <data name="Sensor_Read_Rate" xml:space="preserve">
+        <value>读取速度</value>
+    </data>
+    <data name="Sensor_Write_Rate" xml:space="preserve">
+        <value>写入速度</value>
+    </data>
+    <data name="Sensor_Data_Read" xml:space="preserve">
+        <value>数据读取</value>
+    </data>
+    <data name="Sensor_Data_Written" xml:space="preserve">
+        <value>数据写入</value>
+    </data>
+    <data name="Sensor_Life" xml:space="preserve">
+        <value>寿命</value>
+    </data>
+    <data name="Sensor_PowerOn_Count" xml:space="preserve">
+        <value>通电次数</value>
+    </data>
+    <data name="Sensor_PowerOn_Hours" xml:space="preserve">
+        <value>通电时间</value>
+    </data>
+    <data name="Sensor_Temp_Warning" xml:space="preserve">
+        <value>温度警告</value>
+    </data>
+    <data name="Sensor_Temp_Critical" xml:space="preserve">
+        <value>温度临界</value>
+    </data>
+    <data name="Sensor_Available_Space" xml:space="preserve">
+        <value>可用空间</value>
+    </data>
+    <data name="Sensor_Available_Space_Threshold" xml:space="preserve">
+        <value>可用空间阈值</value>
+    </data>
+    <data name="Sensor_Percentage_Used" xml:space="preserve">
+        <value>已用百分比</value>
+    </data>
+    <data name="Sensor_PCIe_Rx" xml:space="preserve">
+        <value>PCIe 接收</value>
+    </data>
+    <data name="Sensor_PCIe_Tx" xml:space="preserve">
+        <value>PCIe 发送</value>
+    </data>
+    <data name="Sensor_Available_Spare" xml:space="preserve">
+        <value>备用空间</value>
+    </data>
+    <data name="Sensor_Available_Spare_Threshold" xml:space="preserve">
+        <value>备用空间阈值</value>
+    </data>
+    <data name="Sensor_Temperature" xml:space="preserve">
+        <value>温度</value>
+    </data>
+    <data name="Sensor_D3D_3D" xml:space="preserve">
+        <value>D3D 3D</value>
+    </data>
+    <data name="Sensor_D3D_Overlay" xml:space="preserve">
+        <value>D3D 覆盖</value>
+    </data>
+    <data name="Sensor_D3D_VideoDecode" xml:space="preserve">
+        <value>D3D 视频解码</value>
+    </data>
+    <data name="Sensor_D3D_Copy" xml:space="preserve">
+        <value>D3D 复制</value>
+    </data>
+    <data name="Sensor_D3D_Security" xml:space="preserve">
+        <value>D3D 安全</value>
+    </data>
+    <data name="Sensor_D3D_VideoEncode" xml:space="preserve">
+        <value>D3D 视频编码</value>
+    </data>
+    <data name="Sensor_D3D_NVEnc" xml:space="preserve">
+        <value>D3D NVEnc 编码</value>
+    </data>
+    <data name="Sensor_D3D_VR" xml:space="preserve">
+        <value>D3D VR</value>
+    </data>
 </root>

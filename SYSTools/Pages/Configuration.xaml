@@ -76,7 +76,7 @@
                     </muxc:SettingsCard.HeaderIcon>
                     <ComboBox x:Name="LanguageComboBox" SelectionChanged="LanguageComboBox_SelectionChanged">
                         <!--这里不添加文本到Lang.resx中-->
-                        <ComboBoxItem Content="简体中文" Tag="zh-CN"/>
+                        <ComboBoxItem Content="简体中文" Tag="zh-Hans"/>
                         <ComboBoxItem Content="English" Tag="en"/>
                     </ComboBox>
                 </muxc:SettingsCard>

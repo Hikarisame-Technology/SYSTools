@@ -159,9 +159,9 @@ namespace SYSTools.Model
                 );
                 settings.Save(_settingsFilePath);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // 保存失败时忽略错误
+                Debug.WriteLine($"[AppSettings] 保存设置失败: {ex.Message}");
             }
         }
 
@@ -205,9 +205,10 @@ namespace SYSTools.Model
                 // 应用主题设置
                 ApplyTheme();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // 如果加载失败，使用默认值
+                Debug.WriteLine($"[AppSettings] 加载设置失败: {ex.Message}");
+                // 使用默认值
                 _backgroundImagePath = "pack://application:,,,/Resources/NoBackImage.png";
                 _backgroundImageBlurRadius = 0;
                 _backgroundImageOpacity = 100;
@@ -295,8 +296,9 @@ namespace SYSTools.Model
                                 {
                                     toolItem.IconSource = Helpers.IconHelper.LoadIcon(toolItem.IconPath);
                                 }
-                                catch
+                                catch (Exception ex)
                                 {
+                                    Debug.WriteLine($"[AppSettings] 加载自定义工具图标失败: {ex.Message}");
                                     toolItem.IconSource = null;
                                 }
 

@@ -279,8 +279,9 @@ namespace SYSTools.Pages
                         }
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Debug.WriteLine($"[CustomTool] COM快捷方式解析失败: {ex.Message}");
                 }
                 // 回退到原有方法解析目标路径
                 if (string.IsNullOrEmpty(targetPath) || !File.Exists(targetPath))
@@ -317,8 +318,9 @@ namespace SYSTools.Pages
                 {
                     toolItem.IconSource = IconHelper.LoadIcon(targetPath);
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Debug.WriteLine($"[CustomTool] 加载工具图标失败: {ex.Message}");
                     toolItem.IconSource = null;
                 }
 
@@ -338,8 +340,9 @@ namespace SYSTools.Pages
             {
                 return GetShortcutTargetUsingShell(shortcutPath);
             }
-            catch
+            catch (Exception ex)
             {
+                Debug.WriteLine($"[CustomTool] GetShortcutTarget 解析失败: {ex.Message}");
                 return string.Empty;
             }
         }
@@ -360,8 +363,9 @@ namespace SYSTools.Pages
                 string targetPath = shortcut.TargetPath;
                 return targetPath ?? string.Empty;
             }
-            catch
+            catch (Exception ex)
             {
+                Debug.WriteLine($"[CustomTool] GetShortcutTargetUsingShell 失败: {ex.Message}");
                 return TryParseShortcutSimple(shortcutPath);
             }
         }
@@ -372,7 +376,7 @@ namespace SYSTools.Pages
             {
                 var fileName = Path.GetFileNameWithoutExtension(shortcutPath);
                 var result = MessageBox.Show(
-                    $"无法自动解析快捷方式 '{fileName}'。\n是否浏览选择目标程序？",
+                    $"无法自动解析快捷方式 '{fileName}'。\\n是否浏览选择目标程序？",
                     "快捷方式解析失败",
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Question);
@@ -393,8 +397,9 @@ namespace SYSTools.Pages
                 }
                 return string.Empty;
             }
-            catch
+            catch (Exception ex)
             {
+                Debug.WriteLine($"[CustomTool] TryParseShortcutSimple 失败: {ex.Message}");
                 return string.Empty;
             }
         }
@@ -624,8 +629,9 @@ namespace SYSTools.Pages
                 }
                 return null;
             }
-            catch
+            catch (Exception ex)
             {
+                Debug.WriteLine($"[CustomTool] FindParentBorder 查找父级失败: {ex.Message}");
                 return null;
             }
         }

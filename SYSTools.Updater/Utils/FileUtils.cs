@@ -156,9 +156,9 @@ namespace SYSTools.Updater.Utils
                     return;
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                // 简单删除失败，尝试其他方法
+                System.Diagnostics.Debug.WriteLine($"[FileUtils] SmartDeleteFile 简单删除失败: {ex.Message}");
             }
 
             try
@@ -171,24 +171,24 @@ namespace SYSTools.Updater.Utils
                     return;
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                // 继续尝试其他方法
+                System.Diagnostics.Debug.WriteLine($"[FileUtils] SmartDeleteFile 属性+删除失败: {ex.Message}");
             }
 
             try
             {
-                // 最后的手段：只查找可能锁定此文件的进程
+                // 最后的手段：尝试查找并结束占用进程
                 if (File.Exists(path))
                 {
                     KillProcessesUsingFile(path);
-                    System.Threading.Thread.Sleep(100); // 短暂等待
+                    System.Threading.Thread.Sleep(100);
                     File.Delete(path);
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                // 如果所有方法都失败，忽略错误继续
+                System.Diagnostics.Debug.WriteLine($"[FileUtils] SmartDeleteFile 终极删除失败: {ex.Message}");
             }
         }
 
@@ -206,12 +206,12 @@ namespace SYSTools.Updater.Utils
                         if (!process.HasExited && process.Id != Process.GetCurrentProcess().Id)
                         {
                             process.Kill();
-                            process.WaitForExit(1000); // 等待最多1秒
+                            process.WaitForExit(1000);
                         }
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        // 忽略单个进程处理错误
+                        System.Diagnostics.Debug.WriteLine($"[FileUtils] 结束进程失败 ({process?.ProcessName ?? "unknown"}): {ex.Message}");
                     }
                     finally
                     {
@@ -219,13 +219,16 @@ namespace SYSTools.Updater.Utils
                         {
                             process?.Dispose();
                         }
-                        catch { }
+                        catch (Exception ex)
+                        {
+                            System.Diagnostics.Debug.WriteLine($"[FileUtils] 释放进程资源失败: {ex.Message}");
+                        }
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                // 忽略进程查找错误
+                System.Diagnostics.Debug.WriteLine($"[FileUtils] KillProcessesUsingFile 查找/处理进程失败: {ex.Message}");
             }
         }
 
@@ -249,10 +252,11 @@ namespace SYSTools.Updater.Utils
 
                 return Uri.UnescapeDataString(relativeUri.ToString().Replace('/', Path.DirectorySeparatorChar));
             }
-            catch
+            catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine($"[FileUtils] GetRelativePath 失败: {ex.Message}");
                 return fullPath.Substring(basePath.Length).TrimStart(Path.DirectorySeparatorChar);
             }
         }
     }
-} 
+}

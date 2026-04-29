@@ -165,7 +165,7 @@ namespace SYSTools.Pages
                 }
                 catch (Exception ex2)
                 {
-                    // Ignore final fallback errors
+                    Debug.WriteLine($"[About] 隐私协议加载失败后的备用操作也失败了: {ex2.Message}");
                 }
             }
         }

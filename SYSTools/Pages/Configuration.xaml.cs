@@ -30,7 +30,7 @@ namespace SYSTools.Pages
             if (string.IsNullOrEmpty(AppSettings.Instance.Language))
             {
                 string systemLanguage = System.Globalization.CultureInfo.CurrentUICulture.Name.ToLower();
-                string defaultLanguage = systemLanguage.StartsWith("zh-") ? "zh-CN" : "en";
+                string defaultLanguage = systemLanguage.StartsWith("zh-") ? "zh-Hans" : "en";
                 AppSettings.Instance.Language = defaultLanguage;
                 ApplyLanguageChange(defaultLanguage);
             }

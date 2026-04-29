@@ -1,4 +1,5 @@
-﻿using iNKORE.UI.WPF.TrayIcons;
+using iNKORE.UI.WPF.TrayIcons;
+using System.Net;
 using System.Windows;
 using SYSTools.Model;
 
@@ -13,6 +14,11 @@ namespace SYSTools
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            // 提升并发连接数 (.NET Framework 默认为 2)
+            ServicePointManager.DefaultConnectionLimit = 12;
+            // 启用 TLS 1.2 支持（某些 API 要求）
+            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
+
             base.OnStartup(e);
             
             TaskbarIcon = (TrayIcon)FindResource("Taskbar");

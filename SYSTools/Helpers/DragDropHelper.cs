@@ -56,8 +56,9 @@ namespace SYSTools.Helpers
 
                 return false;
             }
-            catch
+            catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine($"[DragDropHelper] IsValidDragData 检查失败: {ex.Message}");
                 return false;
             }
         }
@@ -132,8 +133,9 @@ namespace SYSTools.Helpers
                 // 只允许exe和lnk文件
                 return extension == ".exe" || extension == ".lnk";
             }
-            catch
+            catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine($"[DragDropHelper] IsValidFileForTool 检查失败 '{filePath}': {ex.Message}");
                 return false;
             }
         }
@@ -221,8 +223,9 @@ namespace SYSTools.Helpers
                 
                 return DragDropEffects.None;
             }
-            catch
+            catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine($"[DragDropHelper] GetDragEffect 获取拖拽效果失败: {ex.Message}");
                 return DragDropEffects.None;
             }
         }

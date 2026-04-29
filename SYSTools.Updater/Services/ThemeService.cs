@@ -41,7 +41,10 @@ namespace SYSTools.Updater.Services
                     }
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[ThemeService] 读取注册表主题失败: {ex.Message}");
+            }
             return false;
         }
 
