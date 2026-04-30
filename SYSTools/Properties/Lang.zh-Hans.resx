@@ -904,4 +904,160 @@
 
 所有信息实时获取，无需保存文件。</value>
     </data>
+    <data name="WinUtil_QuickLaunch" xml:space="preserve">
+        <value>快捷启动</value>
+    </data>
+    <data name="WinUtil_NetworkTools" xml:space="preserve">
+        <value>网络工具（管理员权限 · 需要手动重启系统）</value>
+    </data>
+    <data name="WinUtil_ExplorerFeatures" xml:space="preserve">
+        <value>Explorer功能（重启资源管理器生效）</value>
+    </data>
+    <data name="WinUtil_Performance" xml:space="preserve">
+        <value>性能设置</value>
+    </data>
+    <data name="WinUtil_CMD" xml:space="preserve">
+        <value>CMD终端</value>
+    </data>
+    <data name="WinUtil_PowerShell" xml:space="preserve">
+        <value>PowerShell</value>
+    </data>
+    <data name="WinUtil_Regedit" xml:space="preserve">
+        <value>注册表</value>
+    </data>
+    <data name="WinUtil_ControlPanel" xml:space="preserve">
+        <value>控制面板</value>
+    </data>
+    <data name="WinUtil_ComputerMgmt" xml:space="preserve">
+        <value>计算机管理</value>
+    </data>
+    <data name="WinUtil_EventViewer" xml:space="preserve">
+        <value>事件查看器</value>
+    </data>
+    <data name="WinUtil_DeviceMgr" xml:space="preserve">
+        <value>设备管理器</value>
+    </data>
+    <data name="WinUtil_GPEdit" xml:space="preserve">
+        <value>组策略</value>
+    </data>
+    <data name="WinUtil_TaskScheduler" xml:space="preserve">
+        <value>计划任务</value>
+    </data>
+    <data name="WinUtil_GodMode" xml:space="preserve">
+        <value>上帝模式</value>
+    </data>
+    <data name="WinUtil_WinVer" xml:space="preserve">
+        <value>Windows版本</value>
+    </data>
+    <data name="WinUtil_SystemProps" xml:space="preserve">
+        <value>系统属性</value>
+    </data>
+    <data name="WinUtil_PerfMon" xml:space="preserve">
+        <value>性能监视器</value>
+    </data>
+    <data name="WinUtil_ResMon" xml:space="preserve">
+        <value>资源监视器</value>
+    </data>
+    <data name="WinUtil_TaskMgr" xml:space="preserve">
+        <value>任务管理器</value>
+    </data>
+    <data name="WinUtil_MSConfig" xml:space="preserve">
+        <value>系统配置</value>
+    </data>
+    <data name="WinUtil_DisplaySettings" xml:space="preserve">
+        <value>显示设置</value>
+    </data>
+    <data name="WinUtil_RestartExplorer" xml:space="preserve">
+        <value>重启资源管理器</value>
+    </data>
+    <data name="WinUtil_ClearDNS" xml:space="preserve">
+        <value>清除DNS缓存</value>
+    </data>
+    <data name="WinUtil_ResetWinsock" xml:space="preserve">
+        <value>重置Winsock</value>
+    </data>
+    <data name="WinUtil_ResetLSP" xml:space="preserve">
+        <value>重置LSP</value>
+    </data>
+    <data name="WinUtil_ResetTCP" xml:space="preserve">
+        <value>重置TCP/IP栈</value>
+    </data>
+    <data name="WinUtil_ShowFileExt" xml:space="preserve">
+        <value>文件夹后缀</value>
+    </data>
+    <data name="WinUtil_ShowHidden" xml:space="preserve">
+        <value>隐藏文件/文件夹</value>
+    </data>
+    <data name="WinUtil_ShowSuperHidden" xml:space="preserve">
+        <value>显示受保护文件</value>
+    </data>
+    <data name="WinUtil_HideArrow" xml:space="preserve">
+        <value>去快捷小箭头</value>
+    </data>
+    <data name="WinUtil_HideText" xml:space="preserve">
+        <value>去快捷文本</value>
+    </data>
+    <data name="WinUtil_HideUAC" xml:space="preserve">
+        <value>去UAC盾牌</value>
+    </data>
+    <data name="WinUtil_ContextMenuStyle" xml:space="preserve">
+        <value>右键菜单风格</value>
+    </data>
+    <data name="WinUtil_ExplorerDefault" xml:space="preserve">
+        <value>资源管理器打开默认</value>
+    </data>
+    <data name="WinUtil_PowerScheme" xml:space="preserve">
+        <value>电源计划切换</value>
+    </data>
+    <data name="WinUtil_MenuStyle_Win10" xml:space="preserve">
+        <value>Win10风格</value>
+    </data>
+    <data name="WinUtil_MenuStyle_Win11" xml:space="preserve">
+        <value>Win11风格</value>
+    </data>
+    <data name="WinUtil_Explorer_ThisPC" xml:space="preserve">
+        <value>此电脑</value>
+    </data>
+    <data name="WinUtil_Explorer_QuickAccess" xml:space="preserve">
+        <value>快速访问</value>
+    </data>
+    <data name="WinUtil_Power_Saver" xml:space="preserve">
+        <value>最佳能效</value>
+    </data>
+    <data name="WinUtil_Power_Balanced" xml:space="preserve">
+        <value>平衡</value>
+    </data>
+    <data name="WinUtil_Power_Performance" xml:space="preserve">
+        <value>最佳性能</value>
+    </data>
+    <data name="WinUtil_Power_Ultimate" xml:space="preserve">
+        <value>卓越性能</value>
+    </data>
+    <data name="WinUtil_PowerPlan" xml:space="preserve">
+        <value>电源计划</value>
+    </data>
+    <data name="WinUtil_PowerPlanEdit" xml:space="preserve">
+        <value>电源计划编辑</value>
+    </data>
+    <data name="WinUtil_AdvancedSystem" xml:space="preserve">
+        <value>高级系统设置</value>
+    </data>
+    <data name="WinUtil_PerformanceOptions" xml:space="preserve">
+        <value>性能选项</value>
+    </data>
+    <data name="WinUtil_DialogTitle" xml:space="preserve">
+        <value>命令执行结果</value>
+    </data>
+    <data name="WinUtil_Confirm" xml:space="preserve">
+        <value>确定</value>
+    </data>
+    <data name="WinUtil_SettingsChanged" xml:space="preserve">
+        <value>设置已更改，需要重启资源管理器生效</value>
+    </data>
+    <data name="WinUtil_PowerSchemeChanged" xml:space="preserve">
+        <value>电源计划已更改: </value>
+    </data>
+    <data name="WinUtil_PowerEditError" xml:space="preserve">
+        <value>无法打开电源计划编辑页面: </value>
+    </data>
 </root>

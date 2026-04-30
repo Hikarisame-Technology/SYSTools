@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:muxc="http://schemas.inkore.net/lib/ui/wpf/modern"
+      xmlns:model="clr-namespace:SYSTools.Model"
       xmlns:local="clr-namespace:SYSTools.WindowsToolsPages"
       mc:Ignorable="d" 
       d:DesignWidth="1040" d:DesignHeight="560"
@@ -105,7 +106,7 @@
             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,5,20,10">
 
                 <!-- ═══════════════════════ 快捷启动 ═══════════════════════ -->
-                <Expander Header="快捷启动" IsExpanded="True" FontSize="17"
+                <Expander Header="{model:Resource Key=WinUtil_QuickLaunch}" IsExpanded="True" FontSize="17"
                           Style="{StaticResource {x:Static muxc:ThemeKeys.ExpanderCardStyleKey}}"
                           Margin="0,0,0,10" Padding="0">
                     <Expander.Content>
@@ -115,7 +116,7 @@
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="&#xE756;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
-                                    <TextBlock Text="CMD终端" FontSize="12" HorizontalAlignment="Center"
+                                    <TextBlock Text="{model:Resource Key=WinUtil_CMD}" FontSize="12" HorizontalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                 </StackPanel>
                             </Button>
@@ -124,7 +125,7 @@
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="&#xE756;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
-                                    <TextBlock Text="PowerShell" FontSize="12" HorizontalAlignment="Center"
+                                    <TextBlock Text="{model:Resource Key=WinUtil_PowerShell}" FontSize="12" HorizontalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                 </StackPanel>
                             </Button>
@@ -133,7 +134,7 @@
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="&#xE8D9;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
-                                    <TextBlock Text="注册表" FontSize="12" HorizontalAlignment="Center"
+                                    <TextBlock Text="{model:Resource Key=WinUtil_Regedit}" FontSize="12" HorizontalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                 </StackPanel>
                             </Button>
@@ -142,7 +143,7 @@
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="&#xE713;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
-                                    <TextBlock Text="控制面板" FontSize="12" HorizontalAlignment="Center"
+                                    <TextBlock Text="{model:Resource Key=WinUtil_ControlPanel}" FontSize="12" HorizontalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                 </StackPanel>
                             </Button>
@@ -151,7 +152,7 @@
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="&#xE977;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
-                                    <TextBlock Text="计算机管理" FontSize="12" HorizontalAlignment="Center"
+                                    <TextBlock Text="{model:Resource Key=WinUtil_ComputerMgmt}" FontSize="12" HorizontalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                 </StackPanel>
                             </Button>
@@ -160,7 +161,7 @@
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="&#xE96B;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
-                                    <TextBlock Text="事件查看器" FontSize="12" HorizontalAlignment="Center"
+                                    <TextBlock Text="{model:Resource Key=WinUtil_EventViewer}" FontSize="12" HorizontalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                 </StackPanel>
                             </Button>
@@ -169,7 +170,7 @@
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="&#xE72E;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
-                                    <TextBlock Text="设备管理器" FontSize="12" HorizontalAlignment="Center"
+                                    <TextBlock Text="{model:Resource Key=WinUtil_DeviceMgr}" FontSize="12" HorizontalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                 </StackPanel>
                             </Button>
@@ -178,7 +179,7 @@
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="&#xEAAB;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
-                                    <TextBlock Text="组策略" FontSize="12" HorizontalAlignment="Center"
+                                    <TextBlock Text="{model:Resource Key=WinUtil_GPEdit}" FontSize="12" HorizontalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                 </StackPanel>
                             </Button>
@@ -187,7 +188,7 @@
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="&#xE923;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
-                                    <TextBlock Text="计划任务" FontSize="12" HorizontalAlignment="Center"
+                                    <TextBlock Text="{model:Resource Key=WinUtil_TaskScheduler}" FontSize="12" HorizontalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                 </StackPanel>
                             </Button>
@@ -196,7 +197,7 @@
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="&#xE735;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
-                                    <TextBlock Text="上帝模式" FontSize="12" HorizontalAlignment="Center"
+                                    <TextBlock Text="{model:Resource Key=WinUtil_GodMode}" FontSize="12" HorizontalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                 </StackPanel>
                             </Button>
@@ -205,7 +206,7 @@
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="&#xF4A5;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
-                                    <TextBlock Text="Windows版本" FontSize="12" HorizontalAlignment="Center"
+                                    <TextBlock Text="{model:Resource Key=WinUtil_WinVer}" FontSize="12" HorizontalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                 </StackPanel>
                             </Button>
@@ -214,7 +215,7 @@
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="&#xE946;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
-                                    <TextBlock Text="系统属性" FontSize="12" HorizontalAlignment="Center"
+                                    <TextBlock Text="{model:Resource Key=WinUtil_SystemProps}" FontSize="12" HorizontalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                 </StackPanel>
                             </Button>
@@ -223,7 +224,7 @@
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="&#xEDA6;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
-                                    <TextBlock Text="性能监视器" FontSize="12" HorizontalAlignment="Center"
+                                    <TextBlock Text="{model:Resource Key=WinUtil_PerfMon}" FontSize="12" HorizontalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                 </StackPanel>
                             </Button>
@@ -232,7 +233,7 @@
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="&#xE950;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
-                                    <TextBlock Text="资源监视器" FontSize="12" HorizontalAlignment="Center"
+                                    <TextBlock Text="{model:Resource Key=WinUtil_ResMon}" FontSize="12" HorizontalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                 </StackPanel>
                             </Button>
@@ -241,7 +242,7 @@
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="&#xE85F;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
-                                    <TextBlock Text="任务管理器" FontSize="12" HorizontalAlignment="Center"
+                                    <TextBlock Text="{model:Resource Key=WinUtil_TaskMgr}" FontSize="12" HorizontalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                 </StackPanel>
                             </Button>
@@ -250,7 +251,7 @@
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="&#xE713;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
-                                    <TextBlock Text="系统配置" FontSize="12" HorizontalAlignment="Center"
+                                    <TextBlock Text="{model:Resource Key=WinUtil_MSConfig}" FontSize="12" HorizontalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                 </StackPanel>
                             </Button>
@@ -259,7 +260,7 @@
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="&#xE7F4;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
-                                    <TextBlock Text="显示设置" FontSize="12" HorizontalAlignment="Center"
+                                    <TextBlock Text="{model:Resource Key=WinUtil_DisplaySettings}" FontSize="12" HorizontalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                 </StackPanel>
                             </Button>
@@ -268,7 +269,7 @@
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="&#xE777;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
-                                    <TextBlock Text="重启资源管理器" FontSize="12" HorizontalAlignment="Center"
+                                    <TextBlock Text="{model:Resource Key=WinUtil_RestartExplorer}" FontSize="12" HorizontalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                 </StackPanel>
                             </Button>
@@ -277,7 +278,7 @@
                 </Expander>
 
                 <!-- ═══════════════════════ 网络工具 ═══════════════════════ -->
-                <Expander Header="网络工具（管理员权限 · 需要手动重启系统）" IsExpanded="True" FontSize="17"
+                <Expander Header="{model:Resource Key=WinUtil_NetworkTools}" IsExpanded="True" FontSize="17"
                           Style="{StaticResource {x:Static muxc:ThemeKeys.ExpanderCardStyleKey}}"
                           Margin="0,0,0,10" Padding="0">
                     <Expander.Content>
@@ -287,7 +288,7 @@
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="&#xE968;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
-                                    <TextBlock Text="清除DNS缓存" FontSize="12" HorizontalAlignment="Center"
+                                    <TextBlock Text="{model:Resource Key=WinUtil_ClearDNS}" FontSize="12" HorizontalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                 </StackPanel>
                             </Button>
@@ -296,7 +297,7 @@
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="&#xE969;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
-                                    <TextBlock Text="重置Winsock" FontSize="12" HorizontalAlignment="Center"
+                                    <TextBlock Text="{model:Resource Key=WinUtil_ResetWinsock}" FontSize="12" HorizontalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                 </StackPanel>
                             </Button>
@@ -305,7 +306,7 @@
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="&#xE969;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
-                                    <TextBlock Text="重置LSP" FontSize="12" HorizontalAlignment="Center"
+                                    <TextBlock Text="{model:Resource Key=WinUtil_ResetLSP}" FontSize="12" HorizontalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                 </StackPanel>
                             </Button>
@@ -314,7 +315,7 @@
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="&#xE96A;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
-                                    <TextBlock Text="重置TCP/IP栈" FontSize="12" HorizontalAlignment="Center"
+                                    <TextBlock Text="{model:Resource Key=WinUtil_ResetTCP}" FontSize="12" HorizontalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                 </StackPanel>
                             </Button>
@@ -323,7 +324,7 @@
                 </Expander>
 
                 <!-- ═══════════════════════ Explorer功能 ═══════════════════════ -->
-                <Expander Header="Explorer功能（重启资源管理器生效）" IsExpanded="True" FontSize="17"
+                <Expander Header="{model:Resource Key=WinUtil_ExplorerFeatures}" IsExpanded="True" FontSize="17"
                           Style="{StaticResource {x:Static muxc:ThemeKeys.ExpanderCardStyleKey}}"
                           Margin="0,0,0,10" Padding="0">
                     <Expander.Content>
@@ -335,7 +336,7 @@
                                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <TextBlock x:Name="ShowFileExtIcon" Text="&#xE8A7;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                    HorizontalAlignment="Center" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
-                                        <TextBlock Text="文件夹后缀" FontSize="12" HorizontalAlignment="Center"
+                                        <TextBlock Text="{model:Resource Key=WinUtil_ShowFileExt}" FontSize="12" HorizontalAlignment="Center"
                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                     </StackPanel>
                                 </ToggleButton>
@@ -345,7 +346,7 @@
                                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <TextBlock Text="&#xE8B9;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                    HorizontalAlignment="Center" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
-                                        <TextBlock Text="隐藏文件/文件夹" FontSize="12" HorizontalAlignment="Center"
+                                        <TextBlock Text="{model:Resource Key=WinUtil_ShowHidden}" FontSize="12" HorizontalAlignment="Center"
                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                     </StackPanel>
                                 </ToggleButton>
@@ -355,7 +356,7 @@
                                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <TextBlock Text="&#xE943;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                    HorizontalAlignment="Center" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
-                                        <TextBlock Text="显示受保护文件" FontSize="12" HorizontalAlignment="Center"
+                                        <TextBlock Text="{model:Resource Key=WinUtil_ShowSuperHidden}" FontSize="12" HorizontalAlignment="Center"
                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                     </StackPanel>
                                 </ToggleButton>
@@ -365,7 +366,7 @@
                                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <TextBlock Text="&#xE76C;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                    HorizontalAlignment="Center" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
-                                        <TextBlock Text="去快捷小箭头" FontSize="12" HorizontalAlignment="Center"
+                                        <TextBlock Text="{model:Resource Key=WinUtil_HideArrow}" FontSize="12" HorizontalAlignment="Center"
                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                     </StackPanel>
                                 </ToggleButton>
@@ -375,7 +376,7 @@
                                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <TextBlock Text="&#xE756;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                    HorizontalAlignment="Center" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
-                                        <TextBlock Text="去快捷文本" FontSize="12" HorizontalAlignment="Center"
+                                        <TextBlock Text="{model:Resource Key=WinUtil_HideText}" FontSize="12" HorizontalAlignment="Center"
                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                     </StackPanel>
                                 </ToggleButton>
@@ -385,7 +386,7 @@
                                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <TextBlock Text="&#xE72E;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                    HorizontalAlignment="Center" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
-                                        <TextBlock Text="去UAC盾牌" FontSize="12" HorizontalAlignment="Center"
+                                        <TextBlock Text="{model:Resource Key=WinUtil_HideUAC}" FontSize="12" HorizontalAlignment="Center"
                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                     </StackPanel>
                                 </ToggleButton>
@@ -395,13 +396,13 @@
                                         BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                                         Background="{DynamicResource CardBackgroundFillColorSecondaryBrush}">
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="右键菜单风格" FontSize="13"
+                                        <TextBlock Text="{model:Resource Key=WinUtil_ContextMenuStyle}" FontSize="13"
                                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                                    VerticalAlignment="Center" Margin="0,0,8,0"/>
                                         <ComboBox x:Name="MenuStyle" FontSize="14"
                                                   Width="120" SelectionChanged="MenuStyle_SelectionChanged">
-                                            <ComboBoxItem Content="Win10风格"/>
-                                            <ComboBoxItem Content="Win11风格"/>
+                                            <ComboBoxItem Content="{model:Resource Key=WinUtil_MenuStyle_Win10}"/>
+                                            <ComboBoxItem Content="{model:Resource Key=WinUtil_MenuStyle_Win11}"/>
                                         </ComboBox>
                                     </StackPanel>
                                 </Border>
@@ -409,13 +410,13 @@
                                         BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                                         Background="{DynamicResource CardBackgroundFillColorSecondaryBrush}">
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="资源管理器打开默认" FontSize="13"
+                                        <TextBlock Text="{model:Resource Key=WinUtil_ExplorerDefault}" FontSize="13"
                                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                                    VerticalAlignment="Center" Margin="0,0,8,0"/>
                                         <ComboBox x:Name="ExplorerDefault" FontSize="14"
                                                   Width="120" SelectionChanged="ExplorerDefault_SelectionChanged">
-                                            <ComboBoxItem Content="此电脑"/>
-                                            <ComboBoxItem Content="快速访问"/>
+                                            <ComboBoxItem Content="{model:Resource Key=WinUtil_Explorer_ThisPC}"/>
+                                            <ComboBoxItem Content="{model:Resource Key=WinUtil_Explorer_QuickAccess}"/>
                                         </ComboBox>
                                     </StackPanel>
                                 </Border>
@@ -425,7 +426,7 @@
                 </Expander>
 
                 <!-- ═══════════════════════ 性能设置 ═══════════════════════ -->
-                <Expander Header="性能设置" IsExpanded="True" FontSize="17"
+                <Expander Header="{model:Resource Key=WinUtil_Performance}" IsExpanded="True" FontSize="17"
                           Style="{StaticResource {x:Static muxc:ThemeKeys.ExpanderCardStyleKey}}"
                           Margin="0,0,0,10" Padding="0">
                     <Expander.Content>
@@ -436,7 +437,7 @@
                                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <TextBlock Text="&#xE7FC;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                    HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
-                                        <TextBlock Text="电源计划" FontSize="12" HorizontalAlignment="Center"
+                                        <TextBlock Text="{model:Resource Key=WinUtil_PowerPlan}" FontSize="12" HorizontalAlignment="Center"
                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                     </StackPanel>
                                 </Button>
@@ -445,7 +446,7 @@
                                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <TextBlock Text="&#xE7FC;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                    HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
-                                        <TextBlock Text="电源计划编辑" FontSize="12" HorizontalAlignment="Center"
+                                        <TextBlock Text="{model:Resource Key=WinUtil_PowerPlanEdit}" FontSize="12" HorizontalAlignment="Center"
                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                     </StackPanel>
                                 </Button>
@@ -454,7 +455,7 @@
                                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <TextBlock Text="&#xE946;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                    HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
-                                        <TextBlock Text="高级系统设置" FontSize="12" HorizontalAlignment="Center"
+                                        <TextBlock Text="{model:Resource Key=WinUtil_AdvancedSystem}" FontSize="12" HorizontalAlignment="Center"
                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                     </StackPanel>
                                 </Button>
@@ -463,7 +464,7 @@
                                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <TextBlock Text="&#xEDA6;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
                                                    HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
-                                        <TextBlock Text="性能选项" FontSize="12" HorizontalAlignment="Center"
+                                        <TextBlock Text="{model:Resource Key=WinUtil_PerformanceOptions}" FontSize="12" HorizontalAlignment="Center"
                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
                                     </StackPanel>
                                 </Button>
@@ -473,15 +474,15 @@
                                         BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                                         Background="{DynamicResource CardBackgroundFillColorSecondaryBrush}">
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="电源计划切换" FontSize="13"
+                                        <TextBlock Text="{model:Resource Key=WinUtil_PowerScheme}" FontSize="13"
                                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                                    VerticalAlignment="Center" Margin="0,0,8,0"/>
                                         <ComboBox x:Name="PowerConfig" FontSize="14" Width="120"
                                                   SelectionChanged="PowerConfig_SelectionChanged">
-                                            <ComboBoxItem Content="最佳能效"/>
-                                            <ComboBoxItem Content="平衡"/>
-                                            <ComboBoxItem Content="最佳性能"/>
-                                            <ComboBoxItem Content="卓越性能"/>
+                                            <ComboBoxItem Content="{model:Resource Key=WinUtil_Power_Saver}"/>
+                                            <ComboBoxItem Content="{model:Resource Key=WinUtil_Power_Balanced}"/>
+                                            <ComboBoxItem Content="{model:Resource Key=WinUtil_Power_Performance}"/>
+                                            <ComboBoxItem Content="{model:Resource Key=WinUtil_Power_Ultimate}"/>
                                         </ComboBox>
                                     </StackPanel>
                                 </Border>

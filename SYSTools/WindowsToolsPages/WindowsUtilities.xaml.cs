@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using SYSTools.Helpers;
+using SYSTools.Properties;
 
 namespace SYSTools.WindowsToolsPages
 {
@@ -15,6 +16,13 @@ namespace SYSTools.WindowsToolsPages
     public partial class WindowsUtilities : System.Windows.Controls.Page
     {
         private bool isInitializing = true;
+
+        // 简化的本地化辅助方法
+        private static string T(string key, string fallback = "")
+        {
+            return Lang.ResourceManager.GetString(key,
+                System.Globalization.CultureInfo.CurrentUICulture) ?? fallback;
+        }
 
         public WindowsUtilities()
         {
@@ -440,7 +448,7 @@ namespace SYSTools.WindowsToolsPages
             if (!string.IsNullOrEmpty(scheme))
             {
                 string setOutput = RunCommand($"powercfg /setactive {scheme}");
-                ShowMessage("电源计划已更改: " + setOutput);
+                ShowMessage(T("WinUtil_PowerSchemeChanged", "电源计划已更改: ") + setOutput);
             }
         }
 
@@ -463,7 +471,7 @@ namespace SYSTools.WindowsToolsPages
             }
             catch (Exception ex)
             {
-                ShowMessage("无法打开电源计划编辑页面: " + ex.Message);
+                ShowMessage(T("WinUtil_PowerEditError", "无法打开电源计划编辑页面: ") + ex.Message);
             }
         }
 
@@ -507,10 +515,10 @@ namespace SYSTools.WindowsToolsPages
         private async void ShowMessage(string message)
         {
             await ContentDialogHelper.ShowTextContentAsync(
-                "命令执行结果",
+                T("WinUtil_DialogTitle", "命令执行结果"),
                 message,
                 null,
-                "确定"
+                T("WinUtil_Confirm", "确定")
             );
         }
     }

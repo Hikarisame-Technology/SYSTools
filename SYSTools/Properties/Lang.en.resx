@@ -904,4 +904,160 @@ There may be a brief stutter during detection - this is normal, please wait.
 
 All information is fetched in real-time, no files are saved.</value>
     </data>
+    <data name="WinUtil_QuickLaunch" xml:space="preserve">
+        <value>Quick Launch</value>
+    </data>
+    <data name="WinUtil_NetworkTools" xml:space="preserve">
+        <value>Network Tools (Admin required - Restart needed)</value>
+    </data>
+    <data name="WinUtil_ExplorerFeatures" xml:space="preserve">
+        <value>Explorer Features (Restart Explorer to apply)</value>
+    </data>
+    <data name="WinUtil_Performance" xml:space="preserve">
+        <value>Performance Settings</value>
+    </data>
+    <data name="WinUtil_CMD" xml:space="preserve">
+        <value>CMD</value>
+    </data>
+    <data name="WinUtil_PowerShell" xml:space="preserve">
+        <value>PowerShell</value>
+    </data>
+    <data name="WinUtil_Regedit" xml:space="preserve">
+        <value>Registry Editor</value>
+    </data>
+    <data name="WinUtil_ControlPanel" xml:space="preserve">
+        <value>Control Panel</value>
+    </data>
+    <data name="WinUtil_ComputerMgmt" xml:space="preserve">
+        <value>Computer Management</value>
+    </data>
+    <data name="WinUtil_EventViewer" xml:space="preserve">
+        <value>Event Viewer</value>
+    </data>
+    <data name="WinUtil_DeviceMgr" xml:space="preserve">
+        <value>Device Manager</value>
+    </data>
+    <data name="WinUtil_GPEdit" xml:space="preserve">
+        <value>Group Policy</value>
+    </data>
+    <data name="WinUtil_TaskScheduler" xml:space="preserve">
+        <value>Task Scheduler</value>
+    </data>
+    <data name="WinUtil_GodMode" xml:space="preserve">
+        <value>God Mode</value>
+    </data>
+    <data name="WinUtil_WinVer" xml:space="preserve">
+        <value>Windows Version</value>
+    </data>
+    <data name="WinUtil_SystemProps" xml:space="preserve">
+        <value>System Properties</value>
+    </data>
+    <data name="WinUtil_PerfMon" xml:space="preserve">
+        <value>Performance Monitor</value>
+    </data>
+    <data name="WinUtil_ResMon" xml:space="preserve">
+        <value>Resource Monitor</value>
+    </data>
+    <data name="WinUtil_TaskMgr" xml:space="preserve">
+        <value>Task Manager</value>
+    </data>
+    <data name="WinUtil_MSConfig" xml:space="preserve">
+        <value>System Configuration</value>
+    </data>
+    <data name="WinUtil_DisplaySettings" xml:space="preserve">
+        <value>Display Settings</value>
+    </data>
+    <data name="WinUtil_RestartExplorer" xml:space="preserve">
+        <value>Restart Explorer</value>
+    </data>
+    <data name="WinUtil_ClearDNS" xml:space="preserve">
+        <value>Flush DNS Cache</value>
+    </data>
+    <data name="WinUtil_ResetWinsock" xml:space="preserve">
+        <value>Reset Winsock</value>
+    </data>
+    <data name="WinUtil_ResetLSP" xml:space="preserve">
+        <value>Reset LSP</value>
+    </data>
+    <data name="WinUtil_ResetTCP" xml:space="preserve">
+        <value>Reset TCP/IP Stack</value>
+    </data>
+    <data name="WinUtil_ShowFileExt" xml:space="preserve">
+        <value>File Extensions</value>
+    </data>
+    <data name="WinUtil_ShowHidden" xml:space="preserve">
+        <value>Hidden Items</value>
+    </data>
+    <data name="WinUtil_ShowSuperHidden" xml:space="preserve">
+        <value>Protected OS Files</value>
+    </data>
+    <data name="WinUtil_HideArrow" xml:space="preserve">
+        <value>Shortcut Arrow</value>
+    </data>
+    <data name="WinUtil_HideText" xml:space="preserve">
+        <value>Shortcut Text</value>
+    </data>
+    <data name="WinUtil_HideUAC" xml:space="preserve">
+        <value>UAC Shield</value>
+    </data>
+    <data name="WinUtil_ContextMenuStyle" xml:space="preserve">
+        <value>Context Menu Style</value>
+    </data>
+    <data name="WinUtil_ExplorerDefault" xml:space="preserve">
+        <value>Open Explorer To</value>
+    </data>
+    <data name="WinUtil_PowerScheme" xml:space="preserve">
+        <value>Power Scheme</value>
+    </data>
+    <data name="WinUtil_MenuStyle_Win10" xml:space="preserve">
+        <value>Windows 10 Style</value>
+    </data>
+    <data name="WinUtil_MenuStyle_Win11" xml:space="preserve">
+        <value>Windows 11 Style</value>
+    </data>
+    <data name="WinUtil_Explorer_ThisPC" xml:space="preserve">
+        <value>This PC</value>
+    </data>
+    <data name="WinUtil_Explorer_QuickAccess" xml:space="preserve">
+        <value>Quick Access</value>
+    </data>
+    <data name="WinUtil_Power_Saver" xml:space="preserve">
+        <value>Power Saver</value>
+    </data>
+    <data name="WinUtil_Power_Balanced" xml:space="preserve">
+        <value>Balanced</value>
+    </data>
+    <data name="WinUtil_Power_Performance" xml:space="preserve">
+        <value>High Performance</value>
+    </data>
+    <data name="WinUtil_Power_Ultimate" xml:space="preserve">
+        <value>Ultimate Performance</value>
+    </data>
+    <data name="WinUtil_PowerPlan" xml:space="preserve">
+        <value>Power Plan</value>
+    </data>
+    <data name="WinUtil_PowerPlanEdit" xml:space="preserve">
+        <value>Edit Power Plan</value>
+    </data>
+    <data name="WinUtil_AdvancedSystem" xml:space="preserve">
+        <value>Advanced System Settings</value>
+    </data>
+    <data name="WinUtil_PerformanceOptions" xml:space="preserve">
+        <value>Performance Options</value>
+    </data>
+    <data name="WinUtil_DialogTitle" xml:space="preserve">
+        <value>Command Result</value>
+    </data>
+    <data name="WinUtil_Confirm" xml:space="preserve">
+        <value>OK</value>
+    </data>
+    <data name="WinUtil_SettingsChanged" xml:space="preserve">
+        <value>Settings changed. Restart Explorer to apply.</value>
+    </data>
+    <data name="WinUtil_PowerSchemeChanged" xml:space="preserve">
+        <value>Power scheme changed: </value>
+    </data>
+    <data name="WinUtil_PowerEditError" xml:space="preserve">
+        <value>Cannot open power plan editor: </value>
+    </data>
 </root>
