@@ -11,65 +11,247 @@
       KeepAlive="True"
       Title="WindowsUpdateHistory">
 
+    <Page.Resources>
+        <!-- DataGrid 列标题样式 -->
+        <Style x:Key="ModernColumnHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="{DynamicResource CardBackgroundFillColorDefaultBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="12,0,12,0"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        </Style>
+
+        <!-- DataGrid 行样式 -->
+        <Style x:Key="ModernRowStyle" TargetType="DataGridRow">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="MinHeight" Value="36"/>
+            <Setter Property="Padding" Value="12,0"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Style.Triggers>
+                <Trigger Property="AlternationIndex" Value="1">
+                    <Setter Property="Background" Value="{DynamicResource CardBackgroundFillColorSecondaryBrush}"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                    <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- DataGrid 单元格样式 -->
+        <Style x:Key="ModernCellStyle" TargetType="DataGridCell">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="12,0,12,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGridCell">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}"
+                                VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                            <ContentPresenter/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10,0,0">
-            <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" 
-                          Glyph="&#xE895;" 
-                          VerticalAlignment="Center" Margin="10,0,0,0"/>
-            <TextBlock Text="{model:Resource Key=UpdateHistory}" 
-                       Margin="10,0,0,0" 
-                       VerticalAlignment="Center"
-                       FontSize="20"/>
-            <Button x:Name="LoadButton" 
-                        Click="LoadButton_Click"
-                        Margin="10,0,10,0">
-                <StackPanel Orientation="Horizontal">
+        <!-- 顶部操作栏 -->
+        <Border Grid.Row="0" Margin="10,10,10,0"
+                CornerRadius="8" Padding="16,10"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- 标题 -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
                     <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" 
-                                  Glyph="&#xE72C;"
-                                  Margin="0,0,5,0"/>
-                    <TextBlock Text="{model:Resource Key=LoadUpdateHistory}"/>
+                                   Glyph="&#xE895;"
+                                   FontSize="22"
+                                   Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"
+                                   VerticalAlignment="Center"/>
+                    <TextBlock Text="{model:Resource Key=UpdateHistory}" 
+                               Margin="10,0,0,0" 
+                               VerticalAlignment="Center"
+                               FontSize="18"
+                               FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
                 </StackPanel>
-            </Button>
-            <Button x:Name="ClearButton" 
-                        Click="ClearButton_Click">
-                <StackPanel Orientation="Horizontal">
-                    <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" 
-                                  Glyph="&#xE74D;"
-                                  Margin="0,0,5,0"/>
-                    <TextBlock Text="{model:Resource Key=ClearList}"/>
-                </StackPanel>
-            </Button>
-            
-            <muxc:ProgressRing x:Name="LoadingRing" 
-                              IsActive="False"
-                              Margin="10,0,0,0"/>
 
-        </StackPanel>
+                <!-- 加载按钮 -->
+                <Border Grid.Column="1" Margin="20,0,0,0"
+                        CornerRadius="6"
+                        Background="{DynamicResource CardBackgroundFillColorSecondaryBrush}"
+                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                        BorderThickness="1">
+                    <Button x:Name="LoadButton" Click="LoadButton_Click"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Padding="14,7"
+                            Cursor="Hand">
+                        <StackPanel Orientation="Horizontal">
+                            <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" 
+                                           Glyph="&#xE72C;"
+                                           FontSize="14"
+                                           Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"
+                                           Margin="0,0,6,0"
+                                           VerticalAlignment="Center"/>
+                            <TextBlock Text="{model:Resource Key=LoadUpdateHistory}"
+                                       FontSize="13"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </Border>
 
-        <DataGrid x:Name="UpdateHistoryGrid" 
-                 Grid.Row="1"
-                 Margin="10"
-                 AutoGenerateColumns="False"
-                 IsReadOnly="True"
-                 GridLinesVisibility="All">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="{model:Resource Key=UpdateTitle}" 
-                                  Binding="{Binding Title}"
-                                  Width="*"/>
-                <DataGridTextColumn Header="{model:Resource Key=UpdateDate}" 
-                                  Binding="{Binding Date}"
-                                  Width="150"/>
-                <DataGridTextColumn Header="{model:Resource Key=UpdateStatus}" 
-                                  Binding="{Binding Status}"
-                                  Width="100"/>
-            </DataGrid.Columns>
-        </DataGrid>
+                <!-- 清空按钮 -->
+                <Border Grid.Column="2" Margin="8,0,0,0"
+                        CornerRadius="6"
+                        Background="{DynamicResource CardBackgroundFillColorSecondaryBrush}"
+                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                        BorderThickness="1">
+                    <Button x:Name="ClearButton" Click="ClearButton_Click"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Padding="14,7"
+                            Cursor="Hand">
+                        <StackPanel Orientation="Horizontal">
+                            <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" 
+                                           Glyph="&#xE74D;"
+                                           FontSize="14"
+                                           Foreground="{DynamicResource SystemFillColorCriticalBrush}"
+                                           Margin="0,0,6,0"
+                                           VerticalAlignment="Center"/>
+                            <TextBlock Text="{model:Resource Key=ClearList}"
+                                       FontSize="13"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </Border>
 
+                <!-- 加载动画 -->
+                <muxc:ProgressRing Grid.Column="4" x:Name="LoadingRing" 
+                                   IsActive="False"
+                                   Width="24" Height="24"
+                                   Margin="0,0,4,0"
+                                   VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+
+        <!-- 更新列表 -->
+        <Border Grid.Row="1" Margin="10"
+                CornerRadius="8"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1">
+            <DataGrid x:Name="UpdateHistoryGrid" 
+                     Margin="0"
+                     AutoGenerateColumns="False"
+                     IsReadOnly="True"
+                     GridLinesVisibility="None"
+                     HeadersVisibility="Column"
+                     AlternatingRowBackground="Transparent"
+                     CanUserResizeColumns="True"
+                     CanUserSortColumns="True"
+                     BorderThickness="0"
+                     Background="Transparent"
+                     RowHeaderWidth="0"
+                     ColumnHeaderStyle="{StaticResource ModernColumnHeaderStyle}"
+                     RowStyle="{StaticResource ModernRowStyle}"
+                     CellStyle="{StaticResource ModernCellStyle}"
+                     AlternationCount="2">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="{DynamicResource CardBackgroundFillColorDefaultBrush}"/>
+                        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+                        <Setter Property="FontSize" Value="14"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
+                        <Setter Property="Height" Value="40"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                        <Setter Property="Padding" Value="16,0,16,0"/>
+                        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+                        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                    </Style>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+                        <Setter Property="FontSize" Value="13"/>
+                        <Setter Property="MinHeight" Value="38"/>
+                        <Setter Property="Padding" Value="16,0"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Style.Triggers>
+                            <Trigger Property="AlternationIndex" Value="1">
+                                <Setter Property="Background" Value="{DynamicResource CardBackgroundFillColorSecondaryBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="Padding" Value="16,0,16,0"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="DataGridCell">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            Padding="{TemplateBinding Padding}"
+                                            VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                                        <ContentPresenter/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="{model:Resource Key=UpdateTitle}" 
+                                      Binding="{Binding Title}"
+                                      Width="*"/>
+                    <DataGridTextColumn Header="{model:Resource Key=UpdateDate}" 
+                                      Binding="{Binding Date}"
+                                      Width="160"/>
+                    <DataGridTextColumn Header="{model:Resource Key=UpdateStatus}" 
+                                      Binding="{Binding Status}"
+                                      Width="110"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
     </Grid>
 </Page>
-

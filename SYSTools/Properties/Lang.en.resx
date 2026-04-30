@@ -783,4 +783,125 @@
     <data name="AmbientTempTooltip" xml:space="preserve">
         <value>Showing ambient temperature. Run as administrator for accurate CPU core temperature.</value>
     </data>
+    <data name="Test_Detecting" xml:space="preserve">
+        <value>Detecting...</value>
+    </data>
+    <data name="Test_DetectButton" xml:space="preserve">
+        <value>Detect</value>
+    </data>
+    <data name="Test_DialogTitle" xml:space="preserve">
+        <value>System Configuration Test</value>
+    </data>
+    <data name="Test_DetectSuccess" xml:space="preserve">
+        <value>Configuration retrieved successfully</value>
+    </data>
+    <data name="Test_DetectFail" xml:space="preserve">
+        <value>Failed to get system configuration. Please contact the developer.</value>
+    </data>
+    <data name="Test_CatComputer" xml:space="preserve">
+        <value>Computer</value>
+    </data>
+    <data name="Test_CatOS" xml:space="preserve">
+        <value>Operating System</value>
+    </data>
+    <data name="Test_CatCPU" xml:space="preserve">
+        <value>Processor</value>
+    </data>
+    <data name="Test_CatDisk" xml:space="preserve">
+        <value>Disk Drive</value>
+    </data>
+    <data name="Test_CatGPU" xml:space="preserve">
+        <value>Graphics Card</value>
+    </data>
+    <data name="Test_CatMonitor" xml:space="preserve">
+        <value>Monitor</value>
+    </data>
+    <data name="Test_CatResolution" xml:space="preserve">
+        <value>Display Resolution</value>
+    </data>
+    <data name="Test_CatNetAdapter" xml:space="preserve">
+        <value>Network Adapter</value>
+    </data>
+    <data name="Test_CatNetworkConfig" xml:space="preserve">
+        <value>Network Configuration</value>
+    </data>
+    <data name="Test_CatSound" xml:space="preserve">
+        <value>Sound Device</value>
+    </data>
+    <data name="Test_Workgroup" xml:space="preserve">
+        <value>Workgroup: {0}</value>
+    </data>
+    <data name="Test_ComputerName" xml:space="preserve">
+        <value>Computer Name: {0}</value>
+    </data>
+    <data name="Test_Manufacturer" xml:space="preserve">
+        <value>Manufacturer: {0}</value>
+    </data>
+    <data name="Test_TotalMemory_Format" xml:space="preserve">
+        <value>Total Memory: {0} GB</value>
+    </data>
+    <data name="Test_WindowsVersion" xml:space="preserve">
+        <value>Windows Version: {0}</value>
+    </data>
+    <data name="Test_OSArchitecture" xml:space="preserve">
+        <value>Architecture: {0}</value>
+    </data>
+    <data name="Test_KernelVersion" xml:space="preserve">
+        <value>Kernel Version: {0}</value>
+    </data>
+    <data name="Test_CPUModel" xml:space="preserve">
+        <value>CPU Model: {0}</value>
+    </data>
+    <data name="Test_CPUCores_Format" xml:space="preserve">
+        <value>Cores: {0}</value>
+    </data>
+    <data name="Test_CPUThreads_Format" xml:space="preserve">
+        <value>Threads: {0}</value>
+    </data>
+    <data name="Test_Disk_Format" xml:space="preserve">
+        <value>Disk {0}: {1}</value>
+    </data>
+    <data name="Test_DiskCapacity_Format" xml:space="preserve">
+        <value>Capacity: {0:F2} GB ({1:F2} TB)</value>
+    </data>
+    <data name="Test_Monitor_Format" xml:space="preserve">
+        <value>Monitor {0}: {1}</value>
+    </data>
+    <data name="Test_HardwareID" xml:space="preserve">
+        <value>Hardware ID: {0}</value>
+    </data>
+    <data name="Test_Unknown" xml:space="preserve">
+        <value>Unknown</value>
+    </data>
+    <data name="Test_NoMonitor" xml:space="preserve">
+        <value>No display connected</value>
+    </data>
+    <data name="Test_NetworkCard_Format" xml:space="preserve">
+        <value>Adapter: {0}</value>
+    </data>
+    <data name="Test_MACAddress" xml:space="preserve">
+        <value>MAC Address: {0}</value>
+    </data>
+    <data name="Test_IPAddress" xml:space="preserve">
+        <value>IP Address: {0}</value>
+    </data>
+    <data name="Test_CopyItem" xml:space="preserve">
+        <value>Copy this item</value>
+    </data>
+    <data name="Test_CopyCategory" xml:space="preserve">
+        <value>Copy entire category</value>
+    </data>
+    <data name="Test_CopyError" xml:space="preserve">
+        <value>Cannot copy: </value>
+    </data>
+    <data name="Test_InfoTitle" xml:space="preserve">
+        <value>System Configuration Test</value>
+    </data>
+    <data name="Test_InfoContent" xml:space="preserve">
+        <value>Detection is based on WMI (Windows Management Instrumentation)
+
+There may be a brief stutter during detection - this is normal, please wait.
+
+All information is fetched in real-time, no files are saved.</value>
+    </data>
 </root>

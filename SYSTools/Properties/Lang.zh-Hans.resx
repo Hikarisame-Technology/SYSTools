@@ -783,4 +783,125 @@
     <data name="AmbientTempTooltip" xml:space="preserve">
         <value>当前为环境温度，以管理员身份运行可获取准确的CPU核心温度</value>
     </data>
+    <data name="Test_Detecting" xml:space="preserve">
+        <value>检测中...</value>
+    </data>
+    <data name="Test_DetectButton" xml:space="preserve">
+        <value>检测配置</value>
+    </data>
+    <data name="Test_DialogTitle" xml:space="preserve">
+        <value>系统配置测试</value>
+    </data>
+    <data name="Test_DetectSuccess" xml:space="preserve">
+        <value>配置获取成功</value>
+    </data>
+    <data name="Test_DetectFail" xml:space="preserve">
+        <value>系统配置获取失败 请联系开发者</value>
+    </data>
+    <data name="Test_CatComputer" xml:space="preserve">
+        <value>计算机信息</value>
+    </data>
+    <data name="Test_CatOS" xml:space="preserve">
+        <value>操作系统信息</value>
+    </data>
+    <data name="Test_CatCPU" xml:space="preserve">
+        <value>处理器信息</value>
+    </data>
+    <data name="Test_CatDisk" xml:space="preserve">
+        <value>硬盘信息</value>
+    </data>
+    <data name="Test_CatGPU" xml:space="preserve">
+        <value>显卡信息</value>
+    </data>
+    <data name="Test_CatMonitor" xml:space="preserve">
+        <value>显示器信息</value>
+    </data>
+    <data name="Test_CatResolution" xml:space="preserve">
+        <value>屏幕分辨率信息</value>
+    </data>
+    <data name="Test_CatNetAdapter" xml:space="preserve">
+        <value>网卡信息</value>
+    </data>
+    <data name="Test_CatNetworkConfig" xml:space="preserve">
+        <value>网络配置信息</value>
+    </data>
+    <data name="Test_CatSound" xml:space="preserve">
+        <value>声卡信息</value>
+    </data>
+    <data name="Test_Workgroup" xml:space="preserve">
+        <value>工作组: {0}</value>
+    </data>
+    <data name="Test_ComputerName" xml:space="preserve">
+        <value>计算机名称: {0}</value>
+    </data>
+    <data name="Test_Manufacturer" xml:space="preserve">
+        <value>计算机制造商: {0}</value>
+    </data>
+    <data name="Test_TotalMemory_Format" xml:space="preserve">
+        <value>总内存: {0} GB</value>
+    </data>
+    <data name="Test_WindowsVersion" xml:space="preserve">
+        <value>Windows版本: {0}</value>
+    </data>
+    <data name="Test_OSArchitecture" xml:space="preserve">
+        <value>系统位数: {0}</value>
+    </data>
+    <data name="Test_KernelVersion" xml:space="preserve">
+        <value>内核版本号: {0}</value>
+    </data>
+    <data name="Test_CPUModel" xml:space="preserve">
+        <value>CPU型号: {0}</value>
+    </data>
+    <data name="Test_CPUCores_Format" xml:space="preserve">
+        <value>核心数: {0} 核</value>
+    </data>
+    <data name="Test_CPUThreads_Format" xml:space="preserve">
+        <value>线程数: {0} 线程</value>
+    </data>
+    <data name="Test_Disk_Format" xml:space="preserve">
+        <value>硬盘 {0}: {1}</value>
+    </data>
+    <data name="Test_DiskCapacity_Format" xml:space="preserve">
+        <value>容量: {0:F2} GB ({1:F2} TB)</value>
+    </data>
+    <data name="Test_Monitor_Format" xml:space="preserve">
+        <value>显示器 {0}: {1}</value>
+    </data>
+    <data name="Test_HardwareID" xml:space="preserve">
+        <value>硬件ID: {0}</value>
+    </data>
+    <data name="Test_Unknown" xml:space="preserve">
+        <value>未知</value>
+    </data>
+    <data name="Test_NoMonitor" xml:space="preserve">
+        <value>屏幕未接入</value>
+    </data>
+    <data name="Test_NetworkCard_Format" xml:space="preserve">
+        <value>网卡: {0}</value>
+    </data>
+    <data name="Test_MACAddress" xml:space="preserve">
+        <value>MAC地址: {0}</value>
+    </data>
+    <data name="Test_IPAddress" xml:space="preserve">
+        <value>IP地址: {0}</value>
+    </data>
+    <data name="Test_CopyItem" xml:space="preserve">
+        <value>复制此项</value>
+    </data>
+    <data name="Test_CopyCategory" xml:space="preserve">
+        <value>复制整个分类</value>
+    </data>
+    <data name="Test_CopyError" xml:space="preserve">
+        <value>无法复制内容: </value>
+    </data>
+    <data name="Test_InfoTitle" xml:space="preserve">
+        <value>系统配置检测说明</value>
+    </data>
+    <data name="Test_InfoContent" xml:space="preserve">
+        <value>配置提取基于 WMI (Windows Management Instrumentation)
+
+获取时会发生短暂卡顿，这是正常现象，请耐心等待。
+
+所有信息实时获取，无需保存文件。</value>
+    </data>
 </root>

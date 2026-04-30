@@ -1,4 +1,4 @@
-﻿using iNKORE.UI.WPF.Modern.Common.IconKeys;
+using iNKORE.UI.WPF.Modern.Common.IconKeys;
 using iNKORE.UI.WPF.Modern.Helpers.Styles;
 using System;
 using System.Collections.Generic;
@@ -10,6 +10,8 @@ using System.Windows.Media;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Windows.Input;
+using System.ComponentModel;
+using SYSTools.Helpers;
 
 namespace SYSTools.Pages
 {
@@ -18,57 +20,129 @@ namespace SYSTools.Pages
     /// </summary>
     public partial class Test : Page
     {
-        private Dictionary<string, List<string>> hardwareInfo;
+        /// <summary>
+        /// 信息条目 - 存储原始数据，显示时实时本地化
+        /// </summary>
+        private class TestInfoItem
+        {
+            /// <summary>资源键（为空则仅显示 RawValue）</summary>
+            public string ResKey;
+            /// <summary>格式化参数</summary>
+            public string[] Args;
+            /// <summary>是否为缩进子项</summary>
+            public bool IsIndented;
+            /// <summary>纯文本（ResKey 为空时使用，如 GPU/声卡名称）</summary>
+            public string RawText;
+
+            public TestInfoItem(string resKey, string[] args, bool isIndented = false)
+            {
+                ResKey = resKey;
+                Args = args;
+                IsIndented = isIndented;
+                RawText = null;
+            }
+
+            public TestInfoItem(string rawText, bool isIndented = false)
+            {
+                RawText = rawText;
+                IsIndented = isIndented;
+                ResKey = null;
+                Args = null;
+            }
+        }
+
+        private Dictionary<string, List<TestInfoItem>> hardwareInfo;
+        private bool _isLanguageSubscribed = false;
+
+        // 简化的本地化辅助方法
+        private static string T(string key, string fallback = "")
+        {
+            return Properties.Lang.ResourceManager.GetString(key,
+                System.Globalization.CultureInfo.CurrentUICulture) ?? fallback;
+        }
 
         public Test()
         {
             InitializeComponent();
-            hardwareInfo = new Dictionary<string, List<string>>();
+            hardwareInfo = new Dictionary<string, List<TestInfoItem>>();
             iNKORE.UI.WPF.Modern.Controls.MessageBox.DefaultBackdropType = BackdropType.Acrylic11;
-            
-            // 监听窗口大小变化，重新布局
+
+            // 从资源文件加载按钮文本
+            TestBotton.Content = T("Test_DetectButton", "检测配置");
+            TestBotton.ToolTip = T("Test_InfoTitle", "系统配置检测说明");
+
             this.SizeChanged += (s, e) =>
             {
                 if (hardwareInfo.Count > 0)
                 {
-                    Dispatcher.BeginInvoke(new Action(() => BuildUI()), 
+                    Dispatcher.BeginInvoke(new Action(() => BuildUI()),
                         System.Windows.Threading.DispatcherPriority.Background);
                 }
             };
+
+            // 订阅语言切换事件
+            SubscribeLanguageChanged();
+        }
+
+        private void SubscribeLanguageChanged()
+        {
+            if (!_isLanguageSubscribed)
+            {
+                LocalizationManager.Instance.PropertyChanged += OnLanguageChanged;
+                _isLanguageSubscribed = true;
+            }
+        }
+
+        private void OnLanguageChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(e.PropertyName) || e.PropertyName == nameof(LocalizationManager.CurrentCulture))
+            {
+                if (hardwareInfo.Count > 0)
+                {
+                    Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        // 更新检测按钮文字和提示
+                        if (TestBotton.IsEnabled)
+                            TestBotton.Content = T("Test_DetectButton", "检测配置");
+                        TestBotton.ToolTip = T("Test_InfoTitle", "系统配置检测说明");
+                        BuildUI();
+                    }), System.Windows.Threading.DispatcherPriority.Normal);
+                }
+            }
         }
 
         private async void TestBotton_Click(object sender, RoutedEventArgs e)
         {
-            try 
+            try
             {
                 TestBotton.IsEnabled = false;
-                TestBotton.Content = "检测中...";
-                
+                TestBotton.Content = T("Test_Detecting", "检测中...");
+
                 await Task.Run(() => CollectHardwareInfo());
-                
+
                 Dispatcher.Invoke(() =>
                 {
                     BuildUI();
-                    TestBotton.Content = "检测配置";
+                    TestBotton.Content = T("Test_DetectButton", "检测配置");
                     TestBotton.IsEnabled = true;
                 });
-                
+
                 iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(
-                    "配置获取成功", 
-                    "系统配置测试", 
-                    MessageBoxButton.OK, 
+                    T("Test_DetectSuccess", "配置获取成功"),
+                    T("Test_DialogTitle", "系统配置测试"),
+                    MessageBoxButton.OK,
                     SegoeFluentIcons.SpecialEffectSize);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error getting hardware info: {ex}");
-                TestBotton.Content = "检测配置";
+                TestBotton.Content = T("Test_DetectButton", "检测配置");
                 TestBotton.IsEnabled = true;
-                
+
                 iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(
-                    "系统配置获取失败 请联系开发者", 
-                    "系统配置测试", 
-                    MessageBoxButton.OK, 
+                    T("Test_DetectFail", "系统配置获取失败 请联系开发者"),
+                    T("Test_DialogTitle", "系统配置测试"),
+                    MessageBoxButton.OK,
                     MessageBoxImage.Warning);
             }
         }
@@ -79,8 +153,8 @@ namespace SYSTools.Pages
 
             try
             {
-                // 计算机信息
-                var computerInfo = new List<string>();
+                // 计算机信息 - 存储原始数据
+                var computerInfo = new List<TestInfoItem>();
                 using (ManagementObjectSearcher cmsystem = new ManagementObjectSearcher("SELECT * FROM win32_computersystem"))
                 {
                     foreach (ManagementObject cmsys in cmsystem.Get())
@@ -88,42 +162,42 @@ namespace SYSTools.Pages
                         double memory = Convert.ToDouble(cmsys.GetPropertyValue("totalphysicalmemory")) / 1024 / 1024 / 1024;
                         memory = (int)memory;
 
-                        computerInfo.Add($"工作组: {cmsys.GetPropertyValue("domain")}");
-                        computerInfo.Add($"计算机名称: {cmsys.GetPropertyValue("__server")}");
-                        computerInfo.Add($"计算机制造商: {cmsys.GetPropertyValue("manufacturer")}");
-                        computerInfo.Add($"总内存: {memory + 1} GB");
+                        computerInfo.Add(new TestInfoItem("Test_Workgroup", new[] { cmsys.GetPropertyValue("domain")?.ToString() }));
+                        computerInfo.Add(new TestInfoItem("Test_ComputerName", new[] { cmsys.GetPropertyValue("__server")?.ToString() }));
+                        computerInfo.Add(new TestInfoItem("Test_Manufacturer", new[] { cmsys.GetPropertyValue("manufacturer")?.ToString() }));
+                        computerInfo.Add(new TestInfoItem("Test_TotalMemory_Format", new[] { (memory + 1).ToString() }));
                     }
                 }
-                hardwareInfo["计算机信息"] = computerInfo;
+                hardwareInfo["Computer"] = computerInfo;
 
                 // 操作系统信息
-                var osInfo = new List<string>();
+                var osInfo = new List<TestInfoItem>();
                 using (ManagementObjectSearcher OpSystem = new ManagementObjectSearcher("SELECT * FROM win32_OperatingSystem"))
                 {
                     foreach (ManagementObject OpSys in OpSystem.Get())
                     {
-                        osInfo.Add($"Windows版本: {OpSys.GetPropertyValue("Caption")}");
-                        osInfo.Add($"系统位数: {OpSys.GetPropertyValue("OSArchitecture")}操作系统");
-                        osInfo.Add($"内核版本号: {OpSys.GetPropertyValue("Version")}");
+                        osInfo.Add(new TestInfoItem("Test_WindowsVersion", new[] { OpSys.GetPropertyValue("Caption")?.ToString() }));
+                        osInfo.Add(new TestInfoItem("Test_OSArchitecture", new[] { OpSys.GetPropertyValue("OSArchitecture")?.ToString() }));
+                        osInfo.Add(new TestInfoItem("Test_KernelVersion", new[] { OpSys.GetPropertyValue("Version")?.ToString() }));
                     }
                 }
-                hardwareInfo["操作系统信息"] = osInfo;
+                hardwareInfo["OS"] = osInfo;
 
                 // CPU信息
-                var cpuInfo = new List<string>();
+                var cpuInfo = new List<TestInfoItem>();
                 using (ManagementObjectSearcher Process = new ManagementObjectSearcher("SELECT * FROM win32_Processor"))
                 {
                     foreach (ManagementObject CPU in Process.Get())
                     {
-                        cpuInfo.Add($"CPU型号: {CPU.GetPropertyValue("Name")}");
-                        cpuInfo.Add($"核心数: {CPU.GetPropertyValue("NumberOfCores")} 核");
-                        cpuInfo.Add($"线程数: {CPU.GetPropertyValue("NumberOfLogicalProcessors")} 线程");
+                        cpuInfo.Add(new TestInfoItem("Test_CPUModel", new[] { CPU.GetPropertyValue("Name")?.ToString() }));
+                        cpuInfo.Add(new TestInfoItem("Test_CPUCores_Format", new[] { CPU.GetPropertyValue("NumberOfCores")?.ToString() }));
+                        cpuInfo.Add(new TestInfoItem("Test_CPUThreads_Format", new[] { CPU.GetPropertyValue("NumberOfLogicalProcessors")?.ToString() }));
                     }
                 }
-                hardwareInfo["处理器信息"] = cpuInfo;
+                hardwareInfo["CPU"] = cpuInfo;
 
                 // 硬盘信息
-                var diskInfo = new List<string>();
+                var diskInfo = new List<TestInfoItem>();
                 using (ManagementObjectSearcher DiskDrive = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive"))
                 {
                     int diskIndex = 1;
@@ -132,17 +206,18 @@ namespace SYSTools.Pages
                         ulong size = Convert.ToUInt64(Disk.GetPropertyValue("Size"));
                         double sizeInGB = size / (1024.0 * 1024.0 * 1024.0);
                         double sizeInTB = sizeInGB / 1024.0;
-                        string model = Disk.GetPropertyValue("Model").ToString();
+                        string model = Disk.GetPropertyValue("Model")?.ToString();
 
-                        diskInfo.Add($"硬盘 {diskIndex}: {model}");
-                        diskInfo.Add($"    容量: {sizeInGB:F2} GB ({sizeInTB:F2} TB)");
+                        diskInfo.Add(new TestInfoItem("Test_Disk_Format", new[] { diskIndex.ToString(), model }));
+                        diskInfo.Add(new TestInfoItem("Test_DiskCapacity_Format",
+                            new[] { sizeInGB.ToString("F2"), sizeInTB.ToString("F2") }, isIndented: true));
                         diskIndex++;
                     }
                 }
-                hardwareInfo["硬盘信息"] = diskInfo;
+                hardwareInfo["Disk"] = diskInfo;
 
-                // 显卡信息
-                var videoInfo = new List<string>();
+                // 显卡信息 - 无标签，纯原始文本
+                var videoInfo = new List<TestInfoItem>();
                 using (ManagementObjectSearcher Video = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController"))
                 {
                     foreach (ManagementObject VideoDevice_Object in Video.Get())
@@ -150,33 +225,33 @@ namespace SYSTools.Pages
                         string VideoProcessor = (string)VideoDevice_Object["VideoProcessor"];
                         if (VideoProcessor != null)
                         {
-                            videoInfo.Add(VideoDevice_Object.GetPropertyValue("Name").ToString());
+                            videoInfo.Add(new TestInfoItem(VideoDevice_Object.GetPropertyValue("Name")?.ToString()));
                         }
                     }
                 }
-                hardwareInfo["显卡信息"] = videoInfo;
+                hardwareInfo["GPU"] = videoInfo;
 
                 // 显示器信息
-                var monitorInfo = new List<string>();
+                var monitorInfo = new List<TestInfoItem>();
                 using (ManagementObjectSearcher Monitor = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE service='monitor'"))
                 {
                     int monitorIndex = 1;
                     foreach (ManagementObject Monitor_Object in Monitor.Get())
                     {
-                        monitorInfo.Add($"显示器 {monitorIndex}: {Monitor_Object.GetPropertyValue("Name")}");
+                        monitorInfo.Add(new TestInfoItem("Test_Monitor_Format", new[] { monitorIndex.ToString(), Monitor_Object.GetPropertyValue("Name")?.ToString() }));
                         string[] hardwareIDs = Monitor_Object.GetPropertyValue("HardwareID") as string[];
                         string firstHardwareID = hardwareIDs?.FirstOrDefault();
                         if (firstHardwareID != null)
                         {
-                            monitorInfo.Add($"    硬件ID: {firstHardwareID}");
+                            monitorInfo.Add(new TestInfoItem("Test_HardwareID", new[] { firstHardwareID }, isIndented: true));
                         }
                         monitorIndex++;
                     }
                 }
-                hardwareInfo["显示器信息"] = monitorInfo;
+                hardwareInfo["Monitor"] = monitorInfo;
 
                 // 屏幕分辨率信息
-                var resolutionInfo = new List<string>();
+                var resolutionInfo = new List<TestInfoItem>();
                 using (ManagementObjectSearcher Video = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController"))
                 {
                     foreach (ManagementObject DeskTop_Info in Video.Get())
@@ -186,56 +261,53 @@ namespace SYSTools.Pages
                             string VideoProcessor = (string)DeskTop_Info["VideoProcessor"];
                             if (VideoProcessor != null)
                             {
-                                string resolution = DeskTop_Info.GetPropertyValue("VideoModeDescription")?.ToString() ?? "未知";
-                                string refreshRate = DeskTop_Info.GetPropertyValue("CurrentRefreshRate")?.ToString() ?? "未知";
-                                resolutionInfo.Add($"{DeskTop_Info.GetPropertyValue("Name")}:");
-                                resolutionInfo.Add($"    {resolution} {refreshRate} Hz");
+                                string resolution = DeskTop_Info.GetPropertyValue("VideoModeDescription")?.ToString() ?? T("Test_Unknown", "Unknown");
+                                string refreshRate = DeskTop_Info.GetPropertyValue("CurrentRefreshRate")?.ToString() ?? T("Test_Unknown", "Unknown");
+                                resolutionInfo.Add(new TestInfoItem(DeskTop_Info.GetPropertyValue("Name")?.ToString()));
+                                resolutionInfo.Add(new TestInfoItem($"{resolution} {refreshRate} Hz", isIndented: true));
                             }
                         }
                         catch (NullReferenceException)
                         {
-                            resolutionInfo.Add($"{DeskTop_Info.GetPropertyValue("Name")}:");
-                            resolutionInfo.Add($"    屏幕未接入");
+                            resolutionInfo.Add(new TestInfoItem(DeskTop_Info.GetPropertyValue("Name")?.ToString()));
+                            resolutionInfo.Add(new TestInfoItem(T("Test_NoMonitor", "No display connected"), isIndented: true));
                         }
                     }
                 }
-                hardwareInfo["屏幕分辨率信息"] = resolutionInfo;
+                hardwareInfo["Resolution"] = resolutionInfo;
 
                 // 网卡信息 - 按优先级排序
-                var netAdapterInfo = new List<string>();
+                var netAdapterInfo = new List<TestInfoItem>();
                 var netAdapterList = new List<(string name, int priority)>();
-                
-                using (ManagementObjectSearcher NetAdapter = new ManagementObjectSearcher(@"SELECT * FROM Win32_NetworkAdapter WHERE Manufacturer != 'Microsoft' AND NOT PNPDeviceID LIKE 'ROOT\\%'"))
+
+                using (ManagementObjectSearcher NetAdapter = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE Manufacturer != 'Microsoft'"))
                 {
                     foreach (ManagementObject NetAdapter_Object in NetAdapter.Get())
                     {
                         string name = NetAdapter_Object.GetPropertyValue("Name")?.ToString();
                         if (string.IsNullOrEmpty(name)) continue;
-                        
-                        // 获取更多信息用于判断
+
                         string pnpDeviceId = NetAdapter_Object.GetPropertyValue("PNPDeviceID")?.ToString() ?? "";
                         string manufacturer = NetAdapter_Object.GetPropertyValue("Manufacturer")?.ToString() ?? "";
                         var netConnectionStatus = NetAdapter_Object.GetPropertyValue("NetConnectionStatus");
-                        bool isConnected = netConnectionStatus != null && Convert.ToInt32(netConnectionStatus) == 2; // 2 = Connected
-                        
-                        // 确定优先级：有线 > 无线 > 其他，已连接的排在前面
+                        bool isConnected = netConnectionStatus != null && Convert.ToInt32(netConnectionStatus) == 2;
+
                         int priority = GetNetworkAdapterPriority(name, pnpDeviceId, manufacturer, isConnected);
-                        
-                        Debug.WriteLine($"网卡: {name}, 制造商: {manufacturer}, PNP: {pnpDeviceId}, 连接状态: {isConnected}, 优先级: {priority}");
-                        
                         netAdapterList.Add((name, priority));
                     }
                 }
-                
-                // 按优先级排序
+
                 netAdapterList.Sort((a, b) => a.priority.CompareTo(b.priority));
-                netAdapterInfo.AddRange(netAdapterList.Select(x => x.name));
-                hardwareInfo["网卡信息"] = netAdapterInfo;
+                foreach (var adapter in netAdapterList)
+                {
+                    netAdapterInfo.Add(new TestInfoItem("Test_NetworkCard_Format", new[] { adapter.name }));
+                }
+                hardwareInfo["NetAdapter"] = netAdapterInfo;
 
                 // IP/MAC信息 - 按优先级排序
-                var networkInfo = new List<string>();
+                var networkInfo = new List<TestInfoItem>();
                 var networkConfigList = new List<(string description, string macAddress, string[] ipAddresses, int priority)>();
-                
+
                 using (ManagementObjectSearcher NETconfig = new ManagementObjectSearcher("SELECT * FROM win32_NetworkAdapterConfiguration WHERE IPEnabled = True AND MACAddress != Null"))
                 {
                     foreach (ManagementObject MNF in NETconfig.Get())
@@ -243,52 +315,63 @@ namespace SYSTools.Pages
                         string description = MNF.GetPropertyValue("Description")?.ToString();
                         string macAddress = MNF.GetPropertyValue("MACAddress")?.ToString();
                         string[] ipAddresses = (string[])MNF["IPAddress"];
-                        
+
                         if (string.IsNullOrEmpty(description)) continue;
-                        
-                        // 确定优先级（使用简化版本，因为这里无法获取 PNPDeviceID）
-                        int priority = GetNetworkAdapterPriority(description, "", "", true); // 这里都是已启用的网卡
-                        
+
+                        int priority = GetNetworkAdapterPriority(description, "", "", true);
                         networkConfigList.Add((description, macAddress, ipAddresses, priority));
                     }
                 }
-                
-                // 按优先级排序
+
                 networkConfigList.Sort((a, b) => a.priority.CompareTo(b.priority));
-                
-                // 添加到列表
+
                 foreach (var config in networkConfigList)
                 {
-                    networkInfo.Add($"网卡: {config.description}");
-                    networkInfo.Add($"    MAC地址: {config.macAddress}");
-                    
+                    networkInfo.Add(new TestInfoItem("Test_NetworkCard_Format", new[] { config.description }));
+
+                    if (!string.IsNullOrEmpty(config.macAddress))
+                    {
+                        networkInfo.Add(new TestInfoItem("Test_MACAddress", new[] { config.macAddress }, isIndented: true));
+                    }
+
                     if (config.ipAddresses != null && config.ipAddresses.Length > 0)
                     {
                         foreach (string ipAddress in config.ipAddresses)
                         {
-                            networkInfo.Add($"    IP地址: {ipAddress}");
+                            networkInfo.Add(new TestInfoItem("Test_IPAddress", new[] { ipAddress }, isIndented: true));
                         }
                     }
-                    networkInfo.Add(""); // 空行分隔
                 }
-                hardwareInfo["网络配置信息"] = networkInfo;
+                hardwareInfo["NetworkConfig"] = networkInfo;
 
-                // 声卡信息
-                var soundInfo = new List<string>();
+                // 声卡信息 - 纯原始文本
+                var soundInfo = new List<TestInfoItem>();
                 using (ManagementObjectSearcher Sound = new ManagementObjectSearcher("SELECT * FROM Win32_SoundDevice"))
                 {
                     foreach (ManagementObject SoundDevice_Object in Sound.Get())
                     {
-                        soundInfo.Add(SoundDevice_Object.GetPropertyValue("Caption").ToString());
+                        soundInfo.Add(new TestInfoItem(SoundDevice_Object.GetPropertyValue("Caption")?.ToString()));
                     }
                 }
-                hardwareInfo["声卡信息"] = soundInfo;
+                hardwareInfo["Sound"] = soundInfo;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error collecting hardware info: {ex}");
                 throw;
             }
+        }
+
+        /// <summary>
+        /// 渲染单个信息条目为本地化字符串
+        /// </summary>
+        private string RenderItem(TestInfoItem item)
+        {
+            if (item.RawText != null)
+                return item.RawText; // 纯文本（GPU名、分辨率等）
+            if (item.ResKey != null && item.Args != null)
+                return string.Format(T(item.ResKey, item.ResKey), item.Args); // 格式化文本
+            return "";
         }
 
         private void BuildUI()
@@ -301,48 +384,42 @@ namespace SYSTools.Pages
                 PlaceholderText.Visibility = Visibility.Collapsed;
             }
 
-            // 计算列数（根据可用宽度，每张卡片480px + 8px间距）
-            double availableWidth = this.ActualWidth - 70; // 减去边距
+            double availableWidth = this.ActualWidth - 70;
             int columnCount = Math.Max(1, (int)(availableWidth / 488));
 
-            // 创建列定义和列容器
             var columnStacks = new List<StackPanel>();
             for (int i = 0; i < columnCount; i++)
             {
                 MainPanel.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-                
+
                 var stackPanel = new StackPanel
                 {
                     Orientation = Orientation.Vertical,
-                    Margin = new Thickness(0, 0, i < columnCount - 1 ? 8 : 0, 0) // 最后一列无右边距
+                    Margin = new Thickness(0, 0, i < columnCount - 1 ? 8 : 0, 0)
                 };
                 Grid.SetColumn(stackPanel, i);
                 MainPanel.Children.Add(stackPanel);
                 columnStacks.Add(stackPanel);
             }
 
-            // 将卡片轮询分配到各列（实现高度平衡）
             int cardIndex = 0;
             foreach (var category in hardwareInfo)
             {
                 if (category.Value.Count == 0) continue;
 
-                // 创建卡片容器 - 固定宽度，自适应高度
                 var cardBorder = new Border
                 {
-                    Width = 480, // 卡片固定宽度
+                    Width = 480,
                     BorderThickness = new Thickness(1),
                     CornerRadius = new CornerRadius(8),
-                    Margin = new Thickness(0, 0, 0, 8), // 只有下边距
+                    Margin = new Thickness(0, 0, 0, 8),
                     Padding = new Thickness(16, 14, 16, 14),
                     VerticalAlignment = VerticalAlignment.Top
                 };
 
-                // 设置主题感知的背景和边框颜色
                 cardBorder.SetResourceReference(Border.BackgroundProperty, "CardBackgroundFillColorDefaultBrush");
                 cardBorder.SetResourceReference(Border.BorderBrushProperty, "CardStrokeColorDefaultBrush");
 
-                // 添加阴影效果（浅色主题下更明显）
                 var shadowColor = Application.Current.TryFindResource("ShadowColor") as Color? ?? Colors.Black;
                 cardBorder.Effect = new System.Windows.Media.Effects.DropShadowEffect
                 {
@@ -355,18 +432,16 @@ namespace SYSTools.Pages
 
                 var containerStack = new StackPanel();
 
-                // 标题区域
                 var headerPanel = new StackPanel
                 {
                     Orientation = Orientation.Horizontal,
                     Margin = new Thickness(0, 0, 0, 12)
                 };
 
-                // 标题图标
                 var iconText = new TextBlock
                 {
                     Text = GetCategoryIcon(category.Key),
-                    FontFamily = (FontFamily)Application.Current.TryFindResource("SegoeIcons") 
+                    FontFamily = (FontFamily)Application.Current.TryFindResource("SegoeIcons")
                                  ?? new FontFamily("Segoe MDL2 Assets"),
                     FontSize = 20,
                     Margin = new Thickness(0, 0, 10, 0),
@@ -375,10 +450,9 @@ namespace SYSTools.Pages
                 iconText.SetResourceReference(TextBlock.ForegroundProperty, "AccentTextFillColorPrimaryBrush");
                 headerPanel.Children.Add(iconText);
 
-                // 标题文本
                 var headerText = new TextBlock
                 {
-                    Text = category.Key,
+                    Text = GetLocalizedCategoryName(category.Key),
                     FontSize = 16,
                     FontWeight = FontWeights.SemiBold,
                     VerticalAlignment = VerticalAlignment.Center,
@@ -389,7 +463,6 @@ namespace SYSTools.Pages
 
                 containerStack.Children.Add(headerPanel);
 
-                // 分隔线
                 var separator = new Border
                 {
                     Height = 1,
@@ -398,32 +471,28 @@ namespace SYSTools.Pages
                 separator.SetResourceReference(Border.BackgroundProperty, "DividerStrokeColorDefaultBrush");
                 containerStack.Children.Add(separator);
 
-                // 内容容器 - 自适应高度，不使用滚动条
                 var contentStack = new StackPanel
                 {
                     Margin = new Thickness(2, 0, 0, 0)
                 };
 
-                // 添加属性项
-                foreach (var property in category.Value)
+                foreach (var item in category.Value)
                 {
-                    if (string.IsNullOrWhiteSpace(property)) continue;
+                    string displayText = RenderItem(item);
 
-                    bool isIndented = property.StartsWith("    ");
-                    string displayText = isIndented ? property.TrimStart() : property;
+                    if (string.IsNullOrWhiteSpace(displayText)) continue;
 
                     var itemPanel = new StackPanel
                     {
                         Orientation = Orientation.Horizontal,
-                        Margin = new Thickness(isIndented ? 16 : 0, 2, 0, 2)
+                        Margin = new Thickness(item.IsIndented ? 16 : 0, 2, 0, 2)
                     };
 
-                    // 如果是缩进项，添加一个小圆点
-                    if (isIndented)
+                    if (item.IsIndented)
                     {
                         var bullet = new TextBlock
                         {
-                            Text = "●",
+                            Text = "\u25CF",
                             FontSize = 7,
                             Margin = new Thickness(0, 0, 6, 0),
                             VerticalAlignment = VerticalAlignment.Center
@@ -435,45 +504,36 @@ namespace SYSTools.Pages
                     var textBlock = new TextBlock
                     {
                         Text = displayText,
-                        FontSize = isIndented ? 12.5 : 13,
-                        FontWeight = isIndented ? FontWeights.Normal : FontWeights.Medium,
+                        FontSize = item.IsIndented ? 12.5 : 13,
+                        FontWeight = item.IsIndented ? FontWeights.Normal : FontWeights.Medium,
                         Margin = new Thickness(0),
                         TextWrapping = TextWrapping.Wrap,
                         FontFamily = new FontFamily("Consolas, Microsoft YaHei UI, Segoe UI")
                     };
-                    
-                    // 设置主题感知的文本颜色
-                    if (isIndented)
-                    {
-                        textBlock.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorSecondaryBrush");
-                    }
-                    else
-                    {
-                        textBlock.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorPrimaryBrush");
-                    }
 
-                    // 鼠标悬停效果
-                    textBlock.MouseEnter += (s, e) =>
+                    textBlock.SetResourceReference(TextBlock.ForegroundProperty,
+                        item.IsIndented ? "TextFillColorSecondaryBrush" : "TextFillColorPrimaryBrush");
+
+                    textBlock.MouseEnter += (s, ev) =>
                     {
                         var hoverBrush = Application.Current.TryFindResource("SubtleFillColorSecondaryBrush") as Brush
                                         ?? new SolidColorBrush(Color.FromArgb(25, 0, 120, 215));
                         textBlock.Background = hoverBrush;
                         textBlock.Cursor = Cursors.Hand;
                     };
-                    textBlock.MouseLeave += (s, e) =>
+                    textBlock.MouseLeave += (s, ev) =>
                     {
                         textBlock.Background = Brushes.Transparent;
                         textBlock.Cursor = Cursors.Arrow;
                     };
 
-                    // 添加右键菜单
                     var contextMenu = new ContextMenu();
                     var copyMenuItem = new MenuItem
                     {
-                        Header = "复制此项",
+                        Header = T("Test_CopyItem"),
                         FontFamily = new FontFamily("Microsoft YaHei UI")
                     };
-                    copyMenuItem.Click += (s, e) =>
+                    copyMenuItem.Click += (s, ev) =>
                     {
                         try
                         {
@@ -481,27 +541,36 @@ namespace SYSTools.Pages
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("无法复制内容: " + ex.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show(
+                                T("Test_CopyError") + ex.Message,
+                                T("ErrorTitle"),
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
                         }
                     };
                     contextMenu.Items.Add(copyMenuItem);
 
-                    // 复制整个分类
                     var copyAllMenuItem = new MenuItem
                     {
-                        Header = "复制整个分类",
+                        Header = T("Test_CopyCategory"),
                         FontFamily = new FontFamily("Microsoft YaHei UI")
                     };
-                    copyAllMenuItem.Click += (s, e) =>
-            {
-                try
-                {
-                            var allText = string.Join("\r\n", category.Value);
-                            TextCopy.ClipboardService.SetText($"{category.Key}\r\n{allText}");
-                }
-                catch (Exception ex)
-                {
-                            MessageBox.Show("无法复制内容: " + ex.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    // 收集当前分类所有渲染文本
+                    var catText = string.Join("\r\n", category.Value.Select(i => RenderItem(i)));
+                    copyAllMenuItem.Click += (s, ev) =>
+                    {
+                        try
+                        {
+                            var allText = string.Join("\r\n", category.Value.Select(i => RenderItem(i)));
+                            TextCopy.ClipboardService.SetText(allText);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(
+                                T("Test_CopyError") + ex.Message,
+                                T("ErrorTitle"),
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
                         }
                     };
                     contextMenu.Items.Add(copyAllMenuItem);
@@ -514,34 +583,49 @@ namespace SYSTools.Pages
 
                 containerStack.Children.Add(contentStack);
                 cardBorder.Child = containerStack;
-                
-                // 将卡片轮询分配到各列
+
                 int targetColumn = cardIndex % columnCount;
                 columnStacks[targetColumn].Children.Add(cardBorder);
                 cardIndex++;
             }
         }
 
-        // 根据分类返回对应的 Segoe MDL2 Assets 图标
         private string GetCategoryIcon(string category)
         {
             return category switch
             {
-                "计算机信息" => "\uE977",      // ComputerLaptop
-                "操作系统信息" => "\uF4A5",    // WindowsLogo
-                "处理器信息" => "\uE950",      // System
-                "硬盘信息" => "\uEDA2",        // HardDrive
-                "显卡信息" => "\uE7FC",        // Game
-                "显示器信息" => "\uE7F4",      // TVMonitor
-                "屏幕分辨率信息" => "\uF57D",  // ScreenCast
-                "网卡信息" => "\uE968",        // NetworkTower
-                "网络配置信息" => "\uE8A1",    // Plug
-                "声卡信息" => "\uE767",        // Volume
-                _ => "\uE8F1"                   // GenericScan
+                "Computer" => "\uE977",
+                "OS" => "\uF4A5",
+                "CPU" => "\uE950",
+                "Disk" => "\uEDA2",
+                "GPU" => "\uE7FC",
+                "Monitor" => "\uE7F4",
+                "Resolution" => "\uF57D",
+                "NetAdapter" => "\uE968",
+                "NetworkConfig" => "\uE8A1",
+                "Sound" => "\uE767",
+                _ => "\uE8F1"
             };
         }
 
-        // 获取网卡优先级（数字越小优先级越高）
+        private static string GetLocalizedCategoryName(string categoryKey)
+        {
+            return categoryKey switch
+            {
+                "Computer" => T("Test_CatComputer"),
+                "OS" => T("Test_CatOS"),
+                "CPU" => T("Test_CatCPU"),
+                "Disk" => T("Test_CatDisk"),
+                "GPU" => T("Test_CatGPU"),
+                "Monitor" => T("Test_CatMonitor"),
+                "Resolution" => T("Test_CatResolution"),
+                "NetAdapter" => T("Test_CatNetAdapter"),
+                "NetworkConfig" => T("Test_CatNetworkConfig"),
+                "Sound" => T("Test_CatSound"),
+                _ => categoryKey
+            };
+        }
+
         private int GetNetworkAdapterPriority(string adapterName, string pnpDeviceId, string manufacturer, bool isConnected)
         {
             if (string.IsNullOrEmpty(adapterName))
@@ -551,97 +635,42 @@ namespace SYSTools.Pages
             string pnpLower = pnpDeviceId.ToLower();
             string mfgLower = manufacturer.ToLower();
 
-            // 基础优先级
             int basePriority;
 
-            // 先检查虚拟网卡（最低优先级）- 通过多个维度判断
             if (IsVirtualAdapter(nameLower, pnpLower, mfgLower))
-            {
-                basePriority = 100; // 虚拟网卡最低优先级
-            }
-            // 检查蓝牙网卡
+                basePriority = 100;
             else if (nameLower.Contains("bluetooth") || pnpLower.Contains("bth"))
-            {
                 basePriority = 80;
-            }
-            // 检查无线网卡
             else if (IsWirelessAdapter(nameLower, pnpLower))
-            {
                 basePriority = 50;
-            }
-            // 检查有线网卡
             else if (IsWiredAdapter(nameLower, pnpLower))
-            {
                 basePriority = 10;
-            }
             else
-            {
-                // 其他未识别的网卡
                 basePriority = 90;
-            }
 
-            // 已连接的网卡优先级更高（减去5）
-            if (isConnected)
-            {
-                basePriority -= 5;
-            }
-
-            return basePriority;
+            return isConnected ? basePriority - 5 : basePriority;
         }
 
-        // 判断是否为虚拟网卡
         private bool IsVirtualAdapter(string nameLower, string pnpLower, string mfgLower)
         {
-            // 虚拟网卡关键词
             string[] virtualKeywords = {
                 "virtual", "vmware", "virtualbox", "hyper-v", "vethernet",
                 "vboxnet", "tap-windows", "openstack", "docker", "vnic",
                 "tunnel", "loopback", "kdnic", "npcap", "vpn", "pptp",
                 "l2tp", "ipsec", "nettap", "utun"
             };
-
-            // PNP 设备 ID 中的虚拟网卡特征
             string[] virtualPnpKeywords = {
-                "ven_1af4", // QEMU/KVM
-                "root\\", // 虚拟设备通常以 ROOT 开头
-                "netvsc", // Hyper-V
-                "vmbus", // Hyper-V
-                "vbox", // VirtualBox
-                "vmware", // VMware
-                "mstunnel", // Microsoft Tunnel
-                "wan\\" // WAN Miniport
+                "ven_1af4", "root\\", "netvsc", "vmbus", "vbox", "vmware", "mstunnel", "wan\\"
             };
-
-            // 制造商中的虚拟网卡特征
             string[] virtualMfgKeywords = {
                 "vmware", "oracle", "red hat", "qemu", "parallels", "citrix"
             };
 
-            // 检查名称
-            foreach (var keyword in virtualKeywords)
-            {
-                if (nameLower.Contains(keyword))
-                    return true;
-            }
-
-            // 检查 PNP 设备 ID
-            foreach (var keyword in virtualPnpKeywords)
-            {
-                if (pnpLower.Contains(keyword))
-                    return true;
-            }
-
-            // 检查制造商
-            foreach (var keyword in virtualMfgKeywords)
-            {
-                if (mfgLower.Contains(keyword))
-                    return true;
-            }
-
-            return false;
+            return virtualKeywords.Any(k => nameLower.Contains(k)) ||
+                   virtualPnpKeywords.Any(k => pnpLower.Contains(k)) ||
+                   virtualMfgKeywords.Any(k => mfgLower.Contains(k));
         }
 
-        // 判断是否为有线网卡
         private bool IsWiredAdapter(string nameLower, string pnpLower)
         {
             string[] wiredKeywords = {
@@ -650,30 +679,14 @@ namespace SYSTools.Pages
                 "rtl8", "i219", "i211", "i225", "e1000", "82579", "pcie gbe"
             };
 
-            foreach (var keyword in wiredKeywords)
-            {
-                if (nameLower.Contains(keyword) && 
-                    !nameLower.Contains("wireless") && 
-                    !nameLower.Contains("wi-fi") &&
-                    !nameLower.Contains("wifi"))
-                {
-                    return true;
-                }
-            }
-
-            // PCI 以太网卡特征
-            if (pnpLower.Contains("pci\\ven") && 
-                (pnpLower.Contains("&cc_0200") || // 网络控制器 - 以太网
-                 pnpLower.Contains("ven_10ec") || // Realtek
-                 pnpLower.Contains("ven_8086")))  // Intel
-            {
+            if (wiredKeywords.Any(k => nameLower.Contains(k) &&
+                !nameLower.Contains("wireless") && !nameLower.Contains("wi-fi") && !nameLower.Contains("wifi")))
                 return true;
-            }
 
-            return false;
+            return pnpLower.Contains("pci\\ven") &&
+                (pnpLower.Contains("&cc_0200") || pnpLower.Contains("ven_10ec") || pnpLower.Contains("ven_8086"));
         }
 
-        // 判断是否为无线网卡
         private bool IsWirelessAdapter(string nameLower, string pnpLower)
         {
             string[] wirelessKeywords = {
@@ -682,30 +695,18 @@ namespace SYSTools.Pages
                 "realtek.*wireless", "mediatek.*wi-fi", "killer.*wi-fi"
             };
 
-            foreach (var keyword in wirelessKeywords)
-            {
-                if (nameLower.Contains(keyword.Replace(".*", "")))
-                    return true;
-            }
-
-            // PCI 无线网卡特征
-            if (pnpLower.Contains("pci\\ven") && 
-                pnpLower.Contains("&cc_0280")) // 网络控制器 - 无线
-            {
+            if (wirelessKeywords.Any(k => nameLower.Contains(k.Replace(".*", ""))))
                 return true;
-            }
 
-            return false;
+            return pnpLower.Contains("pci\\ven") && pnpLower.Contains("&cc_0280");
         }
 
         private void Info_Click(object sender, RoutedEventArgs e)
         {
             iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(
-                "配置提取基于 WMI (Windows Management Instrumentation)\r\n\r\n" +
-                "获取时会发生短暂卡顿，这是正常现象，请耐心等待。\r\n\r\n" +
-                "所有信息实时获取，无需保存文件。", 
-                "系统配置检测说明", 
-                MessageBoxButton.OK, 
+                T("Test_InfoContent"),
+                T("Test_InfoTitle"),
+                MessageBoxButton.OK,
                 MessageBoxImage.Question);
         }
     }

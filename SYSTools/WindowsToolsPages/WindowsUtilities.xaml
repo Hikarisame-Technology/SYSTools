@@ -10,131 +10,487 @@
       KeepAlive="True"
       Title="WindowsUtilities" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  MinWidth="1040" MinHeight="560">
 
+    <Page.Resources>
+        <!-- 带图标的工具按钮样式 -->
+        <Style x:Key="ToolButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="130"/>
+            <Setter Property="Height" Value="68"/>
+            <Setter Property="Margin" Value="4,0,4,8"/>
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- 带图标切换按钮样式 -->
+        <Style x:Key="ToolToggleStyle" TargetType="ToggleButton">
+            <Setter Property="Width" Value="130"/>
+            <Setter Property="Height" Value="68"/>
+            <Setter Property="Margin" Value="4,0,4,8"/>
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- 带图标和文字的按钮内容模板 -->
+        <Style x:Key="ToolButtonContent" TargetType="StackPanel">
+            <Setter Property="Orientation" Value="Vertical"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </Page.Resources>
+
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Border  BorderThickness="1" CornerRadius="5" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
-        <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="3" Source="/SYSTools;component/Resources/LOGO.png" Opacity="0.5" Width="160" Height="90"/>
-        <ScrollViewer  VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <!--按钮固定上下大小66(px?)-->
-                <Expander HorizontalContentAlignment="Left" Padding="0" VerticalContentAlignment="Top" Header="快捷启动" IsExpanded="True" FontSize="17" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" UseLayoutRounding="False" Margin="5,10,20,10"
-                          ExpandDirection="Down"
-                          Style="{StaticResource {x:Static muxc:ThemeKeys.ExpanderCardStyleKey}}" >
+        <Border BorderThickness="1" CornerRadius="5" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
+        <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="3"
+               Source="/SYSTools;component/Resources/LOGO.png" Opacity="0.5" Width="160" Height="90"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,5,20,10">
+
+                <!-- ═══════════════════════ 快捷启动 ═══════════════════════ -->
+                <Expander Header="快捷启动" IsExpanded="True" FontSize="17"
+                          Style="{StaticResource {x:Static muxc:ThemeKeys.ExpanderCardStyleKey}}"
+                          Margin="0,0,0,10" Padding="0">
                     <Expander.Content>
-                        <WrapPanel Margin="0,5,0,0">
-                            <Button x:Name="CMD" Margin="5,0,0,5" Width="140" Height="40" Content="CMD终端" FontSize="15" Click="CMD_Click" Background="{x:Null}"/>
-                            <Button x:Name="PowerShell" Margin="5,0,0,5" Width="140" Height="40" Content="PowerShell终端" FontSize="15" Click="PowerShell_Click" Background="{x:Null}"/>
-                            <Button x:Name="Regedit" Margin="5,0,0,5" Width="140" Height="40" Content="注册表" FontSize="15" Click="Regedit_Click" Background="{x:Null}"/>
-                            <Button x:Name="Control" Margin="5,0,0,5" Width="140" Height="40" Content="控制面板" FontSize="15" Click="Control_Click" Background="{x:Null}"/>
-                            <Button x:Name="compmgmt" Margin="5,0,0,5" Width="140" Height="40" Content="计算机管理" FontSize="15" Click="compmgmt_Click" Background="{x:Null}"/>
-                            <Button x:Name="Eventvwr" Margin="5,0,0,5" Width="140" Height="40" Content="事件查看器" FontSize="15" Click="Eventvwr_Click" Background="{x:Null}"/>
-                            <Button x:Name="Devmgmt" Margin="5,0,0,5" Width="140" Height="40" Content="设备管理器" FontSize="15" Click="Devmgmt_Click" Background="{x:Null}"/>
-                            <Button x:Name="Gpedit" Margin="5,0,0,5" Width="140" Height="40" Content="组策略" FontSize="15" Click="Gpedit_Click" Background="{x:Null}"/>
-                            <Button x:Name="Taskschd" Margin="5,0,0,5" Width="140" Height="40" Content="计划任务" FontSize="15" Background="{x:Null}" Click="Taskschd_Click"/>
-                            <Button x:Name="GodMode" Margin="5,0,0,5" Width="140" Height="40" Content="上帝模式" FontSize="15" Click="GodMode_Click" Background="{x:Null}"/>
-                            <Button x:Name="Winver" Margin="5,0,0,5" Width="140" Height="40" Content="Windows版本" FontSize="15" Click="Winver_Click" Background="{x:Null}"/>
-                            <Button x:Name="SystemProperties" Margin="5,0,0,5" Width="140" Height="40" Content="系统属性" FontSize="15" Click="SystemProperties_Click" Background="{x:Null}"/>
-                            <Button x:Name="PerfMon" Margin="5,0,0,5" Width="140" Height="40" Content="性能监视器" FontSize="15" Click="PerfMon_Click" Background="{x:Null}"/>
-                            <Button x:Name="ResMon" Margin="5,0,0,5" Width="140" Height="40" Content="资源监视器" FontSize="15" Click="ResMon_Click" Background="{x:Null}"/>
-                            <Button x:Name="TaskMgr" Margin="5,0,0,5" Width="140" Height="40" Content="任务管理器" FontSize="15" Click="TaskMgr_Click" Background="{x:Null}"/>
-                            <Button x:Name="MSConfig" Margin="5,0,0,5" Width="140" Height="40" Content="系统配置" FontSize="15" Click="MSConfig_Click" Background="{x:Null}"/>
-                            <Button x:Name="DisplaySettings" Margin="5,0,0,5" Width="140" Height="40" Content="显示设置" FontSize="15" Click="DisplaySettings_Click" Background="{x:Null}"/>
-                            <Button x:Name="Explorer_Restart" Margin="5,0,0,5" Width="140" Height="40" Content="重启资源管理器" FontSize="15" Click="Explorer_Restart_Click" Background="{x:Null}"/>
-                        </WrapPanel>
-                    </Expander.Content>
-                </Expander>
-                <Expander HorizontalContentAlignment="Left" Padding="0" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Stretch" Header="网络工具( 管理员权限 需要手动重启系统 )" IsExpanded="True" FontSize="17" Margin="5,0,20,10"
-                          ExpandDirection="Down"
-                          Style="{StaticResource {x:Static muxc:ThemeKeys.ExpanderCardStyleKey}}"  >
-                    <Expander.Content>
-                        <WrapPanel Margin="0,5,0,0">
-                            <Button x:Name="ClearDNS" Margin="5,0,0,5" Width="140" Height="40" Content="清除DNS缓存" FontSize="15" Click="ClearDNS_Click" Background="{x:Null}"/>
-                            <Button x:Name="ResetWS" Margin="5,0,0,5" Width="140" Height="40" Content="重置Winsock" FontSize="15" Click="ResetWS_Click" Background="{x:Null}"/>
-                            <Button x:Name="ResetWS_LSP" Margin="5,0,0,5" Width="140" Height="40" Content="重置LSP" FontSize="15" Click="ResetWS_LSP_Click" Background="{x:Null}"/>
-                            <Button x:Name="ResetTCP" Margin="5,0,0,5" Width="140" Height="40" Content="重置TCP/IP栈" FontSize="15" Click="ResetTCP_Click" Background="{x:Null}"/>
-                        </WrapPanel>
-                    </Expander.Content>
-                </Expander>
-                <Expander HorizontalContentAlignment="Left" Padding="0" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Stretch" Header="Explorer功能( 重启资源管理器生效 )" IsExpanded="True" FontSize="17" Margin="5,0,20,10"
-                          ExpandDirection="Down"
-                          Style="{StaticResource {x:Static muxc:ThemeKeys.ExpanderCardStyleKey}}" >
-                    <Expander.Content>
-                        <WrapPanel Orientation="Vertical">
-                            <WrapPanel Margin="0,5,0,0">
-                                <ToggleButton x:Name="ShowFileExt" Margin="5,0,0,5" Width="140" Height="40" 
-                                          Content="文件夹后缀" FontSize="15" Background="{x:Null}" 
-                                          Checked="ShowFileExt_Toggled" Unchecked="ShowFileExt_Toggled"/>
-                                <ToggleButton x:Name="ShowHidden" Margin="5,0,0,5" Width="140" Height="40" 
-                                          Content="隐藏文件/文件夹" FontSize="15" Background="{x:Null}"
-                                          Checked="ShowHidden_Toggled" Unchecked="ShowHidden_Toggled"/>
-                                <ToggleButton x:Name="ShowSuper" Margin="5,0,0,5" Width="140" Height="40" 
-                                          Content="显示受保护文件" FontSize="15" Background="{x:Null}"
-                                          Checked="ShowSuper_Toggled" Unchecked="ShowSuper_Toggled"/>
-                                <ToggleButton x:Name="HideArrow" Margin="5,0,0,5" Width="140" Height="40" 
-                                          Content="去快捷小箭头" FontSize="15" Background="{x:Null}"
-                                          Checked="HideArrow_Toggled" Unchecked="HideArrow_Toggled"/>
-                                <ToggleButton x:Name="HideText" Margin="5,0,0,5" Width="140" Height="40" 
-                                          Content="去快捷文本" FontSize="15" Background="{x:Null}"
-                                          Checked="HideText_Toggled" Unchecked="HideText_Toggled"/>
-                                <ToggleButton x:Name="HideUAC" Margin="5,0,0,5" Width="140" Height="40" 
-                                          Content="去UAC盾牌" FontSize="15" Background="{x:Null}"
-                                          Checked="HideUAC_Toggled" Unchecked="HideUAC_Toggled"/>
-                            </WrapPanel>
-                            <WrapPanel Margin="0,5,0,5">
-                                <ComboBox x:Name="MenuStyle" 
-                                          Margin="5,5,0,0" 
-                                          muxc:ControlHelper.Header="     右键菜单风格" 
-                                          FontSize="15" 
-                                          Width="140"
-                                          SelectionChanged="MenuStyle_SelectionChanged">
-                                    <ComboBoxItem Content="Win10风格"/>
-                                    <ComboBoxItem Content="Win11风格"/>
-                                </ComboBox>
-                                <ComboBox x:Name="ExplorerDefault" 
-                                          Margin="5,5,0,0" 
-                                          muxc:ControlHelper.Header="资源管理器打开默认" 
-                                          FontSize="15" 
-                                          Width="140"
-                                          SelectionChanged="ExplorerDefault_SelectionChanged">
-                                    <ComboBoxItem Content="此电脑"/>
-                                    <ComboBoxItem Content="快速访问"/>
-                                </ComboBox>
-                            </WrapPanel>
+                        <WrapPanel Margin="8,10,8,4">
+                            <Button x:Name="CMD" Style="{StaticResource ToolButtonStyle}" Click="CMD_Click"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="&#xE756;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                               HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                    <TextBlock Text="CMD终端" FontSize="12" HorizontalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="PowerShell" Style="{StaticResource ToolButtonStyle}" Click="PowerShell_Click"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="&#xE756;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                               HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                    <TextBlock Text="PowerShell" FontSize="12" HorizontalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="Regedit" Style="{StaticResource ToolButtonStyle}" Click="Regedit_Click"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="&#xE8D9;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                               HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                    <TextBlock Text="注册表" FontSize="12" HorizontalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="Control" Style="{StaticResource ToolButtonStyle}" Click="Control_Click"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="&#xE713;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                               HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                    <TextBlock Text="控制面板" FontSize="12" HorizontalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="compmgmt" Style="{StaticResource ToolButtonStyle}" Click="compmgmt_Click"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="&#xE977;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                               HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                    <TextBlock Text="计算机管理" FontSize="12" HorizontalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="Eventvwr" Style="{StaticResource ToolButtonStyle}" Click="Eventvwr_Click"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="&#xE96B;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                               HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                    <TextBlock Text="事件查看器" FontSize="12" HorizontalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="Devmgmt" Style="{StaticResource ToolButtonStyle}" Click="Devmgmt_Click"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="&#xE72E;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                               HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                    <TextBlock Text="设备管理器" FontSize="12" HorizontalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="Gpedit" Style="{StaticResource ToolButtonStyle}" Click="Gpedit_Click"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="&#xEAAB;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                               HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                    <TextBlock Text="组策略" FontSize="12" HorizontalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="Taskschd" Style="{StaticResource ToolButtonStyle}" Click="Taskschd_Click"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="&#xE923;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                               HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                    <TextBlock Text="计划任务" FontSize="12" HorizontalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="GodMode" Style="{StaticResource ToolButtonStyle}" Click="GodMode_Click"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="&#xE735;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                               HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                    <TextBlock Text="上帝模式" FontSize="12" HorizontalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="Winver" Style="{StaticResource ToolButtonStyle}" Click="Winver_Click"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="&#xF4A5;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                               HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                    <TextBlock Text="Windows版本" FontSize="12" HorizontalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="SystemProperties" Style="{StaticResource ToolButtonStyle}" Click="SystemProperties_Click"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="&#xE946;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                               HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                    <TextBlock Text="系统属性" FontSize="12" HorizontalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="PerfMon" Style="{StaticResource ToolButtonStyle}" Click="PerfMon_Click"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="&#xEDA6;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                               HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                    <TextBlock Text="性能监视器" FontSize="12" HorizontalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="ResMon" Style="{StaticResource ToolButtonStyle}" Click="ResMon_Click"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="&#xE950;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                               HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                    <TextBlock Text="资源监视器" FontSize="12" HorizontalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="TaskMgr" Style="{StaticResource ToolButtonStyle}" Click="TaskMgr_Click"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="&#xE85F;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                               HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                    <TextBlock Text="任务管理器" FontSize="12" HorizontalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="MSConfig" Style="{StaticResource ToolButtonStyle}" Click="MSConfig_Click"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="&#xE713;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                               HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                    <TextBlock Text="系统配置" FontSize="12" HorizontalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="DisplaySettings" Style="{StaticResource ToolButtonStyle}" Click="DisplaySettings_Click"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="&#xE7F4;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                               HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                    <TextBlock Text="显示设置" FontSize="12" HorizontalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="Explorer_Restart" Style="{StaticResource ToolButtonStyle}" Click="Explorer_Restart_Click"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="&#xE777;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                               HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                    <TextBlock Text="重启资源管理器" FontSize="12" HorizontalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Button>
                         </WrapPanel>
                     </Expander.Content>
                 </Expander>
 
-                <Expander HorizontalContentAlignment="Left" Padding="0" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Stretch" Header="性能设置" IsExpanded="True" FontSize="17" Margin="5,0,20,10"
-                          ExpandDirection="Down"
-                          Style="{StaticResource {x:Static muxc:ThemeKeys.ExpanderCardStyleKey}}" >
+                <!-- ═══════════════════════ 网络工具 ═══════════════════════ -->
+                <Expander Header="网络工具（管理员权限 · 需要手动重启系统）" IsExpanded="True" FontSize="17"
+                          Style="{StaticResource {x:Static muxc:ThemeKeys.ExpanderCardStyleKey}}"
+                          Margin="0,0,0,10" Padding="0">
                     <Expander.Content>
-                        <WrapPanel Orientation="Vertical">
-                            <WrapPanel Margin="0,5,0,0">
-                                <Button x:Name="PowerSetting" Margin="5,0,0,5" Width="140" Height="40" Content="电源计划" FontSize="15" Click="PowerSetting_Click" Background="{x:Null}"/>
-                                <Button x:Name="PowerOptions" Margin="5,0,0,5" Width="140" Height="40" Content="电源计划编辑" FontSize="15" Click="PowerOptions_Click" Background="{x:Null}"/>
-                                <Button x:Name="Advanced" Margin="5,0,0,5" Width="140" Height="40" Content="高级系统设置" FontSize="15" Click="Advanced_Click" Background="{x:Null}"/>
-                                <Button x:Name="Performance" Margin="5,0,0,5" Width="140" Height="40" Content="性能选项" FontSize="15" Click="Performance_Click" Background="{x:Null}"/>
-                            </WrapPanel>
-                            <WrapPanel Margin="0,5,0,5">
-                                <ComboBox x:Name="PowerConfig" 
-                                        Margin="5,5,0,0" 
-                                        muxc:ControlHelper.Header="      电源计划切换" 
-                                        FontSize="15" 
-                                        Width="140"
-                                        SelectionChanged="PowerConfig_SelectionChanged">
-                                    <ComboBoxItem Content="最佳能效"/>
-                                    <ComboBoxItem Content="平衡"/>
-                                    <ComboBoxItem Content="最佳性能"/>
-                                    <ComboBoxItem Content="卓越性能"/>
-                                </ComboBox>
-
-                            </WrapPanel>
+                        <WrapPanel Margin="8,10,8,4">
+                            <Button x:Name="ClearDNS" Style="{StaticResource ToolButtonStyle}" Click="ClearDNS_Click"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="&#xE968;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                               HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                    <TextBlock Text="清除DNS缓存" FontSize="12" HorizontalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="ResetWS" Style="{StaticResource ToolButtonStyle}" Click="ResetWS_Click"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="&#xE969;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                               HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                    <TextBlock Text="重置Winsock" FontSize="12" HorizontalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="ResetWS_LSP" Style="{StaticResource ToolButtonStyle}" Click="ResetWS_LSP_Click"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="&#xE969;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                               HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                    <TextBlock Text="重置LSP" FontSize="12" HorizontalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="ResetTCP" Style="{StaticResource ToolButtonStyle}" Click="ResetTCP_Click"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="&#xE96A;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                               HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                    <TextBlock Text="重置TCP/IP栈" FontSize="12" HorizontalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Button>
                         </WrapPanel>
                     </Expander.Content>
                 </Expander>
 
+                <!-- ═══════════════════════ Explorer功能 ═══════════════════════ -->
+                <Expander Header="Explorer功能（重启资源管理器生效）" IsExpanded="True" FontSize="17"
+                          Style="{StaticResource {x:Static muxc:ThemeKeys.ExpanderCardStyleKey}}"
+                          Margin="0,0,0,10" Padding="0">
+                    <Expander.Content>
+                        <StackPanel>
+                            <WrapPanel Margin="8,10,8,4">
+                                <ToggleButton x:Name="ShowFileExt" Style="{StaticResource ToolToggleStyle}" 
+                                              Checked="ShowFileExt_Toggled" Unchecked="ShowFileExt_Toggled"
+                                              BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock x:Name="ShowFileExtIcon" Text="&#xE8A7;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                                   HorizontalAlignment="Center" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                        <TextBlock Text="文件夹后缀" FontSize="12" HorizontalAlignment="Center"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                    </StackPanel>
+                                </ToggleButton>
+                                <ToggleButton x:Name="ShowHidden" Style="{StaticResource ToolToggleStyle}"
+                                              Checked="ShowHidden_Toggled" Unchecked="ShowHidden_Toggled"
+                                              BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Text="&#xE8B9;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                                   HorizontalAlignment="Center" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                        <TextBlock Text="隐藏文件/文件夹" FontSize="12" HorizontalAlignment="Center"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                    </StackPanel>
+                                </ToggleButton>
+                                <ToggleButton x:Name="ShowSuper" Style="{StaticResource ToolToggleStyle}"
+                                              Checked="ShowSuper_Toggled" Unchecked="ShowSuper_Toggled"
+                                              BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Text="&#xE943;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                                   HorizontalAlignment="Center" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                        <TextBlock Text="显示受保护文件" FontSize="12" HorizontalAlignment="Center"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                    </StackPanel>
+                                </ToggleButton>
+                                <ToggleButton x:Name="HideArrow" Style="{StaticResource ToolToggleStyle}"
+                                              Checked="HideArrow_Toggled" Unchecked="HideArrow_Toggled"
+                                              BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Text="&#xE76C;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                                   HorizontalAlignment="Center" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                        <TextBlock Text="去快捷小箭头" FontSize="12" HorizontalAlignment="Center"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                    </StackPanel>
+                                </ToggleButton>
+                                <ToggleButton x:Name="HideText" Style="{StaticResource ToolToggleStyle}"
+                                              Checked="HideText_Toggled" Unchecked="HideText_Toggled"
+                                              BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Text="&#xE756;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                                   HorizontalAlignment="Center" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                        <TextBlock Text="去快捷文本" FontSize="12" HorizontalAlignment="Center"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                    </StackPanel>
+                                </ToggleButton>
+                                <ToggleButton x:Name="HideUAC" Style="{StaticResource ToolToggleStyle}"
+                                              Checked="HideUAC_Toggled" Unchecked="HideUAC_Toggled"
+                                              BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Text="&#xE72E;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                                   HorizontalAlignment="Center" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                        <TextBlock Text="去UAC盾牌" FontSize="12" HorizontalAlignment="Center"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                    </StackPanel>
+                                </ToggleButton>
+                            </WrapPanel>
+                            <WrapPanel Margin="12,0,8,12">
+                                <Border BorderThickness="1" CornerRadius="6" Padding="8,4" Margin="4,4,4,0"
+                                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                        Background="{DynamicResource CardBackgroundFillColorSecondaryBrush}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="右键菜单风格" FontSize="13"
+                                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                   VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                        <ComboBox x:Name="MenuStyle" FontSize="14"
+                                                  Width="120" SelectionChanged="MenuStyle_SelectionChanged">
+                                            <ComboBoxItem Content="Win10风格"/>
+                                            <ComboBoxItem Content="Win11风格"/>
+                                        </ComboBox>
+                                    </StackPanel>
+                                </Border>
+                                <Border BorderThickness="1" CornerRadius="6" Padding="8,4" Margin="4,4,4,0"
+                                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                        Background="{DynamicResource CardBackgroundFillColorSecondaryBrush}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="资源管理器打开默认" FontSize="13"
+                                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                   VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                        <ComboBox x:Name="ExplorerDefault" FontSize="14"
+                                                  Width="120" SelectionChanged="ExplorerDefault_SelectionChanged">
+                                            <ComboBoxItem Content="此电脑"/>
+                                            <ComboBoxItem Content="快速访问"/>
+                                        </ComboBox>
+                                    </StackPanel>
+                                </Border>
+                            </WrapPanel>
+                        </StackPanel>
+                    </Expander.Content>
+                </Expander>
+
+                <!-- ═══════════════════════ 性能设置 ═══════════════════════ -->
+                <Expander Header="性能设置" IsExpanded="True" FontSize="17"
+                          Style="{StaticResource {x:Static muxc:ThemeKeys.ExpanderCardStyleKey}}"
+                          Margin="0,0,0,10" Padding="0">
+                    <Expander.Content>
+                        <StackPanel>
+                            <WrapPanel Margin="8,10,8,4">
+                                <Button x:Name="PowerSetting" Style="{StaticResource ToolButtonStyle}" Click="PowerSetting_Click"
+                                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Text="&#xE7FC;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                                   HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                        <TextBlock Text="电源计划" FontSize="12" HorizontalAlignment="Center"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button x:Name="PowerOptions" Style="{StaticResource ToolButtonStyle}" Click="PowerOptions_Click"
+                                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Text="&#xE7FC;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                                   HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                        <TextBlock Text="电源计划编辑" FontSize="12" HorizontalAlignment="Center"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button x:Name="Advanced" Style="{StaticResource ToolButtonStyle}" Click="Advanced_Click"
+                                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Text="&#xE946;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                                   HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                        <TextBlock Text="高级系统设置" FontSize="12" HorizontalAlignment="Center"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button x:Name="Performance" Style="{StaticResource ToolButtonStyle}" Click="Performance_Click"
+                                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Text="&#xEDA6;" FontFamily="{DynamicResource SegoeIcons}" FontSize="24"
+                                                   HorizontalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                                        <TextBlock Text="性能选项" FontSize="12" HorizontalAlignment="Center"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,4,0,0"/>
+                                    </StackPanel>
+                                </Button>
+                            </WrapPanel>
+                            <WrapPanel Margin="12,0,8,12">
+                                <Border BorderThickness="1" CornerRadius="6" Padding="8,4" Margin="4,4,4,0"
+                                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                        Background="{DynamicResource CardBackgroundFillColorSecondaryBrush}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="电源计划切换" FontSize="13"
+                                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                   VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                        <ComboBox x:Name="PowerConfig" FontSize="14" Width="120"
+                                                  SelectionChanged="PowerConfig_SelectionChanged">
+                                            <ComboBoxItem Content="最佳能效"/>
+                                            <ComboBoxItem Content="平衡"/>
+                                            <ComboBoxItem Content="最佳性能"/>
+                                            <ComboBoxItem Content="卓越性能"/>
+                                        </ComboBox>
+                                    </StackPanel>
+                                </Border>
+                            </WrapPanel>
+                        </StackPanel>
+                    </Expander.Content>
+                </Expander>
 
             </StackPanel>
         </ScrollViewer>
     </Grid>
 </Page>
-
